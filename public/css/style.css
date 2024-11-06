@@ -24265,3 +24265,8 @@ img.away, img.busy, img.offline, img.online {
 .dropify-wrapper{
   height: 150px;
 }
+
+span.light-logo img {
+  width: 95%;
+  margin-top: 10px;
+}
