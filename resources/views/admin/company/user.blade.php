@@ -115,6 +115,7 @@
         </div> 
     </div>
 </section>
+@if($data->user_list != null)
 <section class="content">
     <div class="row">
         @foreach($data->user_list as $user)
@@ -137,4 +138,5 @@
         @endforeach
     </div>
 </div>
+@endif
 @endsection
