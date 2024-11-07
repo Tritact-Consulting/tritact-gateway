@@ -7733,8 +7733,8 @@ Theme Danger Color
   color: #fd683e;
   border-left: 0px solid #fd683e; }
   .theme-danger.light-skin .sidebar-menu > li.active a {
-    color: #fd683e;
-    background-color: #ffd6cb; }
+    color: black;
+    background-color: #64ce38; }
     .theme-danger.light-skin .sidebar-menu > li.active a > i {
       color: #ffffff;
       background-color: #64ce38;
