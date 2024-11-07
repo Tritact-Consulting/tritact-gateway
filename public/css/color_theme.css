@@ -9107,7 +9107,7 @@ Theme Danger Color
   .theme-danger .form-element .form-control:focus {
     background-image: linear-gradient(45deg, #fd683e, #634fd2), linear-gradient(#3b6dc1, #3b6dc1); }
 .theme-danger .form-control:focus {
-  border-color: #fd683e; }
+  border-color: #64ce38; }
 .theme-danger [type=checkbox]:checked.chk-col-primary + label:before {
   border-right: 2px solid #fd683e;
   border-bottom: 2px solid #fd683e; }
@@ -9340,16 +9340,16 @@ Theme Danger Color
 .theme-danger .select2-container--default.select2-container--open {
   border-color: #fd683e; }
 .theme-danger .select2-container--default .select2-results__option--highlighted[aria-selected] {
-  background-color: #fd683e; }
+  background-color: #64ce38; }
 .theme-danger .select2-container--default .select2-search--dropdown .select2-search__field {
   border-color: #fd683e !important; }
 .theme-danger .select2-container--default.select2-container--focus .select2-selection--multiple {
-  border-color: #fd683e !important; }
+  border-color: #64ce38 !important; }
 .theme-danger .select2-container--default .select2-selection--multiple:focus {
   border-color: #fd683e !important; }
 .theme-danger .select2-container--default .select2-selection--multiple .select2-selection__choice {
-  background-color: #fd683e;
-  border-color: #fd683e; }
+  background-color: #64ce38;
+  border-color: #64ce38; }
 
 /*---Other---*/
 .theme-danger .myadmin-dd .dd-list .dd-list .dd-handle:hover {
