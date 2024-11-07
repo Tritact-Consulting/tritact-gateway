@@ -9320,8 +9320,9 @@ Theme Danger Color
   border: 1px solid #fc410c;
   background-color: #fc410c !important; }
 .theme-danger .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-  border: 1px solid #fd683e;
-  background-color: #fd683e; }
+  border: 1px solid #64ce38;
+  background-color: #64ce38;
+  }
   .theme-danger .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     border: 1px solid #fd683e;
     background-color: #fd683e; }

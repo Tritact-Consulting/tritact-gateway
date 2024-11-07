@@ -44,6 +44,10 @@
                             <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
                             <small class="d-block">Delete</small>
                         </div>
+                        <div class="text-center mx-5">
+							<a href="{{ route('company.user', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-users"></i></a>
+							<small class="d-block">Users</small>
+						</div>
                     </div>
                 </div>
             </div>

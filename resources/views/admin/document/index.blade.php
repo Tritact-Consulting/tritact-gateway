@@ -20,36 +20,44 @@
 <!-- /.content -->
 <section class="content">
     <div class="row">
-        @foreach($data as $key => $value)
-        <div class="col-xxxl-3 col-xl-4 col-lg-6 col-12">
-            <div class="box food-box mt-10">
-                <div class="box-body text-center">
-                    <div class="menu-details text-center">
-                        <h4 class="mb-10">{{ $value->name }}</h4>
-                        <p>
-                            @foreach($value->tags as $tag)
-                            <span class="badge badge-info badge-sm">{{ $tag->name }}</span>
-                            @endforeach
-                        </p>
-                    </div>
-                    <div class="act-btn d-flex justify-content-between">
-                        <div class="text-center mx-5">
-                            <a href="#" class="waves-effect waves-circle btn btn-circle btn-success-light btn-xs mb-5"><i class="fa fa-eye-slash"></i></a>
-                            <small class="d-block">View</small>
-                        </div>
-                        <div class="text-center mx-5">
-                            <a href="{{ route('document.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                            <small class="d-block">Edit</small>
-                        </div>
-                        <div class="text-center mx-5">
-                            <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
-                            <small class="d-block">Delete</small>
-                        </div>
+        <div class="col-12">
+			<div class="box">
+			    <div class="box-body">
+				    <div class="table-responsive rounded card-table">
+                        <table class="table border-no datatables" id="example1">
+                            <thead>
+                                <tr>
+                                    <th>SNO</th>
+                                    <th>Name</th>
+                                    <th>Tags</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($data as $key => $value)
+                                <tr class="hover-primary">
+                                    <td>{{ ++$key }}</td>
+                                    <td>{{ $value->name }}</td>
+                                    <td>
+                                        @foreach($value->tags as $tag)
+                                        <span class="badge badge-info badge-sm">{{ $tag->name }}</span>
+                                        @endforeach
+                                    </td>
+                                    <td>{{ $value->created_at->format('d M, Y') }}</td>
+                                    <td>
+                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-success-light btn-xs mb-5"><i class="fa fa-eye-slash"></i></a>										
+                                        <a href="{{ route('document.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        @endforeach
     </div>
 </section>
 @endsection

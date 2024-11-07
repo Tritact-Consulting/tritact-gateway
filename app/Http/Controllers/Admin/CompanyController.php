@@ -91,4 +91,9 @@ class CompanyController extends Controller
         $company->save();
         return redirect()->back()->with('success', 'Company Updated Successfully');
     }
+
+    public function user($company_id){
+        $data = User::find($company_id);
+        return view('admin.company.user', compact('data'));
+    }
 }
