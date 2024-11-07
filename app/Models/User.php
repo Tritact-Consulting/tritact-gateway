@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function company(){
         return $this->hasOne('App\Models\Company');
     }
+
+    public function user_list(){
+        return $this->hasMany(User::class, 'user_id', 'id')->orderBy('id', 'desc');
+    }
 }

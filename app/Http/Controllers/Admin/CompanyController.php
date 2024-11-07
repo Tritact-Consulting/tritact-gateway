@@ -96,4 +96,22 @@ class CompanyController extends Controller
         $data = User::find($company_id);
         return view('admin.company.user', compact('data'));
     }
+
+    public function userStore(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|confirmed',
+            'company_id' => 'required',
+        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->user_id = $request->company_id;
+        $user->is_company = 0;
+        $user->is_admin = 1;
+        $user->save();
+        return redirect()->back()->with('success', 'User Added Successfully');
+    }
 }
