@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Auth;
 
 class CompanyController extends Controller
 {
@@ -113,5 +114,36 @@ class CompanyController extends Controller
         $user->is_admin = 1;
         $user->save();
         return redirect()->back()->with('success', 'User Added Successfully');
+    }
+
+    public function userEdit($company_id, $id){
+        $data = User::find($company_id);
+        $user = User::find($id);
+        if($user->user_id == $company_id){
+            return view('admin.company.user-edit', compact('data', 'user'));
+        }else{
+            return redirect()->back();
+        }
+    }
+
+    public function userUpdate($id, Request $request){        
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email,'.$id,
+        ]);
+        if($request->password != null){
+            $request->validate([
+                'password' => 'required|confirmed',
+            ]);
+        }
+        
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if($request->password != null){
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        return redirect()->back()->with('success', 'Company User Updated Successfully');
     }
 }

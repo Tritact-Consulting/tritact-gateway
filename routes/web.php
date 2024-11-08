@@ -31,6 +31,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::resource('company', CompanyController::class);
     Route::get('company/users/{company_id}', [CompanyController::class, 'user'])->name('company.user');
     Route::post('company/store/user', [CompanyController::class, 'userStore'])->name('company.user.store');
+    Route::get('company/{company_id}/edit/user/{id}', [CompanyController::class, 'userEdit'])->name('company.user.edit');
+    Route::put('company/update/user/{id}', [CompanyController::class, 'userUpdate'])->name('company.user.update');
     Route::resource('tag', TagController::class);
     Route::resource('document', DocumentController::class);
 });

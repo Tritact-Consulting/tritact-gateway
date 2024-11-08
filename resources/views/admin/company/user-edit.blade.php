@@ -1,16 +1,16 @@
 @extends('layouts.admin-app')
-@section('title', $data->name . ' Users')
+@section('title', $data->name . ' Edit Users' . $user->name)
 @section('content')
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">{{ $data->name }} User List</h3>
+            <h3 class="page-title">{{ $data->name }} Edit User List - {{ $user->name }}</h3>
             <div class="d-inline-block align-items-center">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                         <li class="breadcrumb-item" aria-current="page">{{ $data->name }}</li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ $data->name }} User List</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $data->name }} Edit User List - {{ $user->name }}</li>
                     </ol>
                 </nav>
             </div>
@@ -47,7 +47,7 @@
         <div class="col-lg-12 col-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Add User form</h4>
+                    <h4 class="box-title">Edit User form</h4>
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-danger m-20 mb-0">
@@ -60,42 +60,34 @@
                 </div>
                 @endif
                 <!-- /.box-header -->
-                <form class="form" enctype="multipart/form-data" method="post" action="{{ route('company.user.store') }}">
+                <form class="form" enctype="multipart/form-data" method="post" action="{{ route('company.user.update', $user->id) }}">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" name="company_id" id="company_id" value="{{ $data->id }}">
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Name <strong>*</strong></label>
-                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+                                    <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>E-mail <strong>*</strong></label>
-                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                    <input type="email" class="form-control" name="email" value="{{ old('email', $user->email) }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Password <strong>*</strong></label>
-                                    <input type="password" class="form-control" name="password" value="{{ old('password') }}" required>
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password" value="{{ old('password') }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Confirm Password <strong>*</strong></label>
-                                    <input type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Status <strong>*</strong></label>
-                                    <select class="form-control" name="status" required>
-                                        <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Active</option>
-                                        <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Deactive</option>
-                                    </select>                                   
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}">
                                 </div>
                             </div>
                         </div>
@@ -115,38 +107,4 @@
         </div> 
     </div>
 </section>
-@if(count($data->user_list) != 0)
-<section class="content">
-    <div class="row">
-        @foreach($data->user_list as $user)
-        <div class="col-12 col-lg-4">
-            <div class="box ribbon-box p-4">
-                <div class="ribbon-two ribbon-two-success"><span>USER</span></div>
-                <div class="box-header no-border p-0">				
-                    <a href="#">
-                        <img class="img-fluid" src="{{ asset('images/avatar-dummy.png') }}" alt="{{ $user->name }}" style="height: 100px;width: auto;margin: 0 auto;display: block;border: 2px solid #e5e5e5;border-radius: 50px;">
-                    </a>
-                </div>
-                <div class="box-body p-0">
-                    <div class="text-center">
-                        <h4 class="my-10"><a href="#">{{ $user->name }}</a></h4>
-                        <h6 class="user-info mt-0 mb-10 text-fade">{{ $user->email }}</h6>
-                    </div>
-                    <div class="act-btn d-flex justify-content-center">
-                        <div class="text-center mx-5">
-                            <a href="{{ route('company.user.edit', ['company_id' => $data->id, 'id' => $user->id]) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                            <small class="d-block">Edit</small>
-                        </div>
-                        <div class="text-center mx-5">
-                            <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
-                            <small class="d-block">Delete</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach
-    </div>
-</div>
-@endif
 @endsection
