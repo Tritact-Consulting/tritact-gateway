@@ -115,7 +115,7 @@
         </div> 
     </div>
 </section>
-@if($data->user_list != null)
+@if(count($data->user_list) != 0)
 <section class="content">
     <div class="row">
         @foreach($data->user_list as $user)
