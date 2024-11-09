@@ -24,6 +24,11 @@ class AdminController extends Controller
      */
     public function index()
     {
+        // $file = public_path('document/H08-Job-Application-Letter.docx');
+        // $phpword = new \PhpOffice\PhpWord\TemplateProcessor($file);
+        // $phpword->setValue('name', 'Render Name');
+        // header("Content-Disposition: attachment; filename=edited.docx");
+        // $phpword->saveAs('php://output');
         return view('admin.home');
     }
 }
