@@ -7,6 +7,7 @@ use App\Models\Tags;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use File;
 
 class DocumentController extends Controller
 {
@@ -65,5 +66,25 @@ class DocumentController extends Controller
         $doc->tags()->sync($tags);
 
         return redirect()->back()->with('success', 'Document Updated Successfully');
+    }
+
+    public function show($id){
+        $data = Documents::find($id);
+        return view('admin.document.show', compact('data'));
+    }
+
+    public function documentRead(Request $request){
+        $data = Documents::find($request->id);
+        $lines = file($data->file);
+        foreach($lines as $line) {
+            $get_data = $this->special_chars($line);
+            dump($get_data);
+        }
+    }
+
+    function special_chars($str){
+        $str = htmlentities($str, ENT_COMPAT, 'iso-8859-1');
+        $str = preg_replace('/&(.)(acute|cedil|circ|lig|grave|ring|tilde|uml);/', "$1", $str);
+        return $str;
     }
 }

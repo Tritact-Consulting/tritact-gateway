@@ -35,4 +35,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::put('company/update/user/{id}', [CompanyController::class, 'userUpdate'])->name('company.user.update');
     Route::resource('tag', TagController::class);
     Route::resource('document', DocumentController::class);
+    Route::post('document/read', [DocumentController::class, 'documentRead'])->name('document.read');
 });
