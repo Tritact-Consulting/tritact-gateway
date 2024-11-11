@@ -63,7 +63,6 @@
                     console.log("===== " + result + " =====");
                 }
             });
-            alert(id);
         });
     })
 </script>

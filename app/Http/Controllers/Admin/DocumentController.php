@@ -75,8 +75,9 @@ class DocumentController extends Controller
 
     public function documentRead(Request $request){
         $data = Documents::find($request->id);
-        $lines = file($data->file);
+        $lines = file(public_path($data->file));
         foreach($lines as $line) {
+            dump($line);
             $get_data = $this->special_chars($line);
             dump($get_data);
         }
