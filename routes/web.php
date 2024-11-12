@@ -21,6 +21,7 @@ use App\Http\Controllers\DocumentsController;
 */
 
 Route::get('/', function () {
+    return redirect(url('/login'));
     return view('welcome');
 });
 

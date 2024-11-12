@@ -26,7 +26,7 @@
                 <span class="icon-Align-left"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
                 </a>	
                 <!-- Logo -->
-                <a href="index.html" class="logo">
+                <a href="{{ route('admin.home') }}" class="logo">
                     <!-- logo-->
                     <div class="logo-lg">
                         <span class="light-logo">
@@ -239,7 +239,7 @@
                     <div class="right-bar-content">
                         <div class="box no-shadow box-bordered border-light">
                             <div class="box-header">
-                                <h4 class="box-title">Resent Activity</h4>
+                                <h4 class="box-title">Recent Activity</h4>
                             </div>
                             <div class="box-body p-5">
                                 <div class="media-list media-list-hover">
