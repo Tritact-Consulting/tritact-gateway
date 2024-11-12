@@ -169,62 +169,31 @@
                     <div class="multinav-scroll" style="height: 100%;">
                         <!-- sidebar menu-->
                         <ul class="sidebar-menu" data-widget="tree">
-                            <li class="{{ Request::routeIs('admin.home') ? 'active' : '' }}">
-                                <a href="{{ route('admin.home') }}">
+                            <li class="{{ Request::routeIs('home') ? 'active' : '' }}">
+                                <a href="{{ route('home') }}">
                                     <i class="icon-Home"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
+                            @canany(['view user', 'create user', 'update user', 'delete user'])
                             <li class="treeview">
                                 <a href="#">
-                                    <i class="icon-Clipboard-check"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
-                                    <span>Company</span>
+                                    <i class="icon-Group"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Users</span>
                                 <span class="pull-right-container">
                                 <i class="fa fa-angle-right pull-right"></i>
                                 </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li class="{{ Request::routeIs('company.create') || Request::routeIs('company.edit') || Request::routeIs('company.user') ? 'active' : '' }}"><a href="{{ route('company.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Company</a></li>
-                                    <li class="{{ Request::routeIs('company.index') ? 'active' : '' }}"><a href="{{ route('company.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Company List</a></li>
+                                    @can('create user')
+                                    <li class="{{ Request::routeIs('user.create') || Request::routeIs('user.edit') || Request::routeIs('user.user') ? 'active' : '' }}"><a href="{{ route('user.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add User</a></li>
+                                    @endcan
+                                    @can('view user')
+                                    <li class="{{ Request::routeIs('user.index') ? 'active' : '' }}"><a href="{{ route('user.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Users List</a></li>
+                                    @endcan
                                 </ul>
                             </li>
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="icon-Library"><span class="path1"></span><span class="path2"></span></i>
-                                    <span>Tags</span>
-                                    <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li class="{{ Request::routeIs('tag.create') || Request::routeIs('tag.edit') ? 'active' : '' }}"><a href="{{ route('tag.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Tags</a></li>
-                                    <li class="{{ Request::routeIs('tag.index') ? 'active' : '' }}"><a href="{{ route('tag.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Tag List</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="icon-File"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
-                                    <span>Documents</span>
-                                    <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li class="{{ Request::routeIs('document.create') || Request::routeIs('document.edit') ? 'active' : '' }}"><a href="{{ route('document.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Document</a></li>
-                                    <li class="{{ Request::routeIs('document.index') ? 'active' : '' }}"><a href="{{ route('document.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Document List</a></li>
-                                </ul>
-                            </li>
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="icon-Chart-line"><span class="path1"></span><span class="path2"></span></i>
-                                    <span>Training</span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href=""><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Customer</a></li>
-                                    <li><a href=""><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Members</a></li>
-                                </ul>
-                            </li>
+                            @endcanany
                         </ul>
                         <div class="sidebar-widgets">
                             <div class="copyright text-left m-25">

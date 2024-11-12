@@ -25,7 +25,9 @@
             <div class="box food-box">
                 <div class="box-body text-center">
                     <div class="menu-item">
+                        @if($value->company != null)
                         <img src="{{ asset($value->company->logo) }}" class="img-fluid w-p75" alt="">
+                        @endif
                     </div>
                     <div class="menu-details text-center">
                         <h4 class="mt-20 mb-10">{{ $value->name }}</h4>

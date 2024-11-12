@@ -5,6 +5,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\DocumentController;
+
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +27,7 @@ Auth::routes(['register' => false]);
 
 Route::group(['middleware' => ['auth', 'user']], function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('user', UserController::class);
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(){
@@ -36,4 +40,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::resource('tag', TagController::class);
     Route::resource('document', DocumentController::class);
     Route::post('document/read', [DocumentController::class, 'documentRead'])->name('document.read');
+    Route::post('document/keyword', [DocumentController::class, 'documentKeyword'])->name('document.keyword');
+    Route::post('document/field/delete', [DocumentController::class, 'documentDelete'])->name('document.field.delete');
 });

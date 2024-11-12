@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('document_tags', function (Blueprint $table) {
+        Schema::create('file_keywords', function (Blueprint $table) {
+            $table->id();
+            $table->text('doc_keyword')->nullable();
+            $table->text('data_keyword')->nullable();
             $table->unsignedBigInteger('document_id');
-            $table->unsignedBigInteger('tag_id');
             $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
-            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');;
+            $table->timestamps();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('document_tags');
+        Schema::dropIfExists('file_keywords');
     }
 };

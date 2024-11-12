@@ -1,47 +1,22 @@
-@extends('layouts.admin-app')
-@section('title', $data->name . ' Users')
+@extends('layouts.user-app')
+@section('title', 'Add User')
 @section('content')
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">{{ $data->name }} User List</h3>
+            <h3 class="page-title">Add User</h3>
             <div class="d-inline-block align-items-center">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-                        <li class="breadcrumb-item" aria-current="page">{{ $data->name }}</li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ $data->name }} User List</li>
+                        <li class="breadcrumb-item" aria-current="page">User</li>
+                        <li class="breadcrumb-item active" aria-current="page">Add User</li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
 </div>
-<!-- /.content -->
-<section class="content" style="min-height: auto;">
-    <div class="row">
-        <div class="col-xxxl-4 col-12">
-            <div class="box mb-0">
-                <div class="box-body">
-                    <div class="d-flex align-items-center">
-                        <img class="mr-10 rounded-circle avatar avatar-xl b-2 border-primary" src="{{ asset($data->company->logo) }}" alt="{{ $data->name }}" style="object-fit: cover;">
-                        <div>
-                            <h4 class="mb-0">{{ $data->name }}</h4>
-                            <span class="font-size-14 text-info">{{ $data->email }}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="box-body border-bottom pt-0">
-                    <div class="">
-                        <h6 class="mb-2">Director name: {{ $data->company->director_name }}</h6>
-                        <h6 class="mb-2">Short Name: {{ $data->company->short_name }}</h6>
-                        <h6 class="mb-0">Total Users: <span class="badge badge-info badge-sm">{{ $data->company->total_user }}</span> ~ Remaining Users: <span class="badge badge-info badge-sm">{{ $data->company->remaining_users()}}</span></h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <section class="content">
     <div class="row">
         <div class="col-lg-12 col-12">
@@ -60,9 +35,8 @@
                 </div>
                 @endif
                 <!-- /.box-header -->
-                <form class="form" enctype="multipart/form-data" method="post" action="{{ route('company.user.store') }}">
-                    @csrf
-                    <input type="hidden" name="company_id" id="company_id" value="{{ $data->id }}">
+                <form class="form" enctype="multipart/form-data" method="post" action="{{ route('user.store') }}">
+                    @csrf                    
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -115,38 +89,4 @@
         </div> 
     </div>
 </section>
-@if(count($data->user_list) != 0)
-<section class="content">
-    <div class="row">
-        @foreach($data->user_list as $user)
-        <div class="col-12 col-lg-4">
-            <div class="box ribbon-box p-4">
-                <div class="ribbon-two ribbon-two-success"><span>USER</span></div>
-                <div class="box-header no-border p-0">				
-                    <a href="#">
-                        <img class="img-fluid" src="{{ asset('images/avatar-dummy.png') }}" alt="{{ $user->name }}" style="height: 100px;width: auto;margin: 0 auto;display: block;border: 2px solid #e5e5e5;border-radius: 50px;">
-                    </a>
-                </div>
-                <div class="box-body p-0">
-                    <div class="text-center">
-                        <h4 class="my-10"><a href="#">{{ $user->name }}</a></h4>
-                        <h6 class="user-info mt-0 mb-10 text-fade">{{ $user->email }}</h6>
-                    </div>
-                    <div class="act-btn d-flex justify-content-center">
-                        <div class="text-center mx-5">
-                            <a href="{{ route('company.user.edit', ['company_id' => $data->id, 'id' => $user->id]) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                            <small class="d-block">Edit</small>
-                        </div>
-                        <div class="text-center mx-5">
-                            <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
-                            <small class="d-block">Delete</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach
-    </div>
-</section>
-@endif
 @endsection

@@ -12,4 +12,8 @@ class Documents extends Model
     public function tags(){
         return $this->belongsToMany(Tags::class, 'document_tags', 'document_id', 'tag_id');
     }
+
+    public function file_keyowords(){
+        return $this->hasMany(FileKeyword::class, 'document_id');
+    }
 }

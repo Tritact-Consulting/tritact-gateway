@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -48,6 +49,6 @@ class User extends Authenticatable
     }
 
     public function user_list(){
-        return $this->hasMany(User::class, 'user_id', 'id')->orderBy('id', 'desc');
+        return $this->hasMany(User::class, 'user_id', 'id')->where('status', 0)->orderBy('id', 'desc');
     }
 }

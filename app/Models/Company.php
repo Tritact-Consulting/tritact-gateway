@@ -12,4 +12,11 @@ class Company extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+
+    public function remaining_users(){
+        $total_user = $this->total_user;
+        $users = count($this->user->user_list);
+        return $total_user - $users;       
+    }
+
 }

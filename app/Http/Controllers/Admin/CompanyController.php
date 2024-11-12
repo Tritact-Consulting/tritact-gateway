@@ -36,7 +36,7 @@ class CompanyController extends Controller
         $user->is_admin = 1;
         $user->is_company = 1;
         $user->save();
-
+        $user->assignRole('company');
         $company = new Company();
         if($request->hasFile('logo')){
             $imageName = time().'.'.$request->logo->extension();
@@ -99,21 +99,26 @@ class CompanyController extends Controller
     }
 
     public function userStore(Request $request){
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required|confirmed',
-            'company_id' => 'required',
-        ]);
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->user_id = $request->company_id;
-        $user->is_company = 0;
-        $user->is_admin = 1;
-        $user->save();
-        return redirect()->back()->with('success', 'User Added Successfully');
+        $data = User::find($request->company_id);
+        if($data->company->remaining_users() != 0){
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|unique:users,email',
+                'password' => 'required|confirmed',
+                'company_id' => 'required',
+            ]);
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->user_id = $request->company_id;
+            $user->is_company = 0;
+            $user->is_admin = 1;
+            $user->save();
+            return redirect()->back()->with('success', 'User Added Successfully');
+        }else{
+            return redirect()->back()->with('warning', 'User Limit Exceeded');
+        }
     }
 
     public function userEdit($company_id, $id){

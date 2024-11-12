@@ -1605,7 +1605,7 @@ $(".right-bar-btn").click(function(){
         },
         };
 
-        if(('#chart-spark1').length != 0){
+        if($('#chart-spark1').length != 0){
           var chartSpark1 = new ApexCharts(document.querySelector("#chart-spark1"), optionsSpark1);
           chartSpark1.render();
         }
@@ -1637,9 +1637,10 @@ $(".right-bar-btn").click(function(){
           min: 0
         },
         };
-
-        var chartSpark2 = new ApexCharts(document.querySelector("#chart-spark2"), optionsSpark2);
-        chartSpark2.render();
+        if($('#chart-spark2').length != 0){
+          var chartSpark2 = new ApexCharts(document.querySelector("#chart-spark2"), optionsSpark2);
+          chartSpark2.render();
+        }
 	
 	
 		
@@ -1685,8 +1686,9 @@ $(".right-bar-btn").click(function(){
       		show: false,
 		},
         };
-
-        var chart = new ApexCharts(document.querySelector("#chart3"), options);
-        chart.render();
+        if($('#chart3').length != 0){
+          var chart = new ApexCharts(document.querySelector("#chart3"), options);
+          chart.render();
+        }
 
 }); // End of use strict
