@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 
 class AdminController extends Controller
 {
@@ -24,11 +25,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        // $file = public_path('document/H08-Job-Application-Letter.docx');
-        // $phpword = new \PhpOffice\PhpWord\TemplateProcessor($file);
-        // $phpword->setValue('name', 'Render Name');
-        // header("Content-Disposition: attachment; filename=edited.docx");
-        // $phpword->saveAs('php://output');
-        return view('admin.home');
+        $company_count = DB::table('users')->where('is_admin', 1)->where('is_company', 1)->count();
+        $tag_count = DB::table('tags')->where('status', 0)->count();
+        $user_count = DB::table('users')->where('is_admin', 1)->where('is_company', 0)->count();
+        $document_count = DB::table('documents')->count();
+        return view('admin.home', compact('company_count', 'tag_count', 'user_count', 'document_count'));
     }
 }

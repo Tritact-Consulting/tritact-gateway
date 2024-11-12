@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="checkbox">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label for="remember">Remember Me</label>
                             </div>
                         </div>

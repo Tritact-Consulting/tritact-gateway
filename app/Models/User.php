@@ -51,4 +51,8 @@ class User extends Authenticatable
     public function user_list(){
         return $this->hasMany(User::class, 'user_id', 'id')->where('status', 0)->orderBy('id', 'desc');
     }
+
+    public function added_name(){
+        return $this->hasOne(User::class, 'added_by', 'id');
+    }
 }

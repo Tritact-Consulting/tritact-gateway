@@ -73,6 +73,88 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <hr>
+                                <h4>Permission</h4>
+                                <ul class="permission">
+                                    <li>
+                                        <div class="form-group mb-0">
+                                            <div class="checkbox">
+                                                <input class="form-check-input all-check" type="checkbox" name="users" id="users" {{ old('users') ? 'checked' : '' }}>
+                                                <label for="users">Users</label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                <div class="form-group">
+                                                    <div class="checkbox">
+                                                        <input value="view user" class="form-check-input" type="checkbox" name="permission[]" id="view-user" {{ old('view-user') ? 'checked' : '' }}>
+                                                        <label for="view-user">View User</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="form-group">
+                                                    <div class="checkbox">
+                                                        <input value="create user" class="form-check-input" type="checkbox" name="permission[]" id="create-user" {{ old('view-user') ? 'checked' : '' }}>
+                                                        <label for="create-user">Create User</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="form-group">
+                                                    <div class="checkbox">
+                                                        <input value="update user" class="form-check-input" type="checkbox" name="permission[]" id="update-user" {{ old('update-user') ? 'checked' : '' }}>
+                                                        <label for="update-user">Update User</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="form-group">
+                                                    <div class="checkbox">
+                                                        <input value="delete user" class="form-check-input" type="checkbox" name="permission[]" id="delete-user" {{ old('delete-user') ? 'checked' : '' }}>
+                                                        <label for="delete-user">Delete User</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul class="permission">
+                                    <li>
+                                        <div class="form-group mb-0">
+                                            <div class="checkbox">
+                                                <input class="form-check-input all-check" type="checkbox" name="documents" id="documents" {{ old('documents') ? 'checked' : '' }}>
+                                                <label for="documents">Documents</label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                <div class="form-group">
+                                                    <div class="checkbox">
+                                                        <input value="view document" class="form-check-input" type="checkbox" name="permission[]" id="view-document" {{ old('view-document') ? 'checked' : '' }}>
+                                                        <label for="view-document">View Document</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="form-group">
+                                                    <div class="checkbox">
+                                                        <input value="download document" class="form-check-input" type="checkbox" name="permission[]" id="document-document" {{ old('document-document') ? 'checked' : '' }}>
+                                                        <label for="download-document">Download Document</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
@@ -90,3 +172,20 @@
     </div>
 </section>
 @endsection
+@push('script')
+<script>
+    $(document).ready(function(){
+        $('.all-check').click(function(){
+            if($(this).prop('checked')){
+                $(this).parent().parent().parent().next().find('input').each(function(){
+                    $(this).prop('checked', true);
+                });
+            }else{
+                $(this).parent().parent().parent().next().find('input').each(function(){
+                    $(this).prop('checked', false);
+                });
+            }
+        })
+    });
+</script>
+@endpush

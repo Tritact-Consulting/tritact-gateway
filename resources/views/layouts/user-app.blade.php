@@ -194,6 +194,14 @@
                                 </ul>
                             </li>
                             @endcanany
+                            @canany(['view document', 'download document'])
+                            <li class="{{ Request::routeIs('documents.index') ? 'active' : '' }}">
+                                <a href="{{ route('documents.index') }}">
+                                    <i class="icon-File"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                    <span>Documents</span>
+                                </a>
+                            </li>
+                            @endcanany
                         </ul>
                         <div class="sidebar-widgets">
                             <div class="copyright text-left m-25">

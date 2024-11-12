@@ -32,7 +32,8 @@
                 <div class="box-body p-0">
                     <div class="text-center">
                         <h4 class="my-10"><a href="#">{{ $user->name }}</a></h4>
-                        <h6 class="user-info mt-0 mb-10 text-fade">{{ $user->email }}</h6>
+                        <h6 class="user-info mt-0 mb-5 text-fade">{{ $user->email }}</h6>
+                        <span class="badge badge-info mb-10">{{ $user->added_name != null ? $user->added_name->name : '' }}</span>
                     </div>
                     <div class="act-btn d-flex justify-content-center">
                         @can('update user')

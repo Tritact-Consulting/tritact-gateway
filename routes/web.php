@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\DocumentController;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DocumentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Auth::routes(['register' => false]);
 Route::group(['middleware' => ['auth', 'user']], function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('user', UserController::class);
+    Route::resource('documents', DocumentsController::class);
+    Route::post('documents/download/{id}', [DocumentsController::class, 'download'])->name('documents.download');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(){

@@ -31,9 +31,9 @@ class UserController extends Controller
     public function index()
     {
         if(Auth::user()->is_company == 1){
-            $data = User::where('user_id', Auth::user()->id)->where('status', 0)->get();
+            $data = User::where('user_id', Auth::user()->id)->where('status', 0)->orderBy('id', 'desc')->get();
         }else{
-            $data = User::where('user_id', Auth::user()->user_id)->where('status', 0)->get();
+            $data = User::where('user_id', Auth::user()->user_id)->where('status', 0)->orderBy('id', 'desc')->get();
         }
         return view('user.index', compact('data'));
     }
@@ -50,6 +50,7 @@ class UserController extends Controller
         }
 
         if($data->company->remaining_users() != 0){
+
             $request->validate([
                 'name' => 'required',
                 'email' => 'required|unique:users,email',
@@ -61,12 +62,19 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
             $user->is_admin = 1;
             $user->is_company = 0;
+            $user->added_by = Auth::user()->id;
             if(Auth::user()->is_company == 1){
                 $user->user_id = Auth::user()->id;
             }else{
                 $user->user_id = Auth::user()->user_id;
             }
             $user->save();
+
+            if($request->permission != null){
+                $permission = $request->permission;
+                $user->syncPermissions($permission);
+            }
+            
             return redirect()->back()->with('success', 'User Added Successfully');
         }else{
             return redirect()->back()->with('warning', 'User Limit Exceeded');

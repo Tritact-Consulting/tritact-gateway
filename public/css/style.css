@@ -24270,3 +24270,25 @@ span.light-logo img {
   width: 95%;
   margin-top: 10px;
 }
+
+ul.permission {
+    padding: 0;
+    list-style: none;
+    margin: 20px 0px;
+}
+
+ul.permission li > ul {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    align-items: center;
+    padding-left: 34px;
+}
+
+ul.permission li > ul .form-group {
+  margin-bottom: 0;
+}
+
+ul.permission li > ul .form-group label {
+  margin-bottom: 0;
+}

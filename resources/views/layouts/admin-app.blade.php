@@ -215,22 +215,7 @@
                                     <li class="{{ Request::routeIs('document.index') ? 'active' : '' }}"><a href="{{ route('document.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Document List</a></li>
                                 </ul>
                             </li>
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="icon-Chart-line"><span class="path1"></span><span class="path2"></span></i>
-                                    <span>Training</span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href=""><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Customer</a></li>
-                                    <li><a href=""><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Members</a></li>
-                                </ul>
-                            </li>
                         </ul>
-                        <div class="sidebar-widgets">
-                            <div class="copyright text-left m-25">
-                                <p><strong class="d-block">Tritact Gateway</strong> © 2024 All Rights Reserved</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -252,64 +237,6 @@
                         </a>
                     </div>
                     <div class="right-bar-content">
-                        <div class="box no-shadow box-bordered border-light">
-                            <div class="box-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5>Total Sale</h5>
-                                        <h2 class="mb-0">$254.90</h2>
-                                    </div>
-                                    <div class="p-10">
-                                    
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h5 class="my-0">6 total orders</h5>
-                                    <a href="#" class="mb-0">View Report</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box no-shadow box-bordered border-light">
-                            <div class="box-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5>Total Sessions</h5>
-                                        <h2 class="mb-0">845</h2>
-                                    </div>
-                                    <div class="p-10">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                <div class="d-flex align-items-center justify-content-between">						  	  
-                                    <a href="#" class="btn btn-primary-light btn-sm">Live</a>						  	  
-                                    <a href="#" class="btn btn-info-light btn-sm">4 Visitors</a>						  	  
-                                    <a href="#" class="btn btn-success-light btn-sm">See Live View</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box no-shadow box-bordered border-light">
-                            <div class="box-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5>Customer rate</h5>
-                                        <h2 class="mb-0">5.12%</h2>
-                                    </div>
-                                    <div class="p-10">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h5 class="my-0"><span class="badge badge-xl badge-dot badge-primary mr-10"></span>First Time</h5>
-                                    <h5 class="my-0"><span class="badge badge-xl badge-dot badge-danger mr-10"></span>Returning</h5>
-                                </div>
-                            </div>
-                        </div>
                         <div class="box no-shadow box-bordered border-light">
                             <div class="box-header">
                                 <h4 class="box-title">Resent Activity</h4>
@@ -353,11 +280,6 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="box-footer">
-                                <div class="text-center">						  	  
-                                    <a href="#" class="mb-0">Load More</a>					  	  		
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -365,7 +287,7 @@
         </div>
         <!-- /.Content Right Sidebar -->
         <footer class="main-footer">
-            &copy; 2024 <a href="#">Custom Themes</a>. All Rights Reserved.
+            &copy; 2024 <a href="#">Tritact Gateway</a>. All Rights Reserved.
         </footer>
         <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
