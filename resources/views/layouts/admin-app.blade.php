@@ -201,7 +201,6 @@
                                     <li class="{{ Request::routeIs('tag.index') ? 'active' : '' }}"><a href="{{ route('tag.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Tag List</a></li>
                                 </ul>
                             </li>
-
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-File"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
@@ -214,6 +213,12 @@
                                     <li class="{{ Request::routeIs('document.create') || Request::routeIs('document.edit') ? 'active' : '' }}"><a href="{{ route('document.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Document</a></li>
                                     <li class="{{ Request::routeIs('document.index') ? 'active' : '' }}"><a href="{{ route('document.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Document List</a></li>
                                 </ul>
+                            </li>
+                            <li class="{{ Request::routeIs('version.create') || Request::routeIs('version.edit') || Request::routeIs('version.index') ? 'active' : '' }}">
+                                <a href="{{ route('version.index') }}">
+                                    <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Version</span>
+                                </a>
                             </li>
                         </ul>
                     </div>

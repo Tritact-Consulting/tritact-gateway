@@ -31,7 +31,10 @@
                     </div>
                     <div class="menu-details text-center">
                         <h4 class="mt-20 mb-10">{{ $value->name }}</h4>
-                        <p>{{ $value->email }}</p>
+                        <p class="mb-5">{{ $value->email }}</p>
+                        @foreach($value->tags as $tag)
+                        <span class="badge badge-info mb-10">{{ $tag->name }}</span>
+                        @endforeach
                     </div>
                     <div class="act-btn d-flex justify-content-between">
                         <div class="text-center mx-5">

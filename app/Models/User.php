@@ -55,4 +55,8 @@ class User extends Authenticatable
     public function added_name(){
         return $this->hasOne(User::class, 'added_by', 'id');
     }
+
+    public function tags(){
+        return $this->belongsToMany(Tags::class, 'company_tags', 'user_id', 'tag_id');
+    }
 }

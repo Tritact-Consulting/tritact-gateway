@@ -7932,9 +7932,10 @@ Theme Danger Color
   border-color: #fc410c !important;
   color: #ffffff; }
 .theme-danger .btn-outline.btn-primary {
-  color: #fd683e;
-  background-color: transparent;
-  border-color: #fd683e !important; }
+  color: white;
+  background-color: #64ce38;
+  border-color: #64ce38 !important;
+}
   .theme-danger .btn-outline.btn-primary:hover, .theme-danger .btn-outline.btn-primary:active, .theme-danger .btn-outline.btn-primary.active {
     background-color: #fc410c !important;
     border-color: #fc410c !important;

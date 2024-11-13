@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Tags;
 use App\Models\Company;
+use App\Models\CompanyTags;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,16 +19,19 @@ class CompanyController extends Controller
     }
 
     public function create(){
-        return view('admin.company.create');
+        $tags = Tags::where('status', 0)->get();
+        return view('admin.company.create', compact('tags'));
     }
 
     public function store(Request $request){
+
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required|confirmed',
             'director_name' => 'required',
             'short_name' => 'required',
+            'tags' => 'required'
         ]);
 
         $user = new User();
@@ -49,12 +54,23 @@ class CompanyController extends Controller
         $company->status = $request->status;
 
         $user->company()->save($company);
+
+        $tags = $request->tags;
+        foreach($tags as $key => $value){
+            $data = new CompanyTags();
+            $data->user_id = $user->id;
+            $data->company_id = $company->id;
+            $data->tag_id = $value;
+            $data->save();
+        }
+
         return redirect()->back()->with('success', 'Company Added Successfully');
     }
 
     public function edit($id){
         $data = User::find($id);
-        return view('admin.company.edit', compact('data'));
+        $tags = Tags::where('status', 0)->get();
+        return view('admin.company.edit', compact('data', 'tags'));
     }
 
     public function update($id, Request $request){
@@ -63,6 +79,7 @@ class CompanyController extends Controller
             'email' => 'required|unique:users,email,'.$id,
             'director_name' => 'required',
             'short_name' => 'required',
+            'tags' => 'required'
         ]);
 
         if($request->password != null){
@@ -90,6 +107,11 @@ class CompanyController extends Controller
         $company->total_user = $request->total_user;
         $company->status = $request->status;
         $company->save();
+        $old_tag = $user->tags->pluck('id')->toArray();
+        $tags = $request->tags;
+
+        $user->tags()->syncWithPivotValues($tags, ['company_id' => $company->id]);
+
         return redirect()->back()->with('success', 'Company Updated Successfully');
     }
 

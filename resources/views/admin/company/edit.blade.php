@@ -62,13 +62,27 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Password (Leave Empty)</label>
-                                    <input type="password" class="form-control" name="password">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" name="password">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text toggle-password">
+                                                <i class="fa fa-fw field-icon fa-eye"></i>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Confirm Password (Leave Empty)</label>
-                                    <input type="password" class="form-control" name="password_confirmation">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" name="password_confirmation">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text toggle-password">
+                                                <i class="fa fa-fw field-icon fa-eye"></i>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -98,13 +112,20 @@
                                     </select>                                   
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Tags <strong>*</strong></label>
+                                    <select class="form-control select2" name="tags[]" multiple="multiple" required>
+                                        @foreach($tags as $key => $value)
+                                        <option value="{{ $value->id }}" {{ in_array($value->id, $data->tags->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="button" class="btn btn-rounded btn-warning btn-outline mr-1">
-                        <i class="ti-trash"></i> Cancel
-                        </button>
                         <button type="submit" class="btn btn-rounded btn-primary btn-outline">
                         <i class="ti-save-alt"></i> Save
                         </button>
@@ -116,3 +137,18 @@
     </div>
 </section>
 @endsection
+@push('script')
+<script>
+    $(document).ready(function(){
+        $(".toggle-password").click(function() {
+            $(this).find('i').toggleClass("fa-eye fa-eye-slash");
+            var input = $(this).parent().parent().parent().find('input');
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    })
+</script>
+@endpush

@@ -12,4 +12,9 @@ class Tags extends Model
     public function documents(){
         return $this->belongsToMany(Documents::class, 'document_tags', 'tag_id');
     }
+
+    public function tags(){
+        return $this->belongsToMany(User::class, 'company_tags', 'tag_id');
+    }
+
 }
