@@ -21,6 +21,24 @@
 <section class="content">
     <div class="row">
         <div class="col-12">
+            <div class="box">
+                <div class="box-body">
+                    <form method="GET" action="{{ route('documents.index') }}" id="tag-form">
+                        <ul class="tag-wrapper">
+                            @foreach($get_tags as $key => $value)
+                            <li>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <input value="{{ $value->id }}" class="form-check-input" type="checkbox" name="tags[]" id="tag-{{ $value->id }}" {{ in_array($value->id, request()->get('tags')) ? 'checked' : '' }}>
+                                        <label for="tag-{{ $value->id }}">{{ $value->name }}</label>
+                                    </div>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </form>
+                </div>
+            </div>
 			<div class="box">
 			    <div class="box-body">
 				    <div class="table-responsive rounded card-table">
@@ -64,3 +82,12 @@
     </div>
 </section>
 @endsection
+@push('script')
+<script>
+    $(document).ready(function(){
+        $('input[name="tags[]"]').click(function() {
+            $('#tag-form').submit();
+        });
+    });
+</script>
+@endpush

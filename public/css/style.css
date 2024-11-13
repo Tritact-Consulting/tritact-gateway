@@ -24292,3 +24292,21 @@ ul.permission li > ul .form-group {
 ul.permission li > ul .form-group label {
   margin-bottom: 0;
 }
+
+ul.tag-wrapper {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 30px;
+    margin-bottom: 0;
+}
+
+ul.tag-wrapper * {
+    margin: 0;
+}
+
+ul.tag-wrapper label {
+    padding-left: 30px;
+}

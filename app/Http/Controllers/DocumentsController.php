@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Documents;
+use App\Models\FileKeyword;
+use App\Models\Tags;
 use File;
 
 class DocumentsController extends Controller
@@ -26,17 +28,40 @@ class DocumentsController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Documents::orderBy('id', 'desc')->get();
-        return view('document.index', compact('data'));
+        
+        if(Auth::user()->is_company == 1){
+            $tags = Auth::user()->tags->pluck('id')->toArray();
+        }else{
+            $user = User::find(Auth::user()->user_id);
+            $tags = $user->tags->pluck('id')->toArray();
+        }
+        $get_tags = Tags::whereIn('id', $tags)->get();
+
+        $data = Documents::whereHas('tags', function($q) use ($tags){
+            $q->whereIn('id', $tags);
+        });
+
+        if($request->tags != null){
+            $request_tags = $request->tags;
+            $data = $data->whereHas('tags', function($q) use ($request_tags){
+                $q->whereIn('id', $request_tags);
+            });
+        }
+
+        $data = $data->orderBy('id', 'desc')->get();
+
+
+        return view('document.index', compact('data', 'get_tags'));
     }
 
     public function download($id){
         $data = Documents::find($id);
         $file = public_path($data->file);
         $phpword = new \PhpOffice\PhpWord\TemplateProcessor($file);
-        foreach($data->file_keyowords as $key => $value){
+        $file_keyowords = FileKeyword::all();
+        foreach($file_keyowords as $key => $value){
             $director_name = '';
             $short_name = '';
             $company_name = '';
