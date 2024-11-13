@@ -98,6 +98,9 @@
                                             <select name="column" id="" class="form-control">
                                                 <option value="">Select Column</option>
                                                 <option value="director_name">Director Name</option>
+                                                <option value="short_name">Short Name</option>
+                                                <option value="logo">Logo</option>
+                                                <option value="name">Company Name</option>
                                             </select>
                                         </div>
                                     </div>
