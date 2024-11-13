@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->text('doc_keyword')->nullable();
             $table->text('data_keyword')->nullable();
-            $table->unsignedBigInteger('document_id');
-            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
             $table->timestamps();
         });
     }

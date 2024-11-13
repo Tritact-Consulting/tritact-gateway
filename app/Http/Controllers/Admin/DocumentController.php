@@ -91,10 +91,7 @@ class DocumentController extends Controller
     }
 
     public function documentKeyword(Request $request){
-        $request->validate([
-            'document_id' => 'required',
-        ]);
-        $document_id = $request->document_id;
+        
         $file_keyword = $request->file_keyword;
         if($file_keyword != null){
             $request->validate([
@@ -105,7 +102,7 @@ class DocumentController extends Controller
                     $data = new FileKeyword();
                     $data->doc_keyword = $value['keyword'];
                     $data->data_keyword = $value['column'];
-                    $data->document_id = $document_id;
+                    $data->document_id = 0;
                     $data->save();
                 }
             }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\DocVersionController;
+use App\Http\Controllers\Admin\FileKeywordController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentsController;
@@ -48,4 +49,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('document/keyword', [DocumentController::class, 'documentKeyword'])->name('document.keyword');
     Route::post('document/field/delete', [DocumentController::class, 'documentDelete'])->name('document.field.delete');
     Route::resource('version', DocVersionController::class);
+    Route::resource('keyword', FileKeywordController::class);
 });

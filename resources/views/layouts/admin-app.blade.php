@@ -220,8 +220,8 @@
                                     <span>Version</span>
                                 </a>
                             </li>
-                            <li class="{{ Request::routeIs('version.create') || Request::routeIs('version.edit') || Request::routeIs('version.index') ? 'active' : '' }}">
-                                <a href="{{ route('version.index') }}">
+                            <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
+                                <a href="{{ route('keyword.index') }}">
                                     <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>Document Keyword</span>
                                 </a>
