@@ -115,6 +115,7 @@
                                 <div class="form-group">
                                     <label>Tags <strong>*</strong></label>
                                     <select class="form-control select2" name="tags[]" multiple="multiple" required>
+                                        <option value="all">All</option>
                                         @foreach($tags as $key => $value)
                                         <option value="{{ $value->id }}">{{ $value->name }}</option>
                                         @endforeach
@@ -148,6 +149,6 @@
                 input.attr("type", "password");
             }
         });
-    })
+    })    
 </script>
 @endpush

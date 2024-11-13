@@ -57,11 +57,13 @@ class CompanyController extends Controller
 
         $tags = $request->tags;
         foreach($tags as $key => $value){
-            $data = new CompanyTags();
-            $data->user_id = $user->id;
-            $data->company_id = $company->id;
-            $data->tag_id = $value;
-            $data->save();
+            if($value != 'all'){
+                $data = new CompanyTags();
+                $data->user_id = $user->id;
+                $data->company_id = $company->id;
+                $data->tag_id = $value;
+                $data->save();
+            }
         }
 
         return redirect()->back()->with('success', 'Company Added Successfully');
@@ -109,7 +111,7 @@ class CompanyController extends Controller
         $company->save();
         $old_tag = $user->tags->pluck('id')->toArray();
         $tags = $request->tags;
-
+        $tags = array_diff($tags, ["all"]);
         $user->tags()->syncWithPivotValues($tags, ['company_id' => $company->id]);
 
         return redirect()->back()->with('success', 'Company Updated Successfully');

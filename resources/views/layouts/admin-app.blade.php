@@ -220,6 +220,12 @@
                                     <span>Version</span>
                                 </a>
                             </li>
+                            <li class="{{ Request::routeIs('version.create') || Request::routeIs('version.edit') || Request::routeIs('version.index') ? 'active' : '' }}">
+                                <a href="{{ route('version.index') }}">
+                                    <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+                                    <span>Document Keyword</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -307,6 +313,13 @@
     <script>
         if($('.select2').length != 0){
             $('.select2').select2();
+            $('.select2').on("select2:select", function (e) { 
+                var data = e.params.data.text;
+                if(data=='All'){
+                    $(".select2 > option").prop("selected","selected");
+                    $(".select2").trigger("change");
+                }
+            });
         }
         if($('.datatables').length != 0){
             $('.datatables').DataTable();
