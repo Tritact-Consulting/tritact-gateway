@@ -46,6 +46,7 @@
                                         <option value="short_name" {{ $file_value->data_keyword == 'short_name' ? 'selected' : '' }}>Short Name</option>
                                         <option value="logo" {{ $file_value->data_keyword == 'logo' ? 'selected' : '' }}>Logo</option>
                                         <option value="name" {{ $file_value->data_keyword == 'name' ? 'selected' : '' }}>Company Name</option>
+                                        <option value="version" {{ $file_value->data_keyword == 'version' ? 'selected' : '' }}>Version</option>
                                     </select>
                                 </div>
                             </div>
@@ -72,6 +73,7 @@
                                                 <option value="short_name">Short Name</option>
                                                 <option value="logo">Logo</option>
                                                 <option value="name">Company Name</option>
+                                                <option value="version">Version</option>
                                             </select>
                                         </div>
                                     </div>

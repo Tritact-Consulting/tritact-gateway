@@ -29,7 +29,7 @@
                             <li>
                                 <div class="form-group">
                                     <div class="checkbox">
-                                        <input value="{{ $value->id }}" class="form-check-input" type="checkbox" name="tags[]" id="tag-{{ $value->id }}" {{ in_array($value->id, request()->get('tags')) ? 'checked' : '' }}>
+                                        <input value="{{ $value->id }}" class="form-check-input" type="checkbox" name="tags[]" id="tag-{{ $value->id }}" {{ request()->get('tags') != null ? in_array($value->id, request()->get('tags')) ? 'checked' : '' : '' }}>
                                         <label for="tag-{{ $value->id }}">{{ $value->name }}</label>
                                     </div>
                                 </div>

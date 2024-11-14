@@ -7,6 +7,7 @@ use Auth;
 use App\Models\Documents;
 use App\Models\FileKeyword;
 use App\Models\Tags;
+use App\Models\DocVersion;
 use File;
 
 class DocumentsController extends Controller
@@ -30,7 +31,7 @@ class DocumentsController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         if(Auth::user()->is_company == 1){
             $tags = Auth::user()->tags->pluck('id')->toArray();
         }else{
@@ -82,6 +83,11 @@ class DocumentsController extends Controller
                 $phpword->setValue($value->doc_keyword, $short_name);
             }elseif($value->data_keyword == 'name'){
                 $phpword->setValue($value->doc_keyword, $company_name);
+            }elseif($value->data_keyword == 'version'){
+                $version = DocVersion::first();
+                if($version != null){
+                    $phpword->setValue($value->doc_keyword, $version->name);
+                }
             }
         }
         header("Content-Disposition: attachment; filename=edited.docx");
