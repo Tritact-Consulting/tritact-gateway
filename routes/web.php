@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\FileKeywordController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentsController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::group(['middleware' => ['auth', 'user']], function(){
     Route::resource('user', UserController::class);
     Route::resource('documents', DocumentsController::class);
     Route::post('documents/download/{id}', [DocumentsController::class, 'download'])->name('documents.download');
+    Route::get('profile', [HomeController::class, 'profile'])->name('user.profile');
+    Route::post('profile/update', [HomeController::class, 'profileUpdate'])->name('profile.update');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(){
