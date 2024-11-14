@@ -275,6 +275,11 @@
                                     @endphp
                                     @endif
                                     @endforeach
+                                    @if (auth()->user()->unreadNotifications)
+                                    <li class="d-flex justify-content-end">
+                                        <a href="{{route('admin.mark-as-read')}}" class="btn btn-success btn-sm btn-block mt-2 mb-2">Mark All as Read</a>
+                                    </li>
+                                    @endif
                                 </div>
                             </div>
                         </div>

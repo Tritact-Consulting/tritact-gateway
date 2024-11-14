@@ -50,4 +50,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('document/field/delete', [DocumentController::class, 'documentDelete'])->name('document.field.delete');
     Route::resource('version', DocVersionController::class);
     Route::resource('keyword', FileKeywordController::class);
+    Route::get('/mark-as-read', [AdminController::class, 'markAsRead'])->name('admin.mark-as-read');
 });

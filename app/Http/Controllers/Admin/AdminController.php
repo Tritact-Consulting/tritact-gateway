@@ -31,4 +31,9 @@ class AdminController extends Controller
         $document_count = DB::table('documents')->count();
         return view('admin.home', compact('company_count', 'tag_count', 'user_count', 'document_count'));
     }
+
+    public function markAsRead(){
+        Auth::user()->unreadNotifications->markAsRead();
+        return redirect()->back()->with('success', 'Notification Mark Read Successfully');
+    }
 }

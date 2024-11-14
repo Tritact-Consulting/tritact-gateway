@@ -24317,9 +24317,14 @@ ul.tag-wrapper label {
   font-size: 13px;
   text-align: right;
   margin-top: -10px;
+  margin-bottom: 5px;
 }
 
 .sidebar-notification a {
   margin: 15px 0px;
   display: block;
+}
+
+.sidebar-notification .media-body{
+  border-bottom: 5px solid transparent;
 }
