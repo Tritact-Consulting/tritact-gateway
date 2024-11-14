@@ -95,7 +95,7 @@ class DocumentsController extends Controller
                     $phpword->setValue($value->doc_keyword, $version->name);
                 }
             }elseif($value->data_keyword == 'logo'){
-                $document->setImageValue($value->doc_keyword, $logo_path);
+                $phpword->setImageValue($value->doc_keyword, $logo_path);
             }
         }
         // Notify to admin
