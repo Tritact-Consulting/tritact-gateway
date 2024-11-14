@@ -69,15 +69,18 @@ class DocumentsController extends Controller
             $director_name = '';
             $short_name = '';
             $company_name = '';
+            $logo_path = '';
             if(Auth::user()->is_company == 1){
                 $director_name = Auth::user()->company->director_name;
                 $short_name = Auth::user()->company->short_name;
                 $company_name = Auth::user()->name;
+                $logo_path = public_path(Auth::user()->company->logo);
             }else{
                 $data = User::find(Auth::user()->user_id);
                 $director_name = $data->company->director_name;
                 $short_name = $data->company->short_name;
                 $company_name = $data->name;
+                $logo_path = public_path($data->company->logo);
             }
 
             if($value->data_keyword == 'director_name'){
@@ -91,6 +94,8 @@ class DocumentsController extends Controller
                 if($version != null){
                     $phpword->setValue($value->doc_keyword, $version->name);
                 }
+            }elseif($value->data_keyword == 'logo'){
+                $document->setImageValue($value->doc_keyword, $logo_path);
             }
         }
         // Notify to admin
