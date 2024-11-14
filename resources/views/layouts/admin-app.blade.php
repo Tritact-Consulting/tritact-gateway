@@ -231,7 +231,7 @@
                                     $count = 0;
                                     @endphp
                                     @foreach (auth()->user()->unreadNotifications as $notification)
-                                    <a class="media-single mb-10 p-0 rounded-0" href="#">
+                                    <a class="media-single mb-10 p-0 rounded-0" href="javascript:;">
                                         <div class="media-body pl-15 bl-5 rounded {{ $class_array[$count] }}">
                                             <p>{{ $notification->data['data'] }}</p>
                                             <span class="text-fade">by {{ $notification->data['name'] }}</span>
