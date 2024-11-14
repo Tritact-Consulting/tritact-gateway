@@ -73,7 +73,7 @@
                         </li>
                         <!-- Notifications -->
                         <li class="dropdown notifications-menu">
-                            <span class="label label-danger">5</span>
+                            <span class="label label-danger">{{auth()->user()->unreadNotifications->count()}}</span>
                             <a href="#" class="waves-effect waves-light dropdown-toggle btn-danger-light" data-toggle="dropdown" title="Notifications">
                             <i class="icon-Notifications"><span class="path1"></span><span class="path2"></span></i>
                             </a>
@@ -85,7 +85,7 @@
                                                 <h4 class="mb-0 mt-0">Notifications</h4>
                                             </div>
                                             <div>
-                                                <a href="#" class="text-danger">Clear All</a>
+                                                <a href="{{route('admin.mark-as-read')}}" class="text-danger">Clear All</a>
                                             </div>
                                         </div>
                                     </div>
@@ -93,45 +93,19 @@
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu sm-scrol">
+                                        @foreach (auth()->user()->unreadNotifications as $notification)
                                         <li>
-                                            <a href="#">
-                                            <i class="fa fa-users text-info"></i> Curabitur id eros quis nunc suscipit blandit.
+                                            <a href="javascript:;">
+                                                @if($notification->type == 'App\Notifications\UserCreationSuccessful')
+                                                <i class="fa fa-user-plus text-info"></i>
+                                                @elseif($notification->type == 'App\Notifications\DocumentDownloadSuccessful')
+                                                <i class="fa fa-download text-success" aria-hidden="true"></i>
+                                                @endif
+                                                {{ $notification->data['data'] }}
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="#">
-                                            <i class="fa fa-warning text-warning"></i> Duis malesuada justo eu sapien elementum, in semper diam posuere.
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                            <i class="fa fa-users text-danger"></i> Donec at nisi sit amet tortor commodo porttitor pretium a erat.
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                            <i class="fa fa-shopping-cart text-success"></i> In gravida mauris et nisi
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                            <i class="fa fa-user text-danger"></i> Praesent eu lacus in libero dictum fermentum.
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                            <i class="fa fa-user text-primary"></i> Nunc fringilla lorem 
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                            <i class="fa fa-user text-success"></i> Nullam euismod dolor ut quam interdum, at scelerisque ipsum imperdiet.
-                                            </a>
-                                        </li>
+                                        @endforeach
                                     </ul>
-                                </li>
-                                <li class="footer">
-                                    <a href="#">View all</a>
                                 </li>
                             </ul>
                         </li>
