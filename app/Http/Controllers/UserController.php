@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Notification;
+use App\Notifications\UserCreationSuccessful;
 
 class UserController extends Controller
 {
@@ -74,7 +76,11 @@ class UserController extends Controller
                 $permission = $request->permission;
                 $user->syncPermissions($permission);
             }
-            
+
+            // Notify to admin
+            $admin = User::where('is_admin', 0)->where('is_company', 0)->first();
+            $data = ['text' => $data->name . ' created a User - ' . $user->name, 'name' => $data->name];
+            Notification::send($admin, new UserCreationSuccessful($data));
             return redirect()->back()->with('success', 'User Added Successfully');
         }else{
             return redirect()->back()->with('warning', 'User Limit Exceeded');

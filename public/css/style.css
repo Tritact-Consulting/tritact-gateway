@@ -24310,3 +24310,16 @@ ul.tag-wrapper * {
 ul.tag-wrapper label {
     padding-left: 30px;
 }
+
+.sidebar-notification h4 {
+  display: block;
+  width: 100% !important;
+  font-size: 13px;
+  text-align: right;
+  margin-top: -10px;
+}
+
+.sidebar-notification a {
+  margin: 15px 0px;
+  display: block;
+}

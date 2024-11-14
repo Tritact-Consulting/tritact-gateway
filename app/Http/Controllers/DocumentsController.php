@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Documents;
+use App\Models\User;
 use App\Models\FileKeyword;
 use App\Models\Tags;
 use App\Models\DocVersion;
 use File;
+use Notification;
+use App\Notifications\DocumentDownloadSuccessful;
 
 class DocumentsController extends Controller
 {
@@ -90,6 +93,11 @@ class DocumentsController extends Controller
                 }
             }
         }
+        // Notify to admin
+        $admin = User::where('is_admin', 0)->where('is_company', 0)->first();
+        $data = ['text' => Auth::user()->name . ' download a Document - ' . $data->name, 'name' => Auth::user()->name];
+        Notification::send($admin, new DocumentDownloadSuccessful($data));
+
         header("Content-Disposition: attachment; filename=edited.docx");
         $phpword->saveAs('php://output');
     }
