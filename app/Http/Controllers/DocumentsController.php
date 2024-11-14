@@ -103,7 +103,7 @@ class DocumentsController extends Controller
         $notify_data = ['text' => Auth::user()->name . ' download a Document - ' . $data->name, 'name' => Auth::user()->name];
         Notification::send($admin, new DocumentDownloadSuccessful($notify_data));
         $file_name = str_replace(' ', '-', $data->name);
-        header("Content-Disposition: attachment; filename=".$file_name."");
+        header("Content-Disposition: attachment; filename=".$file_name.".docx");
         $phpword->saveAs('php://output');
     }
     
