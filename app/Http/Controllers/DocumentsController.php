@@ -100,10 +100,10 @@ class DocumentsController extends Controller
         }
         // Notify to admin
         $admin = User::where('is_admin', 0)->where('is_company', 0)->first();
-        $data = ['text' => Auth::user()->name . ' download a Document - ' . $data->name, 'name' => Auth::user()->name];
-        Notification::send($admin, new DocumentDownloadSuccessful($data));
-
-        header("Content-Disposition: attachment; filename=edited.docx");
+        $notify_data = ['text' => Auth::user()->name . ' download a Document - ' . $data->name, 'name' => Auth::user()->name];
+        Notification::send($admin, new DocumentDownloadSuccessful($notify_data));
+        $file_name = str_replace(' ', '-', $data->name);
+        header("Content-Disposition: attachment; filename=".$file_name."");
         $phpword->saveAs('php://output');
     }
     
