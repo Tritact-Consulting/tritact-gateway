@@ -52,6 +52,7 @@ class CompanyController extends Controller
         $company->short_name = $request->short_name;
         $company->total_user = $request->total_user;
         $company->status = $request->status;
+        $company->address = $request->address;
 
         $user->company()->save($company);
 
@@ -108,6 +109,7 @@ class CompanyController extends Controller
         $company->short_name = $request->short_name;
         $company->total_user = $request->total_user;
         $company->status = $request->status;
+        $company->address = $request->address;
         $company->save();
         $old_tag = $user->tags->pluck('id')->toArray();
         $tags = $request->tags;

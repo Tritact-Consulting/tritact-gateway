@@ -123,6 +123,12 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" name="address" id="address" class="form-control" value="{{ old('address', $data->company->address) }}">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
