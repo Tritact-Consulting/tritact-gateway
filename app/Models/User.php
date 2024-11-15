@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -58,5 +59,26 @@ class User extends Authenticatable
 
     public function tags(){
         return $this->belongsToMany(Tags::class, 'company_tags', 'user_id', 'tag_id');
+    }
+
+    public function get_total_users(){
+        if(Auth::user()->is_company == 1){
+            $user_id = Auth::user()->id;
+        }else{
+            $user = User::find(Auth::user()->user_id);
+            $user_id = $user->id;
+        }
+        $total = User::where('user_id', $user_id)->count();
+        echo $total;
+    }
+
+    public function get_total_tags(){
+        if(Auth::user()->is_company == 1){
+            $user = Auth::user();
+        }else{
+            $user = User::find(Auth::user()->user_id);
+        }
+        
+        echo count($user->tags);
     }
 }

@@ -224,50 +224,43 @@
                         </a>
                     </div>
                     <div class="right-bar-content">
+                        @hasrole('company')
                         <div class="box no-shadow box-bordered border-light">
                             <div class="box-header">
                                 <h4 class="box-title">Recent Activity</h4>
                             </div>
                             <div class="box-body p-5">
-                                <div class="media-list media-list-hover">
-                                    <a class="media media-single mb-10 p-0 rounded-0" href="#">
-                                        <h4 class="w-50 text-gray font-weight-500">10:10</h4>
-                                        <div class="media-body pl-15 bl-5 rounded border-primary">
-                                            <p>Morbi quis ex eu arcu auctor sagittis.</p>
-                                            <span class="text-fade">by Johne</span>
+                                <div class="media-list media-list-hover sidebar-notification">
+                                    @php
+                                    $class_array = ['border-primary', 'border-success', 'border-info', 'border-danger', 'border-warning']; 
+                                    $count = 0;
+                                    @endphp
+                                    @foreach (auth()->user()->unreadNotifications as $notification)
+                                    <a class="media-single mb-10 p-0 rounded-0" href="javascript:;">
+                                        <div class="media-body pl-15 bl-5 rounded {{ $class_array[$count] }}">
+                                            <p>{{ $notification->data['data'] }}</p>
+                                            <span class="text-fade">by {{ $notification->data['name'] }}</span>
+                                            <h4 class="w-50 text-gray font-weight-500">{{ $notification->created_at->diffForHumans() }}</h4>
                                         </div>
                                     </a>
-                                    <a class="media media-single mb-10 p-0 rounded-0" href="#">
-                                        <h4 class="w-50 text-gray font-weight-500">08:40</h4>
-                                        <div class="media-body pl-15 bl-5 rounded border-success">
-                                            <p>Proin iaculis eros non odio ornare efficitur.</p>
-                                            <span class="text-fade">by Amla</span>
-                                        </div>
-                                    </a>
-                                    <a class="media media-single mb-10 p-0 rounded-0" href="#">
-                                        <h4 class="w-50 text-gray font-weight-500">07:10</h4>
-                                        <div class="media-body pl-15 bl-5 rounded border-info">
-                                            <p>In mattis mi ut posuere consectetur.</p>
-                                            <span class="text-fade">by Josef</span>
-                                        </div>
-                                    </a>
-                                    <a class="media media-single mb-10 p-0 rounded-0" href="#">
-                                        <h4 class="w-50 text-gray font-weight-500">01:15</h4>
-                                        <div class="media-body pl-15 bl-5 rounded border-danger">
-                                            <p>Morbi quis ex eu arcu auctor sagittis.</p>
-                                            <span class="text-fade">by Rima</span>
-                                        </div>
-                                    </a>
-                                    <a class="media media-single mb-10 p-0 rounded-0" href="#">
-                                        <h4 class="w-50 text-gray font-weight-500">23:12</h4>
-                                        <div class="media-body pl-15 bl-5 rounded border-warning">
-                                            <p>Morbi quis ex eu arcu auctor sagittis.</p>
-                                            <span class="text-fade">by Alaxa</span>
-                                        </div>
-                                    </a>
+                                    @php
+                                    $count++;
+                                    @endphp
+                                    @if($count == 5)
+                                    @php
+                                    $count = 0;
+                                    @endphp
+                                    @endif
+                                    @endforeach
+                                    @if (auth()->user()->unreadNotifications)
+                                    <li class="d-flex justify-content-end">
+                                        <a href="" class="btn btn-success btn-sm btn-block mt-2 mb-2">Mark All as Read</a>
+                                    </li>
+                                    @endif                                    
                                 </div>
                             </div>
                         </div>
+                        @endhasrole
                     </div>
                 </div>
             </div>

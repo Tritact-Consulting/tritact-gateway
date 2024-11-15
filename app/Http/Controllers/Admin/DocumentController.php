@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Documents;
 use App\Models\Tags;
 use App\Models\FileKeyword;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use File;
+use App\Notifications\DocumentTagSuccessful;
+use Auth;
+use Notification;
 
 class DocumentController extends Controller
 {
@@ -39,7 +43,14 @@ class DocumentController extends Controller
         }
         $doc->save();
         $doc->tags()->sync($tags);
+        $data = User::where('is_admin', 1)->whereHas('tags', function($a) use ($tags){
+            $a->whereIn('tag_id', $tags);
+        })->get();
 
+        foreach($data as $key => $value){ 
+            $notify_data = ['text' => $doc->name . ' has been added in tag' , 'name' => Auth::user()->name];
+            Notification::send($value, new DocumentTagSuccessful($notify_data));
+        }
         return redirect()->back()->with('success', 'Document Added Successfully');
     }
 
