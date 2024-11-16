@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -38,7 +39,15 @@ class HomeController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email,'.$id,
+            'signature' => 'required',
         ]);
+
+        if(Auth::user()->is_company == 1){
+            $request->validate([
+                'signature' => 'required',
+            ]);
+        }
+
         if($request->password != null){
             $request->validate([
                 'password' => 'required|confirmed',
@@ -52,6 +61,14 @@ class HomeController extends Controller
             $user->password = Hash::make($request->password);
         }
         $user->save();
+
+        if(Auth::user()->is_company == 1){
+            $company = Company::where('user_id', $id)->first();
+            $company->signature = $request->signature;
+            $company->address = $request->address;
+            $company->save();
+        }
+
         return redirect()->back()->with('success', 'Profile Updated Successfully');
     }
 }

@@ -76,6 +76,20 @@
                                     </div>
                                 </div>
                             </div>
+                            @hasrole('company')
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Signature <strong>*</strong></label>
+                                    <input type="text" name="signature" class="form-control" value="{{ Auth::user()->company->signature }}" required style="font-style: italic;">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Address <strong>*</strong></label>
+                                    <input type="text" name="address" class="form-control" value="{{ Auth::user()->company->address }}" required>
+                                </div>
+                            </div>
+                            @endhasrole
                         </div>
                     </div>
                     <!-- /.box-body -->

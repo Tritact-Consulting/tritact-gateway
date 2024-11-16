@@ -7932,14 +7932,15 @@ Theme Danger Color
   border-color: #fc410c !important;
   color: #ffffff; }
 .theme-danger .btn-outline.btn-primary {
-  color: white;
-  background-color: #64ce38;
+  color: #64ce38;
+  background-color: transparent;
   border-color: #64ce38 !important;
 }
   .theme-danger .btn-outline.btn-primary:hover, .theme-danger .btn-outline.btn-primary:active, .theme-danger .btn-outline.btn-primary.active {
-    background-color: #fc410c !important;
-    border-color: #fc410c !important;
-    color: #ffffff !important; }
+    background-color: #64ce38 !important;
+    border-color: #64ce38 !important;
+    color: #ffffff !important;
+    }
 .theme-danger .show > .btn-outline.btn-primary.dropdown-toggle {
   background-color: #fc410c !important;
   border-color: #fc410c !important;
