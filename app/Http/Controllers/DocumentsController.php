@@ -70,17 +70,20 @@ class DocumentsController extends Controller
             $short_name = '';
             $company_name = '';
             $logo_path = '';
+            $address = '';
             if(Auth::user()->is_company == 1){
                 $director_name = Auth::user()->company->director_name;
                 $short_name = Auth::user()->company->short_name;
                 $company_name = Auth::user()->name;
                 $logo_path = public_path(Auth::user()->company->logo);
+                $address = Auth::user()->company->address;
             }else{
                 $data = User::find(Auth::user()->user_id);
                 $director_name = $data->company->director_name;
                 $short_name = $data->company->short_name;
                 $company_name = $data->name;
                 $logo_path = public_path($data->company->logo);
+                $address = $data->company->address;
             }
 
             if($value->data_keyword == 'director_name'){
@@ -89,6 +92,8 @@ class DocumentsController extends Controller
                 $phpword->setValue($value->doc_keyword, $short_name);
             }elseif($value->data_keyword == 'name'){
                 $phpword->setValue($value->doc_keyword, $company_name);
+            }elseif($value->data_keyword == 'address'){
+                $phpword->setValue($value->doc_keyword, $address);
             }elseif($value->data_keyword == 'version'){
                 $version = DocVersion::first();
                 if($version != null){
