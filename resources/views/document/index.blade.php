@@ -78,7 +78,7 @@
                                     </td>
                                 </tr>
                                 @foreach($value->supportive_document(Auth::user()->id) as $support_key => $support_value)
-                                <tr class="bg-primary">
+                                <tr class="bg-light">
                                     <td>{{ $value->name }} {{ $support_value->version }}</td>
                                     <td>
                                         @foreach($value->tags as $tag)
