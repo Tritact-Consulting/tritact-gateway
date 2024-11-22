@@ -64,12 +64,18 @@ class DocumentsController extends Controller
 
     public function download($id, $supportive = 0){
         $file_name = '';
+        $version_name = '';
+        $issue_date = '';
         if($supportive == 0){
             $data = Documents::find($id);
-            $file_name = str_replace(' ', '-', $data->name);
+            $file_name = $data->name;
+            $version_name = $data->version;
+            $issue_date = $data->issue_date;
         }else{
             $data = SupportiveDocument::find($id);
-            $file_name = str_replace(' ', '-', $data->document->name);
+            $file_name = $data->document->name;
+            $version_name = $data->version;
+            $issue_date = $data->issue_date;
         }
         $file = public_path($data->file);
         $phpword = new \PhpOffice\PhpWord\TemplateProcessor($file);
@@ -104,10 +110,11 @@ class DocumentsController extends Controller
             }elseif($value->data_keyword == 'address'){
                 $phpword->setValue($value->doc_keyword, $address);
             }elseif($value->data_keyword == 'version'){
-                $version = DocVersion::first();
-                if($version != null){
-                    $phpword->setValue($value->doc_keyword, $version->name);
+                if($version_name != ''){
+                    $phpword->setValue($value->doc_keyword, $version_name);
                 }
+            }elseif($value->data_keyword == 'issue_date'){
+                $phpword->setValue($value->doc_keyword, $issue_date);
             }elseif($value->data_keyword == 'logo'){
                 $phpword->setImageValue($value->doc_keyword, $logo_path);
             }

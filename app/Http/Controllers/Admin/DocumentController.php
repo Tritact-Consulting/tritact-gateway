@@ -102,40 +102,15 @@ class DocumentController extends Controller
     }
 
     public function documentKeyword(Request $request){
+        $request->validate([
+            'keyword' => 'required',
+            'column' => 'required',
+        ]);
 
-        $file_keyword = $request->file_keyword;
-        if($file_keyword != null){
-            $request->validate([
-                'file_keyword' => 'required',
-            ]);
-            foreach($file_keyword as $key => $value){
-                if($value['column'] != ''){
-                    $data = new FileKeyword();
-                    $data->doc_keyword = $value['keyword'];
-                    $data->data_keyword = $value['column'];
-                    $data->save();
-                }
-            }
-        }
-
-        $old_keyword = $request->old_keyword;
-        $old_column = $request->old_column;
-
-        if($old_keyword != null){
-            foreach($old_keyword as $key => $value){
-                $data = FileKeyword::find($key);
-                $data->doc_keyword = $value;
-                $data->save();
-            }
-        }
-
-        if($old_column != null){
-            foreach($old_column as $key => $value){
-                $data = FileKeyword::find($key);
-                $data->data_keyword = $value;
-                $data->save();
-            }
-        }
+        $data = new FileKeyword();
+        $data->doc_keyword = $request->keyword;
+        $data->data_keyword = $request->column;
+        $data->save();
 
         return redirect()->back()->with('success', 'Document Keyword Updated Successfully');
     }
