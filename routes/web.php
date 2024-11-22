@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth', 'user']], function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('user', UserController::class);
     Route::resource('documents', DocumentsController::class);
-    Route::post('documents/download/{id}', [DocumentsController::class, 'download'])->name('documents.download');
+    Route::post('documents/download/{id}/{supportive?}', [DocumentsController::class, 'download'])->name('documents.download');
     Route::get('profile', [HomeController::class, 'profile'])->name('user.profile');
     Route::post('profile/update', [HomeController::class, 'profileUpdate'])->name('profile.update');
 });

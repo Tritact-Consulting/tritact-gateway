@@ -12,5 +12,9 @@ class Documents extends Model
     public function tags(){
         return $this->belongsToMany(Tags::class, 'document_tags', 'document_id', 'tag_id');
     }
+
+    public function supportive_document($user_id){
+        return $this->hasMany(SupportiveDocument::class, 'document_id', 'id')->where('user_id', $user_id)->orderBy('id', 'desc')->get();
+    }
     
 }

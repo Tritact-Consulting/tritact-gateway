@@ -9,8 +9,10 @@ use App\Models\User;
 use App\Models\FileKeyword;
 use App\Models\Tags;
 use App\Models\DocVersion;
+use App\Models\SupportiveDocument;
 use File;
 use Notification;
+use Illuminate\Support\Str;
 use App\Notifications\DocumentDownloadSuccessful;
 
 class DocumentsController extends Controller
@@ -60,8 +62,15 @@ class DocumentsController extends Controller
         return view('document.index', compact('data', 'get_tags'));
     }
 
-    public function download($id){
-        $data = Documents::find($id);
+    public function download($id, $supportive = 0){
+        $file_name = '';
+        if($supportive == 0){
+            $data = Documents::find($id);
+            $file_name = str_replace(' ', '-', $data->name);
+        }else{
+            $data = SupportiveDocument::find($id);
+            $file_name = str_replace(' ', '-', $data->document->name);
+        }
         $file = public_path($data->file);
         $phpword = new \PhpOffice\PhpWord\TemplateProcessor($file);
         $file_keyowords = FileKeyword::all();
@@ -107,9 +116,32 @@ class DocumentsController extends Controller
         $admin = User::where('is_admin', 0)->where('is_company', 0)->first();
         $notify_data = ['text' => Auth::user()->name . ' download a Document - ' . $data->name, 'name' => Auth::user()->name];
         Notification::send($admin, new DocumentDownloadSuccessful($notify_data));
-        $file_name = str_replace(' ', '-', $data->name);
         header("Content-Disposition: attachment; filename=".$file_name.".docx");
         $phpword->saveAs('php://output');
+    }
+
+    public function store(Request $request){
+        $request->validate([
+            'version' => 'required',
+            'issue_date' => 'required',
+            'file' => 'required',
+            'document_id' => 'required',
+        ]);
+
+        $data = new SupportiveDocument();
+        $data->user_id = Auth::user()->id;
+        $data->version = $request->version;
+        $data->issue_date = $request->issue_date;
+        $data->document_id = $request->document_id;
+        if($request->hasFile('file')){
+            $path = Str::slug(Auth::user()->name).'/'.Str::slug($request->version);
+            $public_path = public_path('document/'.$path);
+            $imageName = time().'.'.$request->file->extension();
+            $request->file->move(public_path('document/'.$path), $imageName);
+            $data->file = 'document/'.$path.'/'.$imageName;
+        }
+        $data->save();
+        return redirect()->back()->with('success', 'Supportive Document Added Successfully');        
     }
     
 }

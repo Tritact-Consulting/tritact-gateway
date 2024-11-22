@@ -81,4 +81,9 @@ class User extends Authenticatable
         
         echo count($user->tags);
     }
+
+    public function supportive_document(){
+        return $this->hasMany(SupportiveDocument::class, 'user_id', 'id')->orderBy('id', 'desc');
+    }
+
 }

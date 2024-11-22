@@ -49,7 +49,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>File <strong>*</strong></label>
-                                    <input type="file" class="form-control" name="file" value="{{ old('name') }}" required>
+                                    <input type="file" class="form-control" name="file" value="{{ old('file') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
