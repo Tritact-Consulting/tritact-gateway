@@ -53,6 +53,8 @@ class CompanyController extends Controller
         $company->total_user = $request->total_user;
         $company->status = $request->status;
         $company->address = $request->address;
+        $company->version = $request->version;
+        $company->issue_date = $request->issue_date;
 
         $user->company()->save($company);
 
@@ -82,7 +84,9 @@ class CompanyController extends Controller
             'email' => 'required|unique:users,email,'.$id,
             'director_name' => 'required',
             'short_name' => 'required',
-            'tags' => 'required'
+            'tags' => 'required',
+            'version' => 'required',
+            'issue_date' => 'required',
         ]);
 
         if($request->password != null){
@@ -110,6 +114,8 @@ class CompanyController extends Controller
         $company->total_user = $request->total_user;
         $company->status = $request->status;
         $company->address = $request->address;
+        $company->version = $request->version;
+        $company->issue_date = $request->issue_date;
         $company->save();
         $old_tag = $user->tags->pluck('id')->toArray();
         $tags = $request->tags;
@@ -132,6 +138,8 @@ class CompanyController extends Controller
                 'email' => 'required|unique:users,email',
                 'password' => 'required|confirmed',
                 'company_id' => 'required',
+                'version' => 'required',
+                'issue_date' => 'required',
             ]);
             $user = new User();
             $user->name = $request->name;

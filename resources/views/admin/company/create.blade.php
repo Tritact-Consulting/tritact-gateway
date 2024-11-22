@@ -128,6 +128,18 @@
                                     <input type="text" name="address" id="address" class="form-control" value="{{ old('address') }}">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="version">Version <strong>*</strong></label>
+                                    <input type="text" name="version" id="version" class="form-control" value="{{ old('version') }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="issue_date">Issue Date <strong>*</strong></label>
+                                    <input type="date" name="issue_date" id="issue_date" class="form-control" value="{{ old('issue_date') }}" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
