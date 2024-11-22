@@ -70,12 +70,12 @@ class DocumentsController extends Controller
             $data = Documents::find($id);
             $file_name = $data->name;
             $version_name = $data->version;
-            $issue_date = $data->issue_date;
+            $issue_date = date('d/m/Y', strtotime($data->issue_date));
         }else{
             $data = SupportiveDocument::find($id);
             $file_name = $data->document->name;
             $version_name = $data->version;
-            $issue_date = $data->issue_date;
+            $issue_date = date('d/m/Y', strtotime($data->issue_date));
         }
         $file = public_path($data->file);
         $phpword = new \PhpOffice\PhpWord\TemplateProcessor($file);
