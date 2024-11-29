@@ -31,7 +31,11 @@ class CompanyController extends Controller
             'password' => 'required|confirmed',
             'director_name' => 'required',
             'short_name' => 'required',
-            'tags' => 'required'
+            'tags' => 'required',
+            'address' => 'required',
+            'website' => 'required',
+            'registration_num' => 'required',
+            'phone_num' => 'required'
         ]);
 
         $user = new User();
@@ -55,6 +59,9 @@ class CompanyController extends Controller
         $company->address = $request->address;
         $company->version = $request->version;
         $company->issue_date = $request->issue_date;
+        $company->website = $request->website;
+        $company->registration_num = $request->registration_num;
+        $company->phone_num = $request->phone_num;
 
         $user->company()->save($company);
 
@@ -87,6 +94,10 @@ class CompanyController extends Controller
             'tags' => 'required',
             'version' => 'required',
             'issue_date' => 'required',
+            'address' => 'required',
+            'website' => 'required',
+            'registration_num' => 'required',
+            'phone_num' => 'required'
         ]);
 
         if($request->password != null){
@@ -116,6 +127,9 @@ class CompanyController extends Controller
         $company->address = $request->address;
         $company->version = $request->version;
         $company->issue_date = $request->issue_date;
+        $company->website = $request->website;
+        $company->registration_num = $request->registration_num;
+        $company->phone_num = $request->phone_num;
         $company->save();
         $old_tag = $user->tags->pluck('id')->toArray();
         $tags = $request->tags;

@@ -141,6 +141,24 @@
                                     <input type="date" name="issue_date" id="issue_date" class="form-control" value="{{  old('issue_data', date('Y-m-d', strtotime($data->company->issue_date))) }}" required>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="website">Website <strong>*</strong></label>
+                                    <input type="text" name="website" id="website" class="form-control" value="{{ old('website', $data->company->website) }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="registration_num">Registration Number <strong>*</strong></label>
+                                    <input type="text" name="registration_num" id="registration_num" class="form-control" value="{{ old('registration_num', $data->company->registration_num) }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone_num">Phone Number <strong>*</strong></label>
+                                    <input type="text" name="phone_num" id="phone_num" class="form-control" value="{{ old('phone_num', $data->company->phone_num) }}" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
