@@ -58,6 +58,9 @@
                                         <option value="version">Version</option>
                                         <option value="issue_date">Issue Date</option>
                                         <option value="address">Address</option>
+                                        <option value="website">Website</option>
+                                        <option value="registration_num">Registration Number</option>
+                                        <option value="phone_num">Phone Number</option>
                                     </select>
                                 </div>
                             </div>
@@ -105,6 +108,9 @@
                                     <option value="version" {{ $file_value->data_keyword == 'version' ? 'selected' : '' }}>Version</option>
                                     <option value="issue_date" {{ $file_value->data_keyword == 'issue_date' ? 'selected' : '' }}>Issue Date</option>
                                     <option value="address" {{ $file_value->data_keyword == 'address' ? 'selected' : '' }}>Address</option>
+                                    <option value="website" {{ $file_value->data_keyword == 'website' ? 'selected' : '' }}>Website</option>
+                                    <option value="registration_num" {{ $file_value->data_keyword == 'registration_num' ? 'selected' : '' }}>Registration Number</option>
+                                    <option value="phone_num" {{ $file_value->data_keyword == 'phone_num' ? 'selected' : '' }}>Phone Number</option>
                                 </select>
                             </div>
                         </div>
