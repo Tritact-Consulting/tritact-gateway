@@ -69,8 +69,6 @@ class DocumentsController extends Controller
         if($supportive == 0){
             $data = Documents::find($id);
             $file_name = $data->name;
-            $version_name = $data->version;
-            $issue_date = date('d/m/Y', strtotime($data->issue_date));
         }else{
             $data = SupportiveDocument::find($id);
             $file_name = $data->document->name;
@@ -86,12 +84,27 @@ class DocumentsController extends Controller
             $company_name = '';
             $logo_path = '';
             $address = '';
+            $phone = '';
+            $website = '';
+            $registration_num = '';
             if(Auth::user()->is_company == 1){
                 $director_name = Auth::user()->company->director_name;
                 $short_name = Auth::user()->company->short_name;
                 $company_name = Auth::user()->name;
                 $logo_path = public_path(Auth::user()->company->logo);
                 $address = Auth::user()->company->address;
+                $phone = Auth::user()->company->phone;
+                $website = Auth::user()->company->website;
+                $registration_num = Auth::user()->company->registration_num;
+
+                if($version_name == '') {
+                    $version_name = Auth::user()->company->version;
+                }
+
+                if ($issue_date == '') {
+                    $issue_date = date('d/m/Y', strtotime(Auth::user()->company->issue_date));
+                }
+
             }else{
                 $data = User::find(Auth::user()->user_id);
                 $director_name = $data->company->director_name;
@@ -99,6 +112,17 @@ class DocumentsController extends Controller
                 $company_name = $data->name;
                 $logo_path = public_path($data->company->logo);
                 $address = $data->company->address;
+                $phone = $data->company->phone;
+                $website = $data->company->website;
+                $registration_num = $data->company->registration_num;
+
+                if($version_name == '') {
+                    $version_name = $data->company->version;
+                }
+
+                if ($issue_date == '') {
+                    $issue_date = date('d/m/Y', strtotime($data->company->issue_date));
+                }
             }
 
             if($value->data_keyword == 'director_name'){
@@ -117,6 +141,12 @@ class DocumentsController extends Controller
                 $phpword->setValue($value->doc_keyword, $issue_date);
             }elseif($value->data_keyword == 'logo'){
                 $phpword->setImageValue($value->doc_keyword, $logo_path);
+            }elseif($value->data_keyword == 'phone_num'){
+                $phpword->setValue($value->doc_keyword, $phone);
+            }elseif($value->data_keyword == 'website'){
+                $phpword->setValue($value->doc_keyword, $website);
+            }elseif($value->data_keyword == 'registration_num'){
+                $phpword->setValue($value->doc_keyword, $registration_num);
             }
         }
         // Notify to admin
