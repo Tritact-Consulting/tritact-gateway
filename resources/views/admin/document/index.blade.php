@@ -46,9 +46,13 @@
                                     </td>
                                     <td>{{ $value->created_at->format('d M, Y') }}</td>
                                     <td>
-                                        <a href="{{ route('document.show', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-success-light btn-xs mb-5"><i class="fa fa-eye-slash"></i></a>										
-                                        <a href="{{ route('document.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
+                                        <form action="{{ route('document.destroy', $value->id) }}" method="post">
+                                            <a href="{{ route('document.show', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-success-light btn-xs mb-5"><i class="fa fa-eye-slash"></i></a>										
+                                            <a href="{{ route('document.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5" onclick="return confirm('Do you want to delete this document?');"><i class="fa fa-trash"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

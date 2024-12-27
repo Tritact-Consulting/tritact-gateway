@@ -45,7 +45,7 @@ class DocumentsController extends Controller
         }
         $get_tags = Tags::whereIn('id', $tags)->get();
 
-        $data = Documents::whereHas('tags', function($q) use ($tags){
+        $data = Documents::where('status', 0)->whereHas('tags', function($q) use ($tags){
             $q->whereIn('id', $tags);
         });
 

@@ -17,7 +17,7 @@ use Notification;
 class DocumentController extends Controller
 {
     public function index(){
-        $data = Documents::with('tags')->orderBy('id', 'desc')->get();
+        $data = Documents::with('tags')->where('status', 0)->orderBy('id', 'desc')->get();
         return view('admin.document.index', compact('data'));
     }
 
@@ -120,5 +120,12 @@ class DocumentController extends Controller
         $data = FileKeyword::find($id);
         $data->delete();
         return true;
+    }
+
+    public function destroy($id){
+        $data = Documents::find($id);
+        $data->status = 1;
+        $data->save();
+        return redirect()->back()->with('success', 'Document Deleted Successfully');
     }
 }
