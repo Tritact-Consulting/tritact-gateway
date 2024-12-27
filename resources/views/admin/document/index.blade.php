@@ -51,7 +51,7 @@
                                             <a href="{{ route('document.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5" onclick="return confirm('Do you want to delete this document?');"><i class="fa fa-trash"></i></button>
+                                            <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm"><i class="fa fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>
