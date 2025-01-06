@@ -29,7 +29,7 @@ class AdminController extends Controller
         $company_count = DB::table('users')->where('is_admin', 1)->where('is_company', 1)->count();
         $tag_count = DB::table('tags')->where('status', 0)->count();
         $user_count = DB::table('users')->where('is_admin', 1)->where('is_company', 0)->count();
-        $document_count = DB::table('documents')->count();
+        $document_count = DB::table('documents')->where('status', 0)->count();
         return view('admin.home', compact('company_count', 'tag_count', 'user_count', 'document_count'));
     }
 
