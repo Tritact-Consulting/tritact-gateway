@@ -61,8 +61,17 @@ class DocumentsController extends Controller
 
         return view('document.index', compact('data', 'get_tags'));
     }
+    
+    public function downloadAll(Request $request){
+        $doc = $request->doc;
+        $doc_id = explode(',', $doc[0]);
+        for($i = 0; $i < count($doc_id); $i++){
+            $return_file = $this->download($doc_id[$i], 0, 1);
+            dump($return_file);
+        }
+    }
 
-    public function download($id, $supportive = 0){
+    public function download($id, $supportive = 0, $zip = 0){
         $file_name = '';
         $version_name = '';
         $issue_date = '';
@@ -93,9 +102,11 @@ class DocumentsController extends Controller
                 $company_name = Auth::user()->name;
                 $logo_path = public_path(Auth::user()->company->logo);
                 $address = Auth::user()->company->address;
-                $phone = Auth::user()->company->phone;
+                $phone = Auth::user()->company->phone_num;
                 $website = Auth::user()->company->website;
                 $registration_num = Auth::user()->company->registration_num;
+                $company_email = Auth::user()->company->company_email;
+                $signature = Auth::user()->company->signature;
 
                 if($version_name == '') {
                     $version_name = Auth::user()->company->version;
@@ -112,9 +123,11 @@ class DocumentsController extends Controller
                 $company_name = $data->name;
                 $logo_path = public_path($data->company->logo);
                 $address = $data->company->address;
-                $phone = $data->company->phone;
+                $phone = $data->company->phone_num;
                 $website = $data->company->website;
                 $registration_num = $data->company->registration_num;
+                $company_email = $data->company->company_email;
+                $signature = $data->company->signature;
 
                 if($version_name == '') {
                     $version_name = $data->company->version;
@@ -147,14 +160,22 @@ class DocumentsController extends Controller
                 $phpword->setValue($value->doc_keyword, $website);
             }elseif($value->data_keyword == 'registration_num'){
                 $phpword->setValue($value->doc_keyword, $registration_num);
+            }elseif($value->data_keyword == 'company_email'){
+                $phpword->setValue($value->doc_keyword, $company_email);
+            }elseif($value->data_keyword == 'signature'){
+                $phpword->setValue($value->doc_keyword, $signature);
             }
         }
         // Notify to admin
         $admin = User::where('is_admin', 0)->where('is_company', 0)->first();
         $notify_data = ['text' => Auth::user()->name . ' download a Document - ' . $data->name, 'name' => Auth::user()->name];
         Notification::send($admin, new DocumentDownloadSuccessful($notify_data));
-        header("Content-Disposition: attachment; filename=".$file_name);
-        $phpword->saveAs('php://output');
+        if($zip == 0){
+            header("Content-Disposition: attachment; filename=".$file_name);
+            $phpword->saveAs('php://output');
+        }else{
+            return $phpword;
+        }
     }
 
     public function store(Request $request){

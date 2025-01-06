@@ -260,8 +260,13 @@
             </div>
         </div>
         <!-- /.Content Right Sidebar -->
-        <footer class="main-footer">
-            &copy; 2024 <a href="#">Tritact Gateway</a>. All Rights Reserved.
+        <footer class="main-footer d-flex justify-content-between" style="padding-right: 30px;">
+            <div>
+                &copy; 2025 <a href="#">Tritact Gateway</a>. All Rights Reserved.
+            </div>
+            <div class="text-right">
+                <a href="mailto:support@tritact.co.uk" target="_blank">support@tritact.co.uk</a>
+            </div>
         </footer>
         <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>

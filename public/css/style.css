@@ -24299,8 +24299,13 @@ ul.tag-wrapper {
     display: flex;
     align-items: center;
     justify-content: end;
-    gap: 30px;
+    gap: 0;
     margin-bottom: 0;
+    flex-wrap: wrap;
+}
+
+ul.tag-wrapper li {
+    margin: 5px 0px 5px 30px;
 }
 
 ul.tag-wrapper * {

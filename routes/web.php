@@ -34,7 +34,8 @@ Route::group(['middleware' => ['auth', 'user']], function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('user', UserController::class);
     Route::resource('documents', DocumentsController::class);
-    Route::post('documents/download/{id}/{supportive?}', [DocumentsController::class, 'download'])->name('documents.download');
+    Route::post('documents/download/{id}/{supportive?}/{zip?}', [DocumentsController::class, 'download'])->name('documents.download');
+    Route::post('document/download', [DocumentsController::class, 'downloadAll'])->name('documents.download.all');
     Route::get('profile', [HomeController::class, 'profile'])->name('user.profile');
     Route::post('profile/update', [HomeController::class, 'profileUpdate'])->name('profile.update');
 });
@@ -54,4 +55,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::resource('version', DocVersionController::class);
     Route::resource('keyword', FileKeywordController::class);
     Route::get('/mark-as-read', [AdminController::class, 'markAsRead'])->name('admin.mark-as-read');
+    Route::get('company/dashboard/{company_id}', [CompanyController::class, 'dashboard'])->name('company.dashboard');
+    Route::post('company/document/download/{id}/{supportive}/{company_id}', [DocumentController::class, 'dashboardDocuments'])->name('company.dashboard.documents.download');
 });

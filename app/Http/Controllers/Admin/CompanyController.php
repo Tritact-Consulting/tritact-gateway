@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Tags;
 use App\Models\Company;
 use App\Models\CompanyTags;
+use App\Models\Documents;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -35,7 +36,8 @@ class CompanyController extends Controller
             'address' => 'required',
             'website' => 'required',
             'registration_num' => 'required',
-            'phone_num' => 'required'
+            'phone_num' => 'required',
+            'company_email' => 'required'
         ]);
 
         $user = new User();
@@ -62,6 +64,7 @@ class CompanyController extends Controller
         $company->website = $request->website;
         $company->registration_num = $request->registration_num;
         $company->phone_num = $request->phone_num;
+        $company->company_email = $request->company_email;
 
         $user->company()->save($company);
 
@@ -97,7 +100,8 @@ class CompanyController extends Controller
             'address' => 'required',
             'website' => 'required',
             'registration_num' => 'required',
-            'phone_num' => 'required'
+            'phone_num' => 'required',
+            'company_email' => 'required'
         ]);
 
         if($request->password != null){
@@ -130,6 +134,7 @@ class CompanyController extends Controller
         $company->website = $request->website;
         $company->registration_num = $request->registration_num;
         $company->phone_num = $request->phone_num;
+        $company->company_email = $request->company_email;
         $company->save();
         $old_tag = $user->tags->pluck('id')->toArray();
         $tags = $request->tags;
@@ -198,5 +203,22 @@ class CompanyController extends Controller
         }
         $user->save();
         return redirect()->back()->with('success', 'Company User Updated Successfully');
+    }
+    
+    public function dashboard($company_id, Request $request){
+        $user = User::find($company_id);
+        $tags = $user->tags->pluck('id')->toArray();
+        $get_tags = Tags::whereIn('id', $tags)->get();
+        $data = Documents::where('status', 0)->whereHas('tags', function($q) use ($tags){
+            $q->whereIn('id', $tags);
+        });
+        if($request->tags != null){
+            $request_tags = $request->tags;
+            $data = $data->whereHas('tags', function($q) use ($request_tags){
+                $q->whereIn('id', $request_tags);
+            });
+        }
+        $data = $data->orderBy('id', 'desc')->get();
+        return view('admin.company.dashboard.index', compact('user', 'get_tags', 'data'));
     }
 }

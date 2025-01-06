@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class TagController extends Controller
 {
     public function index(){
-        $data = Tags::orderBy('id', 'desc')->get();
+        $data = Tags::where('status', 0)->orderBy('id', 'desc')->get();
         return view('admin.tag.index', compact('data'));
     }
 
@@ -47,5 +47,12 @@ class TagController extends Controller
         $tag->save();
 
         return redirect()->back()->with('success', 'Tag Updated Successfully');
+    }
+    
+    public function destroy($id){
+        $data = Tags::find($id);
+        $data->status = 1;
+        $data->save();
+        return redirect()->back()->with('success', 'Tag Deleted Successfully');
     }
 }

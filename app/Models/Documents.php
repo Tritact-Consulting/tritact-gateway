@@ -10,7 +10,7 @@ class Documents extends Model
     use HasFactory;
 
     public function tags(){
-        return $this->belongsToMany(Tags::class, 'document_tags', 'document_id', 'tag_id');
+        return $this->belongsToMany(Tags::class, 'document_tags', 'document_id', 'tag_id')->where('status', 0);
     }
 
     public function supportive_document($user_id){

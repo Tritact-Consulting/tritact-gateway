@@ -38,10 +38,6 @@
                     </div>
                     <div class="act-btn d-flex justify-content-between">
                         <div class="text-center mx-5">
-                            <a href="#" class="waves-effect waves-circle btn btn-circle btn-success-light btn-xs mb-5"><i class="fa fa-eye-slash"></i></a>
-                            <small class="d-block">View</small>
-                        </div>
-                        <div class="text-center mx-5">
                             <a href="{{ route('company.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
                             <small class="d-block">Edit</small>
                         </div>
@@ -53,6 +49,10 @@
 							<a href="{{ route('company.user', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-users"></i></a>
 							<small class="d-block">Users</small>
 						</div>
+						<div class="text-center mx-5">
+                            <a href="{{ route('company.dashboard', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-success-light btn-xs mb-5"><i class="fa fa-lock"></i></a>
+                            <small class="d-block">Login</small>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -61,6 +61,8 @@
                                         <option value="website">Website</option>
                                         <option value="registration_num">Registration Number</option>
                                         <option value="phone_num">Phone Number</option>
+                                        <option value="company_email">Company Email</option>
+                                        <option value="signature">Signature</option>
                                     </select>
                                 </div>
                             </div>
@@ -111,6 +113,8 @@
                                     <option value="website" {{ $file_value->data_keyword == 'website' ? 'selected' : '' }}>Website</option>
                                     <option value="registration_num" {{ $file_value->data_keyword == 'registration_num' ? 'selected' : '' }}>Registration Number</option>
                                     <option value="phone_num" {{ $file_value->data_keyword == 'phone_num' ? 'selected' : '' }}>Phone Number</option>
+                                    <option value="company_email" {{ $file_value->data_keyword == 'company_email' ? 'selected' : '' }}>Company Email</option>
+                                    <option value="signature" {{ $file_value->data_keyword == 'signature' ? 'selected' : '' }}>Signature</option>
                                 </select>
                             </div>
                         </div>

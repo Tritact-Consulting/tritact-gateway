@@ -72,10 +72,10 @@
                             </a>
                         </li>
                         <!-- Notifications -->
-                        <li class="dropdown notifications-menu">
+                        <li class="dropdown notifications-menu d-none">
                             <span class="label label-danger">5</span>
                             <a href="#" class="waves-effect waves-light dropdown-toggle btn-danger-light" data-toggle="dropdown" title="Notifications">
-                            <i class="icon-Notifications"><span class="path1"></span><span class="path2"></span></i>
+                                <i class="icon-Notifications"><span class="path1"></span><span class="path2"></span></i>
                             </a>
                             <ul class="dropdown-menu animated bounceIn">
                                 <li class="header">
@@ -266,8 +266,13 @@
             </div>
         </div>
         <!-- /.Content Right Sidebar -->
-        <footer class="main-footer">
-            &copy; 2024 <a href="#">Tritact Gateway</a>. All Rights Reserved.
+        <footer class="main-footer d-flex justify-content-between" style="padding-right: 30px;">
+            <div>
+                &copy; 2025 <a href="#">Tritact Gateway</a>. All Rights Reserved.
+            </div>
+            <div class="text-right">
+                <a href="mailto:support@tritact.co.uk" target="_blank">support@tritact.co.uk</a>
+            </div>
         </footer>
         <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>

@@ -159,6 +159,12 @@
                                     <input type="text" name="phone_num" id="phone_num" class="form-control" value="{{ old('phone_num', $data->company->phone_num) }}" required>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="company_email">Company Email <strong>*</strong></label>
+                                    <input type="email" name="company_email" id="company_email" class="form-control" value="{{ old('company_email', $data->company->company_email) }}" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
