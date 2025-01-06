@@ -50,7 +50,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-sucess mt-10">SIGN IN</button>
+                            <button type="submit" class="btn btn-success mt-10">SIGN IN</button>
                         </div>
                         <!-- /.col -->
                     </div>
