@@ -153,7 +153,7 @@ class DocumentsController extends Controller
         $admin = User::where('is_admin', 0)->where('is_company', 0)->first();
         $notify_data = ['text' => Auth::user()->name . ' download a Document - ' . $data->name, 'name' => Auth::user()->name];
         Notification::send($admin, new DocumentDownloadSuccessful($notify_data));
-        header("Content-Disposition: attachment; filename=".$file_name.".docx");
+        header("Content-Disposition: attachment; filename=".$file_name);
         $phpword->saveAs('php://output');
     }
 
