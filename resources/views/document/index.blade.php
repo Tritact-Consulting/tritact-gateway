@@ -42,7 +42,7 @@
 			<div class="box">
 			    <div class="box-body">
 				    <div class="table-responsive rounded card-table">
-				        <div class="text-right mb-2">
+				        <div class="text-right mb-2 d-none">
 				            <form method="post" id="download_all_form" action="{{ route('documents.download.all') }}">
 				                @csrf
 				                <input type="hidden" name="doc[]">
