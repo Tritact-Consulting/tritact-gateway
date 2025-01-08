@@ -27,29 +27,41 @@ class DocumentController extends Controller
     }
 
     public function store(Request $request){
+        if($request->bulk == 0){
+            $request->validate([
+                'name' => 'required',
+            ]);
+        }
         $request->validate([
-            'name' => 'required',
             'file' => 'required',
             'tags' => 'required',
         ]);
+
         $tags = $request->tags;
-        $doc = new Documents();
-        $doc->name = $request->name;
         //$doc->status = $request->status;
         if($request->hasFile('file')){
-            $imageName = time().'.'.$request->file->extension();
-            $request->file->move(public_path('document'), $imageName);
-            $doc->file = 'document/'.$imageName;
-        }
-        $doc->save();
-        $doc->tags()->sync($tags);
-        $data = User::where('is_admin', 1)->whereHas('tags', function($a) use ($tags){
-            $a->whereIn('tag_id', $tags);
-        })->get();
-
-        foreach($data as $key => $value){ 
-            $notify_data = ['text' => $doc->name . ' has been added in tag' , 'name' => Auth::user()->name];
-            Notification::send($value, new DocumentTagSuccessful($notify_data));
+            $files = $request->file('file');
+            foreach($files as $file){
+                $doc = new Documents();
+                if($request->bulk == 0){
+                    $doc->name = $request->name;
+                }else{
+                    $doc->name = $file->getClientOriginalName();
+                }
+                $imageName = time().'.'.$file->extension();
+                $file->move(public_path('document'), $imageName);
+                $doc->file = 'document/'.$imageName;
+                $doc->save();
+                $doc->tags()->sync($tags);
+                $data = User::where('is_admin', 1)->whereHas('tags', function($a) use ($tags){
+                    $a->whereIn('tag_id', $tags);
+                })->get();
+        
+                foreach($data as $key => $value){ 
+                    $notify_data = ['text' => $doc->name . ' has been added in tag' , 'name' => Auth::user()->name];
+                    Notification::send($value, new DocumentTagSuccessful($notify_data));
+                }
+            }
         }
         return redirect()->back()->with('success', 'Document Added Successfully');
     }

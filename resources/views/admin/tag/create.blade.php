@@ -59,12 +59,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="button" class="btn btn-rounded btn-warning btn-outline mr-1">
-                        <i class="ti-trash"></i> Cancel
-                        </button>
-                        <button type="submit" class="btn btn-rounded btn-primary btn-outline">
-                        <i class="ti-save-alt"></i> Save
-                        </button>
+                        <button type="submit" class="btn btn-rounded btn-primary btn-outline"><i class="ti-save-alt"></i> Save</button>
                     </div>
                 </form>
             </div>
