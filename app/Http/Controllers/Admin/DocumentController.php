@@ -28,7 +28,7 @@ class DocumentController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'name' => 'required|unique:documents,name',
+            'name' => 'required',
             'file' => 'required',
             'tags' => 'required',
         ]);
