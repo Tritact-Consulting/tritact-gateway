@@ -71,7 +71,12 @@ class DocumentsController extends Controller
         }
     }
 
-    public function download($id, $supportive = 0, $zip = 0){
+    public function download($id, $supportive = 0, $zip = 0, $company_id = 0){
+        if($company_id == 0){
+            $user = Auth::user();
+        }else{
+            $user = User::find($company_id);
+        }
         $file_name = '';
         $version_name = '';
         $issue_date = '';
@@ -96,28 +101,28 @@ class DocumentsController extends Controller
             $phone = '';
             $website = '';
             $registration_num = '';
-            if(Auth::user()->is_company == 1){
-                $director_name = Auth::user()->company->director_name;
-                $short_name = Auth::user()->company->short_name;
-                $company_name = Auth::user()->name;
-                $logo_path = public_path(Auth::user()->company->logo);
-                $address = Auth::user()->company->address;
-                $phone = Auth::user()->company->phone_num;
-                $website = Auth::user()->company->website;
-                $registration_num = Auth::user()->company->registration_num;
-                $company_email = Auth::user()->company->company_email;
-                $signature = Auth::user()->company->signature;
+            if($user->is_company == 1){
+                $director_name = $user->company->director_name;
+                $short_name = $user->company->short_name;
+                $company_name = $user->name;
+                $logo_path = public_path($user->company->logo);
+                $address = $user->company->address;
+                $phone = $user->company->phone_num;
+                $website = $user->company->website;
+                $registration_num = $user->company->registration_num;
+                $company_email = $user->company->company_email;
+                $signature = $user->company->signature;
 
                 if($version_name == '') {
-                    $version_name = Auth::user()->company->version;
+                    $version_name = $user->company->version;
                 }
 
                 if ($issue_date == '') {
-                    $issue_date = date('d/m/Y', strtotime(Auth::user()->company->issue_date));
+                    $issue_date = date('d/m/Y', strtotime($user->company->issue_date));
                 }
 
             }else{
-                $data = User::find(Auth::user()->user_id);
+                $data = User::find($user->user_id);
                 $director_name = $data->company->director_name;
                 $short_name = $data->company->short_name;
                 $company_name = $data->name;
@@ -168,7 +173,7 @@ class DocumentsController extends Controller
         }
         // Notify to admin
         $admin = User::where('is_admin', 0)->where('is_company', 0)->first();
-        $notify_data = ['text' => Auth::user()->name . ' download a Document - ' . $data->name, 'name' => Auth::user()->name];
+        $notify_data = ['text' => $user->name . ' download a Document - ' . $data->name, 'name' => $user->name];
         Notification::send($admin, new DocumentDownloadSuccessful($notify_data));
         if($zip == 0){
             header("Content-Disposition: attachment; filename=".$file_name);

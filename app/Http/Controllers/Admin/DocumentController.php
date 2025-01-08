@@ -7,6 +7,7 @@ use App\Models\Tags;
 use App\Models\FileKeyword;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DocumentsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use File;
@@ -139,5 +140,10 @@ class DocumentController extends Controller
         $data->status = 1;
         $data->save();
         return redirect()->back()->with('success', 'Document Deleted Successfully');
+    }
+
+    public function dashboardDocuments($id, $supportive, $company_id){
+        $data = new DocumentsController();
+        $data->download($id, $supportive, 0, $company_id);
     }
 }
