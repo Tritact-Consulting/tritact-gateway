@@ -24333,3 +24333,7 @@ ul.tag-wrapper label {
 .sidebar-notification .media-body{
   border-bottom: 5px solid transparent;
 }
+
+.menu-details p.mb-5 {
+  word-break: break-all;
+}
