@@ -165,6 +165,18 @@
                                     <input type="email" name="company_email" id="company_email" class="form-control" value="{{ old('company_email', $data->company->company_email) }}" required>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="logo_width">Logo Width <strong>*</strong></label>
+                                    <input type="number" name="logo_width" id="logo_width" class="form-control" value="{{ old('logo_width', $data->company->logo_width) }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="logo_height">Logo Height <strong>*</strong></label>
+                                    <input type="number" name="logo_height" id="logo_height" class="form-control" value="{{ old('logo_height', $data->company->logo_height) }}" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->

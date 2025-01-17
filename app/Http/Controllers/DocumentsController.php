@@ -106,6 +106,8 @@ class DocumentsController extends Controller
                 $short_name = $user->company->short_name;
                 $company_name = $user->name;
                 $logo_path = public_path($user->company->logo);
+                $logo_width = $user->company->logo_width;
+                $logo_height = $user->company->logo_height;
                 $address = $user->company->address;
                 $phone = $user->company->phone_num;
                 $website = $user->company->website;
@@ -127,6 +129,8 @@ class DocumentsController extends Controller
                 $short_name = $data->company->short_name;
                 $company_name = $data->name;
                 $logo_path = public_path($data->company->logo);
+                $logo_width = $data->company->logo_width;
+                $logo_height = $data->company->logo_height;
                 $address = $data->company->address;
                 $phone = $data->company->phone_num;
                 $website = $data->company->website;
@@ -158,7 +162,12 @@ class DocumentsController extends Controller
             }elseif($value->data_keyword == 'issue_date'){
                 $phpword->setValue($value->doc_keyword, $issue_date);
             }elseif($value->data_keyword == 'logo'){
-                $phpword->setImageValue($value->doc_keyword, $logo_path);
+                $phpword->setImageValue($value->doc_keyword, [
+                    'path' => $logo_path,
+                    'width' => $logo_width,
+                    'height' => $logo_height,
+                ]);
+                // $phpword->setImageValue($value->doc_keyword, $logo_path);
             }elseif($value->data_keyword == 'phone_num'){
                 $phpword->setValue($value->doc_keyword, $phone);
             }elseif($value->data_keyword == 'website'){

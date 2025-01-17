@@ -37,7 +37,9 @@ class CompanyController extends Controller
             'website' => 'required',
             'registration_num' => 'required',
             'phone_num' => 'required',
-            'company_email' => 'required'
+            'company_email' => 'required',
+            'logo_width' => 'required',
+            'logo_height' => 'required',
         ]);
 
         $user = new User();
@@ -65,7 +67,9 @@ class CompanyController extends Controller
         $company->registration_num = $request->registration_num;
         $company->phone_num = $request->phone_num;
         $company->company_email = $request->company_email;
-
+        $company->logo_width = $request->logo_width;
+        $company->logo_height = $request->logo_height;
+        
         $user->company()->save($company);
 
         $tags = $request->tags;
@@ -101,7 +105,9 @@ class CompanyController extends Controller
             'website' => 'required',
             'registration_num' => 'required',
             'phone_num' => 'required',
-            'company_email' => 'required'
+            'company_email' => 'required',
+            'logo_width' => 'required',
+            'logo_height' => 'required',
         ]);
 
         if($request->password != null){
@@ -135,6 +141,8 @@ class CompanyController extends Controller
         $company->registration_num = $request->registration_num;
         $company->phone_num = $request->phone_num;
         $company->company_email = $request->company_email;
+        $company->logo_width = $request->logo_width;
+        $company->logo_height = $request->logo_height;
         $company->save();
         $old_tag = $user->tags->pluck('id')->toArray();
         $tags = $request->tags;
