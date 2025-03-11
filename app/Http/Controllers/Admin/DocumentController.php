@@ -147,12 +147,16 @@ class DocumentController extends Controller
 
     public function documentsDeleteAll(Request $request){
         $doc = $request->doc;
-        $get_doc = explode (',', $doc[0]);
-        for($i = 0; $i < count($get_doc); $i++){
-            $data = Documents::find($get_doc[$i]);
-            $data->status = 1;
-            $data->save();
+        if($doc[0] != null){
+            $get_doc = explode (',', $doc[0]);
+            for($i = 0; $i < count($get_doc); $i++){
+                $data = Documents::find($get_doc[$i]);
+                $data->status = 1;
+                $data->save();
+            }
+            return redirect()->back()->with('success', 'Document Deleted Successfully');
+        }else{
+            return redirect()->back();
         }
-        return redirect()->back()->with('success', 'Document Deleted Successfully');
     }
 }
