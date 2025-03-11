@@ -15,7 +15,7 @@ use Auth;
 class CompanyController extends Controller
 {
     public function index(){
-        $data = User::where('is_admin', 1)->where('is_company', 1)->orderBy('id', 'desc')->get();
+        $data = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         return view('admin.company.index', compact('data'));
     }
 
@@ -228,5 +228,12 @@ class CompanyController extends Controller
         }
         $data = $data->orderBy('id', 'desc')->get();
         return view('admin.company.dashboard.index', compact('user', 'get_tags', 'data'));
+    }
+
+    public function destroy($id){
+        $data = User::find($id);
+        $data->status = 1;
+        $data->save();
+        return redirect()->back()->with('success', 'Company Deleted Successfully');
     }
 }

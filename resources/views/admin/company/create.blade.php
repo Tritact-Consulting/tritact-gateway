@@ -176,6 +176,11 @@
                                     <input type="number" name="logo_height" id="logo_height" class="form-control" value="{{ old('logo_height') }}" required>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="alert alert-info">
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->

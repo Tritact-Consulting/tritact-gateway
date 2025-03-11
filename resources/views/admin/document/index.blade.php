@@ -24,9 +24,22 @@
 			<div class="box">
 			    <div class="box-body">
 				    <div class="table-responsive rounded card-table">
-                        <table class="table border-no datatables" id="example1">
+                        <div class="text-right mb-2">
+				            <form method="post" id="download_all_form" action="{{ route('documents.delete.all') }}">
+				                @csrf
+				                <input type="hidden" name="doc[]">
+				                <button type="button" class="btn btn-danger btn-sm download_all_form">Delete Selected File</button>
+				            </form>
+			            </div>
+                        <table class="table border-no datatables document-table" id="example1">
                             <thead>
                                 <tr>
+                                    <th style="width: 60px;">
+                                        <div style="position: relative;top: 10px;">
+                                            <input type="checkbox" name="document_all" class="form-check-input" id="document-all">
+                                            <label for="document-all"></label>
+                                        </div>
+                                    </th>
                                     <th>SNO</th>
                                     <th>Name</th>
                                     <th>Tags</th>
@@ -37,6 +50,10 @@
                             <tbody>
                                 @foreach($data as $key => $value)
                                 <tr class="hover-primary">
+                                    <td style="vertical-align: sub;padding-top: 22px;">
+                                        <input type="checkbox" name="document_id[]" class="form-check-input" id="document-{{ $value->id }}" value="{{ $value->id }}">
+                                        <label for="document-{{ $value->id }}"></label>
+                                    </td>
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>
@@ -65,3 +82,32 @@
     </div>
 </section>
 @endsection
+@push('script')
+<script>
+    $('#document-all').click(function(){
+        if($(this).is(':checked')){
+            $('.document-table input').each(function(){
+                $(this).prop('checked', true);
+            });
+        }else{
+            $('.document-table input').each(function(){
+                $(this).prop('checked', false);
+            });
+        }
+    });
+
+    $(document).ready(function(){
+        $('.download_all_form').click(function(e){
+            arrp=[];
+            $('input[name="document_id[]"]').each(function(){
+                if($(this).is(':checked')){
+                    arrp.push($(this).val());
+                }
+            });
+            $('#download_all_form').find('input[name="doc[]"]').val(arrp);
+            e.preventDefault();
+            $('#download_all_form').submit();
+        })
+    });
+</script>
+@endpush

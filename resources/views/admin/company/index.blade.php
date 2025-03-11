@@ -42,8 +42,12 @@
                             <small class="d-block">Edit</small>
                         </div>
                         <div class="text-center mx-5">
-                            <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
-                            <small class="d-block">Delete</small>
+                            <form action="{{ route('company.destroy',$value->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></button>
+                                <small class="d-block">Delete</small>
+                            </form>
                         </div>
                         <div class="text-center mx-5">
 							<a href="{{ route('company.user', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-users"></i></a>

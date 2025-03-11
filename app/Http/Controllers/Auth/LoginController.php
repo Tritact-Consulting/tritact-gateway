@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -45,6 +46,22 @@ class LoginController extends Controller
             return '/admin/home';
         }else{
             return '/home';
+        }
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->status == 1) {
+            $message = 'Invalid Credentials';
+            // Log the user out.
+            $this->logout($request);
+            // Return them to the log in form.
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    // This is where we are providing the error message.
+                    $this->username() => $message,
+                ]);
         }
     }
 }
