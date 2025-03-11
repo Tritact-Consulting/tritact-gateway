@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Login ')
 @section('content')
+<style>
+    body{
+        background-image: url({{ asset('images/login-bg.png') }});
+    }
+</style>
 <div class="row justify-content-center no-gutters">
     <div class="col-lg-5 col-md-5 col-12">
         <div class="bg-white rounded30 shadow-lg">

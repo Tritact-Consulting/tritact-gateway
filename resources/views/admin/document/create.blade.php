@@ -103,13 +103,13 @@
                     @csrf
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 d-none">
                                 <div class="form-group">
-                                    <label>Name <strong>*</strong></label>
-                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>File <strong>*</strong></label>
                                     <input type="file" class="form-control" name="file[]" value="{{ old('file') }}" required>

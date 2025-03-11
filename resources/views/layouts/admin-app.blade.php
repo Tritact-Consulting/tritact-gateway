@@ -186,12 +186,12 @@
                                     <li class="{{ Request::routeIs('document.index') ? 'active' : '' }}"><a href="{{ route('document.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Document List</a></li>
                                 </ul>
                             </li>
-                            <li class="{{ Request::routeIs('version.create') || Request::routeIs('version.edit') || Request::routeIs('version.index') ? 'active' : '' }}">
-                                <a href="{{ route('version.index') }}">
-                                    <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>
-                                    <span>Version</span>
-                                </a>
-                            </li>
+                            <!--<li class="{{ Request::routeIs('version.create') || Request::routeIs('version.edit') || Request::routeIs('version.index') ? 'active' : '' }}">-->
+                            <!--    <a href="{{ route('version.index') }}">-->
+                            <!--        <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>-->
+                            <!--        <span>Version</span>-->
+                            <!--    </a>-->
+                            <!--</li>-->
                             <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
                                 <a href="{{ route('keyword.index') }}">
                                     <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>

@@ -29,9 +29,7 @@ class DocumentController extends Controller
 
     public function store(Request $request){
         if($request->bulk == 0){
-            $request->validate([
-                'name' => 'required',
-            ]);
+            
         }
         $request->validate([
             'file' => 'required',
@@ -42,14 +40,14 @@ class DocumentController extends Controller
         //$doc->status = $request->status;
         if($request->hasFile('file')){
             $files = $request->file('file');
-            foreach($files as $file){
+            foreach($files as $key => $file){
                 $doc = new Documents();
                 if($request->bulk == 0){
-                    $doc->name = $request->name;
+                    $doc->name = $file->getClientOriginalName();
                 }else{
                     $doc->name = $file->getClientOriginalName();
                 }
-                $imageName = time().'.'.$file->extension();
+                $imageName = $key . time().'.'.$file->extension();
                 $file->move(public_path('document'), $imageName);
                 $doc->file = 'document/'.$imageName;
                 $doc->save();
