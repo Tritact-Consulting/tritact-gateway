@@ -178,7 +178,13 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="alert alert-info">
-                                    
+                                    If you have same size of logo (width and height are equal) then width = 120 & height = 120
+                                </div>
+                                <div class="alert alert-info">
+                                    If your logo width is greater then your logo height than width = 100 & height = 70
+                                </div>
+                                <div class="alert alert-info">
+                                    If your logo height is greater then your logo width than height = 100 & width = 70
                                 </div>
                             </div>
                         </div>
