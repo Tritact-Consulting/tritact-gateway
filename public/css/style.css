@@ -24337,3 +24337,35 @@ ul.tag-wrapper label {
 .menu-details p.mb-5 {
   word-break: break-all;
 }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  opacity: 1;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 500px;
+  background-color: black;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 10px 15px;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -15px;
+  left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip.right-tooltip .tooltiptext{
+  right: 105%;
+  left: auto;
+}
