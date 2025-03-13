@@ -167,13 +167,23 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="logo_width">Logo Width <strong>*</strong></label>
+                                    <label for="logo_width">Logo Width <strong>*</strong>
+                                        <div class="tooltip">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <span class="tooltiptext">If you have same size of logo (width and height are equal) then width = 120<br>If your logo width is greater then your logo height than width = 100<br>If your logo height is greater then your logo width than width = 70</span>
+                                        </div>
+                                    </label>
                                     <input type="number" name="logo_width" id="logo_width" class="form-control" value="{{ old('logo_width', $data->company->logo_width) }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="logo_height">Logo Height <strong>*</strong></label>
+                                    <label for="logo_height">Logo Height <strong>*</strong>
+                                        <div class="tooltip right-tooltip">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <span class="tooltiptext">If you have same size of logo (width and height are equal) then height = 120<br>If your logo width is greater then your logo height than height = 70<br>If your logo height is greater then your logo width than height = 100</span>
+                                        </div>
+                                    </label>
                                     <input type="number" name="logo_height" id="logo_height" class="form-control" value="{{ old('logo_height', $data->company->logo_height) }}" required>
                                 </div>
                             </div>
