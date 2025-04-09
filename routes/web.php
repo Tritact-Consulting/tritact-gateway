@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\FileKeywordController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentsController;
+use App\Http\Controllers\GuidesController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['auth', 'user']], function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('user', UserController::class);
     Route::resource('documents', DocumentsController::class);
+    Route::resource('guides', GuidesController::class);
     Route::post('documents/download/{id}/{supportive?}/{zip?}/{company_id?}', [DocumentsController::class, 'download'])->name('documents.download');
     Route::post('document/download', [DocumentsController::class, 'downloadAll'])->name('documents.download.all');
     Route::get('profile', [HomeController::class, 'profile'])->name('user.profile');

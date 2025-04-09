@@ -201,6 +201,12 @@
                                     <span>Documents</span>
                                 </a>
                             </li>
+                            <li class="{{ Request::routeIs('guides.index') ? 'active' : '' }}">
+                                <a href="{{ route('guides.index') }}">
+                                    <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Guides</span>
+                                </a>
+                            </li>
                             @endcanany
                         </ul>
                     </div>

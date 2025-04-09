@@ -5,7 +5,7 @@
 <section class="content">
     <d[iv class="row">
         @if(Auth::user()->hasRole('company'))
-        <div class="col-xxxl-3 col-lg-6 col-12">
+        <div class="col-xxxl-4 col-lg-6 col-12">
             <div class="box">
                 <div class="box-body">
                     <div class="d-flex align-items-center">
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xxxl-3 col-lg-6 col-12">
+        <div class="col-xxxl-4 col-lg-6 col-12">
             <div class="box">
                 <div class="box-body">
                     <div class="d-flex align-items-center">

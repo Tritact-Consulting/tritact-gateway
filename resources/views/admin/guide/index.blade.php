@@ -62,7 +62,7 @@
                                             <a href="{{ route('guide.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="Guide"><i class="fa fa-trash"></i></button>
+                                            <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="guide"><i class="fa fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>
