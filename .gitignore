@@ -12,6 +12,7 @@ public/storage
 public/hot
 public/company
 public/document
+public/guide
 
 # Laravel 5 & Lumen specific with changed public path
 public_html/storage
