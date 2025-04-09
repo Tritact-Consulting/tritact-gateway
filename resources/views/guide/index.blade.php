@@ -46,8 +46,6 @@
                                                 @csrf
                                                 <button type="submit" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-0"><i class="fa fa-download"></i></button>
                                             </form>
-
-                                            <a href="{{ asset($value->file) }}" download class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-0"><i class="fa fa-download"></i></a>
                                             @endcan
                                         </div>
                                     </td>
