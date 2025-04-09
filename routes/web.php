@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\DocumentController;
+use App\Http\Controllers\Admin\GuideController;
 use App\Http\Controllers\Admin\DocVersionController;
 use App\Http\Controllers\Admin\FileKeywordController;
 
@@ -49,6 +50,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::put('company/update/user/{id}', [CompanyController::class, 'userUpdate'])->name('company.user.update');
     Route::resource('tag', TagController::class);
     Route::resource('document', DocumentController::class);
+    Route::resource('guide', GuideController::class);
     Route::post('document/read', [DocumentController::class, 'documentRead'])->name('document.read');
     Route::post('document/keyword', [DocumentController::class, 'documentKeyword'])->name('document.keyword');
     Route::post('document/field/delete', [DocumentController::class, 'documentDelete'])->name('document.field.delete');

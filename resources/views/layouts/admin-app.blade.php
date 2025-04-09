@@ -186,6 +186,19 @@
                                     <li class="{{ Request::routeIs('document.index') ? 'active' : '' }}"><a href="{{ route('document.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Document List</a></li>
                                 </ul>
                             </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Guide</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li class="{{ Request::routeIs('guide.create') || Request::routeIs('guide.edit') ? 'active' : '' }}"><a href="{{ route('guide.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Guide</a></li>
+                                    <li class="{{ Request::routeIs('guide.index') ? 'active' : '' }}"><a href="{{ route('guide.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Guide List</a></li>
+                                </ul>
+                            </li>
                             <!--<li class="{{ Request::routeIs('version.create') || Request::routeIs('version.edit') || Request::routeIs('version.index') ? 'active' : '' }}">-->
                             <!--    <a href="{{ route('version.index') }}">-->
                             <!--        <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>-->
