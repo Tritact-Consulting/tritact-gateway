@@ -332,10 +332,15 @@
     <script>
         $(document).ready(function(){
             $('.show_confirm').click(function(event) {
+                var set_heading = 'document';
+                var heading = $(this).data('heading');
+                if(heading != undefined){
+                    set_heading = heading;
+                }
                 var form =  $(this).closest("form");
                 event.preventDefault();
                 swal({
-                    title: `Are you sure you want to delete this document?`,
+                    title: 'Are you sure you want to delete this '+ set_heading +'?',
                     text: "If you delete this, it will be gone forever.",
                     icon: "warning",
                     buttons: true,
