@@ -53,9 +53,9 @@
                                 <div class="search-bx mx-5">
                                     <form>
                                         <div class="input-group">
-                                            <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                                            <!--<input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">-->
                                             <div class="input-group-append">
-                                                <button class="btn" type="submit" id="button-addon3"><i class="ti-search"></i></button>
+                                                <!--<button class="btn" type="submit" id="button-addon3"><i class="ti-search"></i></button>-->
                                             </div>
                                         </div>
                                     </form>
@@ -262,7 +262,7 @@
         <!-- /.Content Right Sidebar -->
         <footer class="main-footer d-flex justify-content-between" style="padding-right: 30px;">
             <div>
-                &copy; 2025 <a href="#">Tritact&#174; Gateway</a>. All Rights Reserved.
+                &copy; 2025 <a href="#">Tritact&#174; Gateway™</a>. All Rights Reserved.
             </div>
             <div class="text-right">
                 <a href="mailto:support@tritact.co.uk" target="_blank">support@tritact.co.uk</a>
