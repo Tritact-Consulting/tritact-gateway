@@ -19,7 +19,7 @@
 </div>
 <section class="content" style="min-height: auto;">
     <div class="row">
-        <div class="col-xxxl-4 col-12">
+        <div class="col-xxxl-12 col-12">
             <div class="box mb-0">
                 <div class="box-body d-flex justify-content-between">
                     <div class="d-flex align-items-center">

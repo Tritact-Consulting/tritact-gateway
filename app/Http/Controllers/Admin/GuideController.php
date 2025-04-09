@@ -27,15 +27,30 @@ class GuideController extends Controller
         //$doc->status = $request->status;
         if($request->hasFile('file')){
             $files = $request->file('file');
-            foreach($files as $key => $file){
-                $doc = new Guides();
-                if($request->bulk == 0){
-                    $doc->name = $file->getClientOriginalName();
-                }else{
-                    $doc->name = $file->getClientOriginalName();
+            
+            $bulk = $request->bulk;
+            if($bulk == 1){
+                foreach($files as $key => $file){
+                    $doc = new Guides();
+                    if($request->bulk == 0){
+                        $doc->name = $file->getClientOriginalName();
+                    }else{
+                        $doc->name = $file->getClientOriginalName();
+                    }
+                    $imageName = $key . time().'.'.$file->extension();
+                    $file->move(public_path('guide'), $imageName);
+                    $doc->file = 'guide/'.$imageName;
+                    $doc->save();
                 }
-                $imageName = $key . time().'.'.$file->extension();
-                $file->move(public_path('guide'), $imageName);
+            }else{
+                $doc = new Guides();
+                if($request->name != null){
+                    $doc->name = $request->name;
+                }else{
+                    $doc->name = $files->getClientOriginalName();
+                }
+                $imageName = time().'.'.$files->extension();
+                $files->move(public_path('guide'), $imageName);
                 $doc->file = 'guide/'.$imageName;
                 $doc->save();
             }
