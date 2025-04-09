@@ -32,10 +32,11 @@ class GuideController extends Controller
             if($bulk == 1){
                 foreach($files as $key => $file){
                     $doc = new Guides();
+                    $set_file_name = ucwords(str_replace('-', ' ', pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)));
                     if($request->bulk == 0){
-                        $doc->name = $file->getClientOriginalName();
+                        $doc->name = $set_file_name;
                     }else{
-                        $doc->name = $file->getClientOriginalName();
+                        $doc->name = $set_file_name;
                     }
                     $imageName = $key . time().'.'.$file->extension();
                     $file->move(public_path('guide'), $imageName);
@@ -47,7 +48,8 @@ class GuideController extends Controller
                 if($request->name != null){
                     $doc->name = $request->name;
                 }else{
-                    $doc->name = $files->getClientOriginalName();
+                    $set_file_name = ucwords(str_replace('-', ' ', pathinfo($files->getClientOriginalName(), PATHINFO_FILENAME)));
+                    $doc->name = $set_file_name;
                 }
                 $imageName = time().'.'.$files->extension();
                 $files->move(public_path('guide'), $imageName);

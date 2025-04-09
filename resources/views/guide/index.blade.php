@@ -24,13 +24,6 @@
 			<div class="box">
 			    <div class="box-body">
 				    <div class="table-responsive rounded card-table">
-				        <div class="text-right mb-2 d-none">
-				            <form method="post" id="download_all_form" action="{{ route('documents.download.all') }}">
-				                @csrf
-				                <input type="hidden" name="doc[]">
-				                <button type="button" class="btn btn-success btn-sm download_all_form">Download All</button>
-				            </form>
-			            </div>
                         <table class="table border-no datatables document-table" id="example1">
                             <thead>
                                 <tr>
@@ -49,6 +42,11 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             @can('download document')
+                                            <form action="{{ route('guides.download', $value->id) }}" method="POST">                                
+                                                @csrf
+                                                <button type="submit" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-0"><i class="fa fa-download"></i></button>
+                                            </form>
+
                                             <a href="{{ asset($value->file) }}" download class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-0"><i class="fa fa-download"></i></a>
                                             @endcan
                                         </div>

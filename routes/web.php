@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth', 'user']], function(){
     Route::resource('guides', GuidesController::class);
     Route::post('documents/download/{id}/{supportive?}/{zip?}/{company_id?}', [DocumentsController::class, 'download'])->name('documents.download');
     Route::post('document/download', [DocumentsController::class, 'downloadAll'])->name('documents.download.all');
+    Route::post('guides/download/{id}', [GuidesController::class, 'download'])->name('guides.download');
     Route::get('profile', [HomeController::class, 'profile'])->name('user.profile');
     Route::post('profile/update', [HomeController::class, 'profileUpdate'])->name('profile.update');
 });
