@@ -35,6 +35,21 @@
                 </div>
             </div>
         </div>
+        <div class="col-xxxl-4 col-lg-6 col-12">
+            <div class="box">
+                <div class="box-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <i class="fa fa-book mr-20" aria-hidden="true" style="font-size: 40px"></i>
+                        </div>
+                        <div>
+                            <h2 class="my-0 font-weight-700">{{ $guide_count }}</h2>
+                            <p class="text-fade mb-0">Total Guides</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         @endif
     </div>
 </section>

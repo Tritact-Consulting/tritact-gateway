@@ -7,6 +7,7 @@ use Auth;
 use App\Models\User;
 use App\Models\Company;
 use Illuminate\Support\Facades\Hash;
+use DB;
 
 class HomeController extends Controller
 {
@@ -27,7 +28,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $guide_count = DB::table('guides')->where('status', 0)->count();
+        return view('home', compact('guide_count'));
     }
 
     public function profile(){
