@@ -208,7 +208,6 @@
                                 <div class="form-group email_template_wrapper">
                                     <label for="email_template">Email Content</label>
                                     <div class="email_template form-control" contenteditable="true">
-                                        <p>Subject: Your Account Credentials</p>
                                         <p>Hi <span class="username"></span>,</p>
                                         <p>Welcome to {!! config('app.name', 'Laravel') !!}!</p>
                                         <p>Here are your login credentials:</p>
@@ -217,7 +216,6 @@
                                         <p>For security reasons, we recommend that you log in and update your password as soon as possible.</p>
                                         <p>If you have any trouble accessing your account, feel free to reply to this email or contact our support team at support@tritact.co.uk or 02080773222.</p>
                                         <br>
-                                        <p>Thank you, <br>{!! config('app.name', 'Laravel') !!} <br>support@tritact.co.uk <br>02080773222</p>
                                     </div>
                                 </div>
                             </div>
