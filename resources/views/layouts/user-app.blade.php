@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css" integrity="sha512-PT0RvABaDhDQugEbpNMwgYBCnGCiTZMh9yOzUsJHDgl/dMhD9yjHAwoumnUk3JydV3QTcIkNDuN40CJxik5+WQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/skin_color.css') }}">
-    <title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title') | {!! config('app.name', 'Laravel') !!}</title>
 </head>
 <body class="hold-transition light-skin sidebar-mini theme-danger fixed">
     <div class="wrapper">
@@ -274,7 +274,7 @@
         <!-- /.Content Right Sidebar -->
         <footer class="main-footer d-flex justify-content-between" style="padding-right: 30px;">
             <div>
-                &copy; 2025 <a href="#">Tritact&#174; Gateway™</a>. All Rights Reserved.
+                &copy; {{ date('Y') }} <a href="#">{!! config('app.name', 'Laravel') !!}</a>. All Rights Reserved.
             </div>
             <div class="text-right">
                 <a href="mailto:support@tritact.co.uk" target="_blank">support@tritact.co.uk</a>

@@ -5,6 +5,19 @@
     body{
         background-image: url({{ asset('images/login-bg.png') }});
     }
+    .login-logo img {
+        width: 250px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .login-logo {
+        margin-top: 20px;
+    }
+    button.btn.btn-success:hover {
+        background-color: #85d763bf !important;
+        color: black !important;
+    }
 </style>
 <div class="row justify-content-center no-gutters">
     <div class="col-lg-4 col-md-5 col-12" style="
@@ -22,10 +35,13 @@
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
 ">
+        <div class="login-logo">
+            <img src="{{ asset('images/logo_dark.png') }}" alt="logo">
+        </div>
         <div class="rounded30 shadow-lg">
-            <div class="content-top-agile p-40 pb-0">
+            <div class="content-top-agile p-20 pb-0">
                 <h2 style="color: #000000;">Let's Get Started</h2>
-                <p class="mb-0">Sign in to {{ config('app.name', 'Laravel') }}</p>
+                <p class="mb-0">Sign in to {!! config('app.name', 'Laravel') !!}</p>
             </div>
             <div class="p-40">
                 <form action="{{ route('login') }}" method="post">

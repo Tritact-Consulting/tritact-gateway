@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Mail;
+use App\Mail\CompanyAddMail;
 
 class CompanyController extends Controller
 {
@@ -81,6 +83,15 @@ class CompanyController extends Controller
                 $data->tag_id = $value;
                 $data->save();
             }
+        }
+
+        $credentials = $request->credentials;
+        if($credentials == 1){
+            $email_template = $request->email_temp;
+            $mailData = [
+                'body' => $email_template
+            ];
+            Mail::to($request->sender_email)->send(new CompanyAddMail($mailData));
         }
 
         return redirect()->back()->with('success', 'Company Added Successfully');

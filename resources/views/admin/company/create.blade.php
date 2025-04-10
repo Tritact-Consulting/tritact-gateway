@@ -38,6 +38,7 @@
                 <!-- /.box-header -->
                 <form class="form" enctype="multipart/form-data" method="post" action="{{ route('company.store') }}">
                     @csrf
+                    <input type="hidden" name="email_temp" value="" id="email_temp">
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -49,20 +50,20 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Name <strong>*</strong></label>
-                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>E-mail <strong>*</strong></label>
-                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Password <strong>*</strong></label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" name="password" value="{{ old('password') }}" required>
+                                        <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text toggle-password">
                                                 <i class="fa fa-fw field-icon fa-eye"></i>
@@ -186,6 +187,40 @@
                                     <input type="number" name="logo_height" id="logo_height" class="form-control" value="{{ old('logo_height') }}" required>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="credentials">Send Credentials Via Email</label>
+                                            <select name="credentials" id="credentials" class="form-control">
+                                                <option value="0">NO</option>
+                                                <option value="1">YES</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="sender_email">Sender Email Address</label>
+                                            <input type="email" name="sender_email" id="sender_email" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group email_template_wrapper">
+                                    <label for="email_template">Email Content</label>
+                                    <div class="email_template form-control" contenteditable="true">
+                                        <p>Subject: Your Account Credentials</p>
+                                        <p>Hi <span class="username"></span>,</p>
+                                        <p>Welcome to {!! config('app.name', 'Laravel') !!}!</p>
+                                        <p>Here are your login credentials:</p>
+                                        <p>Email: <span class="email"></span><br>Password: <span class="password"></span></p>
+                                        <p>You can log in here: {{ $_SERVER['SERVER_NAME'] }}</p>
+                                        <p>For security reasons, we recommend that you log in and update your password as soon as possible.</p>
+                                        <p>If you have any trouble accessing your account, feel free to reply to this email or contact our support team at support@tritact.co.uk or 02080773222.</p>
+                                        <br>
+                                        <p>Thank you, <br>{!! config('app.name', 'Laravel') !!} <br>support@tritact.co.uk <br>02080773222</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -201,6 +236,14 @@
     </div>
 </section>
 @endsection
+@push('style')
+<style>
+    .email_template_wrapper{
+        display: none;
+    }
+</style>
+@endpush
+
 @push('script')
 <script>
     $(document).ready(function(){
@@ -213,6 +256,32 @@
                 input.attr("type", "password");
             }
         });
-    })    
+    });
+
+    $('#name').on('keyup',function(){
+        $('.email_template .username').text($(this).val());
+    });
+
+    $('#email').on('keyup',function(){
+        $('.email_template .email').text($(this).val());
+        $('#sender_email').val($(this).val());
+    });
+
+    $('#password').on('keyup',function(){
+        $('.email_template .password').text($(this).val());
+    });
+
+    $('#credentials').change(function(){
+        if($(this).val() == 1){
+            $('.email_template_wrapper').show();
+        }else{
+            $('.email_template_wrapper').hide();
+        }
+    });
+
+    $('.form').submit(function(e){
+        $('#email_temp').val($('.email_template').html());
+        return true;
+    })
 </script>
 @endpush
