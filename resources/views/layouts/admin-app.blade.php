@@ -189,6 +189,19 @@
                             </li>
                             <li class="treeview">
                                 <a href="#">
+                                    <i class="icon-Cart"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Category</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li class="{{ Request::routeIs('category.create') || Request::routeIs('category.edit') ? 'active' : '' }}"><a href="{{ route('category.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Category</a></li>
+                                    <li class="{{ Request::routeIs('category.index') ? 'active' : '' }}"><a href="{{ route('category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Category List</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
                                     <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Guide</span>
                                     <span class="pull-right-container">

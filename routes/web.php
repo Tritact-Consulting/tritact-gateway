@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\GuideController;
 use App\Http\Controllers\Admin\DocVersionController;
@@ -52,6 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::get('company/{company_id}/edit/user/{id}', [CompanyController::class, 'userEdit'])->name('company.user.edit');
     Route::put('company/update/user/{id}', [CompanyController::class, 'userUpdate'])->name('company.user.update');
     Route::resource('tag', TagController::class);
+    Route::resource('category', CategoryController::class);
     Route::resource('document', DocumentController::class);
     Route::resource('guide', GuideController::class);
     Route::post('document/read', [DocumentController::class, 'documentRead'])->name('document.read');
