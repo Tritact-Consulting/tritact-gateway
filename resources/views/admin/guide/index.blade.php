@@ -42,6 +42,7 @@
                                     </th>
                                     <th>SNO</th>
                                     <th>Name</th>
+                                    <th>Categories</th>
                                     <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
@@ -55,6 +56,11 @@
                                     </td>
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $value->name }}</td>
+                                    <td>
+                                        @foreach($value->categories as $tag)
+                                        <span class="badge badge-info badge-sm">{{ $tag->name }}</span>
+                                        @endforeach
+                                    </td>
                                     <td>{{ $value->created_at->format('d M, Y') }}</td>
                                     <td>
                                         <form action="{{ route('guide.destroy', $value->id) }}" method="post">

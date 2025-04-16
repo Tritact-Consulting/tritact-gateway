@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Guides;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use File;
@@ -16,14 +17,16 @@ class GuideController extends Controller
     }
 
     public function create(){
-        return view('admin.guide.create');
+        $data = Category::where('status', 0)->get();
+        return view('admin.guide.create', compact('data'));
     }
 
     public function store(Request $request){
         $request->validate([
             'file' => 'required',
+            'category' => 'required',
         ]);
-
+        $category = $request->category;
         //$doc->status = $request->status;
         if($request->hasFile('file')){
             $files = $request->file('file');
@@ -42,6 +45,7 @@ class GuideController extends Controller
                     $file->move(public_path('guide'), $imageName);
                     $doc->file = 'guide/'.$imageName;
                     $doc->save();
+                    $doc->categories()->sync($category);
                 }
             }else{
                 $doc = new Guides();
@@ -55,21 +59,24 @@ class GuideController extends Controller
                 $files->move(public_path('guide'), $imageName);
                 $doc->file = 'guide/'.$imageName;
                 $doc->save();
+                $doc->categories()->sync($category);
             }
         }
         return redirect()->back()->with('success', 'Guide Added Successfully');
     }
 
     public function edit($id){
+        $categories = Category::where('status', 0)->get();
         $data = Guides::find($id);
-        return view('admin.guide.edit', compact('data'));
+        return view('admin.guide.edit', compact('data', 'categories'));
     }
 
     public function update($id, Request $request){
         $request->validate([
             'name' => 'required|unique:documents,name,'.$id,
+            'category' => 'required',
         ]);
-
+        $category = $request->category;
         $doc = Guides::find($id);
         $doc->name = $request->name;
         //$doc->status = $request->status;
@@ -79,7 +86,7 @@ class GuideController extends Controller
             $doc->file = 'guide/'.$imageName;
         }
         $doc->save();
-
+        $doc->categories()->sync($category);
         return redirect()->back()->with('success', 'Guide Updated Successfully');
     }
 

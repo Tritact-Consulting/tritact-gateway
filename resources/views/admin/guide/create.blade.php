@@ -49,6 +49,16 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label>Category <strong>*</strong></label>
+                                    <select name="category[]" id="category" class="form-control select2" multiple>
+                                        @foreach($data as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>        
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label>Status <strong>*</strong></label>
                                     <select class="form-control" name="status" required>
                                         <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Active</option>
@@ -103,6 +113,16 @@
                                     <label>File <strong>*</strong></label>
                                     <input type="file" class="form-control" name="file" value="{{ old('file') }}" required>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Category <strong>*</strong></label>
+                                    <select name="category[]" id="category_2" class="form-control select2" multiple>
+                                        @foreach($data as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>        
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
