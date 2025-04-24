@@ -126,7 +126,6 @@ class CompanyController extends Controller
             'director_name' => 'required',
             'short_name' => 'required',
             'tags' => 'required',
-            'categories' => 'required',
             'version' => 'required',
             'issue_date' => 'required',
             'address' => 'required',

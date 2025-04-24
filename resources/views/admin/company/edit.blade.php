@@ -126,7 +126,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Categories <strong>*</strong></label>
-                                    <select class="form-control select2" name="categories[]" multiple="multiple" required>
+                                    <select class="form-control select2" name="categories[]" multiple="multiple">
                                         <option value="all">All</option>
                                         @foreach($categories as $key => $value)
                                         <option value="{{ $value->id }}" {{ in_array($value->id, $data->categories->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $value->name }}</option>
