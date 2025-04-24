@@ -38,7 +38,6 @@ class CompanyController extends Controller
             'director_name' => 'required',
             'short_name' => 'required',
             'tags' => 'required',
-            'categories' => 'required',
             'address' => 'required',
             'website' => 'required',
             'registration_num' => 'required',
@@ -90,13 +89,15 @@ class CompanyController extends Controller
         }
 
         $categories = $request->categories;
-        foreach($categories as $key => $value){
-            if($value != 'all'){
-                $data = new CompanyCategories();
-                $data->user_id = $user->id;
-                $data->company_id = $company->id;
-                $data->category_id = $value;
-                $data->save();
+        if($categories != null){
+            foreach($categories as $key => $value){
+                if($value != 'all'){
+                    $data = new CompanyCategories();
+                    $data->user_id = $user->id;
+                    $data->company_id = $company->id;
+                    $data->category_id = $value;
+                    $data->save();
+                }
             }
         }
 
@@ -178,7 +179,9 @@ class CompanyController extends Controller
 
         $old_category = $user->categories->pluck('id')->toArray();
         $categories = $request->categories;
-        $categories = array_diff($categories, ["all"]);
+        if($categories != null){
+            $categories = array_diff($categories, ["all"]);
+        }
         $user->categories()->syncWithPivotValues($categories, ['company_id' => $company->id]);
 
         return redirect()->back()->with('success', 'Company Updated Successfully');
