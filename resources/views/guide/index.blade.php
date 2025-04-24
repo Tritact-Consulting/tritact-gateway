@@ -29,6 +29,7 @@
                                 <tr>
                                     <th>SNO</th>
                                     <th>Name</th>
+                                    <th>Categories</th>
                                     <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
@@ -38,6 +39,11 @@
                                 <tr class="hover-primary">
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $value->name }}</td>
+                                    <td>
+                                        @foreach($value->categories as $category)
+                                        <span class="badge badge-info badge-sm">{{ $category->name }}</span>
+                                        @endforeach
+                                    </td>
                                     <td>{{ $value->created_at->format('d M, Y') }}</td>
                                     <td>
                                         <div class="d-flex align-items-center">

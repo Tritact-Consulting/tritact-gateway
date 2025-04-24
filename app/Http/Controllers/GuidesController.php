@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Guides;
+use App\Models\Category;
 use App\Models\User;
 use File;
 use Illuminate\Support\Str;
@@ -31,7 +32,20 @@ class GuidesController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Guides::where('status', 0)->orderBy('id', 'desc')->get();
+        if(Auth::user()->is_company == 1){
+            $categories = Auth::user()->categories->pluck('id')->toArray();
+        }else{
+            $user = User::find(Auth::user()->user_id);
+            $categories = $user->categories->pluck('id')->toArray();
+        }
+        $get_categories = Category::whereIn('id', $categories)->get();
+
+        $data = Guides::where('status', 0)->whereHas('categories', function($q) use ($categories){
+            $q->whereIn('id', $categories);
+        });
+
+        $data = $data->orderBy('id', 'desc')->get();
+
         return view('guide.index', compact('data'));
     }
     
