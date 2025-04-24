@@ -61,6 +61,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Tags::class, 'company_tags', 'user_id', 'tag_id');
     }
 
+    public function categories(){
+        return $this->belongsToMany(Category::class, 'company_categories', 'user_id', 'category_id');
+    }
+
     public function get_total_users(){
         if(Auth::user()->is_company == 1){
             $user_id = Auth::user()->id;

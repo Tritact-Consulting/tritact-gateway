@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Tags;
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\CompanyTags;
+use App\Models\CompanyCategories;
 use App\Models\Documents;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -23,7 +25,8 @@ class CompanyController extends Controller
 
     public function create(){
         $tags = Tags::where('status', 0)->get();
-        return view('admin.company.create', compact('tags'));
+        $categories = Category::where('status', 0)->get();
+        return view('admin.company.create', compact('tags', 'categories'));
     }
 
     public function store(Request $request){
@@ -35,6 +38,7 @@ class CompanyController extends Controller
             'director_name' => 'required',
             'short_name' => 'required',
             'tags' => 'required',
+            'categories' => 'required',
             'address' => 'required',
             'website' => 'required',
             'registration_num' => 'required',
@@ -85,6 +89,17 @@ class CompanyController extends Controller
             }
         }
 
+        $categories = $request->categories;
+        foreach($categories as $key => $value){
+            if($value != 'all'){
+                $data = new CompanyCategories();
+                $data->user_id = $user->id;
+                $data->company_id = $company->id;
+                $data->category_id = $value;
+                $data->save();
+            }
+        }
+
         $credentials = $request->credentials;
         if($credentials == 1){
             $email_template = $request->email_temp;
@@ -100,7 +115,8 @@ class CompanyController extends Controller
     public function edit($id){
         $data = User::find($id);
         $tags = Tags::where('status', 0)->get();
-        return view('admin.company.edit', compact('data', 'tags'));
+        $categories = Category::where('status', 0)->get();
+        return view('admin.company.edit', compact('data', 'tags', 'categories'));
     }
 
     public function update($id, Request $request){
@@ -110,6 +126,7 @@ class CompanyController extends Controller
             'director_name' => 'required',
             'short_name' => 'required',
             'tags' => 'required',
+            'categories' => 'required',
             'version' => 'required',
             'issue_date' => 'required',
             'address' => 'required',
@@ -159,6 +176,11 @@ class CompanyController extends Controller
         $tags = $request->tags;
         $tags = array_diff($tags, ["all"]);
         $user->tags()->syncWithPivotValues($tags, ['company_id' => $company->id]);
+
+        $old_category = $user->categories->pluck('id')->toArray();
+        $categories = $request->categories;
+        $categories = array_diff($categories, ["all"]);
+        $user->categories()->syncWithPivotValues($categories, ['company_id' => $company->id]);
 
         return redirect()->back()->with('success', 'Company Updated Successfully');
     }

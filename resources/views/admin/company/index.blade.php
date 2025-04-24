@@ -21,7 +21,7 @@
 <section class="content">
     <div class="row">
         @foreach($data as $key => $value)
-        <div class="col-xxxl-3 col-xl-4 col-lg-6 col-12">
+        <div class="col-xxxl-4 col-xl-4 col-lg-6 col-12">
             <div class="box food-box">
                 <div class="box-body text-center">
                     <div class="menu-item">
@@ -34,6 +34,10 @@
                         <p class="mb-5">{{ $value->email }}</p>
                         @foreach($value->tags as $tag)
                         <span class="badge badge-info mb-10">{{ $tag->name }}</span>
+                        @endforeach
+                        <hr style="margin-top: 4px;">
+                        @foreach($value->categories as $category)
+                        <span class="badge badge-info mb-10">{{ $category->name }}</span>
                         @endforeach
                     </div>
                     <div class="act-btn d-flex justify-content-between">
