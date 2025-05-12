@@ -228,8 +228,8 @@
                                 </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li class="{{ Request::routeIs('certification-category.create') || Request::routeIs('certification-category.edit') ? 'active' : '' }}"><a href="{{ route('certification-category.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Certification Category</a></li>
-                                    <li class="{{ Request::routeIs('certification-category.index') ? 'active' : '' }}"><a href="{{ route('certification-category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Certification Category List</a></li>
+                                    <li class="{{ Request::routeIs('certification-category.create') || Request::routeIs('certification-category.edit') ? 'active' : '' }}"><a href="{{ route('certification-category.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Category</a></li>
+                                    <li class="{{ Request::routeIs('certification-category.index') ? 'active' : '' }}"><a href="{{ route('certification-category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Category List</a></li>
                                 </ul>
                             </li>
                             <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
