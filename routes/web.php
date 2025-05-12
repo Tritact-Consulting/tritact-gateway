@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\GuideController;
 use App\Http\Controllers\Admin\DocVersionController;
 use App\Http\Controllers\Admin\FileKeywordController;
+use App\Http\Controllers\Admin\CertificationCategoryController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentsController;
@@ -54,6 +55,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::put('company/update/user/{id}', [CompanyController::class, 'userUpdate'])->name('company.user.update');
     Route::resource('tag', TagController::class);
     Route::resource('category', CategoryController::class);
+    Route::resource('certification-category', CertificationCategoryController::class);
     Route::resource('document', DocumentController::class);
     Route::resource('guide', GuideController::class);
     Route::post('document/read', [DocumentController::class, 'documentRead'])->name('document.read');
@@ -65,4 +67,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::get('company/dashboard/{company_id}', [CompanyController::class, 'dashboard'])->name('company.dashboard');
     Route::post('company/document/download/{id}/{supportive}/{company_id}', [DocumentController::class, 'dashboardDocuments'])->name('company.dashboard.documents.download');
     Route::post('company/document/delete', [DocumentController::class, 'documentsDeleteAll'])->name('documents.delete.all');
+    Route::get('company/certification/assign/{id}', [CompanyController::class, 'companyCertificationAssign'])->name('company.certification.assign');
+    Route::post('company/certification/add', [CompanyController::class, 'companyCertificationAdd'])->name('company.certification.add');
 });

@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\CompanyTags;
 use App\Models\CompanyCategories;
 use App\Models\Documents;
+use App\Models\CertificationCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -270,5 +271,25 @@ class CompanyController extends Controller
         $data->status = 1;
         $data->save();
         return redirect()->back()->with('success', 'Company Deleted Successfully');
+    }
+
+    public function companyCertificationAssign($id){
+        $user = User::find($id);
+        $certification = CertificationCategory::where('status', 0)->get();
+        return view('admin.company.certification', compact('user', 'certification'));
+    }
+
+    public function companyCertificationAdd(Request $request){
+        $id = $request->user_id;
+        $company = Company::where('user_id', $id)->first();
+        $user = User::find($id);
+        $old_certification = $user->certification_category->pluck('id')->toArray();
+        $certification_category = $request->certification_category;
+        if($certification_category != null){
+            $certification_category = array_diff($certification_category, ["all"]);
+            $user->certification_category()->syncWithPivotValues($certification_category, ['company_id' => $company->id]);
+        }
+
+        return redirect()->back()->with('success', 'Company Certification Assigned Successfully');
     }
 }

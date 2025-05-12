@@ -13566,7 +13566,7 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
     width: auto;
     height: auto;
     padding: 0;
-    margin-right: 25px;
+    margin-right: 8px;
     -webkit-transition: transform .5s ease;
     -o-transition: transform .5s ease;
     transition: transform .5s ease; }

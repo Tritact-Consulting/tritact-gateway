@@ -61,6 +61,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Tags::class, 'company_tags', 'user_id', 'tag_id');
     }
 
+    public function certification_category(){
+        return $this->belongsToMany(CertificationCategory::class, 'company_certifications', 'user_id', 'certifications_id');
+    }
+
     public function categories(){
         return $this->belongsToMany(Category::class, 'company_categories', 'user_id', 'category_id');
     }
