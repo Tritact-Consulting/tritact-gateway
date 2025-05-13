@@ -4,13 +4,13 @@
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">Assign Certification - {{ $user->name }}</h3>
+            <h3 class="page-title">Assign Certification</h3>
             <div class="d-inline-block align-items-center">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                         <li class="breadcrumb-item" aria-current="page">Company</li>
-                        <li class="breadcrumb-item active" aria-current="page">Assign Certification - {{ $user->name }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">Assign Certification</li>
                     </ol>
                 </nav>
             </div>
@@ -37,17 +37,46 @@
                 <!-- /.box-header -->
                 <form class="form" enctype="multipart/form-data" method="post" action="{{ route('company.certification.add') }}">
                     @csrf
-                    <input type="hidden" name="user_id" value="{{ $user->id }}">
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Certification <strong>*</strong></label>
-                                    <select multiple="multiple" name="certification_category[]" id="certification" class="form-control select2" required>
-                                        @foreach($certification as $key => $value)
-                                        <option value="{{ $value->id }}" {{ in_array($value->id, $user->certification_category->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $value->name }}</option>
+                                    <label>Company <strong>*</strong></label>
+                                    <select name="company" id="company" class="form-control select2" required>
+                                        <option value="">Select Company</option>
+                                        @foreach($user as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Certification <strong>*</strong></label>
+                                    <select name="certification" id="certification" class="form-control select2" required>
+                                        <option value="">Select Certification</option>
+                                        @foreach($certification as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Issue Date <strong>*</strong></label>
+                                    <input type="date" name="issue_date" id="issue_date" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Expire Date <strong>*</strong></label>
+                                    <input type="date" name="expire_date" id="expire_date" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Certification Name <strong>*</strong></label>
+                                    <input type="text" name="certification_name" id="certification_name" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -60,6 +89,38 @@
             </div>
             <!-- /.box -->			
         </div> 
+    </div>
+    <div class="row">
+        <div class="col-12">
+			<div class="box">
+			    <div class="box-body">
+				    <div class="table-responsive rounded card-table">
+                        <table class="table border-no datatables" id="example1">
+                            <thead>
+                                <tr>
+                                    <th>Company Name</th>
+                                    <th>Certification</th>
+                                    <th>Certification Name</th>
+                                    <th>Issue Date</th>
+                                    <th>Expire Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($data as $key => $value)
+                                <tr class="hover-primary">
+                                    <td>{{ $value->user->name }}</td>
+                                    <td>{{ $value->certificate->name }}</td>
+                                    <td>{{ $value->certification_name }}</td>
+                                    <td>{{ $value->issue_date }}</td>
+                                    <td>{{ $value->expire_date }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 @endsection

@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\CompanyTags;
 use App\Models\CompanyCategories;
 use App\Models\Documents;
+use App\Models\CompanyCertification;
 use App\Models\CertificationCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -273,23 +274,26 @@ class CompanyController extends Controller
         return redirect()->back()->with('success', 'Company Deleted Successfully');
     }
 
-    public function companyCertificationAssign($id){
-        $user = User::find($id);
+    public function companyCertificationAssign(){
+        $user = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         $certification = CertificationCategory::where('status', 0)->get();
-        return view('admin.company.certification', compact('user', 'certification'));
+        $data = CompanyCertification::orderBy('id', 'desc')->get();
+        return view('admin.company.certification', compact('user', 'certification', 'data'));
     }
 
     public function companyCertificationAdd(Request $request){
-        $id = $request->user_id;
+        $id = $request->company;
         $company = Company::where('user_id', $id)->first();
         $user = User::find($id);
-        $old_certification = $user->certification_category->pluck('id')->toArray();
-        $certification_category = $request->certification_category;
-        if($certification_category != null){
-            $certification_category = array_diff($certification_category, ["all"]);
-            $user->certification_category()->syncWithPivotValues($certification_category, ['company_id' => $company->id]);
-        }
 
+        $data = new CompanyCertification();
+        $data->user_id = $user->id;
+        $data->company_id = $company->id;
+        $data->certifications_id = $request->certification;
+        $data->certification_name = $request->certification_name;
+        $data->issue_date = $request->issue_date;
+        $data->expire_date = $request->expire_date;
+        $data->save();
         return redirect()->back()->with('success', 'Company Certification Assigned Successfully');
     }
 }

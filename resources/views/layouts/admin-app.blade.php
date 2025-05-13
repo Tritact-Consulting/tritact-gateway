@@ -233,6 +233,12 @@
                                 </ul>
                             </li>
                             <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
+                                <a href="{{ route('company.certification.assign') }}">
+                                    <i class="icon-Share1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+                                    <span>Assign Certification</span>
+                                </a>
+                            </li>
+                            <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
                                 <a href="{{ route('keyword.index') }}">
                                     <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>Document Keyword</span>

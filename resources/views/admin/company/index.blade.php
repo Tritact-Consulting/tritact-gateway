@@ -62,7 +62,6 @@
                             <small class="d-block">Login</small>
                         </div>
                     </div>
-                    <a href="{{ route('company.certification.assign', $value->id) }}" class="btn btn-primary btn-sm mt-2">Assign Certification</a>
                 </div>
             </div>
         </div>
