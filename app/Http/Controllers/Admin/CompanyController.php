@@ -296,4 +296,32 @@ class CompanyController extends Controller
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Assigned Successfully');
     }
+
+    public function companyCertificationEdit($id){
+        $data = CompanyCertification::find($id);
+        $user = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $certification = CertificationCategory::where('status', 0)->get();
+        return view('admin.company.certification-edit', compact('data', 'user', 'certification'));
+    }
+
+    public function companyCertificationUpdate(Request $request, $id){
+        $company_id = $request->company;
+        $company = Company::where('user_id', $company_id)->first();
+        $user = User::find($company_id);
+
+        $data = CompanyCertification::find($id);
+        $data->user_id = $user->id;
+        $data->company_id = $company->id;
+        $data->certifications_id = $request->certification;
+        $data->certification_name = $request->certification_name;
+        $data->issue_date = $request->issue_date;
+        $data->expire_date = $request->expire_date;
+        $data->save();
+        return redirect()->back()->with('success', 'Company Certification Updated Successfully');
+    }
+
+    public function companyCertificationDestroy($id){
+        $data = CompanyCertification::find($id)->delete();
+        return redirect()->back()->with('success', 'Company Certification Deleted Successfully');
+    }
 }

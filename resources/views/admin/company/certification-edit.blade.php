@@ -1,16 +1,16 @@
 @extends('layouts.admin-app')
-@section('title', 'Assign Certification')
+@section('title', 'Edit Certification - ' . $data->id)
 @section('content')
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">Assign Certification</h3>
+            <h3 class="page-title">Edit Certification - {{ $data->id }}</h3>
             <div class="d-inline-block align-items-center">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                         <li class="breadcrumb-item" aria-current="page">Company</li>
-                        <li class="breadcrumb-item active" aria-current="page">Assign Certification</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Certification - {{ $data->id }}</li>
                     </ol>
                 </nav>
             </div>
@@ -35,7 +35,7 @@
                 </div>
                 @endif
                 <!-- /.box-header -->
-                <form class="form" enctype="multipart/form-data" method="post" action="{{ route('company.certification.add') }}">
+                <form class="form" enctype="multipart/form-data" method="post" action="{{ route('company.certification.update', $data->id) }}">
                     @csrf
                     <div class="box-body">
                         <div class="row">
@@ -45,7 +45,7 @@
                                     <select name="company" id="company" class="form-control select2" required>
                                         <option value="">Select Company</option>
                                         @foreach($user as $key => $value)
-                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        <option value="{{ $value->id }}" {{ $data->user_id == $value->id ? 'selected' : '' }}>{{ $value->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -56,7 +56,7 @@
                                     <select name="certification" id="certification" class="form-control select2" required>
                                         <option value="">Select Certification</option>
                                         @foreach($certification as $key => $value)
-                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        <option value="{{ $value->id }}" {{ $data->certifications_id == $value->id ? 'selected' : '' }}>{{ $value->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -64,19 +64,19 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Issue Date <strong>*</strong></label>
-                                    <input type="date" name="issue_date" id="issue_date" class="form-control" required>
+                                    <input type="date" name="issue_date" id="issue_date" class="form-control" value="{{ $data->issue_date }}" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Expire Date <strong>*</strong></label>
-                                    <input type="date" name="expire_date" id="expire_date" class="form-control" required>
+                                    <input type="date" name="expire_date" id="expire_date" class="form-control" value="{{ $data->expire_date }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Certification Name <strong>*</strong></label>
-                                    <input type="text" name="certification_name" id="certification_name" class="form-control" required>
+                                    <input type="text" name="certification_name" id="certification_name" class="form-control" value="{{ $data->certification_name }}" required>
                                 </div>
                             </div>
                         </div>
@@ -89,49 +89,6 @@
             </div>
             <!-- /.box -->			
         </div> 
-    </div>
-    <div class="row">
-        <div class="col-12">
-			<div class="box">
-			    <div class="box-body">
-				    <div class="table-responsive rounded card-table">
-                        <table class="table border-no datatables" id="example1">
-                            <thead>
-                                <tr>
-                                    <th>Company Name</th>
-                                    <th>Certification</th>
-                                    <th>Certification Name</th>
-                                    <th>Issue Date</th>
-                                    <th>Expire Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($data as $key => $value)
-                                <tr class="hover-primary">
-                                    <td>{{ $value->user->name }}</td>
-                                    <td>{{ $value->certificate->name }}</td>
-                                    <td>{{ $value->certification_name }}</td>
-                                    <td>{{ $value->issue_date }}</td>
-                                    <td>{{ $value->expire_date }}</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <a href="{{ route('company.certification.edit', $value->id) }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                                            <form action="{{ route('company.certification.destroy', $value->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="certification"><i class="fa fa-trash"></i></button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 @endsection

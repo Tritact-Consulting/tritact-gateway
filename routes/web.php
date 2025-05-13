@@ -69,4 +69,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('company/document/delete', [DocumentController::class, 'documentsDeleteAll'])->name('documents.delete.all');
     Route::get('company/certification/assign', [CompanyController::class, 'companyCertificationAssign'])->name('company.certification.assign');
     Route::post('company/certification/add', [CompanyController::class, 'companyCertificationAdd'])->name('company.certification.add');
+    Route::get('company/certification/edit/{id}', [CompanyController::class, 'companyCertificationEdit'])->name('company.certification.edit');
+    Route::post('company/certification/update/{id}', [CompanyController::class, 'companyCertificationUpdate'])->name('company.certification.update');
+    Route::delete('company/certification/destroy/{id}', [CompanyController::class, 'companyCertificationDestroy'])->name('company.certification.destroy');
 });
