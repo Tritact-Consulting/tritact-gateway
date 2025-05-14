@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\GuideController;
 use App\Http\Controllers\Admin\DocVersionController;
 use App\Http\Controllers\Admin\FileKeywordController;
 use App\Http\Controllers\Admin\CertificationCategoryController;
+use App\Http\Controllers\Admin\CertificationBodyController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentsController;
@@ -63,6 +64,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('document/field/delete', [DocumentController::class, 'documentDelete'])->name('document.field.delete');
     Route::resource('version', DocVersionController::class);
     Route::resource('keyword', FileKeywordController::class);
+    Route::resource('certification-body', CertificationBodyController::class);
     Route::get('/mark-as-read', [AdminController::class, 'markAsRead'])->name('admin.mark-as-read');
     Route::get('company/dashboard/{company_id}', [CompanyController::class, 'dashboard'])->name('company.dashboard');
     Route::post('company/document/download/{id}/{supportive}/{company_id}', [DocumentController::class, 'dashboardDocuments'])->name('company.dashboard.documents.download');

@@ -232,6 +232,19 @@
                                     <li class="{{ Request::routeIs('certification-category.index') ? 'active' : '' }}"><a href="{{ route('certification-category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Category List</a></li>
                                 </ul>
                             </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Chart-line"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Certification Body</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li class="{{ Request::routeIs('certification-body.create') || Request::routeIs('certification-body.edit') ? 'active' : '' }}"><a href="{{ route('certification-body.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Body</a></li>
+                                    <li class="{{ Request::routeIs('certification-body.index') ? 'active' : '' }}"><a href="{{ route('certification-body.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Body List</a></li>
+                                </ul>
+                            </li>
                             <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
                                 <a href="{{ route('company.certification.assign') }}">
                                     <i class="icon-Share1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
