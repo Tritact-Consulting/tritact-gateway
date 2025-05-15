@@ -245,6 +245,19 @@
                                     <li class="{{ Request::routeIs('certification-body.index') ? 'active' : '' }}"><a href="{{ route('certification-body.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Body List</a></li>
                                 </ul>
                             </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Auditor</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li class="{{ Request::routeIs('auditor.create') || Request::routeIs('auditor.edit') ? 'active' : '' }}"><a href="{{ route('auditor.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Auditor</a></li>
+                                    <li class="{{ Request::routeIs('auditor.index') ? 'active' : '' }}"><a href="{{ route('auditor.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Auditor List</a></li>
+                                </ul>
+                            </li>
                             <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
                                 <a href="{{ route('company.certification.assign') }}">
                                     <i class="icon-Share1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>

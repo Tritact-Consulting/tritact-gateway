@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\DocVersionController;
 use App\Http\Controllers\Admin\FileKeywordController;
 use App\Http\Controllers\Admin\CertificationCategoryController;
 use App\Http\Controllers\Admin\CertificationBodyController;
+use App\Http\Controllers\Admin\AuditorController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentsController;
@@ -59,6 +60,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::resource('certification-category', CertificationCategoryController::class);
     Route::resource('document', DocumentController::class);
     Route::resource('guide', GuideController::class);
+    Route::resource('auditor', AuditorController::class);
     Route::post('document/read', [DocumentController::class, 'documentRead'])->name('document.read');
     Route::post('document/keyword', [DocumentController::class, 'documentKeyword'])->name('document.keyword');
     Route::post('document/field/delete', [DocumentController::class, 'documentDelete'])->name('document.field.delete');
