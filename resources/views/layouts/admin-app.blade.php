@@ -258,7 +258,7 @@
                                     <li class="{{ Request::routeIs('auditor.index') ? 'active' : '' }}"><a href="{{ route('auditor.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Auditor List</a></li>
                                 </ul>
                             </li>
-                            <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
+                            <li class="{{ Request::routeIs('company.certification.assign') || Request::routeIs('company.certification.edit') ? 'active' : '' }}">
                                 <a href="{{ route('company.certification.assign') }}">
                                     <i class="icon-Share1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>Assign Certification</span>

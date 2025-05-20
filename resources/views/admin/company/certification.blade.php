@@ -39,7 +39,7 @@
                     @csrf
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Company <strong>*</strong></label>
                                     <select name="company" id="company" class="form-control select2" required>
@@ -50,33 +50,44 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Certification <strong>*</strong></label>
-                                    <select name="certification" id="certification" class="form-control select2" required>
-                                        <option value="">Select Certification</option>
+                                    <label>Certification Category<strong>*</strong></label>
+                                    <select name="certification_category" id="certification_category" class="form-control select2" required>
+                                        <option value="">Select Certification Category </option>
                                         @foreach($certification as $key => $value)
                                         <option value="{{ $value->id }}">{{ $value->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Issue Date <strong>*</strong></label>
-                                    <input type="date" name="issue_date" id="issue_date" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Expire Date <strong>*</strong></label>
-                                    <input type="date" name="expire_date" id="expire_date" class="form-control" required>
+                                    <label>Auditor <strong>*</strong></label>
+                                    <select name="auditor" id="auditor" class="form-control" required>
+                                        <option value="">Select Auditor</option>
+                                        @foreach($auditors as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Certification Name <strong>*</strong></label>
                                     <input type="text" name="certification_name" id="certification_name" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Issue Date</label>
+                                    <input type="date" name="issue_date" id="issue_date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Expire Date</label>
+                                    <input type="date" name="expire_date" id="expire_date" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -101,8 +112,7 @@
                                     <th>Company Name</th>
                                     <th>Certification</th>
                                     <th>Certification Name</th>
-                                    <th>Issue Date</th>
-                                    <th>Expire Date</th>
+                                    <th>Auditor</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -112,8 +122,7 @@
                                     <td>{{ $value->user->name }}</td>
                                     <td>{{ $value->certificate->name }}</td>
                                     <td>{{ $value->certification_name }}</td>
-                                    <td>{{ $value->issue_date }}</td>
-                                    <td>{{ $value->expire_date }}</td>
+                                    <td>{{ $value->auditor->name }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{ route('company.certification.edit', $value->id) }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>

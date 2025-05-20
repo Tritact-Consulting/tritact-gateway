@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\CompanyTags;
 use App\Models\CompanyCategories;
 use App\Models\Documents;
+use App\Models\Auditor;
 use App\Models\CompanyCertification;
 use App\Models\CertificationCategory;
 use App\Http\Controllers\Controller;
@@ -278,7 +279,8 @@ class CompanyController extends Controller
         $user = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         $certification = CertificationCategory::where('status', 0)->get();
         $data = CompanyCertification::orderBy('id', 'desc')->get();
-        return view('admin.company.certification', compact('user', 'certification', 'data'));
+        $auditors = Auditor::all();
+        return view('admin.company.certification', compact('user', 'certification', 'data', 'auditors'));
     }
 
     public function companyCertificationAdd(Request $request){
@@ -289,10 +291,11 @@ class CompanyController extends Controller
         $data = new CompanyCertification();
         $data->user_id = $user->id;
         $data->company_id = $company->id;
-        $data->certifications_id = $request->certification;
+        $data->certifications_id = $request->certification_category;
         $data->certification_name = $request->certification_name;
         $data->issue_date = $request->issue_date;
         $data->expire_date = $request->expire_date;
+        $data->auditor_id = $request->auditor;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Assigned Successfully');
     }
@@ -301,7 +304,8 @@ class CompanyController extends Controller
         $data = CompanyCertification::find($id);
         $user = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         $certification = CertificationCategory::where('status', 0)->get();
-        return view('admin.company.certification-edit', compact('data', 'user', 'certification'));
+        $auditors = Auditor::all();
+        return view('admin.company.certification-edit', compact('data', 'user', 'certification', 'auditors'));
     }
 
     public function companyCertificationUpdate(Request $request, $id){
@@ -316,6 +320,7 @@ class CompanyController extends Controller
         $data->certification_name = $request->certification_name;
         $data->issue_date = $request->issue_date;
         $data->expire_date = $request->expire_date;
+        $data->auditor_id = $request->auditor;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Updated Successfully');
     }

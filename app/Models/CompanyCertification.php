@@ -16,4 +16,8 @@ class CompanyCertification extends Model
     public function certificate(){
         return $this->hasOne(CertificationCategory::class, 'id', 'certifications_id');
     }
+
+    public function auditor(){
+        return $this->hasOne(Auditor::class, 'id', 'auditor_id');
+    }
 }
