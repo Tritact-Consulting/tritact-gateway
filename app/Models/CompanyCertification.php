@@ -20,4 +20,18 @@ class CompanyCertification extends Model
     public function auditor(){
         return $this->hasOne(Auditor::class, 'id', 'auditor_id');
     }
+
+    public function getRemainingDays(){
+        $remaining = \Carbon\Carbon::now()->diffInDays($this->expire_date, false);
+        $remaining = $remaining + 2;
+        if($remaining < 20){
+            return $remaining;
+        }else if(($remaining >= 20) && ($remaining <= 30)){
+            return 'alert alert-red ' . $remaining;
+        }else if(($remaining > 30) && ($remaining <= 90)){
+            return 'alert alert-warning ' . $remaining;
+        }else if($remaining > 90){
+            return 'alert alert-success ' . $remaining;
+        }
+    }
 }

@@ -113,6 +113,7 @@
                                     <th>Certification</th>
                                     <th>Certification Name</th>
                                     <th>Auditor</th>
+                                    <th>Expire Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -123,6 +124,7 @@
                                     <td>{{ $value->certificate->name }}</td>
                                     <td>{{ $value->certification_name }}</td>
                                     <td>{{ $value->auditor->name }}</td>
+                                    <td>{{ $value->expire_date }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{ route('company.certification.edit', $value->id) }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
