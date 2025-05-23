@@ -79,6 +79,51 @@
                 </div>
             </div>
         </div>
+        <div class="col-xxxl-3 col-lg-6 col-12">
+            <div class="box">
+                <div class="box-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <i class="fa fa-bar-chart mr-20" aria-hidden="true" style="font-size: 40px"></i>
+                        </div>
+                        <div>
+                            <h2 class="my-0 font-weight-700">{{ $cert_body_count }}</h2>
+                            <p class="text-fade mb-0">Total Cert. Body</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxxl-3 col-lg-6 col-12">
+            <div class="box">
+                <div class="box-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <i class="fa fa-user mr-20" aria-hidden="true" style="font-size: 40px"></i>
+                        </div>
+                        <div>
+                            <h2 class="my-0 font-weight-700">{{ $auditor_count }}</h2>
+                            <p class="text-fade mb-0">Total Auditors</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxxl-3 col-lg-6 col-12">
+            <div class="box">
+                <div class="box-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <i class="fa fa-share mr-20" aria-hidden="true" style="font-size: 40px"></i>
+                        </div>
+                        <div>
+                            <h2 class="my-0 font-weight-700">{{ $assign_certification_count }}</h2>
+                            <p class="text-fade mb-0">Total Assign Cert.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-12">
