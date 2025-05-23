@@ -13,7 +13,7 @@
                         </div>
                         <div>
                             <h2 class="my-0 font-weight-700">{{ $company_count }}</h2>
-                            <p class="text-fade mb-0">Total Company</p>
+                            <p class="text-fade mb-0">Companies</p>
                         </div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                         </div>
                         <div>
                             <h2 class="my-0 font-weight-700">{{ $tag_count }}</h2>
-                            <p class="text-fade mb-0">Total Tags</p>
+                            <p class="text-fade mb-0">Tags</p>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                         </div>
                         <div>
                             <h2 class="my-0 font-weight-700">{{ $user_count }}</h2>
-                            <p class="text-fade mb-0">Total Users</p>
+                            <p class="text-fade mb-0">Users</p>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                         </div>
                         <div>
                             <h2 class="my-0 font-weight-700">{{ $document_count }}</h2>
-                            <p class="text-fade mb-0">Total Documents</p>
+                            <p class="text-fade mb-0">Documents</p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                         </div>
                         <div>
                             <h2 class="my-0 font-weight-700">{{ $guide_count }}</h2>
-                            <p class="text-fade mb-0">Total Guides</p>
+                            <p class="text-fade mb-0">Guides</p>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                         </div>
                         <div>
                             <h2 class="my-0 font-weight-700">{{ $cert_body_count }}</h2>
-                            <p class="text-fade mb-0">Total Cert. Body</p>
+                            <p class="text-fade mb-0">Cert. Body</p>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                         </div>
                         <div>
                             <h2 class="my-0 font-weight-700">{{ $auditor_count }}</h2>
-                            <p class="text-fade mb-0">Total Auditors</p>
+                            <p class="text-fade mb-0">Auditors</p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                         </div>
                         <div>
                             <h2 class="my-0 font-weight-700">{{ $assign_certification_count }}</h2>
-                            <p class="text-fade mb-0">Total Assign Cert.</p>
+                            <p class="text-fade mb-0">Assign Cert.</p>
                         </div>
                     </div>
                 </div>
