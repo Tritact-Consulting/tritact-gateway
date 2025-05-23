@@ -313,6 +313,7 @@ class CompanyController extends Controller
         $data->auditor_id = $request->auditor;
         $data->username = $request->username;
         $data->password = $request->password;
+        $data->certification_number = $request->certification_number;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Assigned Successfully');
     }
@@ -340,6 +341,7 @@ class CompanyController extends Controller
         $data->auditor_id = $request->auditor;
         $data->username = $request->username;
         $data->password = $request->password;
+        $data->certification_number = $request->certification_number;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Updated Successfully');
     }

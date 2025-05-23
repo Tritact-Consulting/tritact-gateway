@@ -88,7 +88,7 @@
                         </div>
                         <div>
                             <h2 class="my-0 font-weight-700">{{ $cert_body_count }}</h2>
-                            <p class="text-fade mb-0">Cert. Body</p>
+                            <p class="text-fade mb-0">Certification Body</p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                         </div>
                         <div>
                             <h2 class="my-0 font-weight-700">{{ $assign_certification_count }}</h2>
-                            <p class="text-fade mb-0">Assign Cert.</p>
+                            <p class="text-fade mb-0">Assign Certificate</p>
                         </div>
                     </div>
                 </div>
