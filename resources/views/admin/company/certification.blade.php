@@ -90,6 +90,18 @@
                                     <input type="date" name="expire_date" id="expire_date" class="form-control">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" name="username" id="username" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="text" name="password" id="password" class="form-control">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->

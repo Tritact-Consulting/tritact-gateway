@@ -311,6 +311,8 @@ class CompanyController extends Controller
         $data->issue_date = $request->issue_date;
         $data->expire_date = $request->expire_date;
         $data->auditor_id = $request->auditor;
+        $data->username = $request->username;
+        $data->password = $request->password;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Assigned Successfully');
     }
@@ -336,6 +338,8 @@ class CompanyController extends Controller
         $data->issue_date = $request->issue_date;
         $data->expire_date = $request->expire_date;
         $data->auditor_id = $request->auditor;
+        $data->username = $request->username;
+        $data->password = $request->password;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Updated Successfully');
     }
