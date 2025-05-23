@@ -230,6 +230,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="company_id">Company ID</label>
+                                    <input type="text" name="company_id" id="company_id" class="form-control" value="{{ old('company_id') }}">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->

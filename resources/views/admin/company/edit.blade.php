@@ -198,6 +198,12 @@
                                     <input type="number" name="logo_height" id="logo_height" class="form-control" value="{{ old('logo_height', $data->company->logo_height) }}" required>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="company_id">Company ID</label>
+                                    <input type="text" name="company_id" id="company_id" class="form-control" value="{{ old('company_id', $data->company->company_id) }}">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->

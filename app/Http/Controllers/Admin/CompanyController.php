@@ -50,6 +50,12 @@ class CompanyController extends Controller
             'logo_height' => 'required',
         ]);
 
+        if($request->company_id != null){
+            $request->validate([
+                'company_id' => 'required|unique:companies,company_id',
+            ]);
+        }
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -77,6 +83,7 @@ class CompanyController extends Controller
         $company->company_email = $request->company_email;
         $company->logo_width = $request->logo_width;
         $company->logo_height = $request->logo_height;
+        $company->company_id = $request->company_id;
         
         $user->company()->save($company);
 
@@ -146,6 +153,14 @@ class CompanyController extends Controller
                 'password' => 'required|confirmed',
             ]);
         }
+
+        $company = Company::where('user_id', $id)->first();
+
+        if($request->company_id != null){
+            $request->validate([
+                'company_id' => 'required|unique:companies,company_id,'.$company->id,
+            ]);
+        }
         
         $user = User::find($id);
         $user->name = $request->name;
@@ -155,7 +170,6 @@ class CompanyController extends Controller
         }
         $user->save();
 
-        $company = Company::where('user_id', $id)->first();
         if($request->hasFile('logo')){
             $imageName = time().'.'.$request->logo->extension();
             $request->logo->move(public_path('company/logos'), $imageName);
@@ -174,6 +188,7 @@ class CompanyController extends Controller
         $company->company_email = $request->company_email;
         $company->logo_width = $request->logo_width;
         $company->logo_height = $request->logo_height;
+        $company->company_id = $request->company_id;
         $company->save();
         $old_tag = $user->tags->pluck('id')->toArray();
         $tags = $request->tags;
