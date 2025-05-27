@@ -63,8 +63,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Auditor <strong>*</strong></label>
-                                    <select name="auditor" id="auditor" class="form-control" required>
+                                    <label>Auditor</label>
+                                    <select name="auditor" id="auditor" class="form-control">
                                         <option value="">Select Auditor</option>
                                         @foreach($auditors as $key => $value)
                                         <option value="{{ $value->id }}">{{ $value->name }}</option>
@@ -141,7 +141,7 @@
                                     <td>{{ $value->user->name }}</td>
                                     <td>{{ $value->certificate->name }}</td>
                                     <td>{{ $value->certification_name }}</td>
-                                    <td>{{ $value->auditor->name }}</td>
+                                    <td>{{ $value->auditor != null ? $value->auditor->name : '' }}</td>
                                     <td>{{ $value->expire_date }}</td>
                                     <td>
                                         <div class="d-flex">

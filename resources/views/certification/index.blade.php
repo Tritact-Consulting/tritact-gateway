@@ -93,10 +93,8 @@
                         <table class="table border-no datatables" id="example1">
                             <thead>
                                 <tr>
-                                    <th>Company Name</th>
                                     <th>Certification</th>
                                     <th>Certification Name</th>
-                                    <th>Auditor</th>
                                     <th>Expire Date</th>
                                     <th>Action</th>
                                 </tr>
@@ -104,15 +102,13 @@
                             <tbody>
                                 @foreach($data as $key => $value)
                                 <tr class="hover-primary">
-                                    <td>{{ $value->user->name }}</td>
                                     <td>{{ $value->certificate->name }}</td>
                                     <td>{{ $value->certification_name }}</td>
-                                    <td>{{ $value->auditor->name }}</td>
                                     <td>{{ $value->expire_date }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('company.certification.edit', $value->id) }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                                            <form action="{{ route('company.certification.destroy', $value->id) }}" method="POST">
+                                            <a href="{{ route('certifications.edit', $value->id) }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                            <form action="{{ route('certifications.destroy', $value->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="certification"><i class="fa fa-trash"></i></button>

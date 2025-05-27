@@ -32,51 +32,52 @@ class CertificationController extends Controller
      */
     public function index(Request $request)
     {
-        $data = CompanyCertification::whereNotNull('expire_date')->orderBy('expire_date', 'asc')->where('company_id', Auth::user()->id)->get();
+        $data = CompanyCertification::orderBy('expire_date', 'asc')->where('company_id', Auth::user()->company->id)->get();
         $certification = CertificationCategory::where('status', 0)->get();
         $auditors = Auditor::all();
         return view('certification.index', compact('data', 'certification', 'auditors'));
     }
-    
-    public function downloadAll(Request $request){
-        $doc = $request->doc;
-        $doc_id = explode(',', $doc[0]);
-        for($i = 0; $i < count($doc_id); $i++){
-            $return_file = $this->download($doc_id[$i], 0, 1);
-            dump($return_file);
-        }
-    }
-
-    public function download($id){
-        $data = Guides::find($id);
-        $file = public_path($data->file);
-        $file_name = $data->name;
-        $extension = pathinfo($file, PATHINFO_EXTENSION);
-        return Response::download($file, $file_name.'.'.$extension);
-    }
 
     public function store(Request $request){
-        $request->validate([
-            'version' => 'required',
-            'issue_date' => 'required',
-            'file' => 'required',
-            'document_id' => 'required',
-        ]);
-
-        $data = new SupportiveDocument();
+        $data = new CompanyCertification();
         $data->user_id = Auth::user()->id;
-        $data->version = $request->version;
+        $data->company_id = Auth::user()->company->id;
+        $data->certifications_id = $request->certification_category;
+        $data->certification_name = $request->certification_name;
         $data->issue_date = $request->issue_date;
-        $data->document_id = $request->document_id;
-        if($request->hasFile('file')){
-            $path = Str::slug(Auth::user()->name).'/'.Str::slug($request->version);
-            $public_path = public_path('document/'.$path);
-            $imageName = time().'.'.$request->file->extension();
-            $request->file->move(public_path('document/'.$path), $imageName);
-            $data->file = 'document/'.$path.'/'.$imageName;
-        }
+        $data->expire_date = $request->expire_date;
+        $data->certification_number = $request->certification_number;
         $data->save();
-        return redirect()->back()->with('success', 'Supportive Document Added Successfully');        
+        return redirect()->back()->with('success', 'Certification Added Successfully');
+
+    }
+
+    public function edit($id){
+        $data = CompanyCertification::find($id);
+        if($data->company_id == Auth::user()->company->id){
+            $certification = CertificationCategory::where('status', 0)->get();
+            return view('certification.edit', compact('data', 'certification'));
+        }else{
+            return redirect()->back();
+        }
+    }
+
+    public function update(Request $request, $id){
+        $data = CompanyCertification::find($id);
+        $data->user_id = Auth::user()->id;
+        $data->company_id = Auth::user()->company->id;
+        $data->certifications_id = $request->certification_category;
+        $data->certification_name = $request->certification_name;
+        $data->issue_date = $request->issue_date;
+        $data->expire_date = $request->expire_date;
+        $data->certification_number = $request->certification_number;
+        $data->save();
+        return redirect()->back()->with('success', 'Certification Updated Successfully');
+    }
+
+    public function destroy($id){
+        CompanyCertification::find($id)->delete();
+        return redirect()->back()->with('success', 'Certification Deleted Successfully');
     }
     
 }
