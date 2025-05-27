@@ -208,6 +208,14 @@
                                 </a>
                             </li>
                             @endcanany
+                            @if(Auth::user()->company->adding_certification != 0)
+                            <li class="{{ Request::routeIs('certifications.index') ? 'active' : '' }}">
+                                <a href="{{ route('certifications.index') }}">
+                                    <i class="icon-Library"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Add Certification</span>
+                                </a>
+                            </li>
+                            @endif
                         </ul>
                     </div>
                 </div>

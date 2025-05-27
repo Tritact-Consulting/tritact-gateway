@@ -84,6 +84,7 @@ class CompanyController extends Controller
         $company->logo_width = $request->logo_width;
         $company->logo_height = $request->logo_height;
         $company->company_id = $request->company_id;
+        $company->adding_certification = $request->adding_certification;
         
         $user->company()->save($company);
 
@@ -189,6 +190,7 @@ class CompanyController extends Controller
         $company->logo_width = $request->logo_width;
         $company->logo_height = $request->logo_height;
         $company->company_id = $request->company_id;
+        $company->adding_certification = $request->adding_certification;
         $company->save();
         $old_tag = $user->tags->pluck('id')->toArray();
         $tags = $request->tags;
