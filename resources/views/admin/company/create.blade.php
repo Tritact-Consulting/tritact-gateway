@@ -236,6 +236,15 @@
                                     <input type="text" name="company_id" id="company_id" class="form-control" value="{{ old('company_id') }}">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="adding_certification">Adding Certification</label>
+                                    <select name="adding_certification" id="adding_certification" class="form-control">
+                                        <option value="0">NO</option>
+                                        <option value="1">YES</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
