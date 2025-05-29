@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Tags;
+use App\Models\Documents;
+use App\Models\Category;
+use App\Models\Guides;
 use Illuminate\Support\Facades\Hash;
 use DB;
 
@@ -28,8 +32,31 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $guide_count = DB::table('guides')->where('status', 0)->count();
-        return view('home', compact('guide_count'));
+        if(Auth::user()->is_company == 1){
+            $tags = Auth::user()->tags->pluck('id')->toArray();
+        }else{
+            $user = User::find(Auth::user()->user_id);
+            $tags = $user->tags->pluck('id')->toArray();
+        }
+        $get_tags = Tags::whereIn('id', $tags)->get();
+
+        $document_count = Documents::where('status', 0)->whereHas('tags', function($q) use ($tags){
+            $q->whereIn('id', $tags);
+        })->count();
+
+        if(Auth::user()->is_company == 1){
+            $categories = Auth::user()->categories->pluck('id')->toArray();
+        }else{
+            $user = User::find(Auth::user()->user_id);
+            $categories = $user->categories->pluck('id')->toArray();
+        }
+        $get_categories = Category::whereIn('id', $categories)->get();
+
+        $guide_count = Guides::where('status', 0)->whereHas('categories', function($q) use ($categories){
+            $q->whereIn('id', $categories);
+        })->count();
+
+        return view('home', compact('guide_count', 'document_count'));
     }
 
     public function profile(){
