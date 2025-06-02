@@ -39,15 +39,15 @@
 				<form class="form" method="post" action="{{ route('users.store') }}">
 					@csrf
 					<div class="box-body">
+						@if($errors->any())
+							{!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
+						@endif
+						@if(session()->has('success'))
+							<div class="alert alert-success">
+								{{ session()->get('success') }}
+							</div>
+						@endif
 						<div class="row">
-							@if($errors->any())
-								{!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
-							@endif
-							@if(session()->has('success'))
-								<div class="alert alert-success">
-									{{ session()->get('success') }}
-								</div>
-							@endif
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="form-label">Name <strong>*</strong></label>
@@ -77,8 +77,12 @@
 									<input type="text" class="form-control" name="password" required>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="box-footer">
+						<div class="row">
 							<div class="col-12">
-								<button type="submit" class="btn btn-primary">Save User</button>
+								<button type="submit" class="btn btn-rounded btn-primary btn-outline">Save User</button>
 							</div>
 						</div>
 					</div>

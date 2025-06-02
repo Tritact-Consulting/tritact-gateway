@@ -306,7 +306,9 @@
                                 </a>
                             </li>
                             @endcan
+                            @canany(['role', 'view user'])
                             <li class="header">Roles & Permissions</li>
+                            @endcan
                             @can('role')
                             <li class="treeview">
                                 <a href="#">

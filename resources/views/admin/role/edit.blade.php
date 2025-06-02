@@ -52,8 +52,12 @@
 								@endforeach
 								</ul>
 							</div>
+						</div>
+					</div>
+					<div class="box-footer">
+						<div class="row">
 							<div class="col-12">
-								<button type="submit" class="btn btn-primary">Update Role</button>
+								<button type="submit" class="btn btn-rounded btn-primary btn-outline">Update Role</button>
 							</div>
 						</div>
 					</div>

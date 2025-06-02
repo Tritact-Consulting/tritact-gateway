@@ -46,7 +46,7 @@
                                     <td>#{{ $value->id }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->email }}</td>
-                                    <td><span class="badge badge-primary badge-sm">{{ $value->getRole(); }}</span></span></td>
+                                    <td><span class="badge badge-info badge-sm">{{ $value->getRole(); }}</span></span></td>
                                     <td>
                                         <div class="d-flex align-items-center justify-content-start gap-10">
                                             @can('update user')

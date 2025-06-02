@@ -77,8 +77,12 @@
 									<input type="text" class="form-control" name="password">
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="box-footer">
+						<div class="row">
 							<div class="col-12">
-								<button type="submit" class="btn btn-primary">Update User</button>
+								<button type="submit" class="btn btn-rounded btn-primary btn-outline">Update User</button>
 							</div>
 						</div>
 					</div>
