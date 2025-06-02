@@ -64,11 +64,17 @@
                                     <td>{{ $value->created_at->format('d M, Y') }}</td>
                                     <td>
                                         <form action="{{ route('document.destroy', $value->id) }}" method="post">
+                                            @can('view doc')
                                             <a href="{{ route('document.show', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-success-light btn-xs mb-5"><i class="fa fa-eye-slash"></i></a>										
+                                            @endcan
+                                            @can('edit doc')
                                             <a href="{{ route('document.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                            @endcan
                                             @csrf
                                             @method('DELETE')
+                                            @can('delete doc')
                                             <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm"><i class="fa fa-trash"></i></button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

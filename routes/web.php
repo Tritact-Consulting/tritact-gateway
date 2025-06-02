@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\FileKeywordController;
 use App\Http\Controllers\Admin\CertificationCategoryController;
 use App\Http\Controllers\Admin\CertificationBodyController;
 use App\Http\Controllers\Admin\AuditorController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\AdminUserController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentsController;
@@ -78,4 +80,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::get('company/certification/edit/{id}', [CompanyController::class, 'companyCertificationEdit'])->name('company.certification.edit');
     Route::post('company/certification/update/{id}', [CompanyController::class, 'companyCertificationUpdate'])->name('company.certification.update');
     Route::delete('company/certification/destroy/{id}', [CompanyController::class, 'companyCertificationDestroy'])->name('company.certification.destroy');
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', AdminUserController::class);
 });

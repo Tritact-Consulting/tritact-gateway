@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class FileKeywordController extends Controller
 {
+
+    function __construct(){
+        $this->middleware('permission:view keyword|create keyword|edit keyword|delete keyword', ['only' => ['index','show']]);
+        $this->middleware('permission:create keyword', ['only' => ['create','store']]);
+        $this->middleware('permission:edit keyword', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete keyword', ['only' => ['destroy']]);
+    }
+
     public function index(){
         $data = FileKeyword::get();
         return view('admin.file-keyword.index', compact('data'));

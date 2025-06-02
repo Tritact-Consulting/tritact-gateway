@@ -946,3 +946,14 @@ body.dark-skin {
   background-color: #f8d7da;
   border-color: #f5c6cb;
 }
+
+ul.role-wrapper {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul.role-wrapper li {
+    flex: 0 0 25%;
+}

@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class AuditorController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:view auditor|create auditor|edit auditor|delete auditor', ['only' => ['index','show']]);
+        $this->middleware('permission:create auditor', ['only' => ['create','store']]);
+        $this->middleware('permission:edit auditor', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete auditor', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

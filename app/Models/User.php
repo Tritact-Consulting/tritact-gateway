@@ -94,4 +94,8 @@ class User extends Authenticatable
         return $this->hasMany(SupportiveDocument::class, 'user_id', 'id')->orderBy('id', 'desc');
     }
 
+    public function getRole(){
+        return $this->getRoleNames()->first();
+    }
+
 }

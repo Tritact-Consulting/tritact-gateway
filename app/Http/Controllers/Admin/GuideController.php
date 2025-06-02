@@ -11,6 +11,14 @@ use Auth;
 
 class GuideController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:view guide|create guide|edit guide|delete guide', ['only' => ['index','show']]);
+        $this->middleware('permission:create guide', ['only' => ['create','store']]);
+        $this->middleware('permission:edit guide', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete guide', ['only' => ['destroy']]);
+
+    }
+
     public function index(){
         $data = Guides::where('status', 0)->orderBy('id', 'desc')->get();
         return view('admin.guide.index', compact('data'));

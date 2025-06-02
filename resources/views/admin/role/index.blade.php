@@ -1,23 +1,23 @@
 @extends('layouts.admin-app')
-@section('title', 'Category List')
+@section('title', 'Role List')
 @section('content')
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">Category List</h3>
+            <h3 class="page-title">Role List</h3>
             <div class="d-inline-block align-items-center">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-                        <li class="breadcrumb-item" aria-current="page">Category</li>
-                        <li class="breadcrumb-item active" aria-current="page">Category list</li>
+                        <li class="breadcrumb-item" aria-current="page">Roles</li>
+                        <li class="breadcrumb-item active" aria-current="page">Role list</li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
 </div>
-<!-- /.content -->
+
 <section class="content">
     <div class="row">
         <div class="col-12">
@@ -29,8 +29,6 @@
                                 <tr>
                                     <th>SNO</th>
                                     <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -40,20 +38,18 @@
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>
-                                        <span class="badge badge-pill badge-{{ $value->status == 0 ? 'info' : 'danger' }}">{{ $value->status == 0 ? 'Active' : 'Deactive' }}</span>
-                                    </td>
-                                    <td>{{ $value->created_at->format('d M, Y') }}</td>
-                                    <td>
-                                        <form action="{{ route('category.destroy', $value->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            @can('edit category')
-                                            <a href="{{ route('category.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                        <div class="d-flex align-items-center justify-content-start gap-10">
+                                            @can('edit role')
+                                            <a href="{{ route('roles.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5 mr-2"><i class="fa fa-edit"></i></a>
                                             @endcan
-                                            @can('delete category')
-                                            <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="category"><i class="fa fa-trash"></i></button>
+                                            @can('delete role')
+                                            <form action="{{ route('roles.destroy', $value->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm"><i class="fa fa-trash"></i></button>
+                                            </form>
                                             @endcan
-                                        </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -66,3 +62,18 @@
     </div>
 </section>
 @endsection
+@push('scripts')
+   <!-- <script type="text/javascript">-->
+   <!-- 	$(function () {-->
+   <!-- 		'use strict';-->
+   <!-- 		$('#example1').DataTable({-->
+		 <!-- 		'paging'      : true,-->
+		 <!-- 		'lengthChange': false,-->
+		 <!-- 		'searching'   : false,-->
+		 <!-- 		'ordering'    : true,-->
+		 <!-- 		'info'        : true,-->
+		 <!-- 		'autoWidth'   : false-->
+			<!--});-->
+   <!-- 	});-->
+   <!-- </script>-->
+@endpush

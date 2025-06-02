@@ -17,6 +17,15 @@ use Notification;
 
 class DocumentController extends Controller
 {
+
+    function __construct(){
+        $this->middleware('permission:view doc|create doc|edit doc|delete doc', ['only' => ['index','show']]);
+        $this->middleware('permission:create doc', ['only' => ['create','store']]);
+        $this->middleware('permission:edit doc', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete doc', ['only' => ['destroy']]);
+        $this->middleware('permission:delete keyword', ['only' => ['documentDelete']]);
+    }
+
     public function index(){
         $data = Documents::with('tags')->where('status', 0)->orderBy('id', 'desc')->get();
         return view('admin.document.index', compact('data'));

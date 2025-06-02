@@ -18,6 +18,7 @@
     </div>
 </div>
 <section class="content">
+    @can('create assign certification')
     <div class="row">
         <div class="col-lg-12 col-12">
             <div class="box">
@@ -119,6 +120,8 @@
             <!-- /.box -->			
         </div> 
     </div>
+    @endcan
+    @can('view assign certification')
     <div class="row">
         <div class="col-12">
 			<div class="box">
@@ -145,12 +148,16 @@
                                     <td>{{ $value->expire_date }}</td>
                                     <td>
                                         <div class="d-flex">
+                                            @can('edit assign certification')
                                             <a href="{{ route('company.certification.edit', $value->id) }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                            @endcan
+                                            @can('delete assign certification')
                                             <form action="{{ route('company.certification.destroy', $value->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="certification"><i class="fa fa-trash"></i></button>
                                             </form>
+                                            @endcan
                                         </div>
                                     </td>
                                 </tr>
@@ -162,5 +169,6 @@
             </div>
         </div>
     </div>
+    @endcan
 </section>
 @endsection

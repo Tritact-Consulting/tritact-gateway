@@ -47,8 +47,12 @@
                                         <form action="{{ route('tag.destroy', $value->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
+                                            @can('edit tag')
                                             <a href="{{ route('tag.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                            @endcan
+                                            @can('delete tag')
                                             <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm"><i class="fa fa-trash"></i></button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

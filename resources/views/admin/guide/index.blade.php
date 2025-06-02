@@ -64,11 +64,17 @@
                                     <td>{{ $value->created_at->format('d M, Y') }}</td>
                                     <td>
                                         <form action="{{ route('guide.destroy', $value->id) }}" method="post">
+                                            @can('view guide')
                                             <a href="{{ route('guide.show', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-success-light btn-xs mb-5"><i class="fa fa-eye-slash"></i></a>										
+                                            @endcan
+                                            @can('edit guide')
                                             <a href="{{ route('guide.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                            @endcan
                                             @csrf
                                             @method('DELETE')
+                                            @can('delete guide')
                                             <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="guide"><i class="fa fa-trash"></i></button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

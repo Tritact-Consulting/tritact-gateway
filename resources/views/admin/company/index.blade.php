@@ -41,10 +41,13 @@
                         @endforeach
                     </div>
                     <div class="act-btn d-flex justify-content-between">
+                        @can('edit company')
                         <div class="text-center mx-5">
                             <a href="{{ route('company.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
                             <small class="d-block">Edit</small>
                         </div>
+                        @endcan
+                        @can('delete company')
                         <div class="text-center mx-5">
                             <form action="{{ route('company.destroy',$value->id) }}" method="POST">
                                 @csrf
@@ -53,14 +56,19 @@
                                 <small class="d-block">Delete</small>
                             </form>
                         </div>
+                        @endcan
+                        @can('assign company user')
                         <div class="text-center mx-5">
 							<a href="{{ route('company.user', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-users"></i></a>
 							<small class="d-block">Users</small>
 						</div>
+                        @endcan
+                        @can('login company')
 						<div class="text-center mx-5">
                             <a href="{{ route('company.dashboard', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-success-light btn-xs mb-5"><i class="fa fa-lock"></i></a>
                             <small class="d-block">Login</small>
                         </div>
+                        @endcan
                     </div>
                 </div>
             </div>

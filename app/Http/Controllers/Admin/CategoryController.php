@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Hash;
 
 class CategoryController extends Controller
 {
+
+    function __construct(){
+        $this->middleware('permission:view category|create category|edit category|delete category', ['only' => ['index','show']]);
+        $this->middleware('permission:create category', ['only' => ['create','store']]);
+        $this->middleware('permission:edit category', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete category', ['only' => ['destroy']]);
+
+    }
+
     public function index(){
         $data = Category::where('status', 0)->orderBy('id', 'desc')->get();
         return view('admin.category.index', compact('data'));

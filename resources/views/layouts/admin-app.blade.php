@@ -148,6 +148,7 @@
                                     <span>Dashboard</span>
                                 </a>
                             </li>
+                            @can('view company')
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Clipboard-check"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
@@ -157,10 +158,14 @@
                                 </span>
                                 </a>
                                 <ul class="treeview-menu">
+                                    @can('create company')
                                     <li class="{{ Request::routeIs('company.create') || Request::routeIs('company.edit') || Request::routeIs('company.user') ? 'active' : '' }}"><a href="{{ route('company.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Company</a></li>
+                                    @endcan
                                     <li class="{{ Request::routeIs('company.index') ? 'active' : '' }}"><a href="{{ route('company.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Company List</a></li>
                                 </ul>
                             </li>
+                            @endcan
+                            @can('view tag')
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Library"><span class="path1"></span><span class="path2"></span></i>
@@ -170,10 +175,14 @@
                                 </span>
                                 </a>
                                 <ul class="treeview-menu">
+                                    @can('create tag')
                                     <li class="{{ Request::routeIs('tag.create') || Request::routeIs('tag.edit') ? 'active' : '' }}"><a href="{{ route('tag.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Tags</a></li>
+                                    @endcan
                                     <li class="{{ Request::routeIs('tag.index') ? 'active' : '' }}"><a href="{{ route('tag.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Tag List</a></li>
                                 </ul>
                             </li>
+                            @endcan
+                            @can('view doc')
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-File"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
@@ -183,10 +192,14 @@
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
+                                    @can('create doc')
                                     <li class="{{ Request::routeIs('document.create') || Request::routeIs('document.edit') ? 'active' : '' }}"><a href="{{ route('document.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Document</a></li>
+                                    @endcan
                                     <li class="{{ Request::routeIs('document.index') ? 'active' : '' }}"><a href="{{ route('document.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Document List</a></li>
                                 </ul>
                             </li>
+                            @endcan
+                            @can('view category')
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Cart"><span class="path1"></span><span class="path2"></span></i>
@@ -196,10 +209,14 @@
                                 </span>
                                 </a>
                                 <ul class="treeview-menu">
+                                    @can('create category')
                                     <li class="{{ Request::routeIs('category.create') || Request::routeIs('category.edit') ? 'active' : '' }}"><a href="{{ route('category.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Category</a></li>
+                                    @endcan
                                     <li class="{{ Request::routeIs('category.index') ? 'active' : '' }}"><a href="{{ route('category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Category List</a></li>
                                 </ul>
                             </li>
+                            @endcan
+                            @can('view guide')
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>
@@ -209,16 +226,20 @@
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
+                                    @can('create guide')
                                     <li class="{{ Request::routeIs('guide.create') || Request::routeIs('guide.edit') ? 'active' : '' }}"><a href="{{ route('guide.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Guide</a></li>
+                                    @endcan
                                     <li class="{{ Request::routeIs('guide.index') ? 'active' : '' }}"><a href="{{ route('guide.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Guide List</a></li>
                                 </ul>
                             </li>
+                            @endcan
                             <!--<li class="{{ Request::routeIs('version.create') || Request::routeIs('version.edit') || Request::routeIs('version.index') ? 'active' : '' }}">-->
                             <!--    <a href="{{ route('version.index') }}">-->
                             <!--        <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>-->
                             <!--        <span>Version</span>-->
                             <!--    </a>-->
                             <!--</li>-->
+                            @can('view certification category')
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Cart"><span class="path1"></span><span class="path2"></span></i>
@@ -228,10 +249,14 @@
                                 </span>
                                 </a>
                                 <ul class="treeview-menu">
+                                    @can('create certification category')
                                     <li class="{{ Request::routeIs('certification-category.create') || Request::routeIs('certification-category.edit') ? 'active' : '' }}"><a href="{{ route('certification-category.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Category</a></li>
+                                    @endcan
                                     <li class="{{ Request::routeIs('certification-category.index') ? 'active' : '' }}"><a href="{{ route('certification-category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Category List</a></li>
                                 </ul>
                             </li>
+                            @endcan
+                            @can('view certification body')
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Chart-line"><span class="path1"></span><span class="path2"></span></i>
@@ -241,10 +266,14 @@
                                 </span>
                                 </a>
                                 <ul class="treeview-menu">
+                                    @can('create certification body')
                                     <li class="{{ Request::routeIs('certification-body.create') || Request::routeIs('certification-body.edit') ? 'active' : '' }}"><a href="{{ route('certification-body.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Body</a></li>
+                                    @endcan
                                     <li class="{{ Request::routeIs('certification-body.index') ? 'active' : '' }}"><a href="{{ route('certification-body.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Body List</a></li>
                                 </ul>
                             </li>
+                            @endcan
+                            @can('view auditor')
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
@@ -254,22 +283,64 @@
                                 </span>
                                 </a>
                                 <ul class="treeview-menu">
+                                    @can('create auditor')
                                     <li class="{{ Request::routeIs('auditor.create') || Request::routeIs('auditor.edit') ? 'active' : '' }}"><a href="{{ route('auditor.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Auditor</a></li>
+                                    @endcan
                                     <li class="{{ Request::routeIs('auditor.index') ? 'active' : '' }}"><a href="{{ route('auditor.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Auditor List</a></li>
                                 </ul>
                             </li>
+                            @endcan
+                            @can('view assign certification')
                             <li class="{{ Request::routeIs('company.certification.assign') || Request::routeIs('company.certification.edit') ? 'active' : '' }}">
                                 <a href="{{ route('company.certification.assign') }}">
                                     <i class="icon-Share1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>Assign Certification</span>
                                 </a>
                             </li>
+                            @endcan
+                            @can('view keyword')
                             <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
                                 <a href="{{ route('keyword.index') }}">
                                     <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>Document Keyword</span>
                                 </a>
                             </li>
+                            @endcan
+                            <li class="header">Roles & Permissions</li>
+                            @can('role')
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Brush"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Roles</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('create role')
+                                    <li class="{{ Request::routeIs('roles.create') || Request::routeIs('roles.edit') ? 'active' : '' }}"><a href="{{ route('roles.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Role</a></li>
+                                    @endcan
+                                    <li class="{{ Request::routeIs('roles.index') ? 'active' : '' }}"><a href="{{ route('roles.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Role List</a></li>
+                                </ul>
+                            </li>
+                            @endcan
+                            @can('view user')
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Group"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Users</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('create user')
+                                    <li class="{{ Request::routeIs('users.create') || Request::routeIs('users.edit') ? 'active' : '' }}"><a href="{{ route('users.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Users</a></li>
+                                    @endcan
+                                    <li class="{{ Request::routeIs('users.index') ? 'active' : '' }}"><a href="{{ route('users.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>User List</a></li>
+                                </ul>
+                            </li>
+                            @endcan
                         </ul>
                     </div>
                 </div>

@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Hash;
 
 class TagController extends Controller
 {
+
+    function __construct(){
+        $this->middleware('permission:view tag|create tag|edit tag|delete tag', ['only' => ['index','show']]);
+        $this->middleware('permission:create tag', ['only' => ['create','store']]);
+        $this->middleware('permission:edit tag', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete tag', ['only' => ['destroy']]);
+
+    }
+
     public function index(){
         $data = Tags::where('status', 0)->orderBy('id', 'desc')->get();
         return view('admin.tag.index', compact('data'));

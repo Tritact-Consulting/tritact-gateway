@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class CertificationBodyController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:view certification body|create certification body|edit certification body|delete certification body', ['only' => ['index','show']]);
+        $this->middleware('permission:create certification body', ['only' => ['create','store']]);
+        $this->middleware('permission:edit certification body', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete certification body', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

@@ -125,6 +125,7 @@
             </div>
         </div>
     </div>
+    @can('view assign certification')
     <div class="row">
         <div class="col-12">
 			<div class="box">
@@ -168,6 +169,7 @@
             </div>
         </div>
     </div>
+    @endcan
 </section>
 <!-- /.content -->
 @endsection

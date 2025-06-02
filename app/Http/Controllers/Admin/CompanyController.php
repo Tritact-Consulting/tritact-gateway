@@ -21,6 +21,19 @@ use App\Mail\CompanyAddMail;
 
 class CompanyController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:view company|create company|edit company|delete company', ['only' => ['index','show']]);
+        $this->middleware('permission:create company', ['only' => ['create','store']]);
+        $this->middleware('permission:edit company', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete company', ['only' => ['destroy']]);
+        $this->middleware('permission:assign company user', ['only' => ['user','userStore']]);
+        $this->middleware('permission:login company', ['only' => ['dashboard']]);
+        $this->middleware('permission:view assign certification', ['only' => ['companyCertificationAssign']]);
+        $this->middleware('permission:create assign certification', ['only' => ['companyCertificationAdd']]);
+        $this->middleware('permission:edit assign certification', ['only' => ['companyCertificationEdit','companyCertificationUpdate']]);
+        $this->middleware('permission:delete assign certification', ['only' => ['companyCertificationDestroy']]);
+    }
+
     public function index(){
         $data = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         return view('admin.company.index', compact('data'));

@@ -51,8 +51,12 @@
                                         <form action="{{ route('auditor.destroy', $value->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
+                                            @can('edit auditor')
                                             <a href="{{ route('auditor.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                            @endcan
+                                            @can('delete auditor')
                                             <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="auditor"><i class="fa fa-trash"></i></button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

@@ -47,8 +47,12 @@
                                         <form action="{{ route('certification-body.destroy', $value->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
+                                            @can('edit certification body')
                                             <a href="{{ route('certification-body.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                            @endcan
+                                            @can('delete certification body')
                                             <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="body"><i class="fa fa-trash"></i></button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

@@ -18,6 +18,7 @@
     </div>
 </div>
 <!-- /.content -->
+ @can('create keyword')
 <section class="content">
     <div class="row">
         <div class="col-lg-12 col-12">
@@ -80,7 +81,8 @@
         </div> 
     </div>
 </section>
-
+@endcan
+@can('edit keyword')
 <section class="content pt-0">
     <div class="row">
         <div class="col-lg-12 col-12">
@@ -119,7 +121,9 @@
                             </div>
                         </div>
                         <div class="col-md-2">
+                            @can('delete keyword')
                             <a href="javascript:;" onclick="removeDocField(this, {{$file_value->id}})" class="btn btn-warning btn-sm mt-25 btn-block">Delete</a>
+                            @endcan
                         </div>
                     </div>
                     @endforeach
@@ -129,6 +133,7 @@
         </div>
     </div>
 </div>
+@endcan
 @endsection
 @push('script')
 <script>
