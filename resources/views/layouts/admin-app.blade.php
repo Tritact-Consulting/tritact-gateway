@@ -298,6 +298,23 @@
                                 </a>
                             </li>
                             @endcan
+                            @can('view assign audit')
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Chart-pie"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Assign Audit</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('create assign audit')
+                                    <li class="{{ Request::routeIs('assign-audit.create') || Request::routeIs('assign-audit.edit') ? 'active' : '' }}"><a href="{{ route('assign-audit.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Assign Audit</a></li>
+                                    @endcan
+                                    <li class="{{ Request::routeIs('assign-audit.index') ? 'active' : '' }}"><a href="{{ route('assign-audit.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Assign Audit List</a></li>
+                                </ul>
+                            </li>
+                            @endcan
                             @can('view keyword')
                             <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
                                 <a href="{{ route('keyword.index') }}">
