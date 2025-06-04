@@ -28,6 +28,8 @@ class AssignAudit extends Model
             return 'In progress';
         }else if($this->status == 2){
             return 'Completed';
+        }else if($this->status == 3){
+            return 'Cancelled';
         }
     }
 
@@ -36,8 +38,10 @@ class AssignAudit extends Model
             return 'info';
         }else if($this->status == 1){
             return 'primary';
-        }else if($this->status == 1){
+        }else if($this->status == 2){
             return 'success';
+        }else if($this->status == 3){
+            return 'warning';
         }
     }
 }

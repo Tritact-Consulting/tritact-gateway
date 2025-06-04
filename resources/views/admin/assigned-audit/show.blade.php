@@ -55,6 +55,7 @@
                                                 <option value="0" {{ $data->status == 0 ? 'selected' : '' }}>Upcoming</option>
                                                 <option value="1" {{ $data->status == 1 ? 'selected' : '' }}>In progress</option>
                                                 <option value="2" {{ $data->status == 2 ? 'selected' : '' }}>Completed</option>
+                                                <option value="3" {{ $data->status == 3 ? 'selected' : '' }}>Cancelled</option>
                                             </select>
                                             <button type="submit" class="btn btn-rounded btn-primary btn-outline mt-3"><i class="ti-save-alt"></i> Update</button>
                                         </form>
