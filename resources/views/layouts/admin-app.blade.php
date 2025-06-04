@@ -323,6 +323,14 @@
                                 </a>
                             </li>
                             @endcan
+                            @if(count(Auth::user()->assign_audit) != 0)
+                            <li class="{{ Request::routeIs('assigned-audit.show') || Request::routeIs('assigned-audit.index') ? 'active' : '' }}">
+                                <a href="{{ route('assigned-audit.index') }}">
+                                    <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+                                    <span>Assigned Audit</span>
+                                </a>
+                            </li>
+                            @endif
                             @canany(['role', 'view user'])
                             <li class="header">Roles & Permissions</li>
                             @endcan

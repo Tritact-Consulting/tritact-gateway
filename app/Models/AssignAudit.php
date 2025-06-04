@@ -17,15 +17,27 @@ class AssignAudit extends Model
         return $this->hasOne(User::class, 'id', 'company_id');
     }
 
+    public function category(){
+        return $this->hasOne(CertificationCategory::class, 'id', 'certification_category_id');
+    }
+
     public function get_status(){
         if($this->status == 0){
             return 'Upcoming';
+        }else if($this->status == 1){
+            return 'In progress';
+        }else if($this->status == 2){
+            return 'Completed';
         }
     }
 
     public function get_status_class(){
         if($this->status == 0){
             return 'info';
+        }else if($this->status == 1){
+            return 'primary';
+        }else if($this->status == 1){
+            return 'success';
         }
     }
 }

@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AuditorController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AssignAuditController;
+use App\Http\Controllers\Admin\AssignedAuditController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentsController;
@@ -84,4 +85,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::resource('roles', RoleController::class);
     Route::resource('users', AdminUserController::class);
     Route::resource('assign-audit', AssignAuditController::class);
+    Route::resource('assigned-audit', AssignedAuditController::class);
 });

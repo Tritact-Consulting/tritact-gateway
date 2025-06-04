@@ -98,4 +98,8 @@ class User extends Authenticatable
         return $this->getRoleNames()->first();
     }
 
+    public function assign_audit(){
+        return $this->hasMany(AssignAudit::class, 'user_id', 'id');
+    }
+
 }
