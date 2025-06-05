@@ -21,50 +21,58 @@
     <div class="row">
         <div class="col-12">
 			<div class="box">
-			    <div class="box-body">
-				    <div class="table-responsive rounded card-table">
-                        <table class="table border-no">
-                            <tbody>
-                                <tr>
-                                    <th>Company</th>
-                                    <td>{{ $data->company->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Audit name</th>
-                                    <td>{{ $data->audit_name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Category</th>
-                                    <td>{{ $data->category->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Start Date</th>
-                                    <td>{{ $data->audit_start_date }}</td>
-                                </tr>
-                                <tr>
-                                    <th>End Date</th>
-                                    <td>{{ $data->audit_end_date }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Status</th>
-                                    <td>
-                                        <form action="{{ route('assigned-audit.update', $data->id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                            <select name="status" id="status" class="form-control">
-                                                <option value="0" {{ $data->status == 0 ? 'selected' : '' }}>Upcoming</option>
-                                                <option value="1" {{ $data->status == 1 ? 'selected' : '' }}>In progress</option>
-                                                <option value="2" {{ $data->status == 2 ? 'selected' : '' }}>Completed</option>
-                                                <option value="3" {{ $data->status == 3 ? 'selected' : '' }}>Cancelled</option>
-                                            </select>
-                                            <button type="submit" class="btn btn-rounded btn-primary btn-outline mt-3"><i class="ti-save-alt"></i> Update</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <form action="{{ route('assigned-audit.update', $data->id) }}" method="post">
+			        <div class="box-body">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Company <strong>*</strong></label>
+                                    <input type="text" value="{{ $data->company->name }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Certification Category <strong>*</strong></label>
+                                    <input type="text" value="{{ $data->category->name }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Audit Name <strong>*</strong></label>
+                                    <input type="text" class="form-control" value="{{ $data->audit_name }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Audit Start Date <strong>*</strong></label>
+                                    <input type="date" class="form-control" value="{{ $data->audit_start_date }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Audit End Date <strong>*</strong></label>
+                                    <input type="date" class="form-control" value="{{ $data->audit_end_date }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Status <strong>*</strong></label>
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="0" {{ $data->status == 0 ? 'selected' : '' }}>Upcoming</option>
+                                        <option value="1" {{ $data->status == 1 ? 'selected' : '' }}>In progress</option>
+                                        <option value="2" {{ $data->status == 2 ? 'selected' : '' }}>Completed</option>
+                                        <option value="3" {{ $data->status == 3 ? 'selected' : '' }}>Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-rounded btn-primary btn-outline"><i class="ti-save-alt"></i> Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
