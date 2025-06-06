@@ -8,6 +8,9 @@ use App\Models\CertificationCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+use App\Notifications\AssignAuditNotification;
+use Notification;
+
 
 class AssignedAuditController extends Controller
 {
@@ -29,6 +32,9 @@ class AssignedAuditController extends Controller
         $data = AssignAudit::find($id);
         $data->status = $request->status;
         $data->save();
+        $admin = User::where('is_admin', 0)->where('is_company', 0)->first();
+        $notify_data = ['text' => 'Audit name : ' . $data->audit_name . ' has been updated to ' . $data->get_status(), 'name' => Auth::user()->name, 'url' => $data->id];
+        Notification::send($admin, new AssignAuditNotification($notify_data));
         return redirect()->back()->with('success', 'Status Updated Successfully');
     }
 }

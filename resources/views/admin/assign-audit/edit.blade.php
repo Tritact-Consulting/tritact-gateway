@@ -92,6 +92,17 @@
                                     <input type="date" name="audit_end_date" id="audit_end_date" class="form-control" value="{{ $data->audit_end_date }}" required>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Status <strong>*</strong></label>
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="0" {{ $data->status == 0 ? 'selected' : '' }}>Upcoming</option>
+                                        <option value="1" {{ $data->status == 1 ? 'selected' : '' }}>In progress</option>
+                                        <option value="2" {{ $data->status == 2 ? 'selected' : '' }}>Completed</option>
+                                        <option value="3" {{ $data->status == 3 ? 'selected' : '' }}>Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->

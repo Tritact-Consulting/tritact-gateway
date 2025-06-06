@@ -7,6 +7,9 @@ use App\Models\User;
 use App\Models\CertificationCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Notifications\AssignAuditNotification;
+use Auth;
+use Notification;
 
 class AssignAuditController extends Controller
 {
@@ -59,6 +62,10 @@ class AssignAuditController extends Controller
         $data->audit_end_date = $request->audit_end_date;
         $data->status = 0;
         $data->save();
+        // Notify to user
+        $user = User::where('id', $request->user_id)->first();
+        $notify_data = ['text' => $request->audit_name . ' audit has been assigned to you.', 'name' => Auth::user()->name, 'url' => $data->id];
+        Notification::send($user, new AssignAuditNotification($notify_data));
         return redirect()->back()->with('success', 'Assign Audit Successfully');
     }
 
@@ -102,7 +109,12 @@ class AssignAuditController extends Controller
         $data->audit_name = $request->audit_name;
         $data->audit_start_date = $request->audit_start_date;
         $data->audit_end_date = $request->audit_end_date;
+        $data->status = $request->status;
         $data->save();
+        $user = User::where('id', $request->user_id)->first();
+        $notify_data = ['text' => $request->audit_name . ' audit has been updated to ' . $data->get_status(), 'name' => Auth::user()->name, 'url' => $data->id];
+        Notification::send($user, new AssignAuditNotification($notify_data));
+
         return redirect()->back()->with('success', 'Assign Audit Updated Successfully');
     }
 
