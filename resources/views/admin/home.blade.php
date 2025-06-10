@@ -125,17 +125,112 @@
             </div>
         </div>
     </div>
+    @if($assigned_audit != null)
+    <div class="row">
+        <div class="col-12">
+			<div class="box">
+			    <div class="box-body">
+				    <div class="table-responsive rounded card-table">
+                        <table class="table border-no datatables" id="example1">
+                            <thead>
+                                <tr>
+                                    <th>Company</th>
+                                    <th>Category</th>
+                                    <th>Audit Name</th>
+                                    <th>Start/End Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($assigned_audit as $key => $value)
+                                <tr class="hover-primary">
+                                    <td>{{ $value->company->name }}</td>
+                                    <td>{{ $value->category->name }}</td>
+                                    <td>{{ $value->audit_name }}</td>
+                                    <td>{{ $value->audit_start_date }}<br>{{ $value->audit_end_date }}</td>
+                                    <td>
+                                        <span class="badge badge-pill badge-{{ $value->get_status_class() }}">{{ $value->get_status() }}</span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('assigned-audit.show', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-eye"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+    @if($assign_audit != null)
+    <div class="row">
+        <div class="col-12">
+			<div class="box">
+                <div class="box-header with-border">
+                    <h4 class="box-title">Assign Audit</h4>
+                </div>
+			    <div class="box-body">
+				    <div class="table-responsive rounded card-table">
+                        <table class="table border-no datatables" id="example1">
+                            <thead>
+                                <tr>
+                                    <th>SNO</th>
+                                    <th>User</th>
+                                    <th>Company</th>
+                                    <th>Audit Name</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($assign_audit as $key => $value)
+                                <tr class="hover-primary">
+                                    <td>{{ ++$key }}</td>
+                                    <td>{{ $value->user->name }}</td>
+                                    <td>{{ $value->company->name }}</td>
+                                    <td>{{ $value->audit_name }}</td>
+                                    <td>
+                                        <span class="badge badge-pill badge-{{ $value->get_status_class() }}">{{ $value->get_status() }}</span>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('assign-audit.destroy', $value->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            @can('edit assign audit')
+                                            <a href="{{ route('assign-audit.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                            @endcan
+                                            @can('delete assign audit')
+                                            <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="audit"><i class="fa fa-trash"></i></button>
+                                            @endcan
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
     @can('view assign certification')
     <div class="row">
         <div class="col-12">
 			<div class="box">
+                <div class="box-header with-border">
+                    <h4 class="box-title">Assign Certification</h4>
+                </div>
 			    <div class="box-body">
 				    <div class="table-responsive rounded card-table">
                         <table class="table border-no datatables-expire" id="example1">
                             <thead>
                                 <tr>
                                     <th>Company Name</th>
-                                    <th>Certification</th>
+                                    <th>Certification Category</th>
                                     <th>Certification Name</th>
                                     <th>Auditor</th>
                                     <th>Expire Date</th>

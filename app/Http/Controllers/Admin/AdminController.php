@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CompanyCertification;
+use App\Models\AssignAudit;
 use DB;
 use Auth;
 
@@ -36,7 +37,15 @@ class AdminController extends Controller
         $assign_certification_count = DB::table('company_certifications')->count();
         $cert_body_count = DB::table('certification_bodies')->where('status', 0)->count();
         $auditor_expire = CompanyCertification::whereNotNull('expire_date')->orderBy('expire_date', 'asc')->get();
-        return view('admin.home', compact('company_count', 'tag_count', 'user_count', 'document_count', 'guide_count', 'auditor_expire', 'auditor_count', 'assign_certification_count', 'cert_body_count'));
+        $assigned_audit = null;
+        if(count(Auth::user()->assign_audit) != 0){
+            $assigned_audit = AssignAudit::where('user_id', Auth::user()->id)->orderBy('updated_at', 'asc')->get();
+        }
+        $assign_audit = null;
+        if(Auth::user()->can('view assign audit')){
+            $assign_audit = AssignAudit::orderBy('id', 'desc')->get();
+        }
+        return view('admin.home', compact('company_count', 'tag_count', 'user_count', 'document_count', 'guide_count', 'auditor_expire', 'auditor_count', 'assign_certification_count', 'cert_body_count', 'assigned_audit', 'assign_audit'));
     }
 
     public function markAsRead(){

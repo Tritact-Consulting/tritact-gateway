@@ -96,11 +96,13 @@
                                     <ul class="menu sm-scrol">
                                         @foreach (auth()->user()->unreadNotifications as $notification)
                                         <li>
-                                            <a href="javascript:;">
+                                            <a href="javascript:;" title="{{ $notification->data['data'] }}">
                                                 @if($notification->type == 'App\Notifications\UserCreationSuccessful')
                                                 <i class="fa fa-user-plus text-info"></i>
                                                 @elseif($notification->type == 'App\Notifications\DocumentDownloadSuccessful')
                                                 <i class="fa fa-download text-success" aria-hidden="true"></i>
+                                                @elseif($notification->type == 'App\Notifications\AssignAuditNotification')
+                                                <i class="fa fa-list text-success" aria-hidden="true"></i>
                                                 @endif
                                                 {{ $notification->data['data'] }}
                                             </a>
@@ -401,7 +403,7 @@
                                     $count = 0;
                                     @endphp
                                     @foreach (auth()->user()->unreadNotifications as $notification)
-                                    <a class="media-single mb-10 p-0 rounded-0" href="{{ array_key_exists('url', $notification->data) ? route('assigned-audit.show', $notification->data['url']) : 'javascript:;' }}">
+                                    <a class="media-single mb-10 p-0 rounded-0" title="{{ $notification->data['data'] }}" href="{{ array_key_exists('url', $notification->data) ? route('assigned-audit.show', $notification->data['url']) : 'javascript:;' }}">
                                         <div class="media-body pl-15 bl-5 rounded {{ $class_array[$count] }}">
                                             <p>{{ $notification->data['data'] }}</p>
                                             <span class="text-fade">by {{ $notification->data['name'] }}</span>

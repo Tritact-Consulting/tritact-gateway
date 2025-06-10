@@ -130,8 +130,8 @@
                         <table class="table border-no datatables" id="example1">
                             <thead>
                                 <tr>
-                                    <th>Company Name</th>
-                                    <th>Certification</th>
+                                    <th>Company</th>
+                                    <th>Certification Category</th>
                                     <th>Certification Name</th>
                                     <th>Auditor</th>
                                     <th>Expire Date</th>
