@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('assign_audits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('auditor_id');
+            $table->foreign('auditor_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('certification_category_id');
             $table->foreign('certification_category_id')->references('id')->on('certification_categories')->onDelete('cascade');
-            $table->string('audit_name');
+            $table->string('audit_type');
             $table->date('audit_start_date');
             $table->date('audit_end_date');
             $table->tinyInteger('status')->default(0);

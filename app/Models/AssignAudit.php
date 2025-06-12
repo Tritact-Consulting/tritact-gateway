@@ -9,8 +9,8 @@ class AssignAudit extends Model
 {
     use HasFactory;
 
-    public function user(){
-        return $this->hasOne(User::class, 'id', 'user_id');
+    public function auditor(){
+        return $this->hasOne(Auditor::class, 'id', 'auditor_id');
     }
 
     public function company(){

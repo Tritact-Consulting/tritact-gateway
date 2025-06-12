@@ -42,17 +42,6 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>User <strong>*</strong></label>
-                                    <select name="user_id" id="user_id" class="form-control select2" required>
-                                        <option value="">Select User</option>
-                                        @foreach($user as $key => $value)
-                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
                                     <label>Company <strong>*</strong></label>
                                     <select name="company_id" id="company_id" class="form-control select2" required>
                                         <option value="">Select Company</option>
@@ -75,8 +64,19 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Audit Name <strong>*</strong></label>
-                                    <input type="text" name="audit_name" id="audit_name" class="form-control" required>
+                                    <label>Auditor <strong>*</strong></label>
+                                    <select name="auditor_id" id="auditor_id" class="form-control select2">
+                                        <option value="">Select Auditor</option>
+                                        @foreach($auditors as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Audit Type <strong>*</strong></label>
+                                    <input type="text" name="audit_type" id="audit_type" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-4">

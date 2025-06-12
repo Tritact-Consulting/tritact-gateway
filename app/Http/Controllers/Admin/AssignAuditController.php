@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\AssignAudit;
 use App\Models\User;
+use App\Models\Auditor;
 use App\Models\CertificationCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -34,10 +35,10 @@ class AssignAuditController extends Controller
      */
     public function create()
     {
-        $user = User::where('is_admin', 0)->orderBy('id', 'desc')->get();
+        $auditors = Auditor::all();
         $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         $certification_category = CertificationCategory::where('status', 0)->orderBy('id', 'desc')->get();
-        return view('admin.assign-audit.create', compact('user', 'company', 'certification_category'));
+        return view('admin.assign-audit.create', compact('company', 'certification_category', 'auditors'));
     }
 
     /**
@@ -46,26 +47,23 @@ class AssignAuditController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required',
+            'auditor_id' => 'required',
             'company_id' => 'required',
             'certification_category_id' => 'required',
-            'audit_name' => 'required',
+            'audit_type' => 'required',
             'audit_start_date' => 'required',
             'audit_end_date' => 'required',
         ]);
         $data = new AssignAudit();
-        $data->user_id = $request->user_id;
+        $data->auditor_id = $request->auditor_id;
         $data->company_id = $request->company_id;
         $data->certification_category_id = $request->certification_category_id;
-        $data->audit_name = $request->audit_name;
+        $data->audit_type = $request->audit_type;
         $data->audit_start_date = $request->audit_start_date;
         $data->audit_end_date = $request->audit_end_date;
         $data->status = 0;
         $data->save();
-        // Notify to user
-        $user = User::where('id', $request->user_id)->first();
-        $notify_data = ['text' => $request->audit_name . ' audit has been assigned to you.', 'name' => Auth::user()->name, 'url' => $data->id];
-        Notification::send($user, new AssignAuditNotification($notify_data));
+
         return redirect()->back()->with('success', 'Assign Audit Successfully');
     }
 
@@ -82,11 +80,11 @@ class AssignAuditController extends Controller
      */
     public function edit($id)
     {
-        $user = User::where('is_admin', 0)->orderBy('id', 'desc')->get();
+        $auditors = Auditor::all();
         $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         $certification_category = CertificationCategory::where('status', 0)->orderBy('id', 'desc')->get();
         $data = AssignAudit::find($id);
-        return view('admin.assign-audit.edit', compact('data', 'user', 'company', 'certification_category'));
+        return view('admin.assign-audit.edit', compact('data', 'company', 'certification_category', 'auditors'));
     }
 
     /**
@@ -95,26 +93,23 @@ class AssignAuditController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'user_id' => 'required',
+            'auditor_id' => 'required',
             'company_id' => 'required',
             'certification_category_id' => 'required',
-            'audit_name' => 'required',
+            'audit_type' => 'required',
             'audit_start_date' => 'required',
             'audit_end_date' => 'required',
         ]);
         $data = AssignAudit::find($id);
-        $data->user_id = $request->user_id;
+        $data->auditor_id = $request->auditor_id;
         $data->company_id = $request->company_id;
         $data->certification_category_id = $request->certification_category_id;
-        $data->audit_name = $request->audit_name;
+        $data->audit_type = $request->audit_type;
         $data->audit_start_date = $request->audit_start_date;
         $data->audit_end_date = $request->audit_end_date;
         $data->status = $request->status;
         $data->save();
-        $user = User::where('id', $request->user_id)->first();
-        $notify_data = ['text' => $request->audit_name . ' audit has been updated to ' . $data->get_status(), 'name' => Auth::user()->name, 'url' => $data->id];
-        Notification::send($user, new AssignAuditNotification($notify_data));
-
+        
         return redirect()->back()->with('success', 'Assign Audit Updated Successfully');
     }
 

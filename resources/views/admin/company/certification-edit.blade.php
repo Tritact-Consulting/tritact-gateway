@@ -74,7 +74,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Certification Name <strong>*</strong></label>
+                                    <label>Audit Type <strong>*</strong></label>
                                     <input type="text" name="certification_name" id="certification_name" class="form-control" value="{{ $data->certification_name }}" required>
                                 </div>
                             </div>

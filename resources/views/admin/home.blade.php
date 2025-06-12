@@ -178,9 +178,9 @@
                             <thead>
                                 <tr>
                                     <th>SNO</th>
-                                    <th>User</th>
+                                    <th>Auditor</th>
                                     <th>Company</th>
-                                    <th>Audit Name</th>
+                                    <th>Audit Type</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -189,7 +189,7 @@
                                 @foreach($assign_audit as $key => $value)
                                 <tr class="hover-primary">
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $value->user->name }}</td>
+                                    <td>{{ $value->auditor->name }}</td>
                                     <td>{{ $value->company->name }}</td>
                                     <td>{{ $value->audit_name }}</td>
                                     <td>

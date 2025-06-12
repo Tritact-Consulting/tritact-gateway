@@ -38,9 +38,7 @@ class AdminController extends Controller
         $cert_body_count = DB::table('certification_bodies')->where('status', 0)->count();
         $auditor_expire = CompanyCertification::orderBy('expire_date', 'asc')->get();
         $assigned_audit = null;
-        if(count(Auth::user()->assign_audit) != 0){
-            $assigned_audit = AssignAudit::where('user_id', Auth::user()->id)->orderBy('updated_at', 'asc')->get();
-        }
+        
         $assign_audit = null;
         if(Auth::user()->can('view assign audit')){
             $assign_audit = AssignAudit::orderBy('id', 'desc')->get();
