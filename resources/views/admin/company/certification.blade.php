@@ -1,16 +1,16 @@
 @extends('layouts.admin-app')
-@section('title', 'Assign Certification')
+@section('title', 'Certification Summary')
 @section('content')
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">Assign Certification</h3>
+            <h3 class="page-title">Certification Summary</h3>
             <div class="d-inline-block align-items-center">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                         <li class="breadcrumb-item" aria-current="page">Company</li>
-                        <li class="breadcrumb-item active" aria-current="page">Assign Certification</li>
+                        <li class="breadcrumb-item active" aria-current="page">Certification Summary</li>
                     </ol>
                 </nav>
             </div>
@@ -23,7 +23,7 @@
         <div class="col-lg-12 col-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Assign Certification form</h4>
+                    <h4 class="box-title">Certification Summary form</h4>
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-danger m-20 mb-0">
@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Certification Name <strong>*</strong></label>
+                                    <label>Audit Type <strong>*</strong></label>
                                     <input type="text" name="certification_name" id="certification_name" class="form-control" required>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                 <tr>
                                     <th>Company</th>
                                     <th>Certification Category</th>
-                                    <th>Certification Name</th>
+                                    <th>Audit Type</th>
                                     <th>Auditor</th>
                                     <th>Expire Date</th>
                                     <th>Action</th>

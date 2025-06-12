@@ -36,7 +36,7 @@ class AdminController extends Controller
         $auditor_count = DB::table('auditors')->count();
         $assign_certification_count = DB::table('company_certifications')->count();
         $cert_body_count = DB::table('certification_bodies')->where('status', 0)->count();
-        $auditor_expire = CompanyCertification::whereNotNull('expire_date')->orderBy('expire_date', 'asc')->get();
+        $auditor_expire = CompanyCertification::orderBy('expire_date', 'asc')->get();
         $assigned_audit = null;
         if(count(Auth::user()->assign_audit) != 0){
             $assigned_audit = AssignAudit::where('user_id', Auth::user()->id)->orderBy('updated_at', 'asc')->get();

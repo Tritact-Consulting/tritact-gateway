@@ -296,7 +296,7 @@
                             <li class="{{ Request::routeIs('company.certification.assign') || Request::routeIs('company.certification.edit') ? 'active' : '' }}">
                                 <a href="{{ route('company.certification.assign') }}">
                                     <i class="icon-Share1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
-                                    <span>Assign Certification</span>
+                                    <span>Certification Summary</span>
                                 </a>
                             </li>
                             @endcan
@@ -304,7 +304,7 @@
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Chart-pie"><span class="path1"></span><span class="path2"></span></i>
-                                    <span>Assign Audit</span>
+                                    <span>Live Audit</span>
                                     <span class="pull-right-container">
                                     <i class="fa fa-angle-right pull-right"></i>
                                 </span>

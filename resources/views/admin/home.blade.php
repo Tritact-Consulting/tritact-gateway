@@ -222,7 +222,7 @@
         <div class="col-12">
 			<div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Assign Certification</h4>
+                    <h4 class="box-title">Certification Summary</h4>
                 </div>
 			    <div class="box-body">
 				    <div class="table-responsive rounded card-table">
@@ -231,7 +231,7 @@
                                 <tr>
                                     <th>Company Name</th>
                                     <th>Certification Category</th>
-                                    <th>Certification Name</th>
+                                    <th>Audit Type</th>
                                     <th>Auditor</th>
                                     <th>Expire Date</th>
                                     <th>Action</th>
