@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('assign_audits', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('auditor_id');
-            $table->foreign('auditor_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('auditor_id')->references('id')->on('auditors')->onDelete('cascade');
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('certification_category_id');
