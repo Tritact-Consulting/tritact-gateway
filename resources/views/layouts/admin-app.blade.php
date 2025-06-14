@@ -245,7 +245,7 @@
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Cart"><span class="path1"></span><span class="path2"></span></i>
-                                    <span>Certification Category</span>
+                                    <span>Certification Type</span>
                                     <span class="pull-right-container">
                                     <i class="fa fa-angle-right pull-right"></i>
                                 </span>
