@@ -47,7 +47,7 @@
                                         <span class="badge badge-pill badge-{{ $value->get_status_class() }}">{{ $value->get_status() }}</span>
                                     </td>
                                     <td>
-                                        {{ $value->status == 0 ? 'NO' : 'YES' }}
+                                        {{ $value->completed == 0 ? 'NO' : 'YES' }}
                                     </td>
                                     <td>
                                         <form action="{{ route('assign-audit.destroy', $value->id) }}" method="POST">
