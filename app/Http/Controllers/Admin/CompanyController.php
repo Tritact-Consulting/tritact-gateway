@@ -361,6 +361,7 @@ class CompanyController extends Controller
         $data->username = $request->username;
         $data->password = $request->password;
         $data->certification_number = $request->certification_number;
+        $data->certification_body_id = $request->certification_body;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Updated Successfully');
     }

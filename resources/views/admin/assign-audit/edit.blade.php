@@ -65,6 +65,17 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Certification Body <strong>*</strong></label>
+                                    <select name="certification_body_id" id="certification_body_id" class="form-control select2" required>
+                                        <option value="">Select Certification Body</option>
+                                        @foreach($certification_body as $key => $value)
+                                        <option value="{{ $value->id }}" {{ $value->id == $data->certification_body_id ? 'selected' : '' }}>{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label>Auditor <strong>*</strong></label>
                                     <select name="auditor_id" id="auditor_id" class="form-control select2" required>
                                         <option value="">Select Auditor</option>
@@ -100,6 +111,15 @@
                                         <option value="1" {{ $data->status == 1 ? 'selected' : '' }}>In progress</option>
                                         <option value="2" {{ $data->status == 2 ? 'selected' : '' }}>Completed</option>
                                         <option value="3" {{ $data->status == 3 ? 'selected' : '' }}>Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Completed? <strong>*</strong></label>
+                                    <select name="completed" id="completed" class="form-control">
+                                        <option value="0" {{ $data->completed == 0 ? 'selected' : '' }}>NO</option>
+                                        <option value="1" {{ $data->completed == 1 ? 'selected' : '' }}>YES</option>
                                     </select>
                                 </div>
                             </div>

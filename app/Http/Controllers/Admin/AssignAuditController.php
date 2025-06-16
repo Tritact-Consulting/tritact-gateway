@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\AssignAudit;
 use App\Models\User;
 use App\Models\Auditor;
+use App\Models\CertificationBody;
 use App\Models\CertificationCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -38,7 +39,8 @@ class AssignAuditController extends Controller
         $auditors = Auditor::all();
         $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         $certification_category = CertificationCategory::where('status', 0)->orderBy('id', 'desc')->get();
-        return view('admin.assign-audit.create', compact('company', 'certification_category', 'auditors'));
+        $certification_body = CertificationBody::where('status', 0)->get();
+        return view('admin.assign-audit.create', compact('company', 'certification_category', 'auditors', 'certification_body'));
     }
 
     /**
@@ -53,6 +55,7 @@ class AssignAuditController extends Controller
             'audit_type' => 'required',
             'audit_start_date' => 'required',
             'audit_end_date' => 'required',
+            'certification_body_id' => 'required',
         ]);
         $data = new AssignAudit();
         $data->auditor_id = $request->auditor_id;
@@ -61,6 +64,7 @@ class AssignAuditController extends Controller
         $data->audit_type = $request->audit_type;
         $data->audit_start_date = $request->audit_start_date;
         $data->audit_end_date = $request->audit_end_date;
+        $data->certification_body_id = $request->certification_body_id;
         $data->status = 0;
         $data->save();
 
@@ -84,7 +88,8 @@ class AssignAuditController extends Controller
         $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         $certification_category = CertificationCategory::where('status', 0)->orderBy('id', 'desc')->get();
         $data = AssignAudit::find($id);
-        return view('admin.assign-audit.edit', compact('data', 'company', 'certification_category', 'auditors'));
+        $certification_body = CertificationBody::where('status', 0)->get();
+        return view('admin.assign-audit.edit', compact('data', 'company', 'certification_category', 'auditors', 'certification_body'));
     }
 
     /**
@@ -99,6 +104,7 @@ class AssignAuditController extends Controller
             'audit_type' => 'required',
             'audit_start_date' => 'required',
             'audit_end_date' => 'required',
+            'certification_body_id' => 'required',
         ]);
         $data = AssignAudit::find($id);
         $data->auditor_id = $request->auditor_id;
@@ -107,6 +113,8 @@ class AssignAuditController extends Controller
         $data->audit_type = $request->audit_type;
         $data->audit_start_date = $request->audit_start_date;
         $data->audit_end_date = $request->audit_end_date;
+        $data->certification_body_id = $request->certification_body_id;
+        $data->completed = $request->completed;
         $data->status = $request->status;
         $data->save();
         

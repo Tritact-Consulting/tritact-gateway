@@ -64,6 +64,17 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Certification Body <strong>*</strong></label>
+                                    <select name="certification_body_id" id="certification_body_id" class="form-control select2" required>
+                                        <option value="">Select Certification Body</option>
+                                        @foreach($certification_body as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label>Auditor <strong>*</strong></label>
                                     <select name="auditor_id" id="auditor_id" class="form-control select2">
                                         <option value="">Select Auditor</option>
