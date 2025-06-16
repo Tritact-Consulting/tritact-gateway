@@ -63,6 +63,17 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Certification Body<strong>*</strong></label>
+                                    <select name="certification_body" id="certification_body" class="form-control select2" required>
+                                        <option value="">Select Certification Body </option>
+                                        @foreach($certification_body as $key => $value)
+                                        <option value="{{ $value->id }}" {{ $data->certification_body_id == $value->id ? 'selected' : '' }}>{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label>Auditor <strong>*</strong></label>
                                     <select name="auditor" id="auditor" class="form-control" required>
                                         <option value="">Select Auditor</option>
@@ -72,19 +83,19 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Audit Type <strong>*</strong></label>
                                     <input type="text" name="certification_name" id="certification_name" class="form-control" value="{{ $data->certification_name }}" required>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Issue Date</label>
                                     <input type="date" name="issue_date" id="issue_date" class="form-control" value="{{ $data->issue_date }}">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Expire Date</label>
                                     <input type="date" name="expire_date" id="expire_date" class="form-control" value="{{ $data->expire_date }}">

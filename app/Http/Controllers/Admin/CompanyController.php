@@ -10,6 +10,7 @@ use App\Models\CompanyTags;
 use App\Models\CompanyCategories;
 use App\Models\Documents;
 use App\Models\Auditor;
+use App\Models\CertificationBody;
 use App\Models\CompanyCertification;
 use App\Models\CertificationCategory;
 use App\Http\Controllers\Controller;
@@ -310,7 +311,8 @@ class CompanyController extends Controller
         $certification = CertificationCategory::where('status', 0)->get();
         $data = CompanyCertification::orderBy('id', 'desc')->get();
         $auditors = Auditor::all();
-        return view('admin.company.certification', compact('user', 'certification', 'data', 'auditors'));
+        $certification_body = CertificationBody::where('status', 0)->get();
+        return view('admin.company.certification', compact('user', 'certification', 'data', 'auditors', 'certification_body'));
     }
 
     public function companyCertificationAdd(Request $request){
@@ -329,6 +331,7 @@ class CompanyController extends Controller
         $data->username = $request->username;
         $data->password = $request->password;
         $data->certification_number = $request->certification_number;
+        $data->certification_body_id = $request->certification_body;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Assigned Successfully');
     }
@@ -338,7 +341,8 @@ class CompanyController extends Controller
         $user = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         $certification = CertificationCategory::where('status', 0)->get();
         $auditors = Auditor::all();
-        return view('admin.company.certification-edit', compact('data', 'user', 'certification', 'auditors'));
+        $certification_body = CertificationBody::where('status', 0)->get();
+        return view('admin.company.certification-edit', compact('data', 'user', 'certification', 'auditors', 'certification_body'));
     }
 
     public function companyCertificationUpdate(Request $request, $id){
