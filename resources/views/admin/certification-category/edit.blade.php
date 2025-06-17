@@ -1,16 +1,16 @@
 @extends('layouts.admin-app')
-@section('title', 'Edit Certification Category ' . $data->name )
+@section('title', 'Edit Certification Type ' . $data->name )
 @section('content')
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">Edit Certification Category - {{ $data->name }}</h3>
+            <h3 class="page-title">Edit Certification Type - {{ $data->name }}</h3>
             <div class="d-inline-block align-items-center">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-                        <li class="breadcrumb-item" aria-current="page">Certification Category</li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit Certification Category - {{ $data->name }}</li>
+                        <li class="breadcrumb-item" aria-current="page">Certification Type</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Certification Type - {{ $data->name }}</li>
                     </ol>
                 </nav>
             </div>
@@ -23,7 +23,7 @@
         <div class="col-lg-12 col-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Edit Certification Category form</h4>
+                    <h4 class="box-title">Edit Certification Type form</h4>
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-danger m-20 mb-0">

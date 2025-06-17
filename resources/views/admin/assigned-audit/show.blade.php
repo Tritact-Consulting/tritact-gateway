@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Certification Category <strong>*</strong></label>
+                                    <label>Certification Type <strong>*</strong></label>
                                     <input type="text" value="{{ $data->category->name }}" class="form-control" readonly>
                                 </div>
                             </div>

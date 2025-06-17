@@ -54,9 +54,9 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Certification Category <strong>*</strong></label>
+                                    <label>Certification Type <strong>*</strong></label>
                                     <select name="certification_category_id" id="certification_category_id" class="form-control select2" required>
-                                        <option value="">Select Certification Category</option>
+                                        <option value="">Select Certification Type</option>
                                         @foreach($certification_category as $key => $value)
                                         <option value="{{ $value->id }}" {{ $value->id == $data->certification_category_id ? 'selected' : '' }}>{{ $value->name }}</option>
                                         @endforeach

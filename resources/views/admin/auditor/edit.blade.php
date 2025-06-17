@@ -72,7 +72,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Certification Category <strong>*</strong></label>
+                                    <label>Certification Type <strong>*</strong></label>
                                     <select class="form-control select2" multiple name="certification_category[]" required>
                                         @foreach($category as $key => $value)
                                         <option value="{{ $value->id }}" {{ in_array($value->id, $data->category->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $value->name }}</option>

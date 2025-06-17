@@ -30,7 +30,7 @@
                                     <th>SNO</th>
                                     <th>Auditor</th>
                                     <th>Certification Body</th>
-                                    <th>Certification Category</th>
+                                    <th>Certification Type</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

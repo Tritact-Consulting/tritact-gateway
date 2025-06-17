@@ -230,7 +230,7 @@
                             <thead>
                                 <tr>
                                     <th>Company Name</th>
-                                    <th>Certification Category</th>
+                                    <th>Certification Type</th>
                                     <th>Audit Type</th>
                                     <th>Auditor</th>
                                     <th>Expire Date</th>
