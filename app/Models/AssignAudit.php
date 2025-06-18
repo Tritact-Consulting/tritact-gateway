@@ -44,4 +44,8 @@ class AssignAudit extends Model
             return 'warning';
         }
     }
+
+    public function company_certification(){
+        return $this->hasOne(CompanyCertification::class, 'id', 'company_certificate_id');
+    }
 }

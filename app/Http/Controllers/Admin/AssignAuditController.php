@@ -6,6 +6,8 @@ use App\Models\AssignAudit;
 use App\Models\User;
 use App\Models\Auditor;
 use App\Models\CertificationBody;
+use App\Models\Company;
+use App\Models\CompanyCertification;
 use App\Models\CertificationCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -84,12 +86,14 @@ class AssignAuditController extends Controller
      */
     public function edit($id)
     {
+        $user = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $certification = CertificationCategory::where('status', 0)->get();
         $auditors = Auditor::all();
         $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         $certification_category = CertificationCategory::where('status', 0)->orderBy('id', 'desc')->get();
         $data = AssignAudit::find($id);
         $certification_body = CertificationBody::where('status', 0)->get();
-        return view('admin.assign-audit.edit', compact('data', 'company', 'certification_category', 'auditors', 'certification_body'));
+        return view('admin.assign-audit.edit', compact('data', 'company', 'certification_category', 'auditors', 'certification_body', 'user', 'certification'));
     }
 
     /**
@@ -97,6 +101,7 @@ class AssignAuditController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'auditor_id' => 'required',
             'company_id' => 'required',
@@ -116,6 +121,40 @@ class AssignAuditController extends Controller
         $data->certification_body_id = $request->certification_body_id;
         $data->completed = $request->completed;
         $data->status = $request->status;
+
+        $completed = $request->completed;
+        if($completed == 1){
+            $request->validate([
+                'summary_company' => 'required',
+                'summary_certification_category' => 'required',
+                'summary_certification_body' => 'required',
+                'summary_certification_name' => 'required',
+            ]);
+            $id = $request->summary_company;
+            
+            $company = Company::where('user_id', $id)->first();
+            $user = User::find($id);
+            
+            if($data->company_certificate_id != null){
+                $company_certification = CompanyCertification::find($data->company_certificate_id);
+            }else{
+                $company_certification = new CompanyCertification();
+            }
+            $company_certification->user_id = $user->id;
+            $company_certification->company_id = $company->id;
+            $company_certification->certifications_id = $request->summary_certification_category;
+            $company_certification->certification_name = $request->summary_certification_name;
+            $company_certification->issue_date = $request->summary_issue_date;
+            $company_certification->expire_date = $request->summary_expire_date;
+            $company_certification->auditor_id = $request->summary_auditor;
+            $company_certification->username = $request->summary_username;
+            $company_certification->password = $request->summary_password;
+            $company_certification->certification_number = $request->summary_certification_number;
+            $company_certification->certification_body_id = $request->summary_certification_body;
+            $company_certification->save();
+            $data->company_certificate_id = $company_certification->id;
+        }
+
         $data->save();
         
         return redirect()->back()->with('success', 'Assign Audit Updated Successfully');

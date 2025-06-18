@@ -24369,3 +24369,20 @@ ul.tag-wrapper label {
   right: 105%;
   left: auto;
 }
+
+
+#certification-summary{
+  display: none; 
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+.form-group label{
+  display: block;
+}
+
+#certification-summary.show-certification-summary {
+    display: block;
+}

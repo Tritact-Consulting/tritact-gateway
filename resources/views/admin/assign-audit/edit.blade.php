@@ -116,7 +116,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Completed? <strong>*</strong></label>
+                                    <label>Certificate Generated <strong>*</strong></label>
                                     <select name="completed" id="completed" class="form-control">
                                         <option value="0" {{ $data->completed == 0 ? 'selected' : '' }}>NO</option>
                                         <option value="1" {{ $data->completed == 1 ? 'selected' : '' }}>YES</option>
@@ -125,6 +125,95 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="box-body pt-0 {{ $data->completed == 1 ? 'show-certification-summary' : '' }}" id="certification-summary">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <hr class="mt-0">
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Company <strong>*</strong></label>
+                                    <select name="summary_company" id="summary_company" class="form-control select2">
+                                        <option value="">Select Company</option>
+                                        @foreach($user as $key => $value)
+                                        <option value="{{ $value->id }}" {{ $value->id == ($data->company_certification != null ? $data->company_certification->user_id : $data->company_id) ? 'selected' : '' }}>{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Certification Type<strong>*</strong></label>
+                                    <select name="summary_certification_category" id="summary_certification_category" class="form-control select2">
+                                        <option value="">Select Certification Type </option>
+                                        @foreach($certification as $key => $value)
+                                        <option value="{{ $value->id }}" {{ $value->id == ($data->company_certification != null ? $data->company_certification->certifications_id : $data->certification_category_id) ? 'selected' : '' }}>{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Certification Body<strong>*</strong></label>
+                                    <select name="summary_certification_body" id="summary_certification_body" class="form-control select2">
+                                        <option value="">Select Certification Body </option>
+                                        @foreach($certification_body as $key => $value)
+                                        <option value="{{ $value->id }}" {{ $value->id == ($data->company_certification != null ? $data->company_certification->certification_body_id : $data->certification_body_id) ? 'selected' : '' }}>{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Auditor</label>
+                                    <select name="summary_auditor" id="summary_auditor" class="form-control">
+                                        <option value="">Select Auditor</option>
+                                        @foreach($auditors as $key => $value)
+                                        <option value="{{ $value->id }}" {{ $value->id == ($data->company_certification != null ? $data->company_certification->auditor_id : $data->auditor_id) ? 'selected' : '' }}>{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Audit Type <strong>*</strong></label>
+                                    <input type="text" name="summary_certification_name" id="summary_certification_name" value="{{ $data->company_certification != null ? $data->company_certification->certification_name : $data->audit_type }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Issue Date</label>
+                                    <input type="date" name="summary_issue_date" id="summary_issue_date" class="form-control" value="{{ $data->company_certification != null ? $data->company_certification->issue_date : '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Expire Date</label>
+                                    <input type="date" name="summary_expire_date" id="summary_expire_date" class="form-control" value="{{ $data->company_certification != null ? $data->company_certification->expire_date : '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" name="summary_username" id="summary_username" class="form-control" value="{{ $data->company_certification != null ? $data->company_certification->username : '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="text" name="summary_password" id="summary_password" class="form-control" value="{{ $data->company_certification != null ? $data->company_certification->password : '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Certification Number</label>
+                                    <input type="text" name="summary_certification_number" id="summary_certification_number" class="form-control" value="{{ $data->company_certification != null ? $data->company_certification->certification_number : '' }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <button type="submit" class="btn btn-rounded btn-primary btn-outline"><i class="ti-save-alt"></i> Save</button>
@@ -136,3 +225,14 @@
     </div>
 </section>
 @endsection
+@push('script')
+<script>
+    $('#completed').change(function(){
+        if($(this).val() == 0){
+            $('#certification-summary').hide();
+        }else{
+            $('#certification-summary').show();
+        }
+    })
+</script>
+@endpush
