@@ -182,6 +182,7 @@
                                     <th>Company</th>
                                     <th>Audit Type</th>
                                     <th>Status</th>
+                                    <th>Completed</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -191,9 +192,12 @@
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $value->auditor->name }}</td>
                                     <td>{{ $value->company->name }}</td>
-                                    <td>{{ $value->audit_name }}</td>
+                                    <td>{{ $value->audit_type }}</td>
                                     <td>
                                         <span class="badge badge-pill badge-{{ $value->get_status_class() }}">{{ $value->get_status() }}</span>
+                                    </td>
+                                    <td>
+                                        {{ $value->completed == 0 ? 'NO' : 'YES' }}
                                     </td>
                                     <td>
                                         <form action="{{ route('assign-audit.destroy', $value->id) }}" method="POST">
