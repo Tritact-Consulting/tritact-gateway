@@ -32,7 +32,7 @@
                                     <th>Company</th>
                                     <th>Audit Type</th>
                                     <th>Status</th>
-                                    <th>Completed</th>
+                                    <th>Certificate Issued</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

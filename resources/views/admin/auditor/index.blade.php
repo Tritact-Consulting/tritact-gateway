@@ -29,6 +29,7 @@
                                 <tr>
                                     <th>SNO</th>
                                     <th>Auditor</th>
+                                    <th>Phone</th>
                                     <th>Certification Body</th>
                                     <th>Certification Type</th>
                                     <th>Action</th>
@@ -38,7 +39,8 @@
                                 @foreach($data as $key => $value)
                                 <tr class="hover-primary">
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $value->name }} <br> {{ $value->email }} <br> {{ $value->phone }}</td>
+                                    <td>{{ $value->name }} <br> {{ $value->email }}</td>
+                                    <td>{{ $value->phone }}</td>
                                     <td>
                                         <span class="badge badge-primary">{{ $value->category_body->name }}</span>
                                     </td>
@@ -49,14 +51,16 @@
                                     </td>
                                     <td>
                                         <form action="{{ route('auditor.destroy', $value->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            @can('edit auditor')
-                                            <a href="{{ route('auditor.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                                            @endcan
-                                            @can('delete auditor')
-                                            <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="auditor"><i class="fa fa-trash"></i></button>
-                                            @endcan
+                                            <div class="d-flex">
+                                                @csrf
+                                                @method('DELETE')
+                                                @can('edit auditor')
+                                                <a href="{{ route('auditor.edit', $value->id) }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                                @endcan
+                                                @can('delete auditor')
+                                                <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="auditor"><i class="fa fa-trash"></i></button>
+                                                @endcan
+                                            </div>
                                         </form>
                                     </td>
                                 </tr>

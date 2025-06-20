@@ -504,6 +504,22 @@
             });
         });
     </script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        setInterval(() => {
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('keep-alive') }}",
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+        }, 1200000)
+    </script>
     @stack('script')
 </body>
 </html>

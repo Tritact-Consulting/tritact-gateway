@@ -39,6 +39,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/keep-alive', function () {
+        if(auth()->user()->status == 0){
+            return response()->json(['ok' => true]);
+        }else{
+            return response()->json(['ok' => false]);
+        }
+    });
+});
+
 Auth::routes(['register' => false]);
 
 Route::group(['middleware' => ['auth', 'user']], function(){
