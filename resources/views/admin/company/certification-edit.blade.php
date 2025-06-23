@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Expire Date</label>
+                                    <label>Expiry Date</label>
                                     <input type="date" name="expire_date" id="expire_date" class="form-control" value="{{ $data->expire_date }}">
                                 </div>
                             </div>

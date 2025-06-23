@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Expire Date</label>
+                                    <label>Expiry Date</label>
                                     <input type="date" name="expire_date" id="expire_date" class="form-control">
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                                 <tr>
                                     <th>Certification</th>
                                     <th>Certification Name</th>
-                                    <th>Expire Date</th>
+                                    <th>Expiry Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

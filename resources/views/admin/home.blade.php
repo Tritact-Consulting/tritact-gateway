@@ -182,7 +182,7 @@
                                     <th>Company</th>
                                     <th>Audit Type</th>
                                     <th>Status</th>
-                                    <th>Completed</th>
+                                    <th>Certificate Issued</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -237,7 +237,7 @@
                                     <th>Certification Type</th>
                                     <th>Audit Type</th>
                                     <th>Auditor</th>
-                                    <th>Expire Date</th>
+                                    <th>Expiry Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
