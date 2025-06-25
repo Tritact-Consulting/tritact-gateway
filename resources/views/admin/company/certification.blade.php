@@ -143,6 +143,7 @@
                                 <tr>
                                     <th>Company</th>
                                     <th>Certification Type</th>
+                                    <th>Certification Body</th>
                                     <th>Audit Type</th>
                                     <th>Auditor</th>
                                     <th>Expiry Date</th>
@@ -154,6 +155,7 @@
                                 <tr class="hover-primary">
                                     <td>{{ $value->user->name }}</td>
                                     <td>{{ $value->certificate->name }}</td>
+                                    <td>{{ $value->body != null ? $value->body->name : '' }}</td>
                                     <td>{{ $value->certification_name }}</td>
                                     <td>{{ $value->auditor != null ? $value->auditor->name : '' }}</td>
                                     <td>{{ $value->expire_date }}</td>
