@@ -251,7 +251,7 @@
                                 <tr class="{{ $value->getRemainingDays() }}">
                                     <td>{{ $value->user->name }}</td>
                                     <td>{{ $value->certificate->name }}</td>
-                                    <td>{{ $value->body->name }}</td>
+                                    <td>{{ $value->body != null ? $value->body->name : '' }}</td>
                                     <td>{{ $value->certification_name }}</td>
                                     <td>{{ $value->auditor != null ? $value->auditor->name : '' }}</td>
                                     <td>{{ $value->expire_date }}</td>
