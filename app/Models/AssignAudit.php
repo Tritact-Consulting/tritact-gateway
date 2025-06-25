@@ -21,6 +21,10 @@ class AssignAudit extends Model
         return $this->hasOne(CertificationCategory::class, 'id', 'certification_category_id');
     }
 
+    public function body(){
+        return $this->hasOne(CertificationBody::class, 'id', 'certification_body_id');
+    }
+
     public function get_status(){
         if($this->status == 0){
             return 'Upcoming';

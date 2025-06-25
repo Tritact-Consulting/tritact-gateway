@@ -20,6 +20,10 @@ class CompanyCertification extends Model
     public function auditor(){
         return $this->hasOne(Auditor::class, 'id', 'auditor_id');
     }
+    
+    public function body(){
+        return $this->hasOne(CertificationBody::class, 'id', 'certification_body_id');
+    }
 
     public function getRemainingDays(){
         $remaining = \Carbon\Carbon::now()->diffInDays($this->expire_date, false);

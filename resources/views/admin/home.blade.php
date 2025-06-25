@@ -180,6 +180,8 @@
                                     <th>SNO</th>
                                     <th>Auditor</th>
                                     <th>Company</th>
+                                    <th>Certification Type</th>
+                                    <th>Certification Body</th>
                                     <th>Audit Type</th>
                                     <th>Status</th>
                                     <th>Certificate Issued</th>
@@ -192,6 +194,8 @@
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $value->auditor->name }}</td>
                                     <td>{{ $value->company->name }}</td>
+                                    <td>{{ $value->category->name }}</td>
+                                    <td>{{ $value->body->name }}</td>
                                     <td>{{ $value->audit_type }}</td>
                                     <td>
                                         <span class="badge badge-pill badge-{{ $value->get_status_class() }}">{{ $value->get_status() }}</span>
@@ -235,6 +239,7 @@
                                 <tr>
                                     <th>Company Name</th>
                                     <th>Certification Type</th>
+                                    <th>Certification Body</th>
                                     <th>Audit Type</th>
                                     <th>Auditor</th>
                                     <th>Expiry Date</th>
@@ -246,6 +251,7 @@
                                 <tr class="{{ $value->getRemainingDays() }}">
                                     <td>{{ $value->user->name }}</td>
                                     <td>{{ $value->certificate->name }}</td>
+                                    <td>{{ $value->body->name }}</td>
                                     <td>{{ $value->certification_name }}</td>
                                     <td>{{ $value->auditor != null ? $value->auditor->name : '' }}</td>
                                     <td>{{ $value->expire_date }}</td>
