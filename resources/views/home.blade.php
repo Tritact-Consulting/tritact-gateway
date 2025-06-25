@@ -3,7 +3,7 @@
 @section('content')
 <!-- Main content -->
 <section class="content">
-    <d[iv class="row">
+    <div class="row">
         @if(Auth::user()->hasRole('company'))
         <div class="col-xxxl-3 col-lg-6 col-12">
             <div class="box">
@@ -67,5 +67,50 @@
         </div>
         @endif
     </div>
+    @if($assign_audit != null)
+    <div class="row">
+        <div class="col-12">
+			<div class="box">
+                <div class="box-header with-border">
+                    <h4 class="box-title">Audit</h4>
+                </div>
+			    <div class="box-body">
+				    <div class="table-responsive rounded card-table">
+                        <table class="table border-no datatables" id="example1">
+                            <thead>
+                                <tr>
+                                    <th>SNO</th>
+                                    <th>Auditor</th>
+                                    <th>Certification Type</th>
+                                    <th>Certification Body</th>
+                                    <th>Audit Type</th>
+                                    <th>Status</th>
+                                    <th>Certificate Issued</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($assign_audit as $key => $value)
+                                <tr class="hover-primary">
+                                    <td>{{ ++$key }}</td>
+                                    <td>{{ $value->auditor->name }}</td>
+                                    <td>{{ $value->category->name }}</td>
+                                    <td>{{ $value->body != null ? $value->body->name : ''}}</td>
+                                    <td>{{ $value->audit_type }}</td>
+                                    <td>
+                                        <span class="badge badge-pill badge-{{ $value->get_status_class() }}">{{ $value->get_status() }}</span>
+                                    </td>
+                                    <td>
+                                        {{ $value->completed == 0 ? 'NO' : 'YES' }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 </section>
 @endsection

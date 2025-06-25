@@ -234,8 +234,6 @@ class CompanyController extends Controller
                 'email' => 'required|unique:users,email',
                 'password' => 'required|confirmed',
                 'company_id' => 'required',
-                'version' => 'required',
-                'issue_date' => 'required',
             ]);
             $user = new User();
             $user->name = $request->name;

@@ -10,6 +10,7 @@ use App\Models\Tags;
 use App\Models\Documents;
 use App\Models\Category;
 use App\Models\Guides;
+use App\Models\AssignAudit;
 use Illuminate\Support\Facades\Hash;
 use DB;
 
@@ -56,7 +57,14 @@ class HomeController extends Controller
             $q->whereIn('id', $categories);
         })->count();
 
-        return view('home', compact('guide_count', 'document_count'));
+        if(Auth::user()->is_company == 1){
+            $assign_audit = AssignAudit::where('company_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+        }else{
+            $user = User::find(Auth::user()->user_id);
+            $assign_audit = AssignAudit::where('company_id', $user->id)->orderBy('id', 'desc')->get();
+        }
+
+        return view('home', compact('guide_count', 'document_count', 'assign_audit'));
     }
 
     public function profile(){

@@ -208,7 +208,20 @@
                                 </a>
                             </li>
                             @endcanany
-                            @if(Auth::user()->company->adding_certification != 0)
+                            @php
+                            $adding_adding_certification = false;
+                            if(Auth::user()->is_company == 1){
+                                if(Auth::user()->company->adding_certification != 0){
+                                    $adding_adding_certification = true;
+                                }
+                            }else{
+                                $get_user = \App\Models\User::find(Auth::user()->user_id);
+                                if($get_user->company->adding_certification != 0){
+                                    $adding_adding_certification = true;
+                                }
+                            }
+                            @endphp
+                            @if($adding_adding_certification)
                             <li class="{{ Request::routeIs('certifications.index') ? 'active' : '' }}">
                                 <a href="{{ route('certifications.index') }}">
                                     <i class="icon-Library"><span class="path1"></span><span class="path2"></span></i>
