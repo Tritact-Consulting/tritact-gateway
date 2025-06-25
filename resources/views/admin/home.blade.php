@@ -195,7 +195,7 @@
                                     <td>{{ $value->auditor->name }}</td>
                                     <td>{{ $value->company->name }}</td>
                                     <td>{{ $value->category->name }}</td>
-                                    <td>{{ $value->body->name }}</td>
+                                    <td>{{ $value->body != null ? $value->body->name : ''}}</td>
                                     <td>{{ $value->audit_type }}</td>
                                     <td>
                                         <span class="badge badge-pill badge-{{ $value->get_status_class() }}">{{ $value->get_status() }}</span>
