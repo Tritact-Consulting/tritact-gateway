@@ -11,6 +11,7 @@ use App\Models\Documents;
 use App\Models\Category;
 use App\Models\Guides;
 use App\Models\AssignAudit;
+use App\Models\CompanyCertification;
 use Illuminate\Support\Facades\Hash;
 use DB;
 
@@ -63,8 +64,14 @@ class HomeController extends Controller
             $user = User::find(Auth::user()->user_id);
             $assign_audit = AssignAudit::where('company_id', $user->id)->orderBy('id', 'desc')->get();
         }
+        if(Auth::user()->is_company == 1){
+            $auditor_expire = CompanyCertification::where('user_id', Auth::user()->id)->orderBy('expire_date', 'asc')->get();
+        }else{
+            $user = User::find(Auth::user()->user_id);
+            $auditor_expire = CompanyCertification::where('user_id', $user->id)->orderBy('expire_date', 'asc')->get();
+        }
 
-        return view('home', compact('guide_count', 'document_count', 'assign_audit'));
+        return view('home', compact('guide_count', 'document_count', 'assign_audit', 'auditor_expire'));
     }
 
     public function profile(){

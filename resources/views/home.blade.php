@@ -112,5 +112,42 @@
         </div>
     </div>
     @endif
+    @if($auditor_expire != null)
+    <div class="row">
+        <div class="col-12">
+			<div class="box">
+                <div class="box-header with-border">
+                    <h4 class="box-title">Certification Summary</h4>
+                </div>
+			    <div class="box-body">
+				    <div class="table-responsive rounded card-table">
+                        <table class="table border-no datatables-expire" id="example1">
+                            <thead>
+                                <tr>
+                                    <th>Certification Type</th>
+                                    <th>Certification Body</th>
+                                    <th>Audit Type</th>
+                                    <th>Auditor</th>
+                                    <th>Expiry Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($auditor_expire as $key => $value)
+                                <tr class="{{ $value->getRemainingDays() }}">
+                                    <td>{{ $value->certificate->name }}</td>
+                                    <td>{{ $value->body != null ? $value->body->name : '' }}</td>
+                                    <td>{{ $value->certification_name }}</td>
+                                    <td>{{ $value->auditor != null ? $value->auditor->name : '' }}</td>
+                                    <td>{{ $value->expire_date }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 </section>
 @endsection
