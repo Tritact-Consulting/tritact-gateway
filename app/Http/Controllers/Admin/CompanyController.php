@@ -330,6 +330,7 @@ class CompanyController extends Controller
         $data->password = $request->password;
         $data->certification_number = $request->certification_number;
         $data->certification_body_id = $request->certification_body;
+        $data->next_audit_due_date = $request->next_audit_due_date;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Assigned Successfully');
     }
@@ -360,6 +361,7 @@ class CompanyController extends Controller
         $data->password = $request->password;
         $data->certification_number = $request->certification_number;
         $data->certification_body_id = $request->certification_body;
+        $data->next_audit_due_date = $request->next_audit_due_date;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Updated Successfully');
     }

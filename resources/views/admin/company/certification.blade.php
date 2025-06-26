@@ -104,6 +104,12 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Next Audit Due Date</label>
+                                    <input type="date" name="next_audit_due_date" id="next_audit_due_date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label>Username</label>
                                     <input type="text" name="username" id="username" class="form-control">
                                 </div>
