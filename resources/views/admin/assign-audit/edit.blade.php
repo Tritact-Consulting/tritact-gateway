@@ -116,7 +116,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Certificate Generated <strong>*</strong></label>
+                                    <label>Certificate Issued <strong>*</strong></label>
                                     <select name="completed" id="completed" class="form-control">
                                         <option value="0" {{ $data->completed == 0 ? 'selected' : '' }}>NO</option>
                                         <option value="1" {{ $data->completed == 1 ? 'selected' : '' }}>YES</option>
