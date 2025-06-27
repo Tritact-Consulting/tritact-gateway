@@ -184,6 +184,7 @@
                                     <th>Certification Body</th>
                                     <th>Audit Type</th>
                                     <th>Status</th>
+                                    <th>Audit Dates</th>
                                     <th>Certificate Issued</th>
                                     <th>Action</th>
                                 </tr>
@@ -200,6 +201,7 @@
                                     <td>
                                         <span class="badge badge-pill badge-{{ $value->get_status_class() }}">{{ $value->get_status() }}</span>
                                     </td>
+                                    <td>{{ $value->audit_start_date }}<br>{{ $value->audit_end_date }}</td>
                                     <td>
                                         {{ $value->completed == 0 ? 'NO' : 'YES' }}
                                     </td>
