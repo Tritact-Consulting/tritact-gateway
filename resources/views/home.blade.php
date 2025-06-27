@@ -80,7 +80,6 @@
                             <thead>
                                 <tr>
                                     <th>SNO</th>
-                                    <th>Auditor</th>
                                     <th>Certification Type</th>
                                     <th>Certification Body</th>
                                     <th>Audit Type</th>
@@ -92,7 +91,6 @@
                                 @foreach($assign_audit as $key => $value)
                                 <tr class="hover-primary">
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $value->auditor->name }}</td>
                                     <td>{{ $value->category->name }}</td>
                                     <td>{{ $value->body != null ? $value->body->name : ''}}</td>
                                     <td>{{ $value->audit_type }}</td>
