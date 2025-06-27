@@ -85,7 +85,7 @@
                                     <th>Audit Type</th>
                                     <th>Audit Dates</th>
                                     <th>Status</th>
-                                    <th>Certificate Issued</th>
+                                    <th>Certified</th>
                                 </tr>
                             </thead>
                             <tbody>
