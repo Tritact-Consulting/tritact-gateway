@@ -240,6 +240,7 @@
                                     <th>Company Name</th>
                                     <th>Certification Type</th>
                                     <th>Certification Body</th>
+                                    <th>Certificate Number</th>
                                     <th>Audit Type</th>
                                     <th>Auditor</th>
                                     <th>Expiry Date</th>
@@ -252,6 +253,7 @@
                                     <td>{{ $value->user->name }}</td>
                                     <td>{{ $value->certificate->name }}</td>
                                     <td>{{ $value->body != null ? $value->body->name : '' }}</td>
+                                    <td>{{ $value->certification_number != null ? $value->certification_number : '' }}</td>
                                     <td>{{ $value->certification_name }}</td>
                                     <td>{{ $value->auditor != null ? $value->auditor->name : '' }}</td>
                                     <td>{{ $value->expire_date }}</td>
