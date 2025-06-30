@@ -245,6 +245,12 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="referred_by">Referred By</label>
+                                    <input type="text" name="referred_by" id="referred_by" class="form-control" value="{{ old('referred_by') }}">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->

@@ -99,6 +99,7 @@ class CompanyController extends Controller
         $company->logo_height = $request->logo_height;
         $company->company_id = $request->company_id;
         $company->adding_certification = $request->adding_certification;
+        $company->referred_by = $request->referred_by;
         
         $user->company()->save($company);
 
@@ -205,6 +206,7 @@ class CompanyController extends Controller
         $company->logo_height = $request->logo_height;
         $company->company_id = $request->company_id;
         $company->adding_certification = $request->adding_certification;
+        $company->referred_by = $request->referred_by;
         $company->save();
         $old_tag = $user->tags->pluck('id')->toArray();
         $tags = $request->tags;
