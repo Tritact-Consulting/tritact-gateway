@@ -88,6 +88,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::post('company/document/download/{id}/{supportive}/{company_id}', [DocumentController::class, 'dashboardDocuments'])->name('company.dashboard.documents.download');
     Route::post('company/document/delete', [DocumentController::class, 'documentsDeleteAll'])->name('documents.delete.all');
     Route::get('company/certification/assign', [CompanyController::class, 'companyCertificationAssign'])->name('company.certification.assign');
+    Route::get('get/certification/company', [CompanyController::class, 'getCertificationByCompany'])->name('get-certification-by-company');
     Route::post('company/certification/add', [CompanyController::class, 'companyCertificationAdd'])->name('company.certification.add');
     Route::get('company/certification/edit/{id}', [CompanyController::class, 'companyCertificationEdit'])->name('company.certification.edit');
     Route::post('company/certification/update/{id}', [CompanyController::class, 'companyCertificationUpdate'])->name('company.certification.update');

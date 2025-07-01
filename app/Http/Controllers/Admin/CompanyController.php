@@ -333,6 +333,7 @@ class CompanyController extends Controller
         $data->certification_number = $request->certification_number;
         $data->certification_body_id = $request->certification_body;
         $data->next_audit_due_date = $request->next_audit_due_date;
+        $data->previous_certification = $request->previous_certification;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Assigned Successfully');
     }
@@ -343,7 +344,8 @@ class CompanyController extends Controller
         $certification = CertificationCategory::where('status', 0)->get();
         $auditors = Auditor::all();
         $certification_body = CertificationBody::where('status', 0)->get();
-        return view('admin.company.certification-edit', compact('data', 'user', 'certification', 'auditors', 'certification_body'));
+        $preview_data = CompanyCertification::where('company_id', $data->company_id)->get();
+        return view('admin.company.certification-edit', compact('data', 'user', 'certification', 'auditors', 'certification_body', 'preview_data'));
     }
 
     public function companyCertificationUpdate(Request $request, $id){
@@ -364,6 +366,7 @@ class CompanyController extends Controller
         $data->certification_number = $request->certification_number;
         $data->certification_body_id = $request->certification_body;
         $data->next_audit_due_date = $request->next_audit_due_date;
+        $data->previous_certification = $request->previous_certification;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Updated Successfully');
     }
@@ -371,5 +374,11 @@ class CompanyController extends Controller
     public function companyCertificationDestroy($id){
         $data = CompanyCertification::find($id)->delete();
         return redirect()->back()->with('success', 'Company Certification Deleted Successfully');
+    }
+
+    public function getCertificationByCompany(Request $request){
+        $id = $request->id;
+        $data = CompanyCertification::where('user_id', $id)->get();
+        return response()->json(['success' => true, 'data' => $data]);
     }
 }

@@ -125,6 +125,16 @@
                                     <input type="text" name="certification_number" id="certification_number" class="form-control" value="{{ $data->certification_number }}">
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Previous Certification</label>
+                                    <select name="previous_certification" id="previous_certification" class="form-control select2">
+                                        @foreach($preview_data as $key => $value)
+                                        <option value="{{ $value->previous_certification }}" {{ $value->id == $data->previous_certification ? 'selected' : '' }}>{{ $value->certification_name }} {{ $value->certification_number }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -138,3 +148,34 @@
     </div>
 </section>
 @endsection
+@push('script')
+<script>
+    $(document).ready(function(){
+        $('#company').change(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('get-certification-by-company') }}",
+                data: {id: $(this).val()},
+                success: function(data) {
+                    if(data.success){
+                        var select = document.getElementById('previous_certification');
+                        select.innerHTML = '<option value="">Select Previous Certification</option>';
+                        var option_data = data.data;
+                        option_data.forEach(function(item) {
+                            var option = document.createElement('option');
+                            option.value = item.id;
+                            option.textContent = item.certification_name + ' - ' + item.certification_number;
+                            select.appendChild(option);
+                        });
+                    }
+                }
+            });
+        })
+    });
+</script>
+@endpush
