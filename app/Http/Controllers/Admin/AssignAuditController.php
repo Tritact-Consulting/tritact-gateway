@@ -163,8 +163,9 @@ class AssignAuditController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AssignAudit $assignAudit)
+    public function destroy($id)
     {
-        //
+        AssignAudit::find($id)->delete();
+        return redirect()->back()->with('success', 'Audit Deleted Successfully');
     }
 }

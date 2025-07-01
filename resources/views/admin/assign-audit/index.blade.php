@@ -56,16 +56,18 @@
                                         {{ $value->completed == 0 ? 'NO' : 'YES' }}
                                     </td>
                                     <td>
-                                        <form action="{{ route('assign-audit.destroy', $value->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
+                                        <div>
                                             @can('edit assign audit')
                                             <a href="{{ route('assign-audit.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
                                             @endcan
                                             @can('delete assign audit')
-                                            <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="audit"><i class="fa fa-trash"></i></button>
+                                            <form action="{{ route('assign-audit.destroy', $value->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="audit"><i class="fa fa-trash"></i></button>
+                                            </form>
                                             @endcan
-                                        </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
