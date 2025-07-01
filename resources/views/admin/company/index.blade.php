@@ -30,7 +30,9 @@
                         @endif
                     </div>
                     <div class="menu-details text-center">
-                        <h4 class="mt-20 mb-10">{{ $value->name }}</h4>
+                        <h4 class="mt-20 mb-10">
+                            @if($value->company->company_id) {{ $value->company->company_id }} - @endif {{ $value->name }}
+                        </h4>
                         <p class="mb-5">{{ $value->email }}</p>
                         @foreach($value->tags as $tag)
                         <span class="badge badge-info mb-10">{{ $tag->name }}</span>
