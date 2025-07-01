@@ -49,6 +49,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="company_id">Company ID</label>
+                                    <input type="text" name="company_id" id="company_id" class="form-control" value="{{ old('company_id', $data->company->company_id) }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label>Name <strong>*</strong></label>
                                     <input type="text" class="form-control" name="name" value="{{ $data->name }}" required>
                                 </div>
@@ -105,6 +111,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" name="address" id="address" class="form-control" value="{{ old('address', $data->company->address) }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label>Status <strong>*</strong></label>
                                     <select class="form-control" name="status" required>
                                         <option value="0" {{ $data->company->status == 0 ? 'selected' : '' }}>Active</option>
@@ -132,12 +144,6 @@
                                         <option value="{{ $value->id }}" {{ in_array($value->id, $data->categories->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $value->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" name="address" id="address" class="form-control" value="{{ old('address', $data->company->address) }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -196,12 +202,6 @@
                                         </div>
                                     </label>
                                     <input type="number" name="logo_height" id="logo_height" class="form-control" value="{{ old('logo_height', $data->company->logo_height) }}" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="company_id">Company ID</label>
-                                    <input type="text" name="company_id" id="company_id" class="form-control" value="{{ old('company_id', $data->company->company_id) }}">
                                 </div>
                             </div>
                             <div class="col-md-6">

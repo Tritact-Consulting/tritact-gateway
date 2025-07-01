@@ -49,6 +49,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="company_id">Company ID</label>
+                                    <input type="text" name="company_id" id="company_id" class="form-control" value="{{ old('company_id') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label>Name <strong>*</strong></label>
                                     <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
                                 </div>
@@ -105,6 +111,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" name="address" id="address" class="form-control" value="{{ old('address') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label>Status <strong>*</strong></label>
                                     <select class="form-control" name="status" required>
                                         <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Active</option>
@@ -132,12 +144,6 @@
                                         <option value="{{ $value->id }}">{{ $value->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" name="address" id="address" class="form-control" value="{{ old('address') }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -228,12 +234,6 @@
                                         <p>If you have any trouble accessing your account, feel free to reply to this email or contact our support team at support@tritact.co.uk or 02080773222.</p>
                                         <br>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="company_id">Company ID</label>
-                                    <input type="text" name="company_id" id="company_id" class="form-control" value="{{ old('company_id') }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
