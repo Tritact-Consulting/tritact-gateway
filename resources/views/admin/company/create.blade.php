@@ -50,7 +50,12 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="company_id">Company ID</label>
-                                    <input type="text" name="company_id" id="company_id" class="form-control" value="{{ old('company_id') }}">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">TCA</span>
+                                        </div>
+                                        <input type="text" name="company_id" id="company_id" class="form-control" value="{{ old('company_id') }}">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
