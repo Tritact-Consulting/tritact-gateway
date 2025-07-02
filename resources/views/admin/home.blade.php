@@ -193,8 +193,8 @@
                                 @foreach($assign_audit as $key => $value)
                                 <tr class="hover-primary">
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $value->auditor->name }}</td>
-                                    <td>{{ $value->company->name }}</td>
+                                    <td><a href="{{ route('auditor.edit', $value->auditor->id) }}" target="_blank">{{ $value->auditor->name }}</a></td>
+                                    <td><a href="{{ route('company.edit', $value->company->id) }}" target="_blank">{{ $value->company->name }}</a></td>
                                     <td>{{ $value->category->name }}</td>
                                     <td>{{ $value->body != null ? $value->body->name : ''}}</td>
                                     <td>{{ $value->audit_type }}</td>
@@ -251,7 +251,7 @@
                             <tbody>
                                 @foreach($auditor_expire as $key => $value)
                                 <tr class="{{ $value->getRemainingDays() }}">
-                                    <td>{{ $value->user->name }}</td>
+                                    <td><a href="{{ route('company.edit', $value->user->id) }}" target="_blank" style="color: black;">{{ $value->user->name }}</a></td>
                                     <td>{{ $value->certificate->name }}</td>
                                     <td>{{ $value->body != null ? $value->body->name : '' }}</td>
                                     <td>{{ $value->certification_number != null ? $value->certification_number : '' }}</td>

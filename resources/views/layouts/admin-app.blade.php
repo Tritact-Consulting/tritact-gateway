@@ -325,6 +325,19 @@
                                 </a>
                             </li>
                             @endcan
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Add-user"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Partners</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li class="{{ Request::routeIs('partner.create') || Request::routeIs('partner.edit') ? 'active' : '' }}"><a href="{{ route('partner.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Partner</a></li>
+                                    <li class="{{ Request::routeIs('partner.index') ? 'active' : '' }}"><a href="{{ route('partner.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Partners List</a></li>
+                                </ul>
+                            </li>
                             @canany(['role', 'view user'])
                             <li class="header">Roles & Permissions</li>
                             @endcan
