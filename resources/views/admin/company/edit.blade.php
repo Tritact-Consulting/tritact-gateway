@@ -215,8 +215,13 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="referred_by">Referred By</label>
-                                    <input type="text" name="referred_by" id="referred_by" class="form-control" value="{{ old('referred_by', $data->company->referred_by) }}">
+                                    <label for="referred_by">Partner</label>
+                                    <select name="referred_by" id="referred_by" class="form-control">
+                                        <option value="">Select Partner</option>
+                                        @foreach($partners as $key => $value)
+                                        <option value="{{ $value->id }}" {{ $data->company->referred_by == $value->id ? 'selected' : ''}}>{{ $value->company_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Tags;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Partner;
 use App\Models\CompanyTags;
 use App\Models\CompanyCategories;
 use App\Models\Documents;
@@ -43,7 +44,8 @@ class CompanyController extends Controller
     public function create(){
         $tags = Tags::where('status', 0)->get();
         $categories = Category::where('status', 0)->get();
-        return view('admin.company.create', compact('tags', 'categories'));
+        $partners = Partner::where('status', 0)->get();
+        return view('admin.company.create', compact('tags', 'categories', 'partners'));
     }
 
     public function store(Request $request){
@@ -143,7 +145,8 @@ class CompanyController extends Controller
         $data = User::find($id);
         $tags = Tags::where('status', 0)->get();
         $categories = Category::where('status', 0)->get();
-        return view('admin.company.edit', compact('data', 'tags', 'categories'));
+        $partners = Partner::where('status', 0)->get();
+        return view('admin.company.edit', compact('data', 'tags', 'categories', 'partners'));
     }
 
     public function update($id, Request $request){
