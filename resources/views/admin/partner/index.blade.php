@@ -24,13 +24,6 @@
 			<div class="box">
 			    <div class="box-body">
 				    <div class="table-responsive rounded card-table">
-                        <div class="text-right mb-2">
-				            <form method="post" id="download_all_form" class="d-none" action="{{ route('documents.delete.all') }}">
-				                @csrf
-				                <input type="hidden" name="doc[]">
-				                <button type="button" class="btn btn-danger btn-sm download_all_form">Delete Selected File</button>
-				            </form>
-			            </div>
                         <table class="table border-no datatables document-table" id="example1">
                             <thead>
                                 <tr>
@@ -52,10 +45,14 @@
                                     <td>{{ $value->phone_number }}</td>
                                     <td>
                                         <form action="{{ route('partner.destroy', $value->id) }}" method="post">
+                                            @can('edit partner')
                                             <a href="{{ route('partner.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                            @endcan
                                             @csrf
                                             @method('DELETE')
+                                            @can('delete partner')
                                             <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="partner"><i class="fa fa-trash"></i></button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

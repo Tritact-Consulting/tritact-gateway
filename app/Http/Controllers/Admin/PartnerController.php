@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
+
+    function __construct(){
+        $this->middleware('permission:view partner|create partner|edit partner|delete partner', ['only' => ['index','show']]);
+        $this->middleware('permission:create partner', ['only' => ['create','store']]);
+        $this->middleware('permission:edit partner', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete partner', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
