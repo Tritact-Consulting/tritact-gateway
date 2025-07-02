@@ -89,8 +89,11 @@ class PartnerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Partner $partner)
+    public function destroy($id)
     {
-        //
+        $data = Partner::find($id);
+        $data->status = 1;
+        $data->save();
+        return redirect()->back()->with('success', 'Partner Deleted Successfully');
     }
 }
