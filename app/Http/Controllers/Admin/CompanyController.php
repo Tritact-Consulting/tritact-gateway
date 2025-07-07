@@ -64,6 +64,7 @@ class CompanyController extends Controller
             'company_email' => 'required',
             'logo_width' => 'required',
             'logo_height' => 'required',
+            'prefix_company_id' => 'required'
         ]);
 
         if($request->company_id != null){
@@ -102,6 +103,7 @@ class CompanyController extends Controller
         $company->company_id = $request->company_id;
         $company->adding_certification = $request->adding_certification;
         $company->referred_by = $request->referred_by;
+        $company->prefix_company_id = $request->prefix_company_id;
         
         $user->company()->save($company);
 
@@ -165,6 +167,7 @@ class CompanyController extends Controller
             'company_email' => 'required',
             'logo_width' => 'required',
             'logo_height' => 'required',
+            'prefix_company_id' => 'required'
         ]);
 
         if($request->password != null){
@@ -210,6 +213,7 @@ class CompanyController extends Controller
         $company->company_id = $request->company_id;
         $company->adding_certification = $request->adding_certification;
         $company->referred_by = $request->referred_by;
+        $company->prefix_company_id = $request->prefix_company_id;
         $company->save();
         $old_tag = $user->tags->pluck('id')->toArray();
         $tags = $request->tags;

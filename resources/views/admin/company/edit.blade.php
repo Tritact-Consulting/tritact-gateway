@@ -52,7 +52,10 @@
                                     <label for="company_id">Company ID</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">TCA</span>
+                                            <select name="prefix_company_id" class="input-group-text" id="basic-addon1">
+                                                <option value="TCA" title="Tritact Clients" {{ $data->company->prefix_company_id == 'TCA' ? 'selected' : '' }}>TCA</option>
+                                                <option value="PCA" title="Private Clients" {{ $data->company->prefix_company_id == 'PCA' ? 'selected' : '' }}>PCA</option>
+                                            </select>
                                         </div>
                                         <input type="text" name="company_id" id="company_id" class="form-control" value="{{ old('company_id', $data->company->company_id) }}">
                                     </div>
