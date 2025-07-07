@@ -27,10 +27,48 @@ class AssignAuditController extends Controller
         $this->middleware('permission:delete assign audit', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $data = AssignAudit::orderBy('id', 'desc')->get();
-        return view('admin.assign-audit.index', compact('data'));
+        $auditors = Auditor::all();
+        $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $certification_category = CertificationCategory::where('status', 0)->orderBy('id', 'desc')->get();
+        $certification_body = CertificationBody::where('status', 0)->get();
+
+        $data = AssignAudit::orderBy('id', 'desc');
+        if($request->auditor_name != null){
+            $auditor_name = $request->auditor_name;
+            $data = $data->whereHas('auditor', function($q) use ($auditor_name){
+                $q->where('id', $auditor_name);
+            });
+        }
+        if($request->company_name != null){
+            $company_name = $request->company_name;
+            $data = $data->whereHas('company', function($q) use ($company_name){
+                $q->where('id', $company_name);
+            });
+        }
+        if($request->certification_type != null){
+            $certification_type = $request->certification_type;
+            $data = $data->whereHas('category', function($q) use ($certification_type){
+                $q->where('id', $certification_type);
+            });
+        }
+        if($request->certification_body != null){
+            $certification_body_se = $request->certification_body;
+            $data = $data->whereHas('body', function($q) use ($certification_body_se){
+                $q->where('id', $certification_body_se);
+            });
+        }
+        if($request->audit_type != null){
+            $data = $data->where('audit_type', 'LIKE', '%' . $request->audit_type . '%');
+        }
+        if($request->status != null){
+            $data = $data->where('status', $request->status);
+        }
+
+        $data = $data->get();
+
+        return view('admin.assign-audit.index', compact('data', 'auditors', 'company', 'certification_category', 'certification_body'));
     }
 
     /**
