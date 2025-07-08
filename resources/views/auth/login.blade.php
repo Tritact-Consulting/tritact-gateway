@@ -20,30 +20,43 @@
     }
 </style>
 <div class="row justify-content-center no-gutters">
+    <div class="col-lg-8">
+        <div class="login-left">
+            <h1>Tritact<span>&#174;</span> Gateway</h1>
+            <h6>Smart ISO management in one platform</h6>
+            <div class="login-content-wrapper">
+                <div class="login-content">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-4 col-md-5 col-12" style="
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
+    border-radius: 0;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+    height: 100vh;
 /* From https://css.glass */
     background: rgba(255, 255, 255, 0.5);
-    border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+    
 ">
-        <div class="login-logo">
-            <img src="{{ asset('images/logo_dark.png') }}" alt="logo">
-        </div>
-        <div class="rounded30 shadow-lg">
+    <div class="login-form-wrapper">
+        <div class="">
+            <div class="login-logo">
+                <img src="{{ asset('images/login-logo.png') }}" alt="logo">
+            </div>
             <div class="content-top-agile p-20 pb-0">
                 <h2 style="color: #000000;">Let's Get Started</h2>
                 <p class="mb-0">Sign in to {!! config('app.name', 'Laravel') !!}</p>
             </div>
-            <div class="p-40">
+            <div class="p-20">
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="form-group">
@@ -84,16 +97,8 @@
                             </div>
                         </div>
                         <!-- /.col -->
-                        <div class="col-12 text-center" style="
-    margin-top: 20px;
-">
-                            <button type="submit" class="btn btn-success mt-10" style="
-    height: 50px;
-    width: 140px;
-    border-radius: 10px;
-    background-color: #000000;
-    border: #000000
-">SIGN IN</button>
+                        <div class="col-12 text-center" style="margin-top: 20px;">
+                            <button type="submit" class="btn btn-success mt-10" style="height: 50px;width: 140px;border-radius: 10px;background-color: #000000;border: #000000">SIGN IN</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -101,5 +106,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

@@ -957,3 +957,12 @@ ul.role-wrapper {
 ul.role-wrapper li {
     flex: 0 0 25%;
 }
+
+.login-form-wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 0 0 100%;
+}
