@@ -20,13 +20,72 @@
     }
 </style>
 <div class="row justify-content-center no-gutters">
-    <div class="col-lg-8">
+    <div class="col-lg-8 pl-0">
         <div class="login-left">
-            <h1>Tritact<span>&#174;</span> Gateway</h1>
-            <h6>Smart ISO management in one platform</h6>
-            <div class="login-content-wrapper">
-                <div class="login-content">
-                    
+            <div class="login-left-wrapper">
+                <div class="top-login">
+                    <h1>Tritact<span>&#174;</span> Gateway</h1>
+                    <h6>Smart ISO management in one platform</h6>
+                    <img src="{{ asset('images/tritact-intelligent.png') }}" alt="Tritact Intelligent Agent">
+                </div>
+                <div class="login-content-wrapper">
+                    <div class="login-content">
+                        <div>
+                            <img src="{{ asset('images/login-img-1.png') }}" alt="">
+                            <div>
+                                <h5>Complete ISO Management System Library</h5>
+                                <p>Preloaded templateês for ISO 9001, 14001, 45001, 50001 & 27001.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="{{ asset('images/login-img-2.png') }}" alt="">
+                            <div>
+                                <h5>Audit Planner <br>& Tracker</h5>
+                                <p>Schedule audits, set reminders, and track findings and actions.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="{{ asset('images/login-img-3.png') }}" alt="">
+                            <div>
+                                <h5>Tritact® <br>Intellligent Agent"</h5>
+                                <p>Al assistant to guide implementation, reviews, and improvements.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="{{ asset('images/login-img-4.png') }}" alt="">
+                            <div>
+                                <h5>All-in-One ISO<br>Compliance Huò</h5>
+                                <p>Centrallse documents, risks, actions, and ISO records.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="{{ asset('images/login-img-5.png') }}" alt="">
+                            <div>
+                                <h5>Business Planning<br>& Strategic Tools</h5>
+                                <p>Generate SWOT, PESTLE, and ISO-aligned businesspans.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="{{ asset('images/login-img-6.png') }}" alt="">
+                            <div>
+                                <h5>Evidence Pack<br>Generator</h5>
+                                <p>Build clausé-ns, approvals, and control access easily.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="{{ asset('images/login-img-7.png') }}" alt="">
+                            <div>
+                                <h5>Secure, Scalable &<br>Consultant-Ready</h5>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="{{ asset('images/login-img-7.png') }}" alt="">
+                            <div>
+                                <h5>GDPR-compliant,<br>UK-hosted,</h5>
+                                <p>multi-user & whitênabel capable.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

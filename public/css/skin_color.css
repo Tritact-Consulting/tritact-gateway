@@ -966,3 +966,71 @@ ul.role-wrapper li {
     width: 100%;
     flex: 0 0 100%;
 }
+
+.login-content {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.login-content > div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 32.1%;
+    margin: 8px 0px;
+}
+
+.login-left h1 {
+    font-weight: bold;
+}
+
+.login-left {
+    /* background-color: white; */
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding-right: 30px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    margin-right: 0;
+    border-right: 5px solid black;
+}
+
+.login-content > div img {
+    height: 80px;
+}
+
+.login-content > div p {
+    margin: 0;
+}
+
+.login-content > div h5 {
+    font-weight: 500;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.login-left-wrapper {
+    /* background-color: white; */
+    padding: 60px;
+    /* background: rgba(255, 255, 255, 0.7); */
+    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+    /* backdrop-filter: blur(5px); */
+}
+
+.login-content-wrapper {
+    margin-top: 30px;
+}
+
+.top-login {position: relative;}
+
+.top-login img {
+    position: absolute;
+    right: 0;
+    top: -15px;
+    width: 180px;
+}

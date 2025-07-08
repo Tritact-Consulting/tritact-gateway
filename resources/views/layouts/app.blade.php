@@ -13,9 +13,9 @@
 	<link rel="stylesheet" href="{{ asset('css/skin_color.css') }}">	
 </head>
 <body class="hold-transition theme-primary bg-img" style="background-color: #e5e5e5;">
-    <div class="container-fluid h-p100 pr-0">
+    <div class="container-fluid h-p100 pr-0 pl-0">
         <div class="row align-items-center justify-content-md-center h-p100">
-            <div class="col-12 pr-0">
+            <div class="col-12 pr-0 pl-0">
                 @yield('content')
             </div>
         </div>
