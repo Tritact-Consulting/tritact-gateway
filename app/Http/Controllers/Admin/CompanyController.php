@@ -313,12 +313,39 @@ class CompanyController extends Controller
         return redirect()->back()->with('success', 'Company Deleted Successfully');
     }
 
-    public function companyCertificationAssign(){
+    public function companyCertificationAssign(Request $request){
         $user = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
         $certification = CertificationCategory::where('status', 0)->get();
-        $data = CompanyCertification::orderBy('id', 'desc')->get();
         $auditors = Auditor::all();
         $certification_body = CertificationBody::where('status', 0)->get();
+        $data = CompanyCertification::orderBy('id', 'desc');
+        if($request->company_name != null){
+            $company_name = $request->company_name;
+            $data = $data->whereHas('user', function($q) use ($company_name){
+                $q->where('id', $company_name);
+            });
+        }
+        if($request->certification_type != null){
+            $certification_type = $request->certification_type;
+            $data = $data->whereHas('certificate', function($q) use ($certification_type){
+                $q->where('id', $certification_type);
+            });
+        }
+        if($request->certification_body != null){
+            $certificate_body = $request->certification_body;
+            $data = $data->whereHas('body', function($q) use ($certificate_body){
+                $q->where('id', $certificate_body);
+            });
+        }
+        if($request->certificate_number != null){
+            $data = $data->where('certification_number', 'LIKE', '%' . $request->certificate_number . '%');
+        }
+        if($request->audit_type != null){
+            $data = $data->where('audit_type', 'LIKE', '%' . $request->audit_type . '%');
+        }
+
+
+        $data = $data->get();
         return view('admin.company.certification', compact('user', 'certification', 'data', 'auditors', 'certification_body'));
     }
 
