@@ -24,7 +24,7 @@
         <div class="login-left">
             <div class="login-left-wrapper">
                 <div class="top-login">
-                    <h1>Tritact<span>&#174;</span> Gateway</h1>
+                    <h1>Tritact<span>&#174;</span> Gateway™</h1>
                     <h6>Smart ISO management in one platform</h6>
                     <img src="{{ asset('images/tritact-intelligent.png') }}" alt="Tritact Intelligent Agent">
                 </div>
@@ -34,7 +34,7 @@
                             <img src="{{ asset('images/login-img-1.png') }}" alt="">
                             <div>
                                 <h5>Complete ISO Management System Library</h5>
-                                <p>Preloaded templateês for ISO 9001, 14001, 45001, 50001 & 27001.</p>
+                                <p>Preloaded templates for ISO 9001, 14001, 45001, 50001 & 27001.</p>
                             </div>
                         </div>
                         <div>
@@ -47,29 +47,29 @@
                         <div>
                             <img src="{{ asset('images/login-img-3.png') }}" alt="">
                             <div>
-                                <h5>Tritact® <br>Intellligent Agent"</h5>
+                                <h5>Tritact® <br>Intellligent Agent</h5>
                                 <p>Al assistant to guide implementation, reviews, and improvements.</p>
                             </div>
                         </div>
                         <div>
                             <img src="{{ asset('images/login-img-4.png') }}" alt="">
                             <div>
-                                <h5>All-in-One ISO<br>Compliance Huò</h5>
-                                <p>Centrallse documents, risks, actions, and ISO records.</p>
+                                <h5>All-in-One ISO<br>Compliance Hub</h5>
+                                <p>Centralise documents, risks, actions, and ISO records.</p>
                             </div>
                         </div>
                         <div>
                             <img src="{{ asset('images/login-img-5.png') }}" alt="">
                             <div>
                                 <h5>Business Planning<br>& Strategic Tools</h5>
-                                <p>Generate SWOT, PESTLE, and ISO-aligned businesspans.</p>
+                                <p>Generate SWOT, PESTLE, and ISO-aligned business plans.</p>
                             </div>
                         </div>
                         <div>
                             <img src="{{ asset('images/login-img-6.png') }}" alt="">
                             <div>
                                 <h5>Evidence Pack<br>Generator</h5>
-                                <p>Build clausé-ns, approvals, and control access easily.</p>
+                                <p>Build clauses, approvals, and control access easily.</p>
                             </div>
                         </div>
                         <div>
@@ -81,8 +81,8 @@
                         <div>
                             <img src="{{ asset('images/login-img-7.png') }}" alt="">
                             <div>
-                                <h5>GDPR-compliant,<br>UK-hosted,</h5>
-                                <p>multi-user & whitênabel capable.</p>
+                                <h5>GDPR-compliant,<br>UK-hosted</h5>
+                                <p>Multi-user & whitelabel capable.</p>
                             </div>
                         </div>
                     </div>
