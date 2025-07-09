@@ -1034,3 +1034,49 @@ ul.role-wrapper li {
     top: -15px;
     width: 180px;
 }
+
+@media (max-width: 767.98px) {
+  .login-left{
+    height: auto;
+    padding: 0;
+    border:0px;
+  }
+  .login-content > div {
+    display: block;
+    width: 47%;
+    text-align: center;
+  }
+  .top-login img {
+      position: static;
+      width: 130px;
+  }
+
+  .login-left h1 {
+      font-size: 22px;
+      margin: 6px 0px;
+  }
+  .login-left-wrapper {
+      padding: 30px;
+  }
+  .top-login {
+      text-align: center;
+  }
+  .login-content {
+      justify-content: center;
+  }
+  .login-content > div img {
+    height: 50px;
+    margin-bottom: 4px;
+  }
+  .login-content > div h5 {
+      font-size: 13px;
+  }
+
+  .login-content > div p {
+      font-size: 12px;
+  }
+  .container-fluid.h-p100.pr-0.pl-0 {
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+  }
+}
