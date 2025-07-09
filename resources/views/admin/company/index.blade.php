@@ -15,6 +15,18 @@
                 </nav>
             </div>
         </div>
+        <div class="col-md-6">
+            <form method="get" action="{{ route('company.index') }}">
+                <div class="input-group">
+                    <input type="search" id="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" name="search" value="{{ app('request')->input('search') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-info" type="submit" id="button-addon3">
+                            <i class="icon-Search"><span class="path1"></span><span class="path2"></span></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <!-- /.content -->

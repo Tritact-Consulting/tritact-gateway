@@ -36,8 +36,12 @@ class CompanyController extends Controller
         $this->middleware('permission:delete assign certification', ['only' => ['companyCertificationDestroy']]);
     }
 
-    public function index(){
-        $data = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+    public function index(Request $request){
+        $data = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc');
+        if($request->search != null){
+            $data = $data->where('name', 'like', '%' . $request->search . '%');
+        }
+        $data = $data->get();
         return view('admin.company.index', compact('data'));
     }
 
