@@ -24,61 +24,61 @@
         <div class="login-left">
             <div class="login-left-wrapper">
                 <div class="top-login">
-                    <h1>Tritact<span>&#174;</span> Gateway™</h1>
-                    <h6>Smart ISO management in one platform</h6>
-                    <img src="{{ asset('images/tritact-intelligent.png') }}" alt="Tritact Intelligent Agent">
+                    <h1 class="wow bounceInDown" data-wow-delay="0.2s">Tritact<span>&#174;</span> Gateway™</h1>
+                    <h6 class="wow bounceInDown" data-wow-delay="0.3s">Smart ISO management in one platform</h6>
+                    <img class="wow bounceInRight" src="{{ asset('images/tritact-intelligent.png') }}" alt="Tritact Intelligent Agent">
                 </div>
                 <div class="login-content-wrapper">
                     <div class="login-content">
-                        <div>
+                        <div class="wow bounceInLeft" data-wow-delay="0.1s">
                             <img src="{{ asset('images/login-img-1.png') }}" alt="">
                             <div>
                                 <h5>Complete ISO Management System Library</h5>
                                 <p>Preloaded templates for ISO 9001, 14001, 45001, 50001 & 27001.</p>
                             </div>
                         </div>
-                        <div>
+                        <div class="wow bounceInLeft" data-wow-delay="0.5s">
                             <img src="{{ asset('images/login-img-2.png') }}" alt="">
                             <div>
                                 <h5>Audit Planner <br>& Tracker</h5>
                                 <p>Schedule audits, set reminders, and track findings and actions.</p>
                             </div>
                         </div>
-                        <div>
+                        <div class="wow bounceInLeft" data-wow-delay="1s">
                             <img src="{{ asset('images/login-img-3.png') }}" alt="">
                             <div>
                                 <h5>Tritact® <br>Intellligent Agent</h5>
                                 <p>Al assistant to guide implementation, reviews, and improvements.</p>
                             </div>
                         </div>
-                        <div>
+                        <div class="wow bounceInLeft" data-wow-delay="0.1s">
                             <img src="{{ asset('images/login-img-4.png') }}" alt="">
                             <div>
                                 <h5>All-in-One ISO<br>Compliance Hub</h5>
                                 <p>Centralise documents, risks, actions, and ISO records.</p>
                             </div>
                         </div>
-                        <div>
+                        <div class="wow bounceInLeft" data-wow-delay="0.5s">
                             <img src="{{ asset('images/login-img-5.png') }}" alt="">
                             <div>
                                 <h5>Business Planning<br>& Strategic Tools</h5>
                                 <p>Generate SWOT, PESTLE, and ISO-aligned business plans.</p>
                             </div>
                         </div>
-                        <div>
+                        <div class="wow bounceInLeft" data-wow-delay="1s">
                             <img src="{{ asset('images/login-img-6.png') }}" alt="">
                             <div>
                                 <h5>Evidence Pack<br>Generator</h5>
                                 <p>Build clauses, approvals, and control access easily.</p>
                             </div>
                         </div>
-                        <div>
+                        <div class="wow bounceInLeft" data-wow-delay="0.1s">
                             <img src="{{ asset('images/login-img-7.png') }}" alt="">
                             <div>
                                 <h5>Secure, Scalable &<br>Consultant-Ready</h5>
                             </div>
                         </div>
-                        <div>
+                        <div class="wow bounceInLeft" data-wow-delay="0.5s">
                             <img src="{{ asset('images/login-img-7.png') }}" alt="">
                             <div>
                                 <h5>GDPR-compliant,<br>UK-hosted</h5>
