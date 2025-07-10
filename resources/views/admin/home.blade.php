@@ -191,33 +191,33 @@
                             </thead>
                             <tbody>
                                 @foreach($assign_audit as $key => $value)
-                                <tr class="hover-primary">
-                                    <td>{{ ++$key }}</td>
-                                    <td><a href="{{ route('auditor.edit', $value->auditor->id) }}" target="_blank">{{ $value->auditor->name }}</a></td>
-                                    <td><a href="{{ route('company.edit', $value->company->id) }}" target="_blank">{{ $value->company->name }}</a></td>
-                                    <td>{{ $value->category->name }}</td>
-                                    <td>{{ $value->body != null ? $value->body->name : ''}}</td>
-                                    <td>{{ $value->audit_type }}</td>
-                                    <td>
-                                        <span class="badge badge-pill badge-{{ $value->get_status_class() }}">{{ $value->get_status() }}</span>
-                                    </td>
-                                    <td>{{ $value->audit_start_date }}<br>{{ $value->audit_end_date }}</td>
-                                    <td>
-                                        {{ $value->completed == 0 ? 'NO' : 'YES' }}
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('assign-audit.destroy', $value->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            @can('edit assign audit')
-                                            <a href="{{ route('assign-audit.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                                            @endcan
-                                            @can('delete assign audit')
-                                            <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="audit"><i class="fa fa-trash"></i></button>
-                                            @endcan
-                                        </form>
-                                    </td>
-                                </tr>
+                                    @if(strtolower($value->get_status()) !== 'completed')
+                                        <tr class="hover-primary">
+                                            <td>{{ ++$key }}</td>
+                                            <td><a href="{{ route('auditor.edit', $value->auditor->id) }}" target="_blank">{{ $value->auditor->name }}</a></td>
+                                            <td><a href="{{ route('company.edit', $value->company->id) }}" target="_blank">{{ $value->company->name }}</a></td>
+                                            <td>{{ $value->category->name }}</td>
+                                            <td>{{ $value->body != null ? $value->body->name : ''}}</td>
+                                            <td>{{ $value->audit_type }}</td>
+                                            <td>
+                                                <span class="badge badge-pill badge-{{ $value->get_status_class() }}">{{ $value->get_status() }}</span>
+                                            </td>
+                                            <td>{{ $value->audit_start_date }}<br>{{ $value->audit_end_date }}</td>
+                                            <td>{{ $value->completed == 0 ? 'NO' : 'YES' }}</td>
+                                            <td>
+                                                <form action="{{ route('assign-audit.destroy', $value->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    @can('edit assign audit')
+                                                    <a href="{{ route('assign-audit.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                                    @endcan
+                                                    @can('delete assign audit')
+                                                    <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="audit"><i class="fa fa-trash"></i></button>
+                                                    @endcan
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
