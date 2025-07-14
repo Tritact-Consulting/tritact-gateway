@@ -99,4 +99,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::resource('users', AdminUserController::class);
     Route::resource('assign-audit', AssignAuditController::class);
     Route::resource('assigned-audit', AssignedAuditController::class);
+    Route::get('/open-doc-office/{id}', [DocumentsController::class, 'openInOfficeViewer'])
+    ->name('documents.open.office');
 });

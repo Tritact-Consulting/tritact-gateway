@@ -65,7 +65,12 @@
                                     <td>{{ $value->created_at->format('d M, Y') }}</td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <form action="{{ route('company.dashboard.documents.download', ['id' => $value->id, 'supportive' => 0, 'company_id' => $user->id]) }}" method="POST">                                
+                                            <form action="{{ route('company.dashboard.documents.download', ['id' => $value->id, 'supportive' => 0, 'company_id' => $user->id]) }}" method="POST">
+                                                <a href="{{ route('documents.open.office', $value->id) }}"
+                                                    target="_blank"
+                                                    class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5">
+                                                        <i class="fa fa-eye"></i>
+                                                </a>
                                                 @csrf
                                                 <button type="submit" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-0"><i class="fa fa-download"></i></button>
                                             </form>

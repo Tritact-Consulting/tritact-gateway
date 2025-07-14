@@ -65,7 +65,11 @@
                                     <td>
                                         <form action="{{ route('document.destroy', $value->id) }}" method="post">
                                             @can('view doc')
-                                            <a href="{{ route('document.show', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-success-light btn-xs mb-5"><i class="fa fa-eye-slash"></i></a>										
+                                            <a href="{{ route('documents.open.office', $value->id) }}"
+                                                target="_blank"
+                                                class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5">
+                                                    <i class="fa fa-eye"></i>
+                                            </a>
                                             @endcan
                                             @can('edit doc')
                                             <a href="{{ route('document.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>

@@ -14,6 +14,8 @@ use File;
 use Notification;
 use Illuminate\Support\Str;
 use App\Notifications\DocumentDownloadSuccessful;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Response;
 
 class DocumentsController extends Controller
 {
@@ -215,5 +217,18 @@ class DocumentsController extends Controller
         $data->save();
         return redirect()->back()->with('success', 'Supportive Document Added Successfully');        
     }
-    
+
+    public function openInOfficeViewer($id)
+    {
+        // Fetch document
+        $document = Documents::findOrFail($id);
+
+        // Get full public URL for the docx file
+        $publicUrl = asset($document->file);
+
+        // Generate Office Online viewer URL
+        $viewerUrl = "https://view.officeapps.live.com/op/view.aspx?src=" . urlencode($publicUrl);
+
+        return redirect($viewerUrl);
+    }
 }
