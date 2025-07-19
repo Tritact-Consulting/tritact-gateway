@@ -40,6 +40,7 @@
 					@method('PUT')
 					<div class="box-body">
 						<div class="row">
+							<div class="col-md-12">
 							@if($errors->any())
 								{!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
 							@endif
@@ -48,7 +49,7 @@
 									{{ session()->get('success') }}
 								</div>
 							@endif
-							
+							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="form-label">Name <strong>*</strong></label>
@@ -64,9 +65,9 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="form-label">Role <strong>*</strong></label>
-									<select name="role" id="role" class="form-control" required>
+									<select name="role[]" id="role" class="form-control select2" multiple required>
 										@foreach($roles as $key => $value)
-										<option value="{{ $value->name }}" {{ $data->getRole() == $value->name ? 'selected' : '' }}>{{ $value->name }}</option>
+										<option value="{{ $value->name }}" {{ in_array($value->name, $data->getRole()) ? 'selected' : '' }}>{{ $value->name }}</option>
 										@endforeach
 									</select>
 								</div>

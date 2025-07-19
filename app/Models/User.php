@@ -95,7 +95,7 @@ class User extends Authenticatable
     }
 
     public function getRole(){
-        return $this->getRoleNames()->first();
+        return $this->getRoleNames()->toArray();
     }
 
     public function assign_audit(){

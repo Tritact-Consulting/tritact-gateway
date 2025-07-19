@@ -63,8 +63,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="form-label">Role <strong>*</strong></label>
-									<select name="role" id="role" class="form-control" required>
-										<option value="">Select Role</option>
+									<select name="role[]" id="role" class="form-control select2" multiple required>
 										@foreach($roles as $key => $value)
 										<option value="{{ $value->name }}">{{ $value->name }}</option>
 										@endforeach

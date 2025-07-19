@@ -23,6 +23,7 @@ use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\GuidesController;
 use App\Http\Controllers\CertificationController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 Auth::routes(['register' => false]);
 
+Route::group(['middleware' => ['auth']], function(){
+    Route::resource('attendance', AttendanceController::class);
+    Route::post('/timein', [AttendanceController::class, 'timeIn'])->name('attendance.timeIn');
+    Route::post('/timeout', [AttendanceController::class, 'timeOut'])->name('attendance.timeOut');
+});
 Route::group(['middleware' => ['auth', 'user']], function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('user', UserController::class);
