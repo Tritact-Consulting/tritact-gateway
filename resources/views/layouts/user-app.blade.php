@@ -216,8 +216,10 @@
                                 }
                             }else{
                                 $get_user = \App\Models\User::find(Auth::user()->user_id);
-                                if($get_user->company->adding_certification != 0){
-                                    $adding_adding_certification = true;
+                                if($get_user != null){
+                                    if($get_user->company->adding_certification != 0){
+                                        $adding_adding_certification = true;
+                                    }
                                 }
                             }
                             @endphp
@@ -229,6 +231,17 @@
                                 </a>
                             </li>
                             @endif
+                            @canany(['all attendance', 'view attendance'])
+                            <li class="header">Attendances</li>
+                            @endcan
+                            @can('view attendance')
+                            <li class="{{ Request::routeIs('attendance.index') ? 'active' : '' }}">
+                                <a href="{{ route('attendance.index') }}">
+                                    <i class="icon-Tablet"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+                                    <span>Attendance</span>
+                                </a>
+                            </li>
+                            @endcan
                         </ul>
                     </div>
                 </div>
