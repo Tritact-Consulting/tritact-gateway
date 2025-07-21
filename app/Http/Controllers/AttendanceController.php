@@ -13,6 +13,7 @@ use App\Models\User;
 use File;
 use Illuminate\Support\Str;
 use Response;
+use Carbon\Carbon;
 
 class AttendanceController extends Controller
 {
@@ -67,9 +68,9 @@ class AttendanceController extends Controller
                 if ($data['timein'] != null) {
 
                     $timeIn = Carbon::createFromTimestamp($perdayattendance->timein);
-                    $shiftStartTime = Carbon::parse($userdata->shift()->starting_time);
+                    $shiftStartTime = Carbon::parse('9:00');
 
-                    $shiftStartTimeWithGrace = $shiftStartTime->addMinutes($userdata->shift()->grace_time);
+                    $shiftStartTimeWithGrace = $shiftStartTime->addMinutes(20);
 
                     if ($timeIn->format('H:i:s') > $shiftStartTimeWithGrace->format('H:i:s')) {
                         $data['name'] = 'Late Check In';
@@ -100,6 +101,38 @@ class AttendanceController extends Controller
 
     public function destroy($id){
         
+    }
+
+    public function timeIn(){
+        $userid = Auth::user()->id;
+        $shift = '9:00:00 AM - 6:00:00 PM';
+        $timein = time();
+        if (date('H:i', $timein) >= '00:00' && date('H:i', $timein) <= '06:00') {
+            $date = strtotime(date('d-M-Y')) - 86400;
+        } else {
+            $date = strtotime(date('d-M-Y'));
+        }
+        $timein = Attendances::updateOrCreate([
+            'user_id' => $userid,
+            'date' => $date,
+        ], [
+            'timein' => $timein,
+        ]);
+
+        $successmessage = 'Timed In Successfuly!';
+        return redirect()->back()->with('success', $successmessage);
+    }
+
+    public function timeOut()
+    {
+        $userid = Auth::user()->id;
+        $timeout = time();
+        $date = strtotime(date('d-M-Y'));
+        $timein = Attendances::where('user_id', $userid)->latest()->first();
+        $timeout = Attendances::where(['user_id' => $userid, 'date' => $timein->date])->update(['timeout' => $timeout, 'totalhours' => ($timeout - ($timein->timein))]);
+        $successmessage = 'Timed Out Successfuly!';
+
+        return redirect()->back()->with('success', $successmessage);
     }
     
 }

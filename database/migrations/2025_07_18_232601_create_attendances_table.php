@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('user_id');
             $table->string('timein');
-            $table->string('timeout');
+            $table->string('timeout')->nullable();
             $table->string('date');
-            $table->string('totalhours');
+            $table->string('totalhours')->nullable();
             $table->timestamps();
         });
     }
