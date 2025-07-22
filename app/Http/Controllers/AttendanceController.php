@@ -134,5 +134,10 @@ class AttendanceController extends Controller
 
         return redirect()->back()->with('success', $successmessage);
     }
+
+    public function allAttendance(Request $request){
+        $users = User::permission('view attendance')->get();
+        return view('admin.attendance.index', compact('users'));
+    }
     
 }

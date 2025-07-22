@@ -55,6 +55,7 @@ Auth::routes(['register' => false]);
 
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('attendance', AttendanceController::class);
+    Route::get('/all/attendance', [AttendanceController::class, 'allAttendance'])->name('all-attendance.index');
     Route::post('/timein', [AttendanceController::class, 'timeIn'])->name('attendance.timeIn');
     Route::post('/timeout', [AttendanceController::class, 'timeOut'])->name('attendance.timeOut');
 });

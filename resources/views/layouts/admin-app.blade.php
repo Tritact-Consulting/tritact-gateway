@@ -353,6 +353,14 @@
                                 </a>
                             </li>
                             @endcan
+                            @can('all attendance')
+                            <li class="{{ Request::routeIs('all-attendance.index') ? 'active' : '' }}">
+                                <a href="{{ route('all-attendance.index') }}">
+                                    <i class="icon-Tablet"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+                                    <span>All Attendance</span>
+                                </a>
+                            </li>
+                            @endcan
 
                             @canany(['role', 'view user'])
                             <li class="header">Roles & Permissions</li>
