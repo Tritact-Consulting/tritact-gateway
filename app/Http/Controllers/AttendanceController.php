@@ -74,7 +74,7 @@ class AttendanceController extends Controller
 
                     if ($timeIn->format('H:i:s') > $shiftStartTimeWithGrace->format('H:i:s')) {
                         $data['name'] = 'Late Check In';
-                    } else if ($perdayattendance->totalhours < ($userdata->shift()->shift_hours * 3600)) {
+                    } else if ($perdayattendance->totalhours < (9 * 3600)) {
                         $data['name'] = 'Early Check Out';
                     }
                 }
@@ -188,7 +188,7 @@ class AttendanceController extends Controller
 
                     if ($timeIn->format('H:i:s') > $shiftStartTimeWithGrace->format('H:i:s')) {
                         $data['name'] = 'Late Check In';
-                    } else if ($perdayattendance->totalhours < ($userdata->shift()->shift_hours * 3600)) {
+                    } else if ($perdayattendance->totalhours < (9 * 3600)) {
                         $data['name'] = 'Early Check Out';
                     }
                 }
