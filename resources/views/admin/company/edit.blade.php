@@ -154,16 +154,22 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="version">Version <strong>*</strong></label>
                                     <input type="text" name="version" id="version" class="form-control" value="{{ old('version', $data->company->version) }}" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="issue_date">Issue Date <strong>*</strong></label>
                                     <input type="date" name="issue_date" id="issue_date" class="form-control" value="{{  old('issue_data', date('Y-m-d', strtotime($data->company->issue_date))) }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="policy_date">Policy Issue Date</label>
+                                    <input type="date" name="policy_date" id="policy_date" class="form-control" value="{{ $data->company->policy_date != null ? date('Y-m-d', strtotime($data->company->policy_date)) : '' }}">
                                 </div>
                             </div>
                             <div class="col-md-6">

@@ -35,7 +35,7 @@
                                 <select name="user" id="user" class="form-control select2">
                                     <option value="">Select User</option>
                                     @foreach($users as $key => $value)
-                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                    <option value="{{ $value->id }}" {{ request()->get('user') == $value->id ? 'selected' : '' }}>{{ $value->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -83,6 +83,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if($userdata != null)
                                 @if(isset($attendance))
                                 @foreach ($attendance as $thisattendance)
                                 <tr class="{{ $thisattendance['status'] == 'weekend' ? 'alert alert-danger' : ''}} {{ $thisattendance['status'] == 'today' ? 'alert alert-info' : ''}}">
@@ -102,6 +103,7 @@
                                     <td></td>
                                 </tr>
                                 @endforeach
+                                @endif
                                 @endif
                             </tbody>
                         </table>

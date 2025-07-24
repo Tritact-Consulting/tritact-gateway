@@ -101,6 +101,7 @@ class CompanyController extends Controller
         $company->website = $request->website;
         $company->registration_num = $request->registration_num;
         $company->phone_num = $request->phone_num;
+        $company->policy_date = $request->policy_date;
         $company->company_email = $request->company_email;
         $company->logo_width = $request->logo_width;
         $company->logo_height = $request->logo_height;
