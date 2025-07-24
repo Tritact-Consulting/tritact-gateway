@@ -223,6 +223,4 @@ class AttendanceController extends Controller
             'user' => $user->name,
         ];
     }
-
-    
 }
