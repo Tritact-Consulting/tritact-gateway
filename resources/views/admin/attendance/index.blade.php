@@ -63,6 +63,9 @@
                             <div class="col-md-2">
                                 <button class="btn btn-primary btn-sm" style="width: 100%;">Search</button>
                             </div>
+                            <div class="col-md-2">
+                                <a href="{{ route('all-attendance.index') }}" class="btn btn-secondary btn-sm" style="width: 100%;">Clear Filter</a>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -73,37 +76,30 @@
                         <table class="table table-striped border-no document-table" id="example1">
                             <thead>
                                 <tr>
-                                    <th>Day</th>
-                                    <th>Date</th>
-                                    <th>Timein</th>
-                                    <th>Timeout</th>
+                                    <th>Name</th>
+                                    <th>Time In</th>
+                                    <th>Time Out</th>
                                     <th>Working Hours</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($userdata != null)
-                                @if(isset($attendance))
-                                @foreach ($attendance as $thisattendance)
-                                <tr class="{{ $thisattendance['status'] == 'weekend' ? 'alert alert-danger' : ''}} {{ $thisattendance['status'] == 'today' ? 'alert alert-info' : ''}}">
-                                    <td>{{ $thisattendance['date'] }}</td>
-                                    <td>{{ $thisattendance['day'] }}</td>
-                                    <td>{{ $thisattendance['timein'] != '-' ? $thisattendance['timein'] : '-' }}</td>
-                                    <td>{{ $thisattendance['timeout'] != '-' ? $thisattendance['timeout'] : '-' }}</td>
-                                    <td>{{ $thisattendance['totalhours'] != '-' ? $thisattendance['totalhours'] : '-' }}</td>
-                                    <td>
-                                        @if ($thisattendance['status'] == 'late' || $thisattendance['status'] == 'early')
-                                        {{ ucwords($thisattendance['status']) }} Check
-                                        {{ $thisattendance['status'] == 'late' ? 'In' : 'Out' }}
-                                        @else
-                                        <span>{{ $thisattendance['name'] }} </span>
-                                        @endif
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                @endforeach
-                                @endif
+                                @if(isset($attendance) && count($attendance) > 0)
+                                    @foreach($attendance as $userData)
+                                        @foreach ($userData['records'] as $record)
+                                            <tr>
+                                                <td>{{ $record['user'] }}</td>
+                                                <td>{{ $record['timein'] }}</td>
+                                                <td>{{ $record['timeout'] }}</td>
+                                                <td>{{ $record['totalhours'] }}</td>
+                                                <td>{{ $record['status'] }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="5" class="text-center">No attendance records found.</td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>

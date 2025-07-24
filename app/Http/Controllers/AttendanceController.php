@@ -135,69 +135,94 @@ class AttendanceController extends Controller
         return redirect()->back()->with('success', $successmessage);
     }
 
-    public function allAttendance(Request $request){
+    public function allAttendance(Request $request)
+    {
         $users = User::permission('view attendance')->get();
+        $selectedUser = null;
 
-        $userdata = null;
-        if($request->user != null){
-            $userdata = User::find($request->user);
-        }
-        $month = 1;
-        if($request->month != null){
-            $month = $request->month;
-        }
-        $year = 1;
-        if($request->year != null){
-            $year = $request->year;
+        if ($request->user) {
+            $selectedUser = User::find($request->user);
         }
 
-        $date = '01-'.$month.'-'.$year;
-        $id = Auth::user()->id;
-        $firstday = strtotime(date('Y-m-01', strtotime($date)));
-        $lastday = strtotime(date('Y-m-t', strtotime($date)));
+        // If no date filter is applied, show today's date
+        $today = strtotime(date('Y-m-d'));
+
+        // If filters are applied, get the full month's attendance
+        $filtering = $request->has('month') || $request->has('year');
+
+        $month = $request->month ?? date('m');
+        $year = $request->year ?? date('Y');
+        $date = '01-' . $month . '-' . $year;
+        $firstDay = strtotime(date('Y-m-01', strtotime($date)));
+        $lastDay = strtotime(date('Y-m-t', strtotime($date)));
 
         $attendance = [];
-        $totalDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 
-        for ($i = $firstday; $i <= $lastday; $i += 86400) {
-            $perdayattendance = Attendances::where([['user_id', '=', $id], ['date', '=', $i]])->first();
-            $day = date('l', $i);
-            if ($perdayattendance == NULL) {
-                if ($i > strtotime(date('d-M-Y'))) {
-                    $data = ['status' => 'future', 'timein' => '-', 'timeout' => '-', 'totalhours' => '-', 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => ''];
-                }else {
-                    if (date('D', $i) == 'Sat' || date('D', $i) == 'Sun') {
-                        $data = ['status' => 'weekend', 'timein' => '-', 'timeout' => '-', 'totalhours' => '-', 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => 'Weekend'];
-                    } else {
-                        $data = ['status' => 'absent', 'timein' => '-', 'timeout' => '-', 'totalhours' => '-', 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => 'Absent'];
-                    }
+        foreach ($users as $user) {
+            $records = [];
+
+            if ($filtering) {
+                // full month logic
+                for ($i = $firstDay; $i <= $lastDay; $i += 86400) {
+                    $records[] = $this->getAttendanceRecord($user, $i);
                 }
-            } elseif ($perdayattendance->date == strtotime(date('d-M-Y')) && $perdayattendance->timeout == NULL) {
-                $data = ['status' => 'today', 'timein' => date('h:i:s A', $perdayattendance->timein), 'timeout' => '-', 'totalhours' => '-', 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => 'Today'];
-            } elseif ($perdayattendance->timeout == NULL && $perdayattendance->timein != NULL) {
-                $data = ['status' => 'forgettotimeout', 'timein' => date('h:i:s A', $perdayattendance->timein), 'timeout' => '-', 'totalhours' => '-', 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => 'Forgot to Timeout'];
             } else {
-                $data = ['status' => 'present', 'timein' => date('h:i:s A', $perdayattendance->timein), 'timeout' => date('h:i:s A', $perdayattendance->timeout), 'totalhours' => gmdate('H:i:s', $perdayattendance->totalhours), 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => 'Present'];
-
-                if ($data['timein'] != null) {
-
-                    $timeIn = Carbon::createFromTimestamp($perdayattendance->timein);
-                    $shiftStartTime = Carbon::parse('9:00');
-
-                    $shiftStartTimeWithGrace = $shiftStartTime->addMinutes(20);
-
-                    if ($timeIn->format('H:i:s') > $shiftStartTimeWithGrace->format('H:i:s')) {
-                        $data['name'] = 'Late Check In';
-                    } else if ($perdayattendance->totalhours < (9 * 3600)) {
-                        $data['name'] = 'Early Check Out';
-                    }
-                }
-                //present
+                // today's attendance only
+                $records[] = $this->getAttendanceRecord($user, $today);
             }
-            array_push($attendance, $data);
+
+            $attendance[] = [
+                'user' => $user,
+                'records' => $records,
+            ];
         }
 
-        return view('admin.attendance.index', compact('users', 'attendance', 'userdata'));
+        return view('admin.attendance.index', compact('users', 'attendance', 'selectedUser'));
     }
+
+    private function getAttendanceRecord($user, $timestamp)
+    {
+        $record = Attendances::where('user_id', $user->id)->where('date', $timestamp)->first();
+        $day = date('l', $timestamp);
+
+        if (!$record) {
+            if ($timestamp > strtotime(date('Y-m-d'))) {
+                return ['timein' => '-', 'timeout' => '-', 'totalhours' => '-', 'status' => 'Future', 'user' => $user->name];
+            }
+
+            if (date('D', $timestamp) == 'Sat' || date('D', $timestamp) == 'Sun') {
+                return ['timein' => '-', 'timeout' => '-', 'totalhours' => '-', 'status' => 'Weekend', 'user' => $user->name];
+            }
+
+            return ['timein' => '-', 'timeout' => '-', 'totalhours' => '-', 'status' => 'Absent', 'user' => $user->name];
+        }
+
+        if ($record->timeout === null && $record->date == strtotime(date('Y-m-d'))) {
+            return ['timein' => date('h:i:s A', $record->timein), 'timeout' => '-', 'totalhours' => '-', 'status' => 'Today', 'user' => $user->name];
+        }
+
+        if ($record->timeout === null && $record->timein !== null) {
+            return ['timein' => date('h:i:s A', $record->timein), 'timeout' => '-', 'totalhours' => '-', 'status' => 'Forgot to Timeout', 'user' => $user->name];
+        }
+
+        $status = 'Present';
+        $timeIn = Carbon::createFromTimestamp($record->timein);
+        $shiftStartTime = Carbon::parse('9:00')->addMinutes(20);
+
+        if ($timeIn->format('H:i:s') > $shiftStartTime->format('H:i:s')) {
+            $status = 'Late Check In';
+        } elseif ($record->totalhours < (9 * 3600)) {
+            $status = 'Early Check Out';
+        }
+
+        return [
+            'timein' => date('h:i:s A', $record->timein),
+            'timeout' => date('h:i:s A', $record->timeout),
+            'totalhours' => gmdate('H:i:s', $record->totalhours),
+            'status' => $status,
+            'user' => $user->name,
+        ];
+    }
+
     
 }
