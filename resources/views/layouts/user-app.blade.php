@@ -227,7 +227,7 @@
                             <li class="{{ Request::routeIs('certifications.index') ? 'active' : '' }}">
                                 <a href="{{ route('certifications.index') }}">
                                     <i class="icon-Library"><span class="path1"></span><span class="path2"></span></i>
-                                    <span>Add Certification</span>
+                                    <span>Certification Summary</span>
                                 </a>
                             </li>
                             @endif
