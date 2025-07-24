@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DocVersionController;
 use App\Http\Controllers\Admin\FileKeywordController;
 use App\Http\Controllers\Admin\CertificationCategoryController;
 use App\Http\Controllers\Admin\CertificationBodyController;
+use App\Http\Controllers\Admin\ConsultationBodyController;
 use App\Http\Controllers\Admin\AuditorController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminUserController;
@@ -108,4 +109,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::resource('assigned-audit', AssignedAuditController::class);
     Route::get('/open-doc-office/{id}', [DocumentsController::class, 'openInOfficeViewer'])
     ->name('documents.open.office');
+
+    Route::resource('consultation-body', ConsultationBodyController::class);
 });

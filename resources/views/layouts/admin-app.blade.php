@@ -342,6 +342,27 @@
                                 </ul>
                             </li>
                             @endcan
+                            @canany(['view consultation body', 'create consultation body'])
+                            <li class="header">Consultation</li>
+                            @endcan
+                            @can('view consultation body')
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Chart-line"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Consultation Body</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('create consultation body')
+                                    <li class="{{ Request::routeIs('consultation-body.create') || Request::routeIs('consultation-body.edit') ? 'active' : '' }}"><a href="{{ route('consultation-body.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Body</a></li>
+                                    @endcan
+                                    <li class="{{ Request::routeIs('consultation-body.index') ? 'active' : '' }}"><a href="{{ route('consultation-body.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Body List</a></li>
+                                </ul>
+                            </li>
+                            @endcan
+
                             @canany(['all attendance', 'view attendance'])
                             <li class="header">Attendances</li>
                             @endcan
