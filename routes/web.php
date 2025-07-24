@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AssignAuditController;
 use App\Http\Controllers\Admin\AssignedAuditController;
 use App\Http\Controllers\Admin\ConsultantController;
+use App\Http\Controllers\Admin\ConsultationSummaryController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentsController;
@@ -113,4 +114,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 
     Route::resource('consultation-body', ConsultationBodyController::class);
     Route::resource('consultant', ConsultantController::class);
+    Route::resource('consultation-summary', ConsultationSummaryController::class);
 });

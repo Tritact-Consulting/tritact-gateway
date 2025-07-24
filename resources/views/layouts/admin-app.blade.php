@@ -342,7 +342,7 @@
                                 </ul>
                             </li>
                             @endcan
-                            @canany(['view consultation body', 'create consultation body', 'view consultant', 'create consultant'])
+                            @canany(['view consultation body', 'create consultation body', 'view consultant', 'create consultant', 'view consultation summary', 'create consultation summary'])
                             <li class="header">Consultation</li>
                             @endcan
                             @can('view consultation body')
@@ -376,6 +376,23 @@
                                     <li class="{{ Request::routeIs('consultant.create') || Request::routeIs('consultant.edit') ? 'active' : '' }}"><a href="{{ route('consultant.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Consultant</a></li>
                                     @endcan
                                     <li class="{{ Request::routeIs('consultant.index') ? 'active' : '' }}"><a href="{{ route('consultant.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Consultant List</a></li>
+                                </ul>
+                            </li>
+                            @endcan
+                            @can('view consultation summary')
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Chart-pie"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Consultation Summary</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('create consultation summary')
+                                    <li class="{{ Request::routeIs('consultation-summary.create') || Request::routeIs('consultation-summary.edit') ? 'active' : '' }}"><a href="{{ route('consultation-summary.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Summary</a></li>
+                                    @endcan
+                                    <li class="{{ Request::routeIs('consultation-summary.index') ? 'active' : '' }}"><a href="{{ route('consultation-summary.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Summary List</a></li>
                                 </ul>
                             </li>
                             @endcan
