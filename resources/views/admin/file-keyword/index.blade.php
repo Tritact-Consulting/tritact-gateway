@@ -58,6 +58,7 @@
                                         <option value="name">Company Name</option>
                                         <option value="version">Version</option>
                                         <option value="issue_date">Issue Date</option>
+                                        <option value="policy_date">Policy Issue Date</option>
                                         <option value="address">Address</option>
                                         <option value="website">Website</option>
                                         <option value="registration_num">Registration Number</option>

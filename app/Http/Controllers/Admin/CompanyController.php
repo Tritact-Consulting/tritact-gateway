@@ -219,6 +219,7 @@ class CompanyController extends Controller
         $company->adding_certification = $request->adding_certification;
         $company->referred_by = $request->referred_by;
         $company->prefix_company_id = $request->prefix_company_id;
+        $company->policy_date = $request->policy_date;
         $company->save();
         $old_tag = $user->tags->pluck('id')->toArray();
         $tags = $request->tags;
