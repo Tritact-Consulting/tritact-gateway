@@ -114,11 +114,11 @@
                 <div class="box-body">
                     <div class="d-flex align-items-center">
                         <div>
-                            <i class="fa fa-share mr-20" aria-hidden="true" style="font-size: 40px"></i>
+                            <i class="fa fa-certificate mr-20" aria-hidden="true" style="font-size: 40px"></i>
                         </div>
                         <div>
                             <h2 class="my-0 font-weight-700">{{ $assign_certification_count }}</h2>
-                            <p class="text-fade mb-0">Assign Certificate</p>
+                            <p class="text-fade mb-0">Certifications</p>
                         </div>
                     </div>
                 </div>
