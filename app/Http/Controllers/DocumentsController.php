@@ -82,6 +82,7 @@ class DocumentsController extends Controller
         $file_name = '';
         $version_name = '';
         $issue_date = '';
+        $policy_date = '';
         if($supportive == 0){
             $data = Documents::find($id);
             $file_name = $data->name;
@@ -125,6 +126,10 @@ class DocumentsController extends Controller
                     $issue_date = date('d/m/Y', strtotime($user->company->issue_date));
                 }
 
+                if ($policy_date == '') {
+                    $policy_date = date('d/m/Y', strtotime($user->company->policy_date));
+                }
+
             }else{
                 $data = User::find($user->user_id);
                 $director_name = $data->company->director_name;
@@ -147,6 +152,10 @@ class DocumentsController extends Controller
                 if ($issue_date == '') {
                     $issue_date = date('d/m/Y', strtotime($data->company->issue_date));
                 }
+
+                if ($policy_date == '') {
+                    $policy_date = date('d/m/Y', strtotime($data->company->policy_date));
+                }
             }
 
             if($value->data_keyword == 'director_name'){
@@ -163,6 +172,8 @@ class DocumentsController extends Controller
                 }
             }elseif($value->data_keyword == 'issue_date'){
                 $phpword->setValue($value->doc_keyword, $issue_date);
+            }elseif($value->data_keyword == 'policy_date'){
+                $phpword->setValue($value->doc_keyword, $policy_date);
             }elseif($value->data_keyword == 'logo'){
                 $phpword->setImageValue($value->doc_keyword, [
                     'path' => $logo_path,
