@@ -342,7 +342,7 @@
                                 </ul>
                             </li>
                             @endcan
-                            @canany(['view consultation body', 'create consultation body'])
+                            @canany(['view consultation body', 'create consultation body', 'view consultant', 'create consultant'])
                             <li class="header">Consultation</li>
                             @endcan
                             @can('view consultation body')
@@ -362,7 +362,23 @@
                                 </ul>
                             </li>
                             @endcan
-
+                            @can('view consultant')
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Consultants</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('create consultant')
+                                    <li class="{{ Request::routeIs('consultant.create') || Request::routeIs('consultant.edit') ? 'active' : '' }}"><a href="{{ route('consultant.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Consultant</a></li>
+                                    @endcan
+                                    <li class="{{ Request::routeIs('consultant.index') ? 'active' : '' }}"><a href="{{ route('consultant.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Consultant List</a></li>
+                                </ul>
+                            </li>
+                            @endcan
                             @canany(['all attendance', 'view attendance'])
                             <li class="header">Attendances</li>
                             @endcan

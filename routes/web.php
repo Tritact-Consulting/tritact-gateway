@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AssignAuditController;
 use App\Http\Controllers\Admin\AssignedAuditController;
+use App\Http\Controllers\Admin\ConsultantController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentsController;
@@ -111,4 +112,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     ->name('documents.open.office');
 
     Route::resource('consultation-body', ConsultationBodyController::class);
+    Route::resource('consultant', ConsultantController::class);
 });
