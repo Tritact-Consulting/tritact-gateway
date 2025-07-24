@@ -39,7 +39,7 @@
                     @csrf
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Certification Type<strong>*</strong></label>
                                     <select name="certification_category" id="certification_category" class="form-control select2" required>
@@ -52,17 +52,17 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Certification Name <strong>*</strong></label>
+                                    <label>Audit Type <strong>*</strong></label>
                                     <input type="text" name="certification_name" id="certification_name" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Issue Date</label>
                                     <input type="date" name="issue_date" id="issue_date" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Expiry Date</label>
                                     <input type="date" name="expire_date" id="expire_date" class="form-control">
