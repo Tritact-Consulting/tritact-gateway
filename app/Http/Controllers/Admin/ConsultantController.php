@@ -43,14 +43,13 @@ class ConsultantController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:consultants,email',
-            'phone' => 'required',
-            'consultation_body_id' => 'required'
+            'phone' => 'required'
         ]);
         $data = new Consultant();
         $data->name = $request->name;
         $data->email = $request->email;
         $data->phone = $request->phone;
-        $data->consultation_body_id = $request->consultation_body_id;
+        // $data->consultation_body_id = $request->consultation_body_id;
         $data->save();
         return redirect()->back()->with('success', 'Consultant Added Successfully');
     }

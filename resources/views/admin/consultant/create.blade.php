@@ -58,7 +58,7 @@
                                     <input type="text" class="form-control" name="phone" value="{{ old('phone') }}" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 d-none">
                                 <div class="form-group">
                                     <label>Consultation Body <strong>*</strong></label>
                                     <select name="consultation_body_id" id="consultation_body_id" class="form-control">
