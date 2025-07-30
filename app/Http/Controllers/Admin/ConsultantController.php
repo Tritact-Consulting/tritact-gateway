@@ -80,14 +80,14 @@ class ConsultantController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:consultants,email,'.$id,
-            'phone' => 'required',
-            'consultation_body_id' => 'required'
+            'phone' => 'required'
+            // 'consultation_body_id' => 'required'
         ]);
         $data = Consultant::find($id);
         $data->name = $request->name;
         $data->email = $request->email;
         $data->phone = $request->phone;
-        $data->consultation_body_id = $request->consultation_body_id;
+        // $data->consultation_body_id = $request->consultation_body_id;
         $data->save();
         return redirect()->back()->with('success', 'Consultant Updated Successfully');
     }

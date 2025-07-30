@@ -59,17 +59,6 @@
                                     <input type="text" class="form-control" name="phone" value="{{ old('phone', $data->phone) }}" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Consultation Body <strong>*</strong></label>
-                                    <select name="consultation_body_id" id="consultation_body_id" class="form-control">
-                                        <option value="">Select Consultation Body</option>
-                                        @foreach($body as $key => $value)
-                                        <option value="{{ $value->id }}" {{ $data->consultation_body_id == $value->id ? 'selected' : '' }}>{{ $value->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
