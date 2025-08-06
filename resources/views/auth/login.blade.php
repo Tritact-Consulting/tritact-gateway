@@ -47,7 +47,7 @@
                         <div class="wow bounceInLeft" data-wow-delay="1s">
                             <img src="{{ asset('images/login-img-3.png') }}" alt="">
                             <div>
-                                <h5>Tritact® <br>Intellligent Agent</h5>
+                                <h5>Tritact® <br>Intellligent Agent™</h5>
                                 <p>Al assistant to guide implementation, reviews, and improvements.</p>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
     
 ">
     <div class="login-form-wrapper">
-        <div class="">
+        <div class="col-8">
             <div class="login-logo">
                 <img src="{{ asset('images/login-logo.png') }}" alt="logo">
             </div>
@@ -155,6 +155,9 @@
                                 <label for="remember">Remember Me</label>
                             </div>
                         </div>
+                        <p class="mb-0" style="color: #000000">
+                            To register, email <a href="mailto:support@tritact.co.uk">support@tritact.co.uk</a> or call <a href="tel:+02080773222">02080773222</a>.
+                        </p>
                         <!-- /.col -->
                         <div class="col-12 text-center" style="margin-top: 20px;">
                             <button type="submit" class="btn btn-success mt-10" style="height: 50px;width: 140px;border-radius: 10px;background-color: #000000;border: #000000">SIGN IN</button>
