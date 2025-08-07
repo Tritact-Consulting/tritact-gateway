@@ -24386,3 +24386,7 @@ ul.tag-wrapper label {
 #certification-summary.show-certification-summary {
     display: block;
 }
+
+ul.notification-role-wrapper.role-wrapper li{
+    flex: 0 0 33%;
+}

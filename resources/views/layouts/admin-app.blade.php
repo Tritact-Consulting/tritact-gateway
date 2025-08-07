@@ -415,6 +415,13 @@
                                 </a>
                             </li>
                             @endcan
+                            <li class="header">Notifications</li>
+                            <li class="{{ Request::routeIs('all-attendance.index') ? 'active' : '' }}">
+                                <a href="{{ route('all-attendance.index') }}">
+                                    <i class="icon-Speaker"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+                                    <span>All Notifications</span>
+                                </a>
+                            </li>
 
                             @canany(['role', 'view user'])
                             <li class="header">Roles & Permissions</li>
