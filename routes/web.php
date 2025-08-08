@@ -59,6 +59,8 @@ Auth::routes(['register' => false]);
 
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('attendance', AttendanceController::class);
+    Route::post('/attendance/break-start', [AttendanceController::class, 'breakStart'])->name('attendance.breakStart');
+    Route::post('/attendance/break-end', [AttendanceController::class, 'breakEnd'])->name('attendance.breakEnd');
     Route::get('/all/attendance', [AttendanceController::class, 'allAttendance'])->name('all-attendance.index');
     Route::post('/timein', [AttendanceController::class, 'timeIn'])->name('attendance.timeIn');
     Route::post('/timeout', [AttendanceController::class, 'timeOut'])->name('attendance.timeOut');

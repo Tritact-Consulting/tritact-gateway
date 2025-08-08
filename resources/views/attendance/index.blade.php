@@ -50,14 +50,31 @@ $user = App\Models\User::where('id',Auth::user()->id)->first();
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-success">Check In</button>
                         </form>
+
                     @elseif($timedin == 1 && $timedout == 0)
+                        {{-- If break has not started yet --}}
+                        @if ($break_started == 0)
+                            <form action="{{ route('attendance.breakStart') }}" method="POST" style="display:inline-block;">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-warning">Start Break</button>
+                            </form>
+                        @else
+                            <form action="{{ route('attendance.breakEnd') }}" method="POST" style="display:inline-block;">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-info">End Break</button>
+                            </form>
+                        @endif
+
                         <button type="button" class="btn btn-danger timeout"
                             rel="{{ $check_attendance->timein + 32400 }}">Checkout</button>
                         <h5 class="mb-0"><span id="demo"></span></h5>
+
                     @else
-                        <h5>Your Today's Working Hours are <b>{{ gmdate('H:i:s', $check_attendance->totalhours) }}</b>
+                        <h5>Your Today's Working Hours are 
+                            <b>{{ gmdate('H:i:s', $check_attendance->totalhours) }}</b>
                         </h5>
                     @endif
+
                 </div>
             </div>
 			<div class="box">

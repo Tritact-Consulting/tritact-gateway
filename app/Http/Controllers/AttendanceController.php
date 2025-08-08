@@ -82,8 +82,24 @@ class AttendanceController extends Controller
             }
             array_push($attendance, $data);
         }
+        $startOfDay = strtotime(date('Y-m-d 00:00:00'));
+        $endOfDay = $startOfDay + 86399;
+
+        $todayAttendance = Attendances::where('user_id', $id)
+            ->whereBetween('date', [$startOfDay, $endOfDay])
+            ->first();
+        $timedin = ($todayAttendance && $todayAttendance->timein) ? 1 : 0;
+        $timedout = ($todayAttendance && $todayAttendance->timeout) ? 1 : 0;
+        $break_started = ($todayAttendance && $todayAttendance->break_start && !$todayAttendance->break_end) ? 1 : 0;
         $layout = auth()->user()->hasRole('admin') ? 'layouts.admin-app' : 'layouts.user-app';
-        return view('attendance.index', compact('attendance', 'layout'));
+        return view('attendance.index', compact(
+            'attendance', 
+            'layout', 
+            'timedin', 
+            'timedout', 
+            'break_started', 
+            'todayAttendance'
+        ));
     }
 
     public function store(Request $request){
@@ -105,13 +121,14 @@ class AttendanceController extends Controller
 
     public function timeIn(){
         $userid = Auth::user()->id;
-        $shift = '9:00:00 AM - 6:00:00 PM';
         $timein = time();
-        if (date('H:i', $timein) >= '00:00' && date('H:i', $timein) <= '06:00') {
-            $date = strtotime(date('d-M-Y')) - 86400;
-        } else {
-            $date = strtotime(date('d-M-Y'));
-        }
+        // if (date('H:i', $timein) >= '00:00' && date('H:i', $timein) <= '06:00') {
+        //     $date = strtotime(date('d-M-Y')) - 86400;
+        // }
+        // else {
+        //     $date = strtotime(date('d-M-Y'));
+        // }
+        $date = strtotime(date('d-M-Y'));
         $timein = Attendances::updateOrCreate([
             'user_id' => $userid,
             'date' => $date,
@@ -223,4 +240,44 @@ class AttendanceController extends Controller
             'user' => $user->name,
         ];
     }
+
+    public function breakStart(Request $request)
+    {
+        $userid = Auth::id();
+        $date = strtotime(date('d-M-Y'));
+        $attendance = Attendances::where('user_id', $userid)
+            ->where('date', $date)
+            ->first();
+        // If no attendance record exists, create one
+        if (!$attendance) {
+            return redirect()->back()->with('error', 'You must check in before starting a break.');
+        }
+
+        $attendance->break_start = time();
+        $attendance->break_end = null; // reset in case of previous data
+        $attendance->save();
+
+        return redirect()->back()->with('success', 'Break started!');
+    }
+
+    public function breakEnd(Request $request)
+    {
+        $userid = Auth::id();
+        $date = strtotime(date('d-M-Y'));
+
+        $attendance = Attendances::where('user_id', $userid)
+            ->where('date', $date)
+            ->first();
+
+        if (!$attendance || !$attendance->break_start) {
+            return redirect()->back()->with('error', 'No active break found.');
+        }
+
+        $attendance->break_end = time();
+        $attendance->break_total += ($attendance->break_end - $attendance->break_start);
+        $attendance->save();
+
+        return redirect()->back()->with('success', 'Break ended!');
+    }
+
 }
