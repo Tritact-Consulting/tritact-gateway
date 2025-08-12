@@ -71,7 +71,7 @@ $user = App\Models\User::where('id',Auth::user()->id)->first();
 
                     @else
                         <h5>Your Today's Working Hours are 
-                            <b>{{ gmdate('H:i:s', $check_attendance->totalhours) }}</b>
+                            <b>{{ $todayWorked }}</b>
                         </h5>
                     @endif
 
@@ -83,13 +83,13 @@ $user = App\Models\User::where('id',Auth::user()->id)->first();
                         <table class="table table-striped border-no document-table" id="example1">
                             <thead>
                                 <tr>
-                                    <th>Day</th>
                                     <th>Date</th>
+                                    <th>Day</th>
                                     <th>Timein</th>
                                     <th>Timeout</th>
+                                    <th>Break Start / Break End</th>
                                     <th>Working Hours</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -99,6 +99,11 @@ $user = App\Models\User::where('id',Auth::user()->id)->first();
                                     <td>{{ $thisattendance['day'] }}</td>
                                     <td>{{ $thisattendance['timein'] != '-' ? $thisattendance['timein'] : '-' }}</td>
                                     <td>{{ $thisattendance['timeout'] != '-' ? $thisattendance['timeout'] : '-' }}</td>
+                                    <td>
+                                        {{ $thisattendance['break_start'] != '-' ? $thisattendance['break_start'] : '-' }}
+                                        <br>
+                                        {{ $thisattendance['break_end'] != '-' ? $thisattendance['break_end'] : '-' }}
+                                    </td>
                                     <td>{{ $thisattendance['totalhours'] != '-' ? $thisattendance['totalhours'] : '-' }}</td>
                                     <td>
                                         @if ($thisattendance['status'] == 'late' || $thisattendance['status'] == 'early')
@@ -108,7 +113,6 @@ $user = App\Models\User::where('id',Auth::user()->id)->first();
                                         <span>{{ $thisattendance['name'] }} </span>
                                         @endif
                                     </td>
-                                    <td></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -163,7 +167,7 @@ $user = App\Models\User::where('id',Auth::user()->id)->first();
         var minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((remaining % (1000 * 60)) / 1000);
         // Display the result in the element with id="demo"
-        swal({
+        Swal.fire({
             title: "Are you sure you want to Timeout?",
             text: "Hours Remaining (0" + hours + ":" + minutes + ":" + seconds +
                 ") .You cannot revert it back!",
@@ -183,12 +187,7 @@ $user = App\Models\User::where('id',Auth::user()->id)->first();
                     type: 'timeout'
                 },
                 success: function(result) {
-                    swal(
-                        'Timedout!',
-                        'You are timedout successfully!',
-                        'success'
-
-                    )
+                    Swal.fire('Timedout!', 'You are timedout successfully!', 'success');
                     setTimeout(function() {
                         location.reload();
                     }, 2000);

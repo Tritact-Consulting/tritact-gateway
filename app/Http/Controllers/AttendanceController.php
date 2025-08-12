@@ -34,73 +34,151 @@ class AttendanceController extends Controller
      */
     public function index(Request $request)
     {
-        $userdata = User::find(Auth::user()->id);
+        $userId = Auth::id();
         $month = date('m');
-        $year = date('Y');
-        $date = '01-'.$month.'-'.$year;
-        $id = Auth::user()->id;
-        $firstday = strtotime(date('Y-m-01', strtotime($date)));
-        $lastday = strtotime(date('Y-m-t', strtotime($date)));
+        $year  = date('Y');
+
+        $firstday = strtotime("$year-$month-01");
+        $lastday  = strtotime(date('Y-m-t', $firstday));
+
+        // Fetch all records for the month in one query
+        $records = Attendances::where('user_id', $userId)
+            ->whereBetween('date', [$firstday, $lastday])
+            ->get()
+            ->keyBy('date');
 
         $attendance = [];
-        $totalDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 
-        for ($i = $firstday; $i <= $lastday; $i += 86400) {
-            $perdayattendance = Attendances::where([['user_id', '=', $id], ['date', '=', $i]])->first();
-            $day = date('l', $i);
-            if ($perdayattendance == NULL) {
-                if ($i > strtotime(date('d-M-Y'))) {
-                    $data = ['status' => 'future', 'timein' => '-', 'timeout' => '-', 'totalhours' => '-', 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => ''];
-                }else {
-                    if (date('D', $i) == 'Sat' || date('D', $i) == 'Sun') {
-                        $data = ['status' => 'weekend', 'timein' => '-', 'timeout' => '-', 'totalhours' => '-', 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => 'Weekend'];
-                    } else {
-                        $data = ['status' => 'absent', 'timein' => '-', 'timeout' => '-', 'totalhours' => '-', 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => 'Absent'];
-                    }
+        for ($dayTs = $firstday; $dayTs <= $lastday; $dayTs += 86400) {
+            $perday = $records->get($dayTs);
+            $dayName = date('l', $dayTs);
+
+            // Default break values
+            $break_start = $perday && $perday->break_start ? date('h:i:s A', $perday->break_start) : '-';
+            $break_end   = $perday && $perday->break_end   ? date('h:i:s A', $perday->break_end)   : '-';
+
+            // Calculate totalhours minus break duration
+            $breakDuration = ($perday && $perday->break_start && $perday->break_end)
+                ? $perday->break_end - $perday->break_start
+                : 0;
+
+            $workedSeconds = ($perday && $perday->totalhours)
+                ? max($perday->totalhours - $breakDuration, 0)
+                : 0;
+
+            $totalhours = $workedSeconds > 0 ? gmdate('H:i:s', $workedSeconds) : '-';
+
+            // Determine status and fill data
+            if (!$perday) {
+                if ($dayTs > strtotime(date('d-M-Y'))) {
+                    $attendance[] = [
+                        'status'      => 'future',
+                        'timein'      => '-',
+                        'timeout'     => '-',
+                        'totalhours'  => '-',
+                        'break_start' => '-',
+                        'break_end'   => '-',
+                        'date'        => date('d-M-Y', $dayTs),
+                        'day'         => $dayName,
+                        'name'        => ''
+                    ];
+                } elseif (in_array(date('D', $dayTs), ['Sat', 'Sun'])) {
+                    $attendance[] = [
+                        'status'      => 'weekend',
+                        'timein'      => '-',
+                        'timeout'     => '-',
+                        'totalhours'  => '-',
+                        'break_start' => '-',
+                        'break_end'   => '-',
+                        'date'        => date('d-M-Y', $dayTs),
+                        'day'         => $dayName,
+                        'name'        => 'Weekend'
+                    ];
+                } else {
+                    $attendance[] = [
+                        'status'      => 'absent',
+                        'timein'      => '-',
+                        'timeout'     => '-',
+                        'totalhours'  => '-',
+                        'break_start' => '-',
+                        'break_end'   => '-',
+                        'date'        => date('d-M-Y', $dayTs),
+                        'day'         => $dayName,
+                        'name'        => 'Absent'
+                    ];
                 }
-            } elseif ($perdayattendance->date == strtotime(date('d-M-Y')) && $perdayattendance->timeout == NULL) {
-                $data = ['status' => 'today', 'timein' => date('h:i:s A', $perdayattendance->timein), 'timeout' => '-', 'totalhours' => '-', 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => 'Today'];
-            } elseif ($perdayattendance->timeout == NULL && $perdayattendance->timein != NULL) {
-                $data = ['status' => 'forgettotimeout', 'timein' => date('h:i:s A', $perdayattendance->timein), 'timeout' => '-', 'totalhours' => '-', 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => 'Forgot to Timeout'];
+            } elseif ($perday->date == strtotime(date('d-M-Y')) && !$perday->timeout) {
+                $attendance[] = [
+                    'status'      => 'today',
+                    'timein'      => $perday->timein ? date('h:i:s A', $perday->timein) : '-',
+                    'timeout'     => '-',
+                    'totalhours'  => '-',
+                    'break_start' => $break_start,
+                    'break_end'   => $break_end,
+                    'date'        => date('d-M-Y', $dayTs),
+                    'day'         => $dayName,
+                    'name'        => 'Today'
+                ];
+            } elseif (!$perday->timeout && $perday->timein) {
+                $attendance[] = [
+                    'status'      => 'forgettotimeout',
+                    'timein'      => date('h:i:s A', $perday->timein),
+                    'timeout'     => '-',
+                    'totalhours'  => '-',
+                    'break_start' => $break_start,
+                    'break_end'   => $break_end,
+                    'date'        => date('d-M-Y', $dayTs),
+                    'day'         => $dayName,
+                    'name'        => 'Forgot to Timeout'
+                ];
             } else {
-                $data = ['status' => 'present', 'timein' => date('h:i:s A', $perdayattendance->timein), 'timeout' => date('h:i:s A', $perdayattendance->timeout), 'totalhours' => gmdate('H:i:s', $perdayattendance->totalhours), 'date' => date('d-M-Y', $i), 'day' => $day, 'name' => 'Present'];
-
-                if ($data['timein'] != null) {
-
-                    $timeIn = Carbon::createFromTimestamp($perdayattendance->timein);
-                    $shiftStartTime = Carbon::parse('9:00');
-
-                    $shiftStartTimeWithGrace = $shiftStartTime->addMinutes(20);
-
-                    if ($timeIn->format('H:i:s') > $shiftStartTimeWithGrace->format('H:i:s')) {
-                        $data['name'] = 'Late Check In';
-                    } else if ($perdayattendance->totalhours < (9 * 3600)) {
-                        $data['name'] = 'Early Check Out';
-                    }
-                }
-                //present
+                $attendance[] = [
+                    'status'      => 'present',
+                    'timein'      => date('h:i:s A', $perday->timein),
+                    'timeout'     => date('h:i:s A', $perday->timeout),
+                    'totalhours'  => $totalhours,
+                    'break_start' => $break_start,
+                    'break_end'   => $break_end,
+                    'date'        => date('d-M-Y', $dayTs),
+                    'day'         => $dayName,
+                    'name'        => 'Present'
+                ];
             }
-            array_push($attendance, $data);
         }
-        $startOfDay = strtotime(date('Y-m-d 00:00:00'));
-        $endOfDay = $startOfDay + 86399;
 
-        $todayAttendance = Attendances::where('user_id', $id)
+        // Get today's attendance
+        $startOfDay = strtotime(date('Y-m-d 00:00:00'));
+        $endOfDay   = $startOfDay + 86399;
+        $todayAttendance = Attendances::where('user_id', $userId)
             ->whereBetween('date', [$startOfDay, $endOfDay])
             ->first();
-        $timedin = ($todayAttendance && $todayAttendance->timein) ? 1 : 0;
-        $timedout = ($todayAttendance && $todayAttendance->timeout) ? 1 : 0;
+
+        $timedin       = ($todayAttendance && $todayAttendance->timein) ? 1 : 0;
+        $timedout      = ($todayAttendance && $todayAttendance->timeout) ? 1 : 0;
         $break_started = ($todayAttendance && $todayAttendance->break_start && !$todayAttendance->break_end) ? 1 : 0;
+
+        $todayWorked = '-';
+        if ($todayAttendance && $todayAttendance->totalhours) {
+            $breakDuration = ($todayAttendance->break_start && $todayAttendance->break_end)
+                ? $todayAttendance->break_end - $todayAttendance->break_start
+                : 0;
+            $workedSeconds = max($todayAttendance->totalhours - $breakDuration, 0);
+            $todayWorked = gmdate('H:i:s', $workedSeconds);
+        }
+
         $layout = auth()->user()->hasRole('admin') ? 'layouts.admin-app' : 'layouts.user-app';
+
         return view('attendance.index', compact(
-            'attendance', 
-            'layout', 
-            'timedin', 
-            'timedout', 
-            'break_started', 
-            'todayAttendance'
+            'attendance',
+            'layout',
+            'timedin',
+            'timedout',
+            'break_started',
+            'todayAttendance',
+            'todayWorked'
         ));
     }
+
 
     public function store(Request $request){
         
