@@ -11,4 +11,9 @@ class Attendances extends Model
 
     protected $fillable = ['user_id', 'timein', 'timeout', 'date', 'totalhours'];
 
+    public function breaks()
+    {
+        return $this->hasMany(BreakModel::class, 'attendance_id', 'id');
+    }
+
 }
