@@ -23,7 +23,8 @@
         <div class="col-lg-12 col-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Add Bulk Document</h4>
+                    <h4 class="box-title">Add Bulk Document</h4><br>
+                    <span class="text-danger"><strong>Note:</strong> Only Microsoft Word (.docx) files are allowed.</span>
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-danger m-20 mb-0">
@@ -44,7 +45,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Files <strong>*</strong></label>
-                                    <input type="file" class="form-control dropify" name="file[]" value="{{ old('file') }}" required multiple>
+                                    <input type="file" class="form-control dropify" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" name="file[]" value="{{ old('file') }}" required multiple>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -86,6 +87,8 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h4 class="box-title">Add Document form</h4>
+                    <br>
+                    <span class="text-danger"><strong>Note:</strong> Only Microsoft Word (.docx) files are allowed.</span>
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-danger m-20 mb-0">
@@ -112,7 +115,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>File <strong>*</strong></label>
-                                    <input type="file" class="form-control" name="file[]" value="{{ old('file') }}" required>
+                                    <input type="file" class="form-control" name="file[]" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" value="{{ old('file') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
