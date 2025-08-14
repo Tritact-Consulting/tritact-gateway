@@ -1,5 +1,8 @@
 @extends('layouts.admin-app')
 @section('title', 'Edit User')
+@push('style')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endpush
 @section('content')
 <div class="content-header">
     <div class="d-flex align-items-center">
@@ -79,6 +82,32 @@
 								</div>
 							</div>
 						</div>
+						<div class="row" id="attendance-fields" style="display:none;">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="form-label">Shift Start Timing</label>
+									<input type="time" class="form-control" name="shift_start" id="shift_start" value="{{ $data->shift_start }}">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="form-label">Shift End Timing</label>
+									<input type="time" class="form-control" name="shift_end" id="shift_end" value="{{ $data->shift_end }}">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="form-label">Shift Timezone</label>
+									<select name="timezone" id="timezone" class="form-control select2">
+										@foreach(timezone_identifiers_list() as $tz)
+										<option value="{{ $tz }}" {{ old('timezone', $data->timezone ?? 'UTC') === $tz ? 'selected' : '' }}>
+											{{ $tz }}
+										</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="box-footer">
 						<div class="row">
@@ -95,5 +124,41 @@
 </section>
 @endsection
 
-@push('scripts')
+@push('script')
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+	flatpickr("#shift_start", {
+		enableTime: true,
+		noCalendar: true,
+		dateFormat: "H:i", // 24-hour format
+		time_24hr: true
+	});
+	flatpickr("#shift_end", {
+		enableTime: true,
+		noCalendar: true,
+		dateFormat: "H:i", // 24-hour format
+		time_24hr: true
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		const $roleSelect = $('#role');
+		const $attendanceFields = $('#attendance-fields');
+
+		function toggleAttendanceFields() {
+			let selectedRoles = $roleSelect.val() || [];
+			if (selectedRoles.includes('attendance')) {
+				$attendanceFields.show();
+			} else {
+				$attendanceFields.hide();
+			}
+		}
+
+		// Listen to select2 change
+		$roleSelect.on('change', toggleAttendanceFields);
+
+		// Trigger on page load
+		toggleAttendanceFields();
+	});
+</script>
 @endpush

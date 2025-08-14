@@ -50,8 +50,6 @@ $user = App\Models\User::find(Auth::id());
 <section class="content">
     <div class="row">
         <div class="col-12">
-
-            {{-- Action buttons --}}
             <div class="box">
                 <div class="box-body text-right d-flex" style="justify-content: end; align-items: center; flex-direction: row-reverse; gap: 15px;">
                     @if ($timedin == 0 && $timedout == 0)
@@ -85,7 +83,58 @@ $user = App\Models\User::find(Auth::id());
                 </div>
             </div>
 
-            {{-- Attendance Table --}}
+            <div class="box">
+                <div class="box-header with-border">
+                    <h4 class="box-title">Today's Attendance</h4>
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive rounded card-table">
+                        <table class="table table-striped border-no document-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Day</th>
+                                    <th>Time In</th>
+                                    <th>Time Out</th>
+                                    <th>Breaks</th>
+                                    <th>Working Hours</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $today = date('d-M-Y');
+                                    $todayRecord = collect($attendance)->firstWhere('date', $today);
+                                @endphp
+
+                                @if($todayRecord)
+                                    <tr>
+                                        <td>{{ $todayRecord['date'] }}</td>
+                                        <td>{{ $todayRecord['day'] }}</td>
+                                        <td>{{ $todayRecord['timein'] ?? '-' }}</td>
+                                        <td>{{ $todayRecord['timeout'] ?? '-' }}</td>
+                                        <td>
+                                            @if (!empty($todayRecord['breaks']) && is_array($todayRecord['breaks']) && count($todayRecord['breaks']) > 0)
+                                                @foreach ($todayRecord['breaks'] as $break)
+                                                    {{ $break['start'] ?? '-' }} - {{ $break['end'] ?? '-' }}<br>
+                                                @endforeach
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>{{ $todayRecord['totalhours'] ?? '-' }}</td>
+                                        <td>{{ $todayRecord['status'] }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td colspan="7" class="text-center">No attendance record for today</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <div class="box">
                 <div class="box-body">
                     <div class="table-responsive rounded card-table">

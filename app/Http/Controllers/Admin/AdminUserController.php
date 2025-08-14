@@ -68,6 +68,12 @@ class AdminUserController extends Controller
         $data->password = Hash::make($request->password);
         $data->save();
         $data->assignRole($request->role);
+        if ($data->hasRole('attendance')) {
+            $data->shift_start = $request->shift_start;
+            $data->shift_end   = $request->shift_end;
+            $data->timezone    = $request->timezone;
+            $data->save();
+        }
         return redirect()->back()->with('success', 'User Created Successfully');
     }
 
@@ -117,6 +123,13 @@ class AdminUserController extends Controller
         }
         $data->save();
         $data->syncRoles($request->role);
+
+        if ($data->hasRole('attendance')) {
+            $data->shift_start = $request->shift_start; // e.g. "09:00"
+            $data->shift_end   = $request->shift_end;   // e.g. "17:30"
+            $data->timezone    = $request->timezone;    // e.g. "Asia/Kolkata"
+            $data->save();
+        }
         return redirect()->back()->with('success', 'User Updated Successfully');
     }
 
