@@ -482,6 +482,57 @@
                         </a>
                     </div>
                     <div class="right-bar-content">
+                        @hasrole('attendance')
+                        @php
+                        $user = Auth::user();
+                        $hasShiftInfo = $user->shift_start || $user->shift_end || $user->timezone;
+                        @endphp
+                        @if($hasShiftInfo)
+                        <div class="box no-shadow box-bordered border-light">
+                            <div class="box-header">
+                                <h4 class="box-title">Your Shift Information</h4>
+                            </div>
+                            <div class="box-body p-20">
+                                @if($user->shift_start)
+                                <div class="d-flex align-items-center mb-15">
+                                    <div class="mr-15">
+                                        <span class="icon-holder bg-info"><i class="fa fa-clock-o"></i></span>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0 font-size-12 text-muted">Shift Start</p>
+                                        <h4 class="mb-0 font-weight-bold">{{ date('h:i A', strtotime($user->shift_start)) }}</h4>
+                                    </div>
+                                </div>
+                                @endif
+                                
+                                @if($user->shift_end)
+                                <div class="d-flex align-items-center mb-15">
+                                    <div class="mr-15">
+                                        <span class="icon-holder bg-success"><i class="fa fa-clock-o"></i></span>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0 font-size-12 text-muted">Shift End</p>
+                                        <h4 class="mb-0 font-weight-bold">{{ date('h:i A', strtotime($user->shift_end)) }}</h4>
+                                    </div>
+                                </div>
+                                @endif
+                                
+                                @if($user->timezone)
+                                <div class="d-flex align-items-center">
+                                    <div class="mr-15">
+                                        <span class="icon-holder bg-warning"><i class="fa fa-globe"></i></span>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0 font-size-12 text-muted">Time Zone</p>
+                                        <h4 class="mb-0 font-weight-bold">{{ $user->timezone }}</h4>
+                                    </div>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        @endif
+                        @endhasrole
+                        
                         <div class="box no-shadow box-bordered border-light">
                             <div class="box-header">
                                 <h4 class="box-title">Recent Activity</h4>

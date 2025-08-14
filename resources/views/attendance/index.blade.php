@@ -83,6 +83,8 @@ $user = App\Models\User::find(Auth::id());
                 </div>
             </div>
 
+            </div>
+
             <div class="box">
                 <div class="box-header with-border">
                     <h4 class="box-title">Today's Attendance</h4>
