@@ -35,46 +35,46 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $userId = $user->id;
+        $timezone = $user->timezone ?? 'UTC'; // fallback if not set
 
-        // Select layout based on role
-        $layout = auth()->user()->hasRole('admin') ? 'layouts.admin-app' : 'layouts.user-app';
+        $layout = $user->hasRole('admin') ? 'layouts.admin-app' : 'layouts.user-app';
 
-        // Current month boundaries
-        $monthStart = strtotime(date('Y-m-01 00:00:00'));
-        $monthEnd   = strtotime(date('Y-m-t 23:59:59'));
+        // Current month boundaries in UTC
+        $monthStart = Carbon::now($timezone)->startOfMonth()->timezone('UTC')->timestamp;
+        $monthEnd   = Carbon::now($timezone)->endOfMonth()->timezone('UTC')->timestamp;
 
         // Attendance for current month
         $attendanceRecords = Attendances::with('breaks')
             ->where('user_id', $userId)
             ->whereBetween('date', [$monthStart, $monthEnd])
             ->get()
-            ->keyBy(function ($a) {
-                return date('Y-m-d', $a->date);
+            ->keyBy(function ($a) use ($timezone) {
+                return Carbon::createFromTimestamp($a->date, 'UTC')->setTimezone($timezone)->format('Y-m-d');
             });
 
         $dates = [];
         $current = $monthStart;
 
         while ($current <= $monthEnd) {
-            $dateKey = date('Y-m-d', $current);
-            $dayName = date('l', $current);
-            $isToday = $dateKey === date('Y-m-d');
+            $dateKey = Carbon::createFromTimestamp($current, 'UTC')->setTimezone($timezone)->format('Y-m-d');
+            $dayName = Carbon::createFromTimestamp($current, 'UTC')->setTimezone($timezone)->format('l');
+            $isToday = $dateKey === Carbon::now($timezone)->format('Y-m-d');
 
             if (isset($attendanceRecords[$dateKey])) {
-                // Attendance exists
                 $a = $attendanceRecords[$dateKey];
                 $status = $a->status;
 
                 $dates[] = [
-                    'date'       => date('d-M-Y', $a->date),
+                    'date'       => Carbon::createFromTimestamp($a->date, 'UTC')->setTimezone($timezone)->format('d-M-Y'),
                     'day'        => substr($dayName, 0, 3),
-                    'timein'     => $a->timein ? date('h:i A', $a->timein) : null,
-                    'timeout'    => $a->timeout ? date('h:i A', $a->timeout) : null,
-                    'breaks'     => $a->breaks->map(function ($b) {
+                    'timein'     => $a->timein ? Carbon::createFromTimestamp($a->timein, 'UTC')->setTimezone($timezone)->format('h:i A') : null,
+                    'timeout'    => $a->timeout ? Carbon::createFromTimestamp($a->timeout, 'UTC')->setTimezone($timezone)->format('h:i A') : null,
+                    'breaks'     => $a->breaks->map(function ($b) use ($timezone) {
                         return [
-                            'start' => $b->break_start ? date('h:i:s A', $b->break_start) : null,
-                            'end'   => $b->break_end ? date('h:i:s A', $b->break_end) : null,
+                            'start' => $b->break_start ? Carbon::createFromTimestamp($b->break_start, 'UTC')->setTimezone($timezone)->format('h:i:s A') : null,
+                            'end'   => $b->break_end ? Carbon::createFromTimestamp($b->break_end, 'UTC')->setTimezone($timezone)->format('h:i:s A') : null,
                         ];
                     })->toArray(),
                     'totalhours' => $a->timein && $a->timeout
@@ -84,7 +84,6 @@ class AttendanceController extends Controller
                     'name'       => $a->name,
                 ];
             } else {
-                // No attendance
                 if ($dayName === 'Saturday' || $dayName === 'Sunday') {
                     $status = 'Weekend';
                 } elseif ($isToday) {
@@ -94,7 +93,7 @@ class AttendanceController extends Controller
                 }
 
                 $dates[] = [
-                    'date'       => date('d-M-Y', $current),
+                    'date'       => Carbon::createFromTimestamp($current, 'UTC')->setTimezone($timezone)->format('d-M-Y'),
                     'day'        => substr($dayName, 0, 3),
                     'timein'     => null,
                     'timeout'    => null,
@@ -108,16 +107,13 @@ class AttendanceController extends Controller
             $current = strtotime('+1 day', $current);
         }
 
-        // Latest attendance for buttons
         $check_attendance = Attendances::with('breaks')
             ->where('user_id', $userId)
             ->latest()
             ->first();
 
-        // Break status
         $break_started = $check_attendance && $check_attendance->breaks->whereNull('break_end')->first() ? 1 : 0;
 
-        // Timedin/timedout
         if (!$check_attendance) {
             $timedin = 0;
             $timedout = 0;
@@ -136,7 +132,6 @@ class AttendanceController extends Controller
             }
         }
 
-        // Today's worked time
         $todayWorked = '-';
         if ($check_attendance && $check_attendance->timein && $check_attendance->timeout) {
             $workedSeconds = ($check_attendance->timeout - $check_attendance->timein)
@@ -151,7 +146,6 @@ class AttendanceController extends Controller
             $todayWorked = "{$hours}h {$minutes}m";
         }
 
-        // dd($dates);
         return view('attendance.index', [
             'attendance'      => $dates,
             'check_attendance'=> $check_attendance,
@@ -162,6 +156,7 @@ class AttendanceController extends Controller
             'layout'          => $layout
         ]);
     }
+
 
 
     public function store(Request $request){
@@ -181,37 +176,61 @@ class AttendanceController extends Controller
         
     }
 
-    public function timeIn(){
-        $userid = Auth::user()->id;
-        $timein = time();
-        // if (date('H:i', $timein) >= '00:00' && date('H:i', $timein) <= '06:00') {
-        //     $date = strtotime(date('d-M-Y')) - 86400;
-        // }
-        // else {
-        //     $date = strtotime(date('d-M-Y'));
-        // }
-        $date = strtotime(date('d-M-Y'));
-        $timein = Attendances::updateOrCreate([
-            'user_id' => $userid,
-            'date' => $date,
-        ], [
-            'timein' => $timein,
-        ]);
-
-        $successmessage = 'Timed In Successfuly!';
-        return redirect()->back()->with('success', $successmessage);
+    public function timeIn()
+    {
+        $user = Auth::user();
+        $userid = $user->id;
+        $timezone = $user->timezone ?? 'UTC';
+        $now = Carbon::now($timezone);
+        $date = $now->copy()->startOfDay()->timezone('UTC');
+        $timein = $now->copy()->timezone('UTC');
+        Attendances::updateOrCreate(
+            [
+                'user_id' => $userid,
+                'date'    => $date->timestamp,
+            ],
+            [
+                'timein'  => $timein->timestamp,
+            ]
+        );
+        return redirect()->back()->with('success', 'Timed In Successfully!');
     }
 
     public function timeOut()
     {
-        $userid = Auth::user()->id;
-        $timeout = time();
-        $date = strtotime(date('d-M-Y'));
-        $timein = Attendances::where('user_id', $userid)->latest()->first();
-        $timeout = Attendances::where(['user_id' => $userid, 'date' => $timein->date])->update(['timeout' => $timeout, 'totalhours' => ($timeout - ($timein->timein))]);
-        $successmessage = 'Timed Out Successfuly!';
+        $user = Auth::user();
+        $userid = $user->id;
+        $timezone = $user->timezone ?? 'UTC';
 
-        return redirect()->back()->with('success', $successmessage);
+        // Current time in user's timezone
+        $now = Carbon::now($timezone);
+
+        // Today's date in UTC
+        $date = $now->copy()->startOfDay()->timezone('UTC');
+
+        // Get last attendance record
+        $timeinRecord = Attendances::where('user_id', $userid)->latest()->first();
+
+        if (!$timeinRecord) {
+            return redirect()->back()->with('error', 'No time-in record found!');
+        }
+
+        // Store timeout in UTC
+        $timeoutUTC = $now->copy()->timezone('UTC')->timestamp;
+
+        // Calculate total hours in seconds (UTC-based)
+        $totalSeconds = $timeoutUTC - $timeinRecord->timein;
+
+        // Update record
+        Attendances::where([
+            'user_id' => $userid,
+            'date'    => $timeinRecord->date
+        ])->update([
+            'timeout'    => $timeoutUTC,
+            'totalhours' => $totalSeconds
+        ]);
+
+        return redirect()->back()->with('success', 'Timed Out Successfully!');
     }
 
     public function allAttendance(Request $request)
