@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth', 'user']], function(){
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(){
     Route::get('/home', [AdminController::class, 'index'])->name('admin.home');
     Route::resource('company', CompanyController::class);
+    Route::get('/company-autocomplete', [CompanyController::class, 'autocomplete'])->name('company.autocomplete');
     Route::resource('partner', PartnerController::class);
     Route::get('company/users/{company_id}', [CompanyController::class, 'user'])->name('company.user');
     Route::post('company/store/user', [CompanyController::class, 'userStore'])->name('company.user.store');

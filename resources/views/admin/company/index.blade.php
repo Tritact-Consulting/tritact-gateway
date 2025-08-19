@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <form method="get" action="{{ route('company.index') }}">
+            <form method="get" action="{{ route('company.index') }}" class="company-form">
                 <div class="input-group">
                     <input type="search" id="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" name="search" value="{{ app('request')->input('search') }}">
                     <div class="input-group-append">
@@ -25,6 +25,7 @@
                         </button>
                     </div>
                 </div>
+                <div id="suggestion-box" class="list-group position-absolute" style="z-index: 1000;"></div>
             </form>
         </div>
     </div>
@@ -91,3 +92,43 @@
     </div>
 </section>
 @endsection
+
+@push('script')
+<script>
+$(document).ready(function(){
+    $("#search").keyup(function(){
+        let query = $(this).val();
+
+        if(query.length > 1){
+            $.ajax({
+                url: "{{ route('company.autocomplete') }}",
+                type: "GET",
+                data: { query: query },
+                success: function(data){
+                    $("#suggestion-box").empty().show();
+
+                    if(data.length > 0){
+                        $.each(data, function(index, company){
+                            $("#suggestion-box").append(
+                                `<a href="#" class="list-group-item list-group-item-action suggestion-item" data-name="${company.name}">${company.name}</a>`
+                            );
+                        });
+                    }
+                }
+            });
+        } else {
+            $("#suggestion-box").empty().hide();
+        }
+    });
+
+    // On click fill the input and submit form
+    $(document).on("click", ".suggestion-item", function(e){
+        e.preventDefault();
+        let name = $(this).data("name");
+        $("#search").val(name);  // fill input
+        $("#suggestion-box").empty().hide();
+        $(".company-form").submit();
+    });
+});
+</script>
+@endpush

@@ -24445,3 +24445,12 @@ ul.tag-wrapper label {
 ul.notification-role-wrapper.role-wrapper li{
     flex: 0 0 33%;
 }
+
+.company-form{
+  position: relative;
+}
+
+#suggestion-box {
+    position: absolute !important;
+    width: 100%;
+}

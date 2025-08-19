@@ -421,4 +421,35 @@ class CompanyController extends Controller
         $data = CompanyCertification::where('user_id', $id)->get();
         return response()->json(['success' => true, 'data' => $data]);
     }
+
+    public function autocomplete(Request $request)
+    {
+        $search = $request->get('query'); // input from ajax
+
+        $companies = \DB::table('companies')
+            ->join('users', 'companies.user_id', '=', 'users.id')
+            ->where('companies.status', 0)
+            ->where('users.status', 0)
+            ->where(function($query) use ($search) {
+                $query->where('companies.director_name', 'LIKE', "%{$search}%")
+                    ->where('users.name', 'LIKE', "%{$search}%")
+                    ->orWhere('users.email', 'LIKE', "%{$search}%");
+            })
+            ->select('companies.*', 'users.name as user_name', 'users.email as user_email')
+            ->limit(10)
+            ->get();
+
+
+
+        $data = [];
+        foreach ($companies as $company) {
+            $data[] = [
+                'id'   => $company->id,
+                'name' => $company->user_name,
+            ];
+        }
+
+        return response()->json($data);
+    }
+
 }
