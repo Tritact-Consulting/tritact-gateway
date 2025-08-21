@@ -36,4 +36,12 @@ class CompanyCertification extends Model
             return 'alert alert-success ' . $remaining;
         }
     }
+
+    public function previous(){
+        return $this->belongsTo(CompanyCertification::class, 'previous_certification');
+    }
+
+    public function next(){
+        return $this->hasOne(CompanyCertification::class, 'previous_certification');
+    }
 }
