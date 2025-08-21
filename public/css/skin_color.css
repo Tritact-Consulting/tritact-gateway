@@ -1080,3 +1080,8 @@ ul.role-wrapper li {
     padding-left: 15px !important;
   }
 }
+
+
+.sidebar-notification .media-body p {
+    word-wrap: break-word;
+}
