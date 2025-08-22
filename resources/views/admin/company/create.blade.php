@@ -180,7 +180,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="registration_num">Registration Number <strong>*</strong></label>
+                                    <label for="registration_num">Registration Number <strong>*</strong>
+                                        <div class="tooltip">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <span class="tooltiptext">Companies House Registration Number</span>
+                                        </div>
+                                    </label>
                                     <input type="text" name="registration_num" id="registration_num" class="form-control" value="{{ old('registration_num') }}" required>
                                 </div>
                             </div>
