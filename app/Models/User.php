@@ -102,4 +102,24 @@ class User extends Authenticatable
         return $this->hasMany(AssignAudit::class, 'user_id', 'id');
     }
 
+    public function assignedUsers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'user_assign_company',
+            'parent_user_id',
+            'company_user_id'
+        )->withTimestamps();
+    }
+
+    public function assignedTo()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'user_assign_company',
+            'company_user_id',
+            'parent_user_id'
+        )->withTimestamps();
+    }
+
 }

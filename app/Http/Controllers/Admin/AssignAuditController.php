@@ -29,12 +29,23 @@ class AssignAuditController extends Controller
 
     public function index(Request $request)
     {
+        $loginUserId = Auth::id();
         $auditors = Auditor::all();
-        $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $company = User::where('is_admin', 1)
+        ->where('is_company', 1)
+        ->where('status', 0)
+        ->whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId); // filter by logged-in user
+        })
+        ->with('assignedTo')
+        ->orderBy('id', 'desc')
+        ->get();
         $certification_category = CertificationCategory::where('status', 0)->orderBy('id', 'desc')->get();
         $certification_body = CertificationBody::where('status', 0)->get();
-
-        $data = AssignAudit::orderBy('id', 'desc');
+        $assignedUserIds = User::whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId);
+        })->pluck('id')->toArray();
+        $data = AssignAudit::whereIn('company_id', $assignedUserIds)->orderBy('id', 'desc');
         if($request->auditor_name != null){
             $auditor_name = $request->auditor_name;
             $data = $data->whereHas('auditor', function($q) use ($auditor_name){
@@ -76,8 +87,17 @@ class AssignAuditController extends Controller
      */
     public function create()
     {
+        $loginUserId = Auth::id();
         $auditors = Auditor::all();
-        $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $company = User::where('is_admin', 1)
+        ->where('is_company', 1)
+        ->where('status', 0)
+        ->whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId);
+        })
+        ->with('assignedTo')
+        ->orderBy('id', 'desc')
+        ->get();
         $certification_category = CertificationCategory::where('status', 0)->orderBy('id', 'desc')->get();
         $certification_body = CertificationBody::where('status', 0)->get();
         return view('admin.assign-audit.create', compact('company', 'certification_category', 'auditors', 'certification_body'));
@@ -124,12 +144,37 @@ class AssignAuditController extends Controller
      */
     public function edit($id)
     {
-        $user = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $loginUserId = Auth::id();
+        $assignedUserIds = User::whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId);
+        })->pluck('id')->toArray();
+        $user = User::where('is_admin', 1)
+        ->where('is_company', 1)
+        ->where('status', 0)
+        ->whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId); // filter by logged-in user
+        })
+        ->with('assignedTo')
+        ->orderBy('id', 'desc')
+        ->get();
         $certification = CertificationCategory::where('status', 0)->get();
         $auditors = Auditor::all();
-        $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $company = User::where('is_admin', 1)
+        ->where('is_company', 1)
+        ->where('status', 0)
+        ->whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId); // filter by logged-in user
+        })
+        ->with('assignedTo')
+        ->orderBy('id', 'desc')
+        ->get();
         $certification_category = CertificationCategory::where('status', 0)->orderBy('id', 'desc')->get();
-        $data = AssignAudit::find($id);
+        $data = AssignAudit::where('id', $id)
+                ->whereIn('company_id', $assignedUserIds)
+                ->first();
+        if (!$data) {
+            abort(403, 'You are not authorized to edit this assign audit.');
+        }
         $certification_body = CertificationBody::where('status', 0)->get();
         return view('admin.assign-audit.edit', compact('data', 'company', 'certification_category', 'auditors', 'certification_body', 'user', 'certification'));
     }

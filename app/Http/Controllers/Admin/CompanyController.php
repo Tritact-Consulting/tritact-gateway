@@ -37,7 +37,16 @@ class CompanyController extends Controller
     }
 
     public function index(Request $request){
-        $data = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc');
+        $loginUserId = Auth::id();
+        $data = User::where('is_admin', 1)
+        ->where('is_company', 1)
+        ->where('status', 0)
+        ->whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId);
+        })
+        ->with('assignedTo')
+        ->orderBy('id', 'desc');
+        
         if($request->search != null){
             $data = $data->where('name', 'like', '%' . $request->search . '%');
         }
@@ -149,7 +158,15 @@ class CompanyController extends Controller
     }
 
     public function edit($id){
-        $data = User::find($id);
+        $loginUserId = Auth::id();
+        $data = User::where('id', $id)
+                ->whereHas('assignedTo', function($q) use ($loginUserId) {
+                    $q->where('parent_user_id', $loginUserId);
+                })
+                ->first();
+        if (!$data) {
+            abort(403, 'You are not authorized to edit this user.');
+        }
         $tags = Tags::where('status', 0)->get();
         $categories = Category::where('status', 0)->get();
         $partners = Partner::where('status', 0)->get();
@@ -237,7 +254,15 @@ class CompanyController extends Controller
     }
 
     public function user($company_id){
-        $data = User::find($company_id);
+        $loginUserId = Auth::id();
+        $data = User::where('id', $company_id)
+                ->whereHas('assignedTo', function($q) use ($loginUserId) {
+                    $q->where('parent_user_id', $loginUserId);
+                })
+                ->first();
+        if (!$data) {
+            abort(403, 'You are not authorized to edit this user.');
+        }
         return view('admin.company.user', compact('data'));
     }
 
@@ -296,7 +321,15 @@ class CompanyController extends Controller
     }
     
     public function dashboard($company_id, Request $request){
-        $user = User::find($company_id);
+        $loginUserId = Auth::id();
+        $user = User::where('id', $company_id)
+                ->whereHas('assignedTo', function($q) use ($loginUserId) {
+                    $q->where('parent_user_id', $loginUserId);
+                })
+                ->first();
+        if (!$user) {
+            abort(403, 'You are not authorized to edit this user.');
+        }
         $tags = $user->tags->pluck('id')->toArray();
         $get_tags = Tags::whereIn('id', $tags)->get();
         $data = Documents::where('status', 0)->whereHas('tags', function($q) use ($tags){
@@ -320,11 +353,25 @@ class CompanyController extends Controller
     }
 
     public function companyCertificationAssign(Request $request){
-        $user = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $loginUserId = Auth::id();
+        $user = User::where('is_admin', 1)
+        ->where('is_company', 1)
+        ->where('status', 0)
+        ->whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId); // filter by logged-in user
+        })
+        ->with('assignedTo')
+        ->orderBy('id', 'desc')
+        ->get();
         $certification = CertificationCategory::where('status', 0)->get();
         $auditors = Auditor::all();
         $certification_body = CertificationBody::where('status', 0)->get();
-        $data = CompanyCertification::orderBy('id', 'desc');
+
+        $assignedUserIds = User::whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId);
+        })->pluck('id')->toArray();
+        
+        $data = CompanyCertification::whereIn('user_id', $assignedUserIds)->orderBy('id', 'desc');
         if($request->company_name != null){
             $company_name = $request->company_name;
             $data = $data->whereHas('user', function($q) use ($company_name){
@@ -379,8 +426,25 @@ class CompanyController extends Controller
     }
 
     public function companyCertificationEdit($id){
-        $data = CompanyCertification::find($id);
-        $user = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $loginUserId = Auth::id();
+        $assignedUserIds = User::whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId);
+        })->pluck('id')->toArray();
+        $data = CompanyCertification::where('id', $id)
+                ->whereIn('user_id', $assignedUserIds)
+                ->first();
+        if (!$data) {
+            abort(403, 'You are not authorized to edit this certification.');
+        }
+        $user = User::where('is_admin', 1)
+        ->where('is_company', 1)
+        ->where('status', 0)
+        ->whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId); // filter by logged-in user
+        })
+        ->with('assignedTo')
+        ->orderBy('id', 'desc')
+        ->get();
         $certification = CertificationCategory::where('status', 0)->get();
         $auditors = Auditor::all();
         $certification_body = CertificationBody::where('status', 0)->get();

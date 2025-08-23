@@ -592,16 +592,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
     <script>
-        if($('.select2').length != 0){
+        if ($('.select2').length !== 0) {
             $('.select2').select2();
-            $('.select2').on("select2:select", function (e) { 
-                var data = e.params.data.text;
-                if(data=='All'){
-                    $(".select2 > option").prop("selected","selected");
-                    $(".select2").trigger("change");
+
+            $('.select2').on('select2:select select2:unselect', function (e) {
+                var $select = $(this);
+                var dataText = e.params.data.text;
+
+                if (dataText === 'All') {
+                    if (e.type === 'select2:select') {
+                        // "All" selected: select all options
+                        $select.find('option').prop('selected', true);
+                        $select.trigger('change');
+                    } else if (e.type === 'select2:unselect') {
+                        $select.find('option').each(function() {
+                            if ($(this).text() === 'All') {
+                                $(this).prop('selected', false);
+                            }else{
+                                $(this).prop('selected', false);
+                            }
+                        });
+                        $select.trigger('change');
+                    }
+                } else {
+                    // Any other option selected/unselected: deselect "All" if it's selected
+                    $select.find('option').each(function() {
+                        if ($(this).text() === 'All') {
+                            $(this).prop('selected', false);
+                        }
+                    });
+                    $select.trigger('change');
                 }
             });
         }
+
+        // Optional: function to programmatically select an option
+        function selectOption(selectSelector, optionText) {
+            var $select = $(selectSelector);
+            $select.find('option').each(function() {
+                if ($(this).text() === optionText) {
+                    $(this).prop('selected', true);
+                }
+            });
+            $select.trigger('change');
+        }
+
+
+
         if($('.datatables').length != 0){
             $('.datatables').DataTable();
         }

@@ -8,6 +8,7 @@ use App\Models\CompanyCertification;
 use App\Models\AssignAudit;
 use DB;
 use Auth;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -28,6 +29,10 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $loginUserId = Auth::id();
+        $assignedUserIds = User::whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId);
+        })->pluck('id')->toArray();
         $company_count = DB::table('users')->where('status', 0)->where('is_admin', 1)->where('is_company', 1)->count();
         $tag_count = DB::table('tags')->where('status', 0)->count();
         $user_count = DB::table('users')->where('is_admin', 1)->where('is_company', 0)->count();
@@ -36,7 +41,7 @@ class AdminController extends Controller
         $auditor_count = DB::table('auditors')->count();
         $assign_certification_count = DB::table('company_certifications')->count();
         $cert_body_count = DB::table('certification_bodies')->where('status', 0)->count();
-        $auditor_expire = CompanyCertification::whereNotIn('id', function($query) {
+        $auditor_expire = CompanyCertification::whereIn('user_id', $assignedUserIds)->whereNotIn('id', function($query) {
             $query->select('previous_certification')
                 ->from('company_certifications')
                 ->whereNotNull('previous_certification');
@@ -46,7 +51,7 @@ class AdminController extends Controller
         
         $assign_audit = null;
         if(Auth::user()->can('view assign audit')){
-            $assign_audit = AssignAudit::orderBy('id', 'desc')->get();
+            $assign_audit = AssignAudit::whereIn('company_id', $assignedUserIds)->orderBy('id', 'desc')->get();
         }
         return view('admin.home', compact('company_count', 'tag_count', 'user_count', 'document_count', 'guide_count', 'auditor_expire', 'auditor_count', 'assign_certification_count', 'cert_body_count', 'assigned_audit', 'assign_audit'));
     }

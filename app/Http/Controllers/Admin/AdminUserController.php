@@ -98,7 +98,9 @@ class AdminUserController extends Controller
     {
         $data = User::find($id);
         $roles = Role::all();
-        return view('admin.user.edit', compact('data', 'roles'));
+        $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $assignedUserIds = $data->assignedUsers()->pluck('users.id')->toArray();
+        return view('admin.user.edit', compact('data', 'roles', 'company', 'assignedUserIds'));
     }
 
     /**
@@ -123,6 +125,17 @@ class AdminUserController extends Controller
         }
         $data->save();
         $data->syncRoles($request->role);
+
+        $company = $request->company;
+        $filteredArray = array_filter($company, function($value) {
+            return $value !== 'All';
+        });
+
+        if(count($filteredArray) != 0){
+            $childUsers = User::whereIn('id', $filteredArray)->get();
+            $data->assignedUsers()->syncWithoutDetaching($childUsers->pluck('id'));
+        }
+    
 
         if ($data->hasRole('attendance')) {
             $data->shift_start = $request->shift_start; // e.g. "09:00"

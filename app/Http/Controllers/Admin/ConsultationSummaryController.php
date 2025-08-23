@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\CertificationCategory;
 use App\Models\CertificationBody;
 use Illuminate\Http\Request;
+use Auth;
 
 class ConsultationSummaryController extends Controller
 {
@@ -24,11 +25,22 @@ class ConsultationSummaryController extends Controller
      */
     public function index()
     {
+        $loginUserId = Auth::id();
         $consultants = Consultant::all();
-        $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $company = User::where('is_admin', 1)
+        ->where('is_company', 1)
+        ->where('status', 0)
+        ->whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId);
+        })
+        ->with('assignedTo')
+        ->orderBy('id', 'desc')->get();
         $certification_category = CertificationCategory::where('status', 0)->orderBy('id', 'desc')->get();
         $certification_body = CertificationBody::where('status', 0)->get();
-        $data = ConsultationSummary::orderBy('id', 'desc');
+        $assignedUserIds = User::whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId);
+        })->pluck('id')->toArray();
+        $data = ConsultationSummary::whereIn('company_id', $assignedUserIds)->orderBy('id', 'desc');
         $data = $data->get();
         return view('admin.consultation-summary.index', compact('data', 'consultants', 'company', 'certification_category', 'certification_body'));
     }
@@ -38,8 +50,17 @@ class ConsultationSummaryController extends Controller
      */
     public function create()
     {
+        $loginUserId = Auth::id();
         $consultants = Consultant::all();
-        $company = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->orderBy('id', 'desc')->get();
+        $company = User::where('is_admin', 1)
+        ->where('is_company', 1)
+        ->where('status', 0)
+        ->whereHas('assignedTo', function($q) use ($loginUserId) {
+            $q->where('parent_user_id', $loginUserId); // filter by logged-in user
+        })
+        ->with('assignedTo')
+        ->orderBy('id', 'desc')
+        ->get();
         $certification_category = CertificationCategory::where('status', 0)->orderBy('id', 'desc')->get();
         $certification_body = CertificationBody::where('status', 0)->get();
         return view('admin.consultation-summary.create', compact('company', 'certification_category', 'consultants', 'certification_body'));

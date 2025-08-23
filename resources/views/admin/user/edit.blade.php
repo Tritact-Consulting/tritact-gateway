@@ -108,6 +108,21 @@
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="form-label">Company List</label>
+									<select name="company[]" id="company" class="select2" multiple>
+										<option value="All">All</option>
+										@foreach($company as $key => $value)
+										<option value="{{ $value->id }}"
+										{{ in_array($value->id, $assignedUserIds ?? []) ? 'selected' : '' }}
+										>{{ $value->name }}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="box-footer">
 						<div class="row">
