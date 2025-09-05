@@ -359,7 +359,7 @@
         <!-- /.Content Right Sidebar -->
         <footer class="main-footer d-flex justify-content-between" style="padding-right: 30px;">
             <div>
-                &copy; {{ date('Y') }} <a href="#">{!! config('app.name', 'Laravel') !!}</a>. All Rights Reserved.
+                &copy; {{ date('Y') }} <a href="https://gateway.tritact.co.uk/">{!! config('app.name', 'Laravel') !!}</a>. All Rights Reserved.
             </div>
             <div class="text-right">
                 <a href="mailto:support@tritact.co.uk" target="_blank">support@tritact.co.uk</a>
