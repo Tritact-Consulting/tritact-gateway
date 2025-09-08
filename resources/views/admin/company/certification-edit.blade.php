@@ -129,6 +129,7 @@
                                 <div class="form-group">
                                     <label>Previous Certification</label>
                                     <select name="previous_certification" id="previous_certification" class="form-control select2">
+                                        <option value="">Select Previous Certification</option> {{-- Always default --}}
                                         @foreach($preview_data as $key => $value)
                                         <option value="{{ $value->previous_certification }}" {{ $value->id == $data->previous_certification ? 'selected' : '' }}>{{ $value->certification_name }} {{ $value->certification_number }}</option>
                                         @endforeach

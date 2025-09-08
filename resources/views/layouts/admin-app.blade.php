@@ -212,9 +212,9 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     @can('create category')
-                                    <li class="{{ Request::routeIs('category.create') || Request::routeIs('category.edit') ? 'active' : '' }}"><a href="{{ route('category.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Type</a></li>
+                                    <li class="{{ Request::routeIs('category.create') || Request::routeIs('category.edit') ? 'active' : '' }}"><a href="{{ route('category.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Cateory</a></li>
                                     @endcan
-                                    <li class="{{ Request::routeIs('category.index') ? 'active' : '' }}"><a href="{{ route('category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Type List</a></li>
+                                    <li class="{{ Request::routeIs('category.index') ? 'active' : '' }}"><a href="{{ route('category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Category List</a></li>
                                 </ul>
                             </li>
                             @endcan
@@ -252,9 +252,9 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     @can('create certification category')
-                                    <li class="{{ Request::routeIs('certification-category.create') || Request::routeIs('certification-category.edit') ? 'active' : '' }}"><a href="{{ route('certification-category.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Category</a></li>
+                                    <li class="{{ Request::routeIs('certification-category.create') || Request::routeIs('certification-category.edit') ? 'active' : '' }}"><a href="{{ route('certification-category.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Certification Type</a></li>
                                     @endcan
-                                    <li class="{{ Request::routeIs('certification-category.index') ? 'active' : '' }}"><a href="{{ route('certification-category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Category List</a></li>
+                                    <li class="{{ Request::routeIs('certification-category.index') ? 'active' : '' }}"><a href="{{ route('certification-category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Certification Type List</a></li>
                                 </ul>
                             </li>
                             @endcan
