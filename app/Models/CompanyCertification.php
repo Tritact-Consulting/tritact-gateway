@@ -26,13 +26,16 @@ class CompanyCertification extends Model
     }
 
     public function getRemainingDays(){
-        $remaining = \Carbon\Carbon::now()->diffInDays($this->expire_date, false);
+        $date = $this->next_audit_due_date ?? $this->expire_date;
+
+        $remaining = \Carbon\Carbon::now()->diffInDays($date, false);
         $remaining = $remaining + 2;
-        if($remaining <= 30){
+
+        if ($remaining <= 30) {
             return 'alert alert-red ' . $remaining;
-        }else if(($remaining > 30) && ($remaining <= 90)){
+        } elseif ($remaining > 30 && $remaining <= 90) {
             return 'alert alert-warning ' . $remaining;
-        }else if($remaining > 90){
+        } else {
             return 'alert alert-success ' . $remaining;
         }
     }

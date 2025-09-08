@@ -244,7 +244,7 @@
                                     <th>Certification Body</th>
                                     <th>Certificate Number</th>
                                     <th>Audit Type</th>
-                                    <th>Expiry Date</th>
+                                    <th>Next Audit Date / Expiry Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -256,7 +256,13 @@
                                     <td>{{ $value->body != null ? $value->body->name : '' }}</td>
                                     <td>{{ $value->certification_number != null ? $value->certification_number : '' }}</td>
                                     <td>{{ $value->certification_name }}</td>
-                                    <td>{{ $value->expire_date }}</td>
+                                    <td>
+                                        @if (!empty($value->next_audit_due_date))
+                                            {{ $value->next_audit_due_date }}
+                                        @else
+                                            {{ $value->expire_date }}
+                                        @endif
+                                    </td>
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{ route('company.certification.edit', $value->id) }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
