@@ -7,6 +7,7 @@ use App\Models\Tags;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Partner;
+use App\Models\Consultant;
 use App\Models\CompanyTags;
 use App\Models\CompanyCategories;
 use App\Models\Documents;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Mail;
 use App\Mail\CompanyAddMail;
+use Illuminate\Support\Str;
 
 class CompanyController extends Controller
 {
@@ -58,100 +60,126 @@ class CompanyController extends Controller
         $tags = Tags::where('status', 0)->get();
         $categories = Category::where('status', 0)->get();
         $partners = Partner::where('status', 0)->get();
-        return view('admin.company.create', compact('tags', 'categories', 'partners'));
+        $consultants = Consultant::all();
+        return view('admin.company.create', compact('tags', 'categories', 'partners', 'consultants'));
     }
 
     public function store(Request $request){
-
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required|confirmed',
-            'director_name' => 'required',
-            'short_name' => 'required',
-            'tags' => 'required',
-            'address' => 'required',
-            'website' => 'required',
-            'registration_num' => 'required',
-            'phone_num' => 'required',
-            'company_email' => 'required',
-            'logo_width' => 'required',
-            'logo_height' => 'required',
-            'prefix_company_id' => 'required'
-        ]);
-
-        if($request->company_id != null){
+        if($request->consultant) {
             $request->validate([
-                'company_id' => 'required|unique:companies,company_id',
+                'name'  => 'required',
+                'logo'  => 'required|image',
+                'email' => 'required|unique:users,email',
+                'phone_num' => 'required',
             ]);
-        }
-
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->is_admin = 1;
-        $user->is_company = 1;
-        $user->save();
-        $user->assignRole('company');
-        $company = new Company();
-        if($request->hasFile('logo')){
-            $imageName = time().'.'.$request->logo->extension();
-            $request->logo->move(public_path('company/logos'), $imageName);
-            $company->logo = 'company/logos/'.$imageName;
-        }
-        $company->director_name = $request->director_name;
-        $company->short_name = $request->short_name;
-        $company->total_user = $request->total_user;
-        $company->status = $request->status;
-        $company->address = $request->address;
-        $company->version = $request->version;
-        $company->issue_date = $request->issue_date;
-        $company->website = $request->website;
-        $company->registration_num = $request->registration_num;
-        $company->phone_num = $request->phone_num;
-        $company->policy_date = $request->policy_date;
-        $company->company_email = $request->company_email;
-        $company->logo_width = $request->logo_width;
-        $company->logo_height = $request->logo_height;
-        $company->company_id = $request->company_id;
-        $company->adding_certification = $request->adding_certification;
-        $company->referred_by = $request->referred_by;
-        $company->prefix_company_id = $request->prefix_company_id;
-        
-        $user->company()->save($company);
-
-        $tags = $request->tags;
-        foreach($tags as $key => $value){
-            if($value != 'all'){
-                $data = new CompanyTags();
-                $data->user_id = $user->id;
-                $data->company_id = $company->id;
-                $data->tag_id = $value;
-                $data->save();
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make(Str::random(10));
+            $user->is_admin = 1;
+            $user->is_company = 1;
+            $user->save();
+            $user->assignRole('company');
+            $company = new Company();
+            if ($request->hasFile('logo')) {
+                $imageName = time().'.'.$request->logo->extension();
+                $request->logo->move(public_path('company/logos'), $imageName);
+                $company->logo = 'company/logos/'.$imageName;
             }
-        }
+            $company->phone_num = $request->phone_num;
+            $company->consultant_id = $request->consultant;
+            $user->company()->save($company);
+        }else{
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|unique:users,email',
+                'password' => 'required|confirmed',
+                'director_name' => 'required',
+                'short_name' => 'required',
+                'tags' => 'required',
+                'address' => 'required',
+                'website' => 'required',
+                'registration_num' => 'required',
+                'phone_num' => 'required',
+                'company_email' => 'required',
+                'logo_width' => 'required',
+                'logo_height' => 'required',
+                'prefix_company_id' => 'required'
+            ]);
 
-        $categories = $request->categories;
-        if($categories != null){
-            foreach($categories as $key => $value){
+            if($request->company_id != null){
+                $request->validate([
+                    'company_id' => 'required|unique:companies,company_id',
+                ]);
+            }
+
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->is_admin = 1;
+            $user->is_company = 1;
+            $user->save();
+            $user->assignRole('company');
+            $company = new Company();
+            if($request->hasFile('logo')){
+                $imageName = time().'.'.$request->logo->extension();
+                $request->logo->move(public_path('company/logos'), $imageName);
+                $company->logo = 'company/logos/'.$imageName;
+            }
+            $company->director_name = $request->director_name;
+            $company->short_name = $request->short_name;
+            $company->total_user = $request->total_user;
+            $company->status = $request->status;
+            $company->address = $request->address;
+            $company->version = $request->version;
+            $company->issue_date = $request->issue_date;
+            $company->website = $request->website;
+            $company->registration_num = $request->registration_num;
+            $company->phone_num = $request->phone_num;
+            $company->policy_date = $request->policy_date;
+            $company->company_email = $request->company_email;
+            $company->logo_width = $request->logo_width;
+            $company->logo_height = $request->logo_height;
+            $company->company_id = $request->company_id;
+            $company->adding_certification = $request->adding_certification;
+            $company->referred_by = $request->referred_by;
+            $company->prefix_company_id = $request->prefix_company_id;
+            
+            $user->company()->save($company);
+
+            $tags = $request->tags;
+            foreach($tags as $key => $value){
                 if($value != 'all'){
-                    $data = new CompanyCategories();
+                    $data = new CompanyTags();
                     $data->user_id = $user->id;
                     $data->company_id = $company->id;
-                    $data->category_id = $value;
+                    $data->tag_id = $value;
                     $data->save();
                 }
             }
-        }
 
-        $credentials = $request->credentials;
-        if($credentials == 1){
-            $email_template = $request->email_temp;
-            $mailData = [
-                'body' => $email_template
-            ];
-            Mail::to($request->sender_email)->send(new CompanyAddMail($mailData));
+            $categories = $request->categories;
+            if($categories != null){
+                foreach($categories as $key => $value){
+                    if($value != 'all'){
+                        $data = new CompanyCategories();
+                        $data->user_id = $user->id;
+                        $data->company_id = $company->id;
+                        $data->category_id = $value;
+                        $data->save();
+                    }
+                }
+            }
+
+            $credentials = $request->credentials;
+            if($credentials == 1){
+                $email_template = $request->email_temp;
+                $mailData = [
+                    'body' => $email_template
+                ];
+                Mail::to($request->sender_email)->send(new CompanyAddMail($mailData));
+            }   
         }
 
         return redirect()->back()->with('success', 'Company Added Successfully');
@@ -170,88 +198,105 @@ class CompanyController extends Controller
         $tags = Tags::where('status', 0)->get();
         $categories = Category::where('status', 0)->get();
         $partners = Partner::where('status', 0)->get();
-        return view('admin.company.edit', compact('data', 'tags', 'categories', 'partners'));
+        $consultants = Consultant::all();
+        return view('admin.company.edit', compact('data', 'tags', 'categories', 'partners', 'consultants'));
     }
 
     public function update($id, Request $request){
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email,'.$id,
-            'director_name' => 'required',
-            'short_name' => 'required',
-            'tags' => 'required',
-            'version' => 'required',
-            'issue_date' => 'required',
-            'address' => 'required',
-            'website' => 'required',
-            'registration_num' => 'required',
-            'phone_num' => 'required',
-            'company_email' => 'required',
-            'logo_width' => 'required',
-            'logo_height' => 'required',
-            'prefix_company_id' => 'required'
-        ]);
-
-        if($request->password != null){
+        $company = Company::where('user_id', $id)->firstOrFail();
+        $user    = User::findOrFail($id);
+        if ($request->consultant) {
             $request->validate([
-                'password' => 'required|confirmed',
+                'name'      => 'required',
+                'logo'      => 'nullable|image',
+                'email'     => 'required|unique:users,email,' . $id,
+                'phone_num' => 'required',
             ]);
-        }
-
-        $company = Company::where('user_id', $id)->first();
-
-        if($request->company_id != null){
+            $user->name  = $request->name;
+            $user->email = $request->email;
+            $user->save();
+            if ($request->hasFile('logo')) {
+                $imageName = time() . '.' . $request->logo->extension();
+                $request->logo->move(public_path('company/logos'), $imageName);
+                $company->logo = 'company/logos/' . $imageName;
+            }
+            $company->phone_num     = $request->phone_num;
+            $company->consultant_id = $request->consultant;
+            $company->save();
+        }else {
             $request->validate([
-                'company_id' => 'required|unique:companies,company_id,'.$company->id,
+                'name'             => 'required',
+                'email'            => 'required|unique:users,email,' . $id,
+                'director_name'    => 'required',
+                'short_name'       => 'required',
+                'tags'             => 'required',
+                'address'          => 'required',
+                'website'          => 'required',
+                'registration_num' => 'required',
+                'phone_num'        => 'required',
+                'company_email'    => 'required',
+                'logo_width'       => 'required',
+                'logo_height'      => 'required',
+                'prefix_company_id'=> 'required',
             ]);
-        }
-        
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        if($request->password != null){
-            $user->password = Hash::make($request->password);
-        }
-        $user->save();
 
-        if($request->hasFile('logo')){
-            $imageName = time().'.'.$request->logo->extension();
-            $request->logo->move(public_path('company/logos'), $imageName);
-            $company->logo = 'company/logos/'.$imageName;
-        }
-        $company->director_name = $request->director_name;
-        $company->short_name = $request->short_name;
-        $company->total_user = $request->total_user;
-        $company->status = $request->status;
-        $company->address = $request->address;
-        $company->version = $request->version;
-        $company->issue_date = $request->issue_date;
-        $company->website = $request->website;
-        $company->registration_num = $request->registration_num;
-        $company->phone_num = $request->phone_num;
-        $company->company_email = $request->company_email;
-        $company->logo_width = $request->logo_width;
-        $company->logo_height = $request->logo_height;
-        $company->company_id = $request->company_id;
-        $company->adding_certification = $request->adding_certification;
-        $company->referred_by = $request->referred_by;
-        $company->prefix_company_id = $request->prefix_company_id;
-        $company->policy_date = $request->policy_date;
-        $company->save();
-        $old_tag = $user->tags->pluck('id')->toArray();
-        $tags = $request->tags;
-        $tags = array_diff($tags, ["all"]);
-        $user->tags()->syncWithPivotValues($tags, ['company_id' => $company->id]);
+            if ($request->password != null) {
+                $request->validate([
+                    'password' => 'required|confirmed',
+                ]);
+            }
 
-        $old_category = $user->categories->pluck('id')->toArray();
-        $categories = $request->categories;
-        if($categories != null){
+            if ($request->company_id != null) {
+                $request->validate([
+                    'company_id' => 'required|unique:companies,company_id,' . $company->id,
+                ]);
+            }
+
+            $user->name  = $request->name;
+            $user->email = $request->email;
+            if ($request->password != null) {
+                $user->password = Hash::make($request->password);
+            }
+            $user->save();
+
+            if ($request->hasFile('logo')) {
+                $imageName = time() . '.' . $request->logo->extension();
+                $request->logo->move(public_path('company/logos'), $imageName);
+                $company->logo = 'company/logos/' . $imageName;
+            }
+
+            $company->director_name       = $request->director_name;
+            $company->short_name          = $request->short_name;
+            $company->total_user          = $request->total_user;
+            $company->status              = $request->status;
+            $company->address             = $request->address;
+            $company->version             = $request->version;
+            $company->issue_date          = $request->issue_date;
+            $company->website             = $request->website;
+            $company->registration_num    = $request->registration_num;
+            $company->phone_num           = $request->phone_num;
+            $company->company_email       = $request->company_email;
+            $company->logo_width          = $request->logo_width;
+            $company->logo_height         = $request->logo_height;
+            $company->company_id          = $request->company_id;
+            $company->adding_certification= $request->adding_certification;
+            $company->referred_by         = $request->referred_by;
+            $company->prefix_company_id   = $request->prefix_company_id;
+            $company->policy_date         = $request->policy_date;
+            $company->consultant_id       = null;
+            $company->save();
+
+            $tags = array_diff($request->tags, ["all"]);
+            $user->tags()->syncWithPivotValues($tags, ['company_id' => $company->id]);
+            
+            $categories = $request->categories ?? [];
             $categories = array_diff($categories, ["all"]);
+            $user->categories()->syncWithPivotValues($categories, ['company_id' => $company->id]);
         }
-        $user->categories()->syncWithPivotValues($categories, ['company_id' => $company->id]);
 
         return redirect()->back()->with('success', 'Company Updated Successfully');
     }
+
 
     public function user($company_id){
         $loginUserId = Auth::id();

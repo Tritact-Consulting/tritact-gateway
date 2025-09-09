@@ -12,4 +12,8 @@ class Consultant extends Model
     public function category_body(){
         return $this->hasOne(ConsultationBody::class, 'id', 'consultation_body_id');
     }
+
+    public function companies(){
+        return $this->hasMany(Company::class, 'consultant_id');
+    }
 }

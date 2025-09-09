@@ -43,6 +43,17 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label>Consultant</label>
+                                    <select name="consultant" id="consultant" class="form-control select2">
+                                        <option value="">Select Consultant</option>
+                                        @foreach($consultants as $key => $value)
+                                        <option value="{{ $value->id }}" {{ $data->company->consultant_id == $value->id ? 'selected' : '' }}>{{ $value->name }} - {{ $value->email }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label>Logo <strong>*</strong></label>
                                     <input type="file" name="logo" class="form-control dropify" data-default-file="{{ asset($data->company->logo) }}">
                                 </div>
@@ -265,6 +276,53 @@
                 input.attr("type", "password");
             }
         });
+    });
+
+    $(document).ready(function () {
+        function toggleFields() {
+            let consultant = $("#consultant").val();
+            if (consultant) {
+                $(".col-md-6, .col-md-12, .col-md-4, .col-lg-6")
+                    .hide()
+                    .find("input, select, textarea")
+                    .each(function () {
+                        if ($(this).attr("required")) {
+                            $(this).data("wasRequired", true);
+                            $(this).removeAttr("required");
+                        }
+                    });
+
+                let fieldsToShow = [
+                    "#consultant",
+                    "input[name='name']",
+                    "input[name='logo']",
+                    "input[name='email']",
+                    "input[name='phone_num']"
+                ];
+
+                fieldsToShow.forEach(function (selector) {
+                    let $field = $(selector).closest("[class^='col-md'], .col-lg-6");
+                    $field.show();
+                    $field.find("input, select, textarea").each(function () {
+                        if ($(this).data("wasRequired")) {
+                            $(this).attr("required", "required");
+                        }
+                    });
+                });
+            } else {
+                $(".col-md-6, .col-md-12, .col-md-4, .col-lg-6")
+                    .show()
+                    .find("input, select, textarea")
+                    .each(function () {
+                        if ($(this).data("wasRequired")) {
+                            $(this).attr("required", "required");
+                        }
+                    });
+            }
+        }
+
+        toggleFields();
+        $("#consultant").on("change", toggleFields);
     });
 </script>
 @endpush

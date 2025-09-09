@@ -19,4 +19,8 @@ class Company extends Model
         return $total_user - $users;       
     }
 
+    public function consultant(){
+        return $this->belongsTo(Consultant::class);
+    }
+
 }

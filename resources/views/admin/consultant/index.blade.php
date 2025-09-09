@@ -30,6 +30,7 @@
                                     <th>SNO</th>
                                     <th>Consultant</th>
                                     <th>Phone</th>
+                                    <th>Company</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -39,6 +40,16 @@
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $value->name }} <br> {{ $value->email }}</td>
                                     <td>{{ $value->phone }}</td>
+                                    <td>
+                                        @if($value->companies->isNotEmpty())
+                                        @forelse($value->companies as $company)
+                                            <div>
+                                                <span class="badge badge-info">{{ $company->user ? $company->user->name : '' }}</span>
+                                            </div>
+                                        @empty
+                                        @endforelse
+                                        @endif
+                                    </td>
                                     <td>
                                         <form action="{{ route('consultant.destroy', $value->id) }}" method="POST">
                                             <div class="d-flex">
