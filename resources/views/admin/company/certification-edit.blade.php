@@ -103,19 +103,45 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Next Audit Due Date</label>
+                                    <label>Next Audit Due Date
+                                        <div class="tooltip">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <span class="tooltiptext">
+                                                The next audit due date can either be the certificate’s expiry date or a scheduled audit date.<br>
+                                                <strong>Example:</strong><br>
+                                                • For certifications such as SafeContractor, CHAS, Constructionline, and Cyber Essentials, the next audit date is the same as the expiry date.<br>
+                                                • For ISO certifications, since they involve one certification with three years of surveillance, the next audit date may differ from the expiry date.
+                                            </span>
+                                        </div>
+                                    </label>
                                     <input type="date" name="next_audit_due_date" id="next_audit_due_date" class="form-control" value="{{ $data->next_audit_due_date }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Username</label>
+                                    <label>Username
+                                        <div class="tooltip right-tooltip">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <span class="tooltiptext">
+                                                You may need to provide the username for certifications such as SafeContractor, CHAS, Constructionline, and Cyber Essentials. 
+                                                If you don’t know the username, you can leave this field empty.
+                                            </span>
+                                        </div>
+                                    </label>
                                     <input type="text" name="username" id="username" class="form-control" value="{{ $data->username }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Password</label>
+                                    <label>Password
+                                        <div class="tooltip">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <span class="tooltiptext">
+                                                You may need to provide the password for certifications such as SafeContractor, CHAS, Constructionline, and Cyber Essentials. 
+                                                If you don’t know the password, you can leave this field empty.
+                                            </span>
+                                        </div>
+                                    </label>
                                     <input type="text" name="password" id="password" class="form-control" value="{{ $data->password }}">
                                 </div>
                             </div>

@@ -156,7 +156,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Categories <strong>*</strong></label>
+                                    <label>Categories</label>
                                     <select class="form-control select2" name="categories[]" multiple="multiple">
                                         <option value="all">All</option>
                                         @foreach($categories as $key => $value)
@@ -173,13 +173,23 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="issue_date">Issue Date <strong>*</strong></label>
+                                    <label for="issue_date">Issue Date <strong>*</strong>
+                                        <div class="tooltip">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <span class="tooltiptext">This date will appear in the footer of each document</span>
+                                        </div>
+                                    </label>
                                     <input type="date" name="issue_date" id="issue_date" class="form-control" value="{{  old('issue_data', date('Y-m-d', strtotime($data->company->issue_date))) }}" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="policy_date">Policy Issue Date</label>
+                                    <label for="policy_date">Policy Issue Date
+                                        <div class="tooltip right-tooltip">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <span class="tooltiptext">Date appears on policy documents</span>
+                                        </div>
+                                    </label>
                                     <input type="date" name="policy_date" id="policy_date" class="form-control" value="{{ $data->company->policy_date != null ? date('Y-m-d', strtotime($data->company->policy_date)) : '' }}">
                                 </div>
                             </div>
@@ -191,7 +201,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="registration_num">Registration Number <strong>*</strong></label>
+                                    <label for="registration_num">Registration Number <strong>*</strong>
+                                    <div class="tooltip right-tooltip">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <span class="tooltiptext">Companies House Registration Number</span>
+                                    </div>
+                                    </label>
                                     <input type="text" name="registration_num" id="registration_num" class="form-control" value="{{ old('registration_num', $data->company->registration_num) }}" required>
                                 </div>
                             </div>
