@@ -227,6 +227,14 @@
                                     <input type="text" name="summary_certification_number" id="summary_certification_number" class="form-control" value="{{ $data->company_certification != null ? $data->company_certification->certification_number : '' }}">
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Previous Certification</label>
+                                    <select name="summary_previous_certification" id="summary_previous_certification" class="form-control select2">
+
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -250,5 +258,32 @@
             $('#certification-summary').show();
         }
     })
+    $(document).ready(function(){
+        $('#company').change(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('get-certification-by-company') }}",
+                data: {id: $(this).val()},
+                success: function(data) {
+                    if(data.success){
+                        var select = document.getElementById('summary_previous_certification');
+                        select.innerHTML = '<option value="">Select Previous Certification</option>';
+                        var option_data = data.data;
+                        option_data.forEach(function(item) {
+                            var option = document.createElement('option');
+                            option.value = item.id;
+                            option.textContent = item.certification_name + ' - ' + item.certification_number;
+                            select.appendChild(option);
+                        });
+                    }
+                }
+            });
+        })
+    });
 </script>
 @endpush

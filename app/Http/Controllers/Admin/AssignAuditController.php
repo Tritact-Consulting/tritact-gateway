@@ -229,11 +229,13 @@ class AssignAuditController extends Controller
             $company_certification->certification_name = $request->summary_certification_name;
             $company_certification->issue_date = $request->summary_issue_date;
             $company_certification->expire_date = $request->summary_expire_date;
+            $company_certification->next_audit_due_date = $request->summary_next_audit_due_date;
             $company_certification->auditor_id = $request->summary_auditor;
             $company_certification->username = $request->summary_username;
             $company_certification->password = $request->summary_password;
             $company_certification->certification_number = $request->summary_certification_number;
             $company_certification->certification_body_id = $request->summary_certification_body;
+            $company_certification->previous_certification = $request->summary_previous_certification;
             $company_certification->save();
             $data->company_certificate_id = $company_certification->id;
         }
