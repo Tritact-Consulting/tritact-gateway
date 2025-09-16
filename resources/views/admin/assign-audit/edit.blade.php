@@ -195,6 +195,22 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Next Audit Due Date
+                                        <div class="tooltip">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            <span class="tooltiptext">
+                                                The next audit due date can either be the certificate’s expiry date or a scheduled audit date.<br>
+                                                <strong>Example:</strong><br>
+                                                • For certifications such as SafeContractor, CHAS, Constructionline, and Cyber Essentials, the next audit date is the same as the expiry date.<br>
+                                                • For ISO certifications, since they involve one certification with three years of surveillance, the next audit date may differ from the expiry date.
+                                            </span>
+                                        </div>
+                                    </label>
+                                    <input type="date" name="summary_next_audit_due_date" id="summary_next_audit_due_date" class="form-control" value="{{ $data->company_certification != null ? $data->company_certification->next_audit_due_date : '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label>Username</label>
                                     <input type="text" name="summary_username" id="summary_username" class="form-control" value="{{ $data->company_certification != null ? $data->company_certification->username : '' }}">
                                 </div>
