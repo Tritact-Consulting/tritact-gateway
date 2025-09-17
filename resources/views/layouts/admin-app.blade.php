@@ -171,10 +171,15 @@
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Library"><span class="path1"></span><span class="path2"></span></i>
-                                    <span>Tags</span>
+                                    <span>Tags
+                                    </span>
+                                    <div class="tooltip nav-tooltip">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <span class="tooltipnavtext">Tags act as categories for documents. <br>For example, if you want to store ISO 9001 documents in the gateway, you can create a tag called ISO 9001 and then assign all relevant documents to this tag.<br>This makes it easy to organise and retrieve documents based on their category.</span>
+                                    </div>
                                     <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </span>
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
                                 </a>
                                 <ul class="treeview-menu">
                                     @can('create tag')
