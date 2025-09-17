@@ -1,16 +1,16 @@
 @extends('layouts.admin-app')
-@section('title', 'Assign Audit List')
+@section('title', 'Audit List')
 @section('content')
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">Assign Audit List</h3>
+            <h3 class="page-title">Audit List</h3>
             <div class="d-inline-block align-items-center">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                         <li class="breadcrumb-item" aria-current="page">Assign Audit</li>
-                        <li class="breadcrumb-item active" aria-current="page">Assign Audit list</li>
+                        <li class="breadcrumb-item active" aria-current="page">Audit list</li>
                     </ol>
                 </nav>
             </div>

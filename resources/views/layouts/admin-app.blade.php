@@ -144,6 +144,7 @@
                     <div class="multinav-scroll" style="height: 100%;">
                         <!-- sidebar menu-->
                         <ul class="sidebar-menu" data-widget="tree">
+                            <li class="header">Overview</li>
                             <li class="{{ Request::routeIs('admin.home') ? 'active' : '' }}">
                                 <a href="{{ route('admin.home') }}">
                                     <i class="icon-Home"></i>
@@ -167,6 +168,7 @@
                                 </ul>
                             </li>
                             @endcan
+                            <li class="header">Consultancy</li>
                             @can('view tag')
                             <li class="treeview">
                                 <a href="#">
@@ -211,6 +213,23 @@
                                 </ul>
                             </li>
                             @endcan
+                            @can('view keyword')
+                            <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
+                                <a href="{{ route('keyword.index') }}">
+                                    <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+                                    <span>Document Keyword</span>
+                                    <div class="tooltip nav-tooltip">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <span class="tooltipnavtext" style="left: -1500%">
+                                            The Document Keyword section is used to link placeholders in documents to their corresponding database columns.<br>
+                                            For example, if a document contains a placeholder like <strong>${company_name}</strong>, create a keyword named <strong>company_name</strong> (without the dollar sign and brackets) and link it to the “Company Name” column in the database.<br>
+                                            Before creating a new keyword, always check existing ones to ensure it doesn’t already exist.<br>
+                                            This helps keep your document placeholders accurate and consistent.
+                                        </span>
+                                    </div>
+                                </a>
+                            </li>
+                            @endcan
                             @can('view category')
                             <li class="treeview">
                                 <a href="#">
@@ -241,7 +260,7 @@
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>
-                                    <span>Guide</span>
+                                    <span>Guides</span>
                                     <div class="tooltip nav-tooltip">
                                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                                         <span class="tooltipnavtext">
@@ -269,6 +288,7 @@
                             <!--        <span>Version</span>-->
                             <!--    </a>-->
                             <!--</li>-->
+                            <li class="header">Audit</li>
                             @can('view certification category')
                             <li class="treeview">
                                 <a href="#">
@@ -359,25 +379,8 @@
                                     @can('create assign audit')
                                     <li class="{{ Request::routeIs('assign-audit.create') || Request::routeIs('assign-audit.edit') ? 'active' : '' }}"><a href="{{ route('assign-audit.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Assign Audit</a></li>
                                     @endcan
-                                    <li class="{{ Request::routeIs('assign-audit.index') ? 'active' : '' }}"><a href="{{ route('assign-audit.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Assign Audit List</a></li>
+                                    <li class="{{ Request::routeIs('assign-audit.index') ? 'active' : '' }}"><a href="{{ route('assign-audit.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Audit List</a></li>
                                 </ul>
-                            </li>
-                            @endcan
-                            @can('view keyword')
-                            <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
-                                <a href="{{ route('keyword.index') }}">
-                                    <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
-                                    <span>Document Keyword</span>
-                                    <div class="tooltip nav-tooltip">
-                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                        <span class="tooltipnavtext" style="left: -1500%">
-                                            The Document Keyword section is used to link placeholders in documents to their corresponding database columns.<br>
-                                            For example, if a document contains a placeholder like <strong>${company_name}</strong>, create a keyword named <strong>company_name</strong> (without the dollar sign and brackets) and link it to the “Company Name” column in the database.<br>
-                                            Before creating a new keyword, always check existing ones to ensure it doesn’t already exist.<br>
-                                            This helps keep your document placeholders accurate and consistent.
-                                        </span>
-                                    </div>
-                                </a>
                             </li>
                             @endcan
                             @can('view partner')
@@ -398,7 +401,7 @@
                             </li>
                             @endcan
                             @canany(['view consultation body', 'create consultation body', 'view consultant', 'create consultant', 'view consultation summary', 'create consultation summary'])
-                            <li class="header">Consultation</li>
+                            <li class="header">External Consultants</li>
                             @endcan
                             @can('view consultation body')
                             <li class="treeview">
@@ -438,7 +441,13 @@
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Chart-pie"><span class="path1"></span><span class="path2"></span></i>
-                                    <span>Consultation Summary</span>
+                                    <span>Consultant Audits</span>
+                                    <span class="tooltipnavtext" style="left: -1500%">
+                                        The Consultant Audits section is used to manage and update details about external consultants, the companies they are linked with, audits they have performed, and certificates issued.<br>
+                                        For example, you can record <strong>Consultant Name</strong>, <strong>Company</strong>, <strong>Audit Type</strong>, and <strong>Certificate Details</strong> for each entry.<br>
+                                        This section can be updated whenever new audits are conducted or certificates are issued.<br>
+                                        Keeping this information up to date ensures accurate tracking of consultants and the audits they complete.
+                                    </span>
                                     <span class="pull-right-container">
                                     <i class="fa fa-angle-right pull-right"></i>
                                 </span>

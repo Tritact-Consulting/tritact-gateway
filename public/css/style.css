@@ -13946,7 +13946,11 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
   .sidebar-menu > li.header {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: clip; }
+    text-overflow: clip;
+    font-weight: 600;
+    color: #172b4c;
+    font-size: 14px;
+  }
     .sidebar-menu > li.header.line {
       background-color: #f3f6f9;
       height: 2px;

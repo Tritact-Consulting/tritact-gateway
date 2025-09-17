@@ -169,6 +169,7 @@
                     <div class="multinav-scroll" style="height: 100%;">
                         <!-- sidebar menu-->
                         <ul class="sidebar-menu" data-widget="tree">
+                            <li class="header">Overview</li>
                             <li class="{{ Request::routeIs('home') ? 'active' : '' }}">
                                 <a href="{{ route('home') }}">
                                     <i class="icon-Home"></i>
@@ -176,6 +177,7 @@
                                 </a>
                             </li>
                             @canany(['view user', 'create user', 'update user', 'delete user'])
+                            <li class="header">User Management</li>
                             <li class="treeview">
                                 <a href="#">
                                     <i class="icon-Group"><span class="path1"></span><span class="path2"></span></i>
@@ -193,8 +195,9 @@
                                     @endcan
                                 </ul>
                             </li>
-                            @endcanany
+                            @
                             @canany(['view document', 'download document'])
+                            <li class="header">Document And Guides</li>
                             <li class="{{ Request::routeIs('documents.index') ? 'active' : '' }}">
                                 <a href="{{ route('documents.index') }}">
                                     <i class="icon-File"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
@@ -224,10 +227,20 @@
                             }
                             @endphp
                             @if($adding_adding_certification)
+                            <li class="header">Certifications</li>
                             <li class="{{ Request::routeIs('certifications.index') ? 'active' : '' }}">
                                 <a href="{{ route('certifications.index') }}">
                                     <i class="icon-Library"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Certificate Management</span>
+                                    <div class="tooltip nav-tooltip">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <span class="tooltipnavtext" style="left: -1800%">
+                                            The Certificate Management section allows you to store, view, and update all certificate records.<br>
+                                            You can manage details such as certification type, issue and expiry dates, and other related information.<br>
+                                            Before adding a new certificate, always check existing records to prevent duplicates.<br>
+                                            This section keeps all your certification data organised and easy to access.
+                                        </span>
+                                    </div>
                                 </a>
                             </li>
                             @endif
