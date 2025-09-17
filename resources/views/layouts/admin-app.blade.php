@@ -442,12 +442,15 @@
                                 <a href="#">
                                     <i class="icon-Chart-pie"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Consultant Audits</span>
-                                    <span class="tooltipnavtext" style="left: -1500%">
-                                        The Consultant Audits section is used to manage and update details about external consultants, the companies they are linked with, audits they have performed, and certificates issued.<br>
-                                        For example, you can record <strong>Consultant Name</strong>, <strong>Company</strong>, <strong>Audit Type</strong>, and <strong>Certificate Details</strong> for each entry.<br>
-                                        This section can be updated whenever new audits are conducted or certificates are issued.<br>
-                                        Keeping this information up to date ensures accurate tracking of consultants and the audits they complete.
-                                    </span>
+                                    <div class="tooltip nav-tooltip">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <span class="tooltipnavtext" style="left: -1500%">
+                                            The Consultant Audits section is used to manage and update details about external consultants, the companies they are linked with, audits they have performed, and certificates issued.<br>
+                                            For example, you can record <strong>Consultant Name</strong>, <strong>Company</strong>, <strong>Audit Type</strong>, and <strong>Certificate Details</strong> for each entry.<br>
+                                            This section can be updated whenever new audits are conducted or certificates are issued.<br>
+                                            Keeping this information up to date ensures accurate tracking of consultants and the audits they complete.
+                                        </span>
+                                    </div>
                                     <span class="pull-right-container">
                                     <i class="fa fa-angle-right pull-right"></i>
                                 </span>
