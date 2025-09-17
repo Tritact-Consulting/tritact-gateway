@@ -1,16 +1,16 @@
 @extends('layouts.user-app')
-@section('title', 'Certification Summary')
+@section('title', 'Certificate Management')
 @section('content')
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">Certification Summary</h3>
+            <h3 class="page-title">Certificate Management</h3>
             <div class="d-inline-block align-items-center">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                         <li class="breadcrumb-item" aria-current="page">Company</li>
-                        <li class="breadcrumb-item active" aria-current="page">Certification Summary</li>
+                        <li class="breadcrumb-item active" aria-current="page">Certificate Management</li>
                     </ol>
                 </nav>
             </div>
@@ -22,7 +22,7 @@
         <div class="col-lg-12 col-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Certification Summary form</h4>
+                    <h4 class="box-title">Add Certificate</h4>
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-danger m-20 mb-0">

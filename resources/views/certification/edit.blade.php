@@ -1,16 +1,16 @@
 @extends('layouts.user-app')
-@section('title', 'Edit Certification - ' . $data->id)
+@section('title', 'Edit Certificate - ' . $data->id)
 @section('content')
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">Edit Certification - {{ $data->id }}</h3>
+            <h3 class="page-title">Edit Certificate - {{ $data->id }}</h3>
             <div class="d-inline-block align-items-center">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                         <li class="breadcrumb-item" aria-current="page">Company</li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit Certification - {{ $data->id }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Certificate - {{ $data->id }}</li>
                     </ol>
                 </nav>
             </div>
@@ -22,7 +22,7 @@
         <div class="col-lg-12 col-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Assign Certification form</h4>
+                    <h4 class="box-title">Edit Certificate</h4>
                 </div>
                 @if ($errors->any())
                 <div class="alert alert-danger m-20 mb-0">

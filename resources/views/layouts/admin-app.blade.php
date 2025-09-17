@@ -324,7 +324,7 @@
                             <li class="{{ Request::routeIs('company.certification.assign') || Request::routeIs('company.certification.edit') ? 'active' : '' }}">
                                 <a href="{{ route('company.certification.assign') }}">
                                     <i class="icon-Share1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
-                                    <span>Certification Summary</span>
+                                    <span>Certificate Management</span>
                                     <div class="tooltip nav-tooltip">
                                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                                         <span class="tooltipnavtext" style="left: -1800%">
