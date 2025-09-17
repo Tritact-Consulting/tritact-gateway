@@ -174,8 +174,13 @@
                                     <span>Tags
                                     </span>
                                     <div class="tooltip nav-tooltip">
-                                        <i class="fa fa-exclamation-circle"></i>
-                                        <span class="tooltipnavtext">Tags act as categories for documents. <br>For example, if you want to store ISO 9001 documents in the gateway, you can create a tag called ISO 9001 and then assign all relevant documents to this tag.<br>This makes it easy to organise and retrieve documents based on their category.</span>
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <span class="tooltipnavtext">
+                                            Tags act as categories for documents.<br>
+                                            For example, to store ISO 9001 documents in the gateway, you can create a tag named <strong>ISO 9001</strong> and assign all relevant documents to it.<br>
+                                            Before creating a new tag, always check existing tags to ensure it does not already exist.<br>
+                                            This makes it easy to organise and retrieve documents based on their category.
+                                        </span>
                                     </div>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-right pull-right"></i>
@@ -211,9 +216,18 @@
                                 <a href="#">
                                     <i class="icon-Cart"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Category</span>
+                                    <div class="tooltip nav-tooltip">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <span class="tooltipnavtext">
+                                            Categories act as containers for your guides.<br>
+                                            First, create a category and then add the relevant guides under it.<br>
+                                            Before creating a new category, always check the existing ones to ensure it doesn’t already exist.<br>
+                                            This keeps your guides well organised and easy to find.
+                                        </span>
+                                    </div>
                                     <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </span>
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
                                 </a>
                                 <ul class="treeview-menu">
                                     @can('create category')
@@ -228,6 +242,15 @@
                                 <a href="#">
                                     <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Guide</span>
+                                    <div class="tooltip nav-tooltip">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <span class="tooltipnavtext">
+                                        The Guide section contains helpful reference material for various audits and certifications.<br>
+                                        It includes guidance on standards such as SafeContractor, Cyber Essentials, and more.<br>
+                                        These resources help auditors understand certification requirements and processes before conducting an audit.<br>
+                                        This ensures audits are carried out accurately, confidently, and in line with the relevant standards.
+                                        </span>
+                                    </div>
                                     <span class="pull-right-container">
                                     <i class="fa fa-angle-right pull-right"></i>
                                     </span>
@@ -302,6 +325,15 @@
                                 <a href="{{ route('company.certification.assign') }}">
                                     <i class="icon-Share1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>Certification Summary</span>
+                                    <div class="tooltip nav-tooltip">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <span class="tooltipnavtext" style="left: -1800%">
+                                            The Certificate Management section allows you to store, view, and update all certificate records.<br>
+                                            You can manage details such as certification type, issue and expiry dates, and other related information.<br>
+                                            Before adding a new certificate, always check existing records to prevent duplicates.<br>
+                                            This section keeps all your certification data organised and easy to access.
+                                        </span>
+                                    </div>
                                 </a>
                             </li>
                             @endcan
@@ -310,9 +342,18 @@
                                 <a href="#">
                                     <i class="icon-Chart-pie"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Live Audit</span>
+                                    <div class="tooltip nav-tooltip">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <span class="tooltipnavtext" style="left: -900%">
+                                            The Live Audit tab provides a real-time overview of all audits.<br>
+                                            It displays upcoming, ongoing, and completed audits in one place.<br>
+                                            Use this section to track audit progress, view schedules, and quickly access related information.<br>
+                                            This ensures transparency and helps manage audits efficiently.
+                                        </span>
+                                    </div>
                                     <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </span>
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
                                 </a>
                                 <ul class="treeview-menu">
                                     @can('create assign audit')
@@ -327,6 +368,15 @@
                                 <a href="{{ route('keyword.index') }}">
                                     <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>Document Keyword</span>
+                                    <div class="tooltip nav-tooltip">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <span class="tooltipnavtext" style="left: -1500%">
+                                            The Document Keyword section is used to link placeholders in documents to their corresponding database columns.<br>
+                                            For example, if a document contains a placeholder like <strong>${company_name}</strong>, create a keyword named <strong>company_name</strong> (without the dollar sign and brackets) and link it to the “Company Name” column in the database.<br>
+                                            Before creating a new keyword, always check existing ones to ensure it doesn’t already exist.<br>
+                                            This helps keep your document placeholders accurate and consistent.
+                                        </span>
+                                    </div>
                                 </a>
                             </li>
                             @endcan
