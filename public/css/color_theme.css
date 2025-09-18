@@ -7766,18 +7766,22 @@ Theme Danger Color
     background-color: rgba(253, 104, 62, 0);
     color: #fd683e; }
     .theme-danger.light-skin .sidebar-menu > li.active .treeview-menu li.treeview.active a {
-      color: #fd683e; }
+      color: #64ce38;
+      }
       .theme-danger.light-skin .sidebar-menu > li.active .treeview-menu li.treeview.active a > i {
-        color: #fd683e;
-        background-color: rgba(253, 104, 62, 0); }
+        color: #64ce38;
+        background-color: rgba(253, 104, 62, 0);
+        }
   .theme-danger.light-skin .sidebar-menu > li.active .treeview-menu li.treeview .treeview-menu li.active {
     background-color: rgba(253, 104, 62, 0);
     color: #fd683e; }
     .theme-danger.light-skin .sidebar-menu > li.active .treeview-menu li.treeview .treeview-menu li.active a {
-      color: #fd683e; }
+      color: #64ce38;
+      }
       .theme-danger.light-skin .sidebar-menu > li.active .treeview-menu li.treeview .treeview-menu li.active a > i {
-        color: #fd683e;
-        background-color: rgba(253, 104, 62, 0); }
+        color: #64ce38;
+        background-color: rgba(253, 104, 62, 0);
+        }
   .theme-danger.light-skin .sidebar-menu > li.active .treeview-menu li.treeview .treeview-menu li a {
     color: #172b4c; }
     .theme-danger.light-skin .sidebar-menu > li.active .treeview-menu li.treeview .treeview-menu li a > i {

@@ -13542,8 +13542,9 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
         color: #172b4c;
         text-align: center;
         border-radius: 100px;
-        margin-right: 20px;
-        background-color: transparent; }
+        margin-right: 10px;
+        background-color: transparent;
+        }
       .sidebar-menu > li > a > svg {
         width: 24px;
         display: inline-block;
@@ -14154,13 +14155,15 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
   .treeview-menu > li {
     margin: 0; }
     .treeview-menu > li > a {
-      padding: 5px 5px 5px 25px;
+      padding: 5px 5px 5px 15px;
       display: block;
-      font-size: 1rem; }
+      font-size: 1rem;
+      }
       .treeview-menu > li > a > i {
         width: 20px;
-        padding-right: 20px;
-        padding-left: 10px; }
+        padding-right: 10px;
+        padding-left: 10px;
+        }
       .treeview-menu > li > a > .fa-angle-down {
         width: auto; }
       .treeview-menu > li > a > .fa-angle-left {

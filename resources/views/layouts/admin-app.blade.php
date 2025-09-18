@@ -168,9 +168,125 @@
                                 </ul>
                             </li>
                             @endcan
-                            <li class="header">Consultancy</li>
-                            @can('view tag')
                             <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Library"><span class="path1"></span><span class="path2"></span></i>
+                                    <span>Consultancy</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('view tag')
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Tags
+                                            <div class="tooltip nav-tooltip">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                                <span class="tooltipnavtext">
+                                                    Tags act as categories for documents.<br>
+                                                    For example, to store ISO 9001 documents in the gateway, you can create a tag named <strong>ISO 9001</strong> and assign all relevant documents to it.<br>
+                                                    Before creating a new tag, always check existing tags to ensure it does not already exist.<br>
+                                                    This makes it easy to organise and retrieve documents based on their category.
+                                                </span>
+                                            </div>
+                                            <span class="pull-right-container">
+                                                <i class="fa fa-angle-right pull-right"></i>
+                                            </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create tag')
+                                            <li class="{{ Request::routeIs('tag.create') || Request::routeIs('tag.edit') ? 'active' : '' }}"><a href="{{ route('tag.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Tags</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('tag.index') ? 'active' : '' }}"><a href="{{ route('tag.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Tag List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                    @can('view doc')
+                                    <li class="treeview">
+                                        <a href="#">
+                                        <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Documents
+                                        <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                        </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create doc')
+                                            <li class="{{ Request::routeIs('document.create') || Request::routeIs('document.edit') ? 'active' : '' }}"><a href="{{ route('document.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Document</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('document.index') ? 'active' : '' }}"><a href="{{ route('document.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Document List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                    @can('view keyword')
+                                    <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
+                                        <a href="{{ route('keyword.index') }}">
+                                            <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Document Keyword
+                                            <div class="tooltip nav-tooltip">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                                <span class="tooltipnavtext" style="left: -1500%">
+                                                    The Document Keyword section is used to link placeholders in documents to their corresponding database columns.<br>
+                                                    For example, if a document contains a placeholder like <strong>${company_name}</strong>, create a keyword named <strong>company_name</strong> (without the dollar sign and brackets) and link it to the “Company Name” column in the database.<br>
+                                                    Before creating a new keyword, always check existing ones to ensure it doesn’t already exist.<br>
+                                                    This helps keep your document placeholders accurate and consistent.
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    @endcan
+                                    @can('view category')
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i><span>Category</span>
+                                            <div class="tooltip nav-tooltip">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                                <span class="tooltipnavtext">
+                                                    Categories act as containers for your guides.<br>
+                                                    First, create a category and then add the relevant guides under it.<br>
+                                                    Before creating a new category, always check the existing ones to ensure it doesn’t already exist.<br>
+                                                    This keeps your guides well organised and easy to find.
+                                                </span>
+                                            </div>
+                                            <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create category')
+                                            <li class="{{ Request::routeIs('category.create') || Request::routeIs('category.edit') ? 'active' : '' }}"><a href="{{ route('category.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Cateory</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('category.index') ? 'active' : '' }}"><a href="{{ route('category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Category List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                    @can('view guide')
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i><span>Guides</span>
+                                            <div class="tooltip nav-tooltip">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                                <span class="tooltipnavtext">
+                                                The Guide section contains helpful reference material for various audits and certifications.<br>
+                                                It includes guidance on standards such as SafeContractor, Cyber Essentials, and more.<br>
+                                                These resources help auditors understand certification requirements and processes before conducting an audit.<br>
+                                                This ensures audits are carried out accurately, confidently, and in line with the relevant standards.
+                                                </span>
+                                            </div>
+                                            <span class="pull-right-container">
+                                                <i class="fa fa-angle-right pull-right"></i>
+                                            </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create guide')
+                                            <li class="{{ Request::routeIs('guide.create') || Request::routeIs('guide.edit') ? 'active' : '' }}"><a href="{{ route('guide.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Guide</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('guide.index') ? 'active' : '' }}"><a href="{{ route('guide.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Guide List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                            <li class="header d-none">Consultancy</li>
+                            @can('view tag')
+                            <li class="treeview d-none">
                                 <a href="#">
                                     <i class="icon-Library"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Tags
@@ -197,7 +313,7 @@
                             </li>
                             @endcan
                             @can('view doc')
-                            <li class="treeview">
+                            <li class="treeview d-none">
                                 <a href="#">
                                     <i class="icon-File"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
                                     <span>Documents</span>
@@ -214,7 +330,7 @@
                             </li>
                             @endcan
                             @can('view keyword')
-                            <li class="{{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
+                            <li class="d-none {{ Request::routeIs('keyword.create') || Request::routeIs('keyword.edit') || Request::routeIs('keyword.index') ? 'active' : '' }}">
                                 <a href="{{ route('keyword.index') }}">
                                     <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>Document Keyword</span>
@@ -231,7 +347,7 @@
                             </li>
                             @endcan
                             @can('view category')
-                            <li class="treeview">
+                            <li class="d-none treeview">
                                 <a href="#">
                                     <i class="icon-Cart"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Category</span>
@@ -257,7 +373,7 @@
                             </li>
                             @endcan
                             @can('view guide')
-                            <li class="treeview">
+                            <li class="d-none treeview">
                                 <a href="#">
                                     <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Guides</span>
@@ -288,9 +404,125 @@
                             <!--        <span>Version</span>-->
                             <!--    </a>-->
                             <!--</li>-->
-                            <li class="header">Audit</li>
-                            @can('view certification category')
                             <li class="treeview">
+                                <a href="#">
+                                <i class="icon-Cart"><span class="path1"></span><span class="path2"></span></i>
+                                <span>Audit</span>
+                                <span class="pull-right-container">
+                                <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('view certification category')
+                                    <li class="treeview">
+                                        <a href="#">
+                                        <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Certification Type
+                                        <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                        </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create certification category')
+                                            <li class="{{ Request::routeIs('certification-category.create') || Request::routeIs('certification-category.edit') ? 'active' : '' }}"><a href="{{ route('certification-category.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Certification Type</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('certification-category.index') ? 'active' : '' }}"><a href="{{ route('certification-category.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Certification Type List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                    @can('view certification body')
+                                    <li class="treeview">
+                                        <a href="#">
+                                        <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Certification Body
+                                        <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                        </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create certification body')
+                                            <li class="{{ Request::routeIs('certification-body.create') || Request::routeIs('certification-body.edit') ? 'active' : '' }}"><a href="{{ route('certification-body.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Body</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('certification-body.index') ? 'active' : '' }}"><a href="{{ route('certification-body.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Body List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                    @can('view auditor')
+                                    <li class="treeview">
+                                        <a href="#">
+                                        <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Auditor
+                                        <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                        </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create auditor')
+                                            <li class="{{ Request::routeIs('auditor.create') || Request::routeIs('auditor.edit') ? 'active' : '' }}"><a href="{{ route('auditor.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Auditor</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('auditor.index') ? 'active' : '' }}"><a href="{{ route('auditor.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Auditor List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                    @can('view assign certification')
+                                    <li class="{{ Request::routeIs('company.certification.assign') || Request::routeIs('company.certification.edit') ? 'active' : '' }}">
+                                        <a href="{{ route('company.certification.assign') }}">
+                                            <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i><span>Certificate Management</span>
+                                            <div class="tooltip nav-tooltip">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                                <span class="tooltipnavtext" style="left: -1800%">
+                                                    The Certificate Management section allows you to store, view, and update all certificate records.<br>
+                                                    You can manage details such as certification type, issue and expiry dates, and other related information.<br>
+                                                    Before adding a new certificate, always check existing records to prevent duplicates.<br>
+                                                    This section keeps all your certification data organised and easy to access.
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    @endcan
+                                    @can('view assign audit')
+                                    <li class="treeview">
+                                        <a href="#">
+                                        <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i><span>Live Audit</span>
+                                        <div class="tooltip nav-tooltip">
+                                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                            <span class="tooltipnavtext" style="left: -900%">
+                                                The Live Audit tab provides a real-time overview of all audits.<br>
+                                                It displays upcoming, ongoing, and completed audits in one place.<br>
+                                                Use this section to track audit progress, view schedules, and quickly access related information.<br>
+                                                This ensures transparency and helps manage audits efficiently.
+                                            </span>
+                                        </div>
+                                        <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                        </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create assign audit')
+                                            <li class="{{ Request::routeIs('assign-audit.create') || Request::routeIs('assign-audit.edit') ? 'active' : '' }}"><a href="{{ route('assign-audit.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Assign Audit</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('assign-audit.index') ? 'active' : '' }}"><a href="{{ route('assign-audit.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Audit List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                    @can('view partner')
+                                    <li class="treeview">
+                                        <a href="#">
+                                        <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Partners
+                                        <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                        </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create partner')
+                                            <li class="{{ Request::routeIs('partner.create') || Request::routeIs('partner.edit') ? 'active' : '' }}"><a href="{{ route('partner.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Partner</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('partner.index') ? 'active' : '' }}"><a href="{{ route('partner.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Partners List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                </ul>
+                            </li>
+                            <li class="header d-none">Audit</li>
+                            @can('view certification category')
+                            <li class="d-none treeview">
                                 <a href="#">
                                     <i class="icon-Cart"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Certification Type</span>
@@ -307,7 +539,7 @@
                             </li>
                             @endcan
                             @can('view certification body')
-                            <li class="treeview">
+                            <li class="d-none treeview">
                                 <a href="#">
                                     <i class="icon-Chart-line"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Certification Body</span>
@@ -324,7 +556,7 @@
                             </li>
                             @endcan
                             @can('view auditor')
-                            <li class="treeview">
+                            <li class="d-none treeview">
                                 <a href="#">
                                     <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Auditor</span>
@@ -341,7 +573,7 @@
                             </li>
                             @endcan
                             @can('view assign certification')
-                            <li class="{{ Request::routeIs('company.certification.assign') || Request::routeIs('company.certification.edit') ? 'active' : '' }}">
+                            <li class="d-none {{ Request::routeIs('company.certification.assign') || Request::routeIs('company.certification.edit') ? 'active' : '' }}">
                                 <a href="{{ route('company.certification.assign') }}">
                                     <i class="icon-Share1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>Certificate Management</span>
@@ -358,7 +590,7 @@
                             </li>
                             @endcan
                             @can('view assign audit')
-                            <li class="treeview">
+                            <li class="d-none treeview">
                                 <a href="#">
                                     <i class="icon-Chart-pie"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Live Audit</span>
@@ -384,7 +616,7 @@
                             </li>
                             @endcan
                             @can('view partner')
-                            <li class="treeview">
+                            <li class="d-none treeview">
                                 <a href="#">
                                     <i class="icon-Add-user"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Partners</span>
@@ -400,11 +632,81 @@
                                 </ul>
                             </li>
                             @endcan
+
+                            <li class="treeview">
+                                <a href="#">
+                                <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
+                                <span>External Consultants</span>
+                                <span class="pull-right-container">
+                                <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('view consultation body')
+                                    <li class="treeview">
+                                        <a href="#">
+                                        <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Consultation Body
+                                        <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                        </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create consultation body')
+                                            <li class="{{ Request::routeIs('consultation-body.create') || Request::routeIs('consultation-body.edit') ? 'active' : '' }}"><a href="{{ route('consultation-body.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Body</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('consultation-body.index') ? 'active' : '' }}"><a href="{{ route('consultation-body.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Body List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                    @can('view consultant')
+                                    <li class="treeview">
+                                        <a href="#">
+                                        <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Consultants
+                                        <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                        </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create consultant')
+                                            <li class="{{ Request::routeIs('consultant.create') || Request::routeIs('consultant.edit') ? 'active' : '' }}"><a href="{{ route('consultant.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Consultant</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('consultant.index') ? 'active' : '' }}"><a href="{{ route('consultant.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Consultant List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                    @can('view consultation summary')
+                                    <li class="treeview">
+                                        <a href="#">
+                                        <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i><span>Consultant Audits</span>
+                                        <div class="tooltip nav-tooltip">
+                                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                            <span class="tooltipnavtext" style="left: -1500%">
+                                                The Consultant Audits section is used to manage and update details about external consultants, the companies they are linked with, audits they have performed, and certificates issued.<br>
+                                                For example, you can record <strong>Consultant Name</strong>, <strong>Company</strong>, <strong>Audit Type</strong>, and <strong>Certificate Details</strong> for each entry.<br>
+                                                This section can be updated whenever new audits are conducted or certificates are issued.<br>
+                                                Keeping this information up to date ensures accurate tracking of consultants and the audits they complete.
+                                            </span>
+                                        </div>
+                                        <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                        </span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @can('create consultation summary')
+                                            <li class="{{ Request::routeIs('consultation-summary.create') || Request::routeIs('consultation-summary.edit') ? 'active' : '' }}"><a href="{{ route('consultation-summary.create') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Summary</a></li>
+                                            @endcan
+                                            <li class="{{ Request::routeIs('consultation-summary.index') ? 'active' : '' }}"><a href="{{ route('consultation-summary.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Summary List</a></li>
+                                        </ul>
+                                    </li>
+                                    @endcan
+                                </ul>
+                            </li>
+
                             @canany(['view consultation body', 'create consultation body', 'view consultant', 'create consultant', 'view consultation summary', 'create consultation summary'])
-                            <li class="header">External Consultants</li>
+                            <li class="header d-none">External Consultants</li>
                             @endcan
                             @can('view consultation body')
-                            <li class="treeview">
+                            <li class="treeview d-none">
                                 <a href="#">
                                     <i class="icon-Chart-line"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Consultation Body</span>
@@ -421,7 +723,7 @@
                             </li>
                             @endcan
                             @can('view consultant')
-                            <li class="treeview">
+                            <li class="treeview d-none">
                                 <a href="#">
                                     <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Consultants</span>
@@ -438,7 +740,7 @@
                             </li>
                             @endcan
                             @can('view consultation summary')
-                            <li class="treeview">
+                            <li class="treeview d-none">
                                 <a href="#">
                                     <i class="icon-Chart-pie"><span class="path1"></span><span class="path2"></span></i>
                                     <span>Consultant Audits</span>
@@ -464,10 +766,30 @@
                             </li>
                             @endcan
                             @canany(['all attendance', 'view attendance'])
-                            <li class="header">Attendances</li>
+                            <li class="treeview">
+                                <a href="#">
+                                <i class="icon-Tablet"><span class="path1"></span><span class="path2"></span></i>
+                                <span>Attendances</span>
+                                <span class="pull-right-container">
+                                <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('view attendance')
+                                    <li class="{{ Request::routeIs('attendance.index') ? 'active' : '' }}"><a href="{{ route('attendance.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Attendance</a></li>
+                                    @endcan
+                                    @can('all attendance')
+                                    <li class="{{ Request::routeIs('all-attendance.index') ? 'active' : '' }}"><a href="{{ route('all-attendance.index') }}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>All Attendance</a></li>
+                                    @endcan
+                                </ul>
+                            </li>
+                            @endcan
+
+                            @canany(['all attendance', 'view attendance'])
+                            <li class="header d-none">Attendances</li>
                             @endcan
                             @can('view attendance')
-                            <li class="{{ Request::routeIs('attendance.index') ? 'active' : '' }}">
+                            <li class="d-none {{ Request::routeIs('attendance.index') ? 'active' : '' }}">
                                 <a href="{{ route('attendance.index') }}">
                                     <i class="icon-Tablet"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>Attendance</span>
@@ -475,15 +797,34 @@
                             </li>
                             @endcan
                             @can('all attendance')
-                            <li class="{{ Request::routeIs('all-attendance.index') ? 'active' : '' }}">
+                            <li class="d-none {{ Request::routeIs('all-attendance.index') ? 'active' : '' }}">
                                 <a href="{{ route('all-attendance.index') }}">
                                     <i class="icon-Tablet"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>All Attendance</span>
                                 </a>
                             </li>
                             @endcan
-                            <li class="header">Notifications</li>
-                            <li class="{{ Request::routeIs('all-attendance.index') ? 'active' : '' }}">
+
+                            <li class="treeview">
+                                <a href="#">
+                                <i class="icon-Speaker"><span class="path1"></span><span class="path2"></span></i>
+                                <span>Notifications</span>
+                                <span class="pull-right-container">
+                                <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li class="{{ Request::routeIs('all-attendance.index') ? 'active' : '' }}">
+                                        <a href="{{ route('all-attendance.index') }}">
+                                            <i class="icon-Commit"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+                                            <span>All Notifications</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="header d-none">Notifications</li>
+                            <li class="d-none {{ Request::routeIs('all-attendance.index') ? 'active' : '' }}">
                                 <a href="{{ route('all-attendance.index') }}">
                                     <i class="icon-Speaker"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                     <span>All Notifications</span>

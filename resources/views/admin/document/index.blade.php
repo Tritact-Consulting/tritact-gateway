@@ -63,7 +63,7 @@
                                     </td>
                                     <td>{{ $value->created_at->format('d M, Y') }}</td>
                                     <td>
-                                        <form action="{{ route('document.destroy', $value->id) }}" method="post">
+                                        <form action="{{ route('document.destroy', $value->id) }}" method="post" class="d-flex gap-2">
                                             @can('view doc')
                                             <a href="{{ route('documents.open.office', $value->id) }}"
                                                 target="_blank"
@@ -72,12 +72,12 @@
                                             </a>
                                             @endcan
                                             @can('edit doc')
-                                            <a href="{{ route('document.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ route('document.edit', $value->id) }}" class="ml-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
                                             @endcan
                                             @csrf
                                             @method('DELETE')
                                             @can('delete doc')
-                                            <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm"><i class="fa fa-trash"></i></button>
+                                            <button type="submit" class="ml-1 waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm"><i class="fa fa-trash"></i></button>
                                             @endcan
                                         </form>
                                     </td>
