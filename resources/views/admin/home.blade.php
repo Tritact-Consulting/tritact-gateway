@@ -170,7 +170,7 @@
         <div class="col-12">
 			<div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Live Audit</h4>
+                    <h4 class="box-title">Audit & Compliance</h4>
                 </div>
 			    <div class="box-body">
 				    <div class="table-responsive rounded card-table">
@@ -232,7 +232,7 @@
         <div class="col-12">
 			<div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Certificates</h4>
+                    <h4 class="box-title">Certifications</h4>
                 </div>
 			    <div class="box-body">
 				    <div class="table-responsive rounded card-table">
