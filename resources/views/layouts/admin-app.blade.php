@@ -491,7 +491,7 @@
                             </li>
                             @endcan
 
-                            <li class="treeview">
+                            <li class="treeview d-none">
                                 <a href="#">
                                 <i class="icon-Speaker"><span class="path1"></span><span class="path2"></span></i>
                                 <span>Notifications</span>
@@ -500,8 +500,8 @@
                                 </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li class="{{ Request::routeIs('all-attendance.index') ? 'active' : '' }}">
-                                        <a href="{{ route('all-attendance.index') }}">
+                                    <li class="{{ Request::routeIs('notification-message.index') ? 'active' : '' }}">
+                                        <a href="{{ route('notification-message.index') }}">
                                             <i class="icon-Commit"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                                             <span>All Notifications</span>
                                         </a>
