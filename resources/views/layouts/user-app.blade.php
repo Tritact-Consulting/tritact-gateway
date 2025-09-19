@@ -195,6 +195,7 @@
                                     @endcan
                                 </ul>
                             </li>
+                            @endcanany
                             @canany(['view document', 'download document'])
                             <li class="header">Document And Guides</li>
                             <li class="{{ Request::routeIs('documents.index') ? 'active' : '' }}">
