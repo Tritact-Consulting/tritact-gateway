@@ -231,8 +231,13 @@
     <div class="row">
         <div class="col-12">
 			<div class="box">
-                <div class="box-header with-border">
+                <div class="box-header with-border d-flex justify-content-between">
                     <h4 class="box-title">Certifications</h4>
+                    <ul class="certifications-list">
+                        <li><span class="alert alert-red"></span> Expires in a month.</li>
+                        <li><span class="alert alert-warning"></span> Expires in 3 months.</li>
+                        <li><span class="alert alert-success"></span> Valid ≥3 months.</li>
+                    </ul>
                 </div>
 			    <div class="box-body">
 				    <div class="table-responsive rounded card-table">
