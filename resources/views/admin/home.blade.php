@@ -236,7 +236,7 @@
                     <ul class="certifications-list">
                         <li><span class="alert alert-red"></span> Expires in a month.</li>
                         <li><span class="alert alert-warning"></span> Expires in 3 months.</li>
-                        <li><span class="alert alert-success"></span> Valid ≥3 months.</li>
+                        <li><span class="alert alert-success"></span> Valid for more than 3 months.</li>
                     </ul>
                 </div>
 			    <div class="box-body">
