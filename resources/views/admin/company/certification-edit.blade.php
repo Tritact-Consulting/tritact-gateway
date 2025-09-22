@@ -179,11 +179,11 @@
                                 <div class="form-group">
                                     <label>Status</label>
                                     <select name="status" id="status" class="form-control select2">
-                                        <option value="">Select Status</option>
-                                        <option value="0" {{ $data->status == 0 ? 'selected' : '' }}>Assigned</option>
-                                        <option value="1" {{ $data->status == 1 ? 'selected' : '' }}>Discontinued</option>
-                                        <option value="2" {{ $data->status == 2 ? 'selected' : '' }}>In-Progress</option>
-                                        <option value="3" {{ $data->status == 3 ? 'selected' : '' }}>Completed</option>
+                                        <option value="" {{ $data->status === null ? 'selected' : '' }}>Select Status</option>
+                                        <option value="0" {{ $data->status === 0 ? 'selected' : '' }}>Assigned</option>
+                                        <option value="1" {{ $data->status === 1 ? 'selected' : '' }}>Discontinued</option>
+                                        <option value="2" {{ $data->status === 2 ? 'selected' : '' }}>In-Progress</option>
+                                        <option value="3" {{ $data->status === 3 ? 'selected' : '' }}>Completed</option>
                                     </select>
                                 </div>
                             </div>
