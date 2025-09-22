@@ -442,6 +442,9 @@ class CompanyController extends Controller
         if($request->audit_type != null){
             $data = $data->where('audit_type', 'LIKE', '%' . $request->audit_type . '%');
         }
+        if($request->status != null){
+            $data = $data->where('status', $request->status);
+        }
 
 
         $data = $data->get();

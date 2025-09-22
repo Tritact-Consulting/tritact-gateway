@@ -247,7 +247,19 @@
                                     <input type="text" name="audit_type" id="search_audit_type" class="form-control" value="{{ app('request')->input('audit_type') }}">
                                 </div>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select name="status" id="status" class="form-control select2">
+                                        <option value="" {{ app('request')->input('status') === null ? 'selected' : '' }}>All Status</option>
+                                        <option value="0" {{ app('request')->input('status') === 0 ? 'selected' : '' }}>Assigned</option>
+                                        <option value="1" {{ app('request')->input('status') === 1 ? 'selected' : '' }}>Discontinued</option>
+                                        <option value="2" {{ app('request')->input('status') === 2 ? 'selected' : '' }}>In-Progress</option>
+                                        <option value="3" {{ app('request')->input('status') === 3 ? 'selected' : '' }}>Completed</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group text-right mb-0 mt-4">
                                     <button class="btn btn-primary btn-sm" type="submit">Search</button>
                                 </div>
