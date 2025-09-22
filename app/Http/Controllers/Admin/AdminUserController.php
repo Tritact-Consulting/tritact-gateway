@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Hash;
@@ -68,6 +69,8 @@ class AdminUserController extends Controller
         $data->password = Hash::make($request->password);
         $data->save();
         $data->assignRole($request->role);
+        $allCompanyIds = User::where('is_admin', 1)->where('is_company', 1)->where('status', 0)->pluck('id')->toArray();
+        $data->assignedUsers()->syncWithoutDetaching($allCompanyIds);
         if ($data->hasRole('attendance')) {
             $data->shift_start = $request->shift_start;
             $data->shift_end   = $request->shift_end;

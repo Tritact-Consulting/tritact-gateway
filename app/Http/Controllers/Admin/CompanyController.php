@@ -65,6 +65,7 @@ class CompanyController extends Controller
     }
 
     public function store(Request $request){
+        $user = new User();
         if($request->consultant) {
             $request->validate([
                 'name'  => 'required',
@@ -72,7 +73,6 @@ class CompanyController extends Controller
                 'email' => 'required|unique:users,email',
                 'phone_num' => 'required',
             ]);
-            $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make(Str::random(10));
@@ -113,7 +113,6 @@ class CompanyController extends Controller
                 ]);
             }
 
-            $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
@@ -181,6 +180,12 @@ class CompanyController extends Controller
                 Mail::to($request->sender_email)->send(new CompanyAddMail($mailData));
             }   
         }
+
+        $all_users = User::where('is_admin', 0)->orderBy('id', 'desc')->get();
+        foreach($all_users as $key => $value){
+            $value->assignedUsers()->syncWithoutDetaching($user->id);
+        }
+
 
         return redirect()->back()->with('success', 'Company Added Successfully');
     }
