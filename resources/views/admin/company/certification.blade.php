@@ -160,6 +160,17 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Assigned To<strong>*</strong></label>
+                                    <select name="assigned_to" id="assigned_to" class="form-control select2" required>
+                                        <option value="">Select User </option>
+                                        @foreach($assigned_to as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -242,6 +253,7 @@
                                     <th>Certificate Number</th>
                                     <th>Audit Type</th>
                                     <th>Expiry Date</th>
+                                    <th>Assigned To</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -254,6 +266,7 @@
                                     <td>{{ $value->certification_number != null ? $value->certification_number : '' }}</td>
                                     <td>{{ $value->certification_name }}</td>
                                     <td>{{ $value->expire_date }}</td>
+                                    <td>{{ $value->assignedUser?->name ?? 'N/A' }}</td>
                                     <td>
                                         <div class="d-flex">
                                             @can('edit assign certification')

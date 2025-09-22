@@ -47,4 +47,10 @@ class CompanyCertification extends Model
     public function next(){
         return $this->hasOne(CompanyCertification::class, 'previous_certification');
     }
+
+    // CompanyCertification.php
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class, 'assigned_to');
+    }
 }

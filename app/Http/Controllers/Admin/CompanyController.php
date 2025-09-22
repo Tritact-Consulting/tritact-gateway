@@ -411,6 +411,7 @@ class CompanyController extends Controller
         $certification = CertificationCategory::where('status', 0)->get();
         $auditors = Auditor::all();
         $certification_body = CertificationBody::where('status', 0)->get();
+        $assigned_to = User::where('is_admin', 0)->where('status', 0)->orderBy('id', 'desc')->get();
 
         $assignedUserIds = User::whereHas('assignedTo', function($q) use ($loginUserId) {
             $q->where('parent_user_id', $loginUserId);
@@ -444,7 +445,7 @@ class CompanyController extends Controller
 
 
         $data = $data->get();
-        return view('admin.company.certification', compact('user', 'certification', 'data', 'auditors', 'certification_body'));
+        return view('admin.company.certification', compact('user', 'certification', 'data', 'auditors', 'certification_body', 'assigned_to'));
     }
 
     public function companyCertificationAdd(Request $request){
@@ -466,6 +467,7 @@ class CompanyController extends Controller
         $data->certification_body_id = $request->certification_body;
         $data->next_audit_due_date = $request->next_audit_due_date;
         $data->previous_certification = $request->previous_certification;
+        $data->assigned_to = $request->assigned_to;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Assigned Successfully');
     }
@@ -490,11 +492,16 @@ class CompanyController extends Controller
         ->with('assignedTo')
         ->orderBy('id', 'desc')
         ->get();
+
+        $assigned_to = User::where('is_admin', 0)
+        ->where('status', 0)
+        ->orderBy('id', 'desc')
+        ->get();
         $certification = CertificationCategory::where('status', 0)->get();
         $auditors = Auditor::all();
         $certification_body = CertificationBody::where('status', 0)->get();
         $preview_data = CompanyCertification::where('company_id', $data->company_id)->get();
-        return view('admin.company.certification-edit', compact('data', 'user', 'certification', 'auditors', 'certification_body', 'preview_data'));
+        return view('admin.company.certification-edit', compact('data', 'user', 'certification', 'auditors', 'certification_body', 'assigned_to', 'preview_data'));
     }
 
     public function companyCertificationUpdate(Request $request, $id){
@@ -516,6 +523,7 @@ class CompanyController extends Controller
         $data->certification_body_id = $request->certification_body;
         $data->next_audit_due_date = $request->next_audit_due_date;
         $data->previous_certification = $request->previous_certification;
+        $data->assigned_to = $request->assigned_to;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Updated Successfully');
     }

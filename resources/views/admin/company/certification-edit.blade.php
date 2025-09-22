@@ -162,6 +162,19 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Assigned To<strong>*</strong></label>
+                                    <select name="assigned_to" id="assigned_to" class="form-control select2" required>
+                                        <option value="">Select User</option>
+                                        @foreach($assigned_to as $key => $value)
+                                            <option value="{{ $value->id }}" {{ $data->assigned_to == $value->id ? 'selected' : '' }}>
+                                                {{ $value->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
