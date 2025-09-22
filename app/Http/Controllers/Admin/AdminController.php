@@ -42,7 +42,10 @@ class AdminController extends Controller
         $assign_certification_count = DB::table('company_certifications')->count();
         $cert_body_count = DB::table('certification_bodies')->where('status', 0)->count();
         $auditor_expire = CompanyCertification::whereIn('user_id', $assignedUserIds)
-            ->whereNot('status', 1)
+            ->where(function ($query) {
+                $query->whereIn('status', [0, 2, 3])
+                    ->orWhereNull('status');
+            })
             ->whereNotIn('id', function($query) {
                 $query->select('previous_certification')
                     ->from('company_certifications')
@@ -50,6 +53,7 @@ class AdminController extends Controller
             })
             ->orderBy('expire_date', 'asc')
             ->get();
+
         
         $assigned_audit = null;
         
