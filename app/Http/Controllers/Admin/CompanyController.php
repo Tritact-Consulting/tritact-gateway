@@ -468,6 +468,7 @@ class CompanyController extends Controller
         $data->next_audit_due_date = $request->next_audit_due_date;
         $data->previous_certification = $request->previous_certification;
         $data->assigned_to = $request->assigned_to;
+        $data->status = $request->status;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Assigned Successfully');
     }
@@ -524,6 +525,7 @@ class CompanyController extends Controller
         $data->next_audit_due_date = $request->next_audit_due_date;
         $data->previous_certification = $request->previous_certification;
         $data->assigned_to = $request->assigned_to;
+        $data->status = $request->status;
         $data->save();
         return redirect()->back()->with('success', 'Company Certification Updated Successfully');
     }

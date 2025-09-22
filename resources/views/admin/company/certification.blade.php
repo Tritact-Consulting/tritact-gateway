@@ -171,6 +171,18 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select name="status" id="status" class="form-control select2">
+                                        <option value="">Select Status </option>
+                                        <option value="0">Assigned</option>
+                                        <option value="1">Discontinued</option>
+                                        <option value="2">In-Progress</option>
+                                        <option value="3">Completed</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -247,10 +259,10 @@
                         <table class="table border-no" id="example1">
                             <thead>
                                 <tr>
-                                    <th>Company</th>
+                                    <th>Company<br>Name</th>
                                     <th>Certification Type</th>
-                                    <th>Certification Body</th>
-                                    <th>Certificate Number</th>
+                                    <th>Certification <br>Body</th>
+                                    <th>Certificate No.</th>
                                     <th>Audit Type</th>
                                     <th>Expiry Date</th>
                                     <th>Assigned To</th>
@@ -280,6 +292,11 @@
                                             </form>
                                             @endcan
                                         </div>
+                                        @if($value->status_badge)
+                                            <span class="{{ $value->status_badge['class'] }}">
+                                                {{ $value->status_badge['label'] }}
+                                            </span>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
