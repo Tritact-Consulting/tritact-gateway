@@ -177,7 +177,6 @@
                         <table class="table border-no datatables" id="example1">
                             <thead>
                                 <tr>
-                                    <th>SNO</th>
                                     <th>Auditor</th>
                                     <th>Company</th>
                                     <th>Certification Type</th>
@@ -193,7 +192,6 @@
                                 @foreach($assign_audit as $key => $value)
                                     @if(strtolower($value->get_status()) !== 'completed')
                                         <tr class="hover-primary">
-                                            <td>{{ ++$key }}</td>
                                             <td><a href="{{ route('auditor.edit', $value->auditor->id) }}" target="_blank">{{ $value->auditor->name }}</a></td>
                                             <td><a href="{{ route('company.edit', $value->company->id) }}" target="_blank">{{ $value->company->name }}</a></td>
                                             <td>{{ $value->category->name }}</td>
@@ -205,16 +203,7 @@
                                             <td>{{ $value->audit_start_date }}<br>{{ $value->audit_end_date }}</td>
                                             <td>{{ $value->completed == 0 ? 'NO' : 'YES' }}</td>
                                             <td>
-                                                <form action="{{ route('assign-audit.destroy', $value->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    @can('edit assign audit')
-                                                    <a href="{{ route('assign-audit.edit', $value->id) }}" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                                                    @endcan
-                                                    @can('delete assign audit')
-                                                    <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="audit"><i class="fa fa-trash"></i></button>
-                                                    @endcan
-                                                </form>
+                                                <a href="{{ route('assign-audit.create') }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-plus"></i></a>
                                             </td>
                                         </tr>
                                     @endif
@@ -272,12 +261,7 @@
                                     <td>{{ $value->assignedUser?->name ?? 'N/A' }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('company.certification.edit', $value->id) }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                                            <form action="{{ route('company.certification.destroy', $value->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="certification"><i class="fa fa-trash"></i></button>
-                                            </form>
+                                            <a href="{{ route('company.certification.assign') }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-plus"></i></a>
                                         </div>
                                     </td>
                                 </tr>
