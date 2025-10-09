@@ -38,23 +38,38 @@ class CompanyController extends Controller
         $this->middleware('permission:delete assign certification', ['only' => ['companyCertificationDestroy']]);
     }
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $loginUserId = Auth::id();
+        $filter = $request->get('filter', 'all');
         $data = User::where('is_admin', 1)
-        ->where('is_company', 1)
-        ->where('status', 0)
-        ->whereHas('assignedTo', function($q) use ($loginUserId) {
-            $q->where('parent_user_id', $loginUserId);
-        })
-        ->with('assignedTo')
-        ->orderBy('id', 'desc');
-        
-        if($request->search != null){
-            $data = $data->where('name', 'like', '%' . $request->search . '%');
+            ->where('is_company', 1)
+            ->where('status', 0)
+            ->whereHas('assignedTo', function ($q) use ($loginUserId) {
+                $q->where('parent_user_id', $loginUserId);
+            })
+            ->with('assignedTo', 'company', 'tags', 'categories')
+            ->orderBy('id', 'desc');
+        if ($filter === 'our') {
+            $data->whereHas('company', function ($q) {
+                $q->whereNull('consultant_id');
+            });
+        } elseif ($filter === 'consultant') {
+            $data->whereHas('company', function ($q) {
+                $q->whereNotNull('consultant_id');
+            });
+        } elseif ($filter === 'partner') {
+            $data->whereHas('company', function ($q) {
+                $q->whereNotNull('referred_by');
+            });
+        }
+        if ($request->filled('search')) {
+            $data->where('name', 'like', '%' . $request->search . '%');
         }
         $data = $data->get();
-        return view('admin.company.index', compact('data'));
+        return view('admin.company.index', compact('data', 'filter'));
     }
+
 
     public function create(){
         $tags = Tags::where('status', 0)->get();
@@ -86,6 +101,7 @@ class CompanyController extends Controller
                 $request->logo->move(public_path('company/logos'), $imageName);
                 $company->logo = 'company/logos/'.$imageName;
             }
+            $company->country = $request->country;
             $company->phone_num = $request->phone_num;
             $company->consultant_id = $request->consultant;
             $user->company()->save($company);
@@ -126,6 +142,7 @@ class CompanyController extends Controller
                 $request->logo->move(public_path('company/logos'), $imageName);
                 $company->logo = 'company/logos/'.$imageName;
             }
+            $company->country = $request->country;
             $company->director_name = $request->director_name;
             $company->short_name = $request->short_name;
             $company->total_user = $request->total_user;
@@ -225,6 +242,7 @@ class CompanyController extends Controller
                 $request->logo->move(public_path('company/logos'), $imageName);
                 $company->logo = 'company/logos/' . $imageName;
             }
+            $company->country       = $request->country;
             $company->phone_num     = $request->phone_num;
             $company->consultant_id = $request->consultant;
             $company->save();
@@ -269,7 +287,7 @@ class CompanyController extends Controller
                 $request->logo->move(public_path('company/logos'), $imageName);
                 $company->logo = 'company/logos/' . $imageName;
             }
-
+            $company->country             = $request->country;
             $company->director_name       = $request->director_name;
             $company->short_name          = $request->short_name;
             $company->total_user          = $request->total_user;

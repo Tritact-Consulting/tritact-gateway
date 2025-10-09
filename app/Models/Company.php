@@ -23,4 +23,8 @@ class Company extends Model
         return $this->belongsTo(Consultant::class);
     }
 
+    public function partner(){
+        return $this->belongsTo(Partner::class, 'referred_by');
+    }
+
 }

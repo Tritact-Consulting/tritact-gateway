@@ -24502,3 +24502,24 @@ ul.certifications-list .alert {
     border-radius: 8px;
     margin-right: 10px;
 }
+
+.company-tabs.nav-tabs .nav-link {
+    background-color: white;
+}
+
+.company-tabs.nav-tabs .nav-link:hover{
+    color: #64ce38;
+}
+
+.company-tabs {
+    border-bottom: 0;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.company-tabs.nav-tabs .nav-link.active {
+    background-color: #85d763bf;
+    color: black;
+    border-color: #85d763bf;
+}

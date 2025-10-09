@@ -143,6 +143,109 @@
                                     </select>                                   
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="country">Country <strong>*</strong></label>
+                                    <select name="country" id="country" class="form-control select2" required>
+                                        <option value="">-- Select Country --</option>
+                                        <option value="Afghanistan" {{ old('country', $data->company->country ?? '') == 'Afghanistan' ? 'selected' : '' }}>Afghanistan</option>
+                                        <option value="Albania" {{ old('country', $data->company->country ?? '') == 'Albania' ? 'selected' : '' }}>Albania</option>
+                                        <option value="Algeria" {{ old('country', $data->company->country ?? '') == 'Algeria' ? 'selected' : '' }}>Algeria</option>
+                                        <option value="Andorra" {{ old('country', $data->company->country ?? '') == 'Andorra' ? 'selected' : '' }}>Andorra</option>
+                                        <option value="Angola" {{ old('country', $data->company->country ?? '') == 'Angola' ? 'selected' : '' }}>Angola</option>
+                                        <option value="Argentina" {{ old('country', $data->company->country ?? '') == 'Argentina' ? 'selected' : '' }}>Argentina</option>
+                                        <option value="Armenia" {{ old('country', $data->company->country ?? '') == 'Armenia' ? 'selected' : '' }}>Armenia</option>
+                                        <option value="Australia" {{ old('country', $data->company->country ?? '') == 'Australia' ? 'selected' : '' }}>Australia</option>
+                                        <option value="Austria" {{ old('country', $data->company->country ?? '') == 'Austria' ? 'selected' : '' }}>Austria</option>
+                                        <option value="Azerbaijan" {{ old('country', $data->company->country ?? '') == 'Azerbaijan' ? 'selected' : '' }}>Azerbaijan</option>
+                                        <option value="Bahrain" {{ old('country', $data->company->country ?? '') == 'Bahrain' ? 'selected' : '' }}>Bahrain</option>
+                                        <option value="Bangladesh" {{ old('country', $data->company->country ?? '') == 'Bangladesh' ? 'selected' : '' }}>Bangladesh</option>
+                                        <option value="Belarus" {{ old('country', $data->company->country ?? '') == 'Belarus' ? 'selected' : '' }}>Belarus</option>
+                                        <option value="Belgium" {{ old('country', $data->company->country ?? '') == 'Belgium' ? 'selected' : '' }}>Belgium</option>
+                                        <option value="Bhutan" {{ old('country', $data->company->country ?? '') == 'Bhutan' ? 'selected' : '' }}>Bhutan</option>
+                                        <option value="Bolivia" {{ old('country', $data->company->country ?? '') == 'Bolivia' ? 'selected' : '' }}>Bolivia</option>
+                                        <option value="Bosnia and Herzegovina" {{ old('country', $data->company->country ?? '') == 'Bosnia and Herzegovina' ? 'selected' : '' }}>Bosnia and Herzegovina</option>
+                                        <option value="Botswana" {{ old('country', $data->company->country ?? '') == 'Botswana' ? 'selected' : '' }}>Botswana</option>
+                                        <option value="Brazil" {{ old('country', $data->company->country ?? '') == 'Brazil' ? 'selected' : '' }}>Brazil</option>
+                                        <option value="Brunei" {{ old('country', $data->company->country ?? '') == 'Brunei' ? 'selected' : '' }}>Brunei</option>
+                                        <option value="Bulgaria" {{ old('country', $data->company->country ?? '') == 'Bulgaria' ? 'selected' : '' }}>Bulgaria</option>
+                                        <option value="Cambodia" {{ old('country', $data->company->country ?? '') == 'Cambodia' ? 'selected' : '' }}>Cambodia</option>
+                                        <option value="Cameroon" {{ old('country', $data->company->country ?? '') == 'Cameroon' ? 'selected' : '' }}>Cameroon</option>
+                                        <option value="Canada" {{ old('country', $data->company->country ?? '') == 'Canada' ? 'selected' : '' }}>Canada</option>
+                                        <option value="Chile" {{ old('country', $data->company->country ?? '') == 'Chile' ? 'selected' : '' }}>Chile</option>
+                                        <option value="China" {{ old('country', $data->company->country ?? '') == 'China' ? 'selected' : '' }}>China</option>
+                                        <option value="Colombia" {{ old('country', $data->company->country ?? '') == 'Colombia' ? 'selected' : '' }}>Colombia</option>
+                                        <option value="Costa Rica" {{ old('country', $data->company->country ?? '') == 'Costa Rica' ? 'selected' : '' }}>Costa Rica</option>
+                                        <option value="Croatia" {{ old('country', $data->company->country ?? '') == 'Croatia' ? 'selected' : '' }}>Croatia</option>
+                                        <option value="Cuba" {{ old('country', $data->company->country ?? '') == 'Cuba' ? 'selected' : '' }}>Cuba</option>
+                                        <option value="Cyprus" {{ old('country', $data->company->country ?? '') == 'Cyprus' ? 'selected' : '' }}>Cyprus</option>
+                                        <option value="Czech Republic" {{ old('country', $data->company->country ?? '') == 'Czech Republic' ? 'selected' : '' }}>Czech Republic</option>
+                                        <option value="Denmark" {{ old('country', $data->company->country ?? '') == 'Denmark' ? 'selected' : '' }}>Denmark</option>
+                                        <option value="Dominican Republic" {{ old('country', $data->company->country ?? '') == 'Dominican Republic' ? 'selected' : '' }}>Dominican Republic</option>
+                                        <option value="Ecuador" {{ old('country', $data->company->country ?? '') == 'Ecuador' ? 'selected' : '' }}>Ecuador</option>
+                                        <option value="Egypt" {{ old('country', $data->company->country ?? '') == 'Egypt' ? 'selected' : '' }}>Egypt</option>
+                                        <option value="El Salvador" {{ old('country', $data->company->country ?? '') == 'El Salvador' ? 'selected' : '' }}>El Salvador</option>
+                                        <option value="Estonia" {{ old('country', $data->company->country ?? '') == 'Estonia' ? 'selected' : '' }}>Estonia</option>
+                                        <option value="Ethiopia" {{ old('country', $data->company->country ?? '') == 'Ethiopia' ? 'selected' : '' }}>Ethiopia</option>
+                                        <option value="Finland" {{ old('country', $data->company->country ?? '') == 'Finland' ? 'selected' : '' }}>Finland</option>
+                                        <option value="France" {{ old('country', $data->company->country ?? '') == 'France' ? 'selected' : '' }}>France</option>
+                                        <option value="Germany" {{ old('country', $data->company->country ?? '') == 'Germany' ? 'selected' : '' }}>Germany</option>
+                                        <option value="Ghana" {{ old('country', $data->company->country ?? '') == 'Ghana' ? 'selected' : '' }}>Ghana</option>
+                                        <option value="Greece" {{ old('country', $data->company->country ?? '') == 'Greece' ? 'selected' : '' }}>Greece</option>
+                                        <option value="Hong Kong" {{ old('country', $data->company->country ?? '') == 'Hong Kong' ? 'selected' : '' }}>Hong Kong</option>
+                                        <option value="Hungary" {{ old('country', $data->company->country ?? '') == 'Hungary' ? 'selected' : '' }}>Hungary</option>
+                                        <option value="India" {{ old('country', $data->company->country ?? '') == 'India' ? 'selected' : '' }}>India</option>
+                                        <option value="Indonesia" {{ old('country', $data->company->country ?? '') == 'Indonesia' ? 'selected' : '' }}>Indonesia</option>
+                                        <option value="Iran" {{ old('country', $data->company->country ?? '') == 'Iran' ? 'selected' : '' }}>Iran</option>
+                                        <option value="Iraq" {{ old('country', $data->company->country ?? '') == 'Iraq' ? 'selected' : '' }}>Iraq</option>
+                                        <option value="Ireland" {{ old('country', $data->company->country ?? '') == 'Ireland' ? 'selected' : '' }}>Ireland</option>
+                                        <option value="Israel" {{ old('country', $data->company->country ?? '') == 'Israel' ? 'selected' : '' }}>Israel</option>
+                                        <option value="Italy" {{ old('country', $data->company->country ?? '') == 'Italy' ? 'selected' : '' }}>Italy</option>
+                                        <option value="Japan" {{ old('country', $data->company->country ?? '') == 'Japan' ? 'selected' : '' }}>Japan</option>
+                                        <option value="Jordan" {{ old('country', $data->company->country ?? '') == 'Jordan' ? 'selected' : '' }}>Jordan</option>
+                                        <option value="Kenya" {{ old('country', $data->company->country ?? '') == 'Kenya' ? 'selected' : '' }}>Kenya</option>
+                                        <option value="Kuwait" {{ old('country', $data->company->country ?? '') == 'Kuwait' ? 'selected' : '' }}>Kuwait</option>
+                                        <option value="Lebanon" {{ old('country', $data->company->country ?? '') == 'Lebanon' ? 'selected' : '' }}>Lebanon</option>
+                                        <option value="Libya" {{ old('country', $data->company->country ?? '') == 'Libya' ? 'selected' : '' }}>Libya</option>
+                                        <option value="Luxembourg" {{ old('country', $data->company->country ?? '') == 'Luxembourg' ? 'selected' : '' }}>Luxembourg</option>
+                                        <option value="Malaysia" {{ old('country', $data->company->country ?? '') == 'Malaysia' ? 'selected' : '' }}>Malaysia</option>
+                                        <option value="Mexico" {{ old('country', $data->company->country ?? '') == 'Mexico' ? 'selected' : '' }}>Mexico</option>
+                                        <option value="Morocco" {{ old('country', $data->company->country ?? '') == 'Morocco' ? 'selected' : '' }}>Morocco</option>
+                                        <option value="Nepal" {{ old('country', $data->company->country ?? '') == 'Nepal' ? 'selected' : '' }}>Nepal</option>
+                                        <option value="Netherlands" {{ old('country', $data->company->country ?? '') == 'Netherlands' ? 'selected' : '' }}>Netherlands</option>
+                                        <option value="New Zealand" {{ old('country', $data->company->country ?? '') == 'New Zealand' ? 'selected' : '' }}>New Zealand</option>
+                                        <option value="Nigeria" {{ old('country', $data->company->country ?? '') == 'Nigeria' ? 'selected' : '' }}>Nigeria</option>
+                                        <option value="Norway" {{ old('country', $data->company->country ?? '') == 'Norway' ? 'selected' : '' }}>Norway</option>
+                                        <option value="Oman" {{ old('country', $data->company->country ?? '') == 'Oman' ? 'selected' : '' }}>Oman</option>
+                                        <option value="Pakistan" {{ old('country', $data->company->country ?? '') == 'Pakistan' ? 'selected' : '' }}>Pakistan</option>
+                                        <option value="Panama" {{ old('country', $data->company->country ?? '') == 'Panama' ? 'selected' : '' }}>Panama</option>
+                                        <option value="Peru" {{ old('country', $data->company->country ?? '') == 'Peru' ? 'selected' : '' }}>Peru</option>
+                                        <option value="Philippines" {{ old('country', $data->company->country ?? '') == 'Philippines' ? 'selected' : '' }}>Philippines</option>
+                                        <option value="Poland" {{ old('country', $data->company->country ?? '') == 'Poland' ? 'selected' : '' }}>Poland</option>
+                                        <option value="Portugal" {{ old('country', $data->company->country ?? '') == 'Portugal' ? 'selected' : '' }}>Portugal</option>
+                                        <option value="Qatar" {{ old('country', $data->company->country ?? '') == 'Qatar' ? 'selected' : '' }}>Qatar</option>
+                                        <option value="Romania" {{ old('country', $data->company->country ?? '') == 'Romania' ? 'selected' : '' }}>Romania</option>
+                                        <option value="Russia" {{ old('country', $data->company->country ?? '') == 'Russia' ? 'selected' : '' }}>Russia</option>
+                                        <option value="Saudi Arabia" {{ old('country', $data->company->country ?? '') == 'Saudi Arabia' ? 'selected' : '' }}>Saudi Arabia</option>
+                                        <option value="Singapore" {{ old('country', $data->company->country ?? '') == 'Singapore' ? 'selected' : '' }}>Singapore</option>
+                                        <option value="South Africa" {{ old('country', $data->company->country ?? '') == 'South Africa' ? 'selected' : '' }}>South Africa</option>
+                                        <option value="South Korea" {{ old('country', $data->company->country ?? '') == 'South Korea' ? 'selected' : '' }}>South Korea</option>
+                                        <option value="Spain" {{ old('country', $data->company->country ?? '') == 'Spain' ? 'selected' : '' }}>Spain</option>
+                                        <option value="Sri Lanka" {{ old('country', $data->company->country ?? '') == 'Sri Lanka' ? 'selected' : '' }}>Sri Lanka</option>
+                                        <option value="Sweden" {{ old('country', $data->company->country ?? '') == 'Sweden' ? 'selected' : '' }}>Sweden</option>
+                                        <option value="Switzerland" {{ old('country', $data->company->country ?? '') == 'Switzerland' ? 'selected' : '' }}>Switzerland</option>
+                                        <option value="Thailand" {{ old('country', $data->company->country ?? '') == 'Thailand' ? 'selected' : '' }}>Thailand</option>
+                                        <option value="Turkey" {{ old('country', $data->company->country ?? '') == 'Turkey' ? 'selected' : '' }}>Turkey</option>
+                                        <option value="Ukraine" {{ old('country', $data->company->country ?? '') == 'Ukraine' ? 'selected' : '' }}>Ukraine</option>
+                                        <option value="United Arab Emirates" {{ old('country', $data->company->country ?? '') == 'United Arab Emirates' ? 'selected' : '' }}>United Arab Emirates</option>
+                                        <option value="United Kingdom" {{ old('country', $data->company->country ?? '') == 'United Kingdom' ? 'selected' : '' }}>United Kingdom</option>
+                                        <option value="United States" {{ old('country', $data->company->country ?? '') == 'United States' ? 'selected' : '' }}>United States</option>
+                                        <option value="Vietnam" {{ old('country', $data->company->country ?? '') == 'Vietnam' ? 'selected' : '' }}>Vietnam</option>
+                                        <option value="Zimbabwe" {{ old('country', $data->company->country ?? '') == 'Zimbabwe' ? 'selected' : '' }}>Zimbabwe</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Tags <strong>*</strong></label>
@@ -312,7 +415,8 @@
                     "input[name='name']",
                     "input[name='logo']",
                     "input[name='email']",
-                    "input[name='phone_num']"
+                    "input[name='phone_num']",
+                    "select[name='country']"
                 ];
 
                 fieldsToShow.forEach(function (selector) {

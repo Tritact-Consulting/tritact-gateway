@@ -33,6 +33,22 @@
 <!-- /.content -->
 <section class="content">
     <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs mb-3 company-tabs">
+                <li class="nav-item">
+                    <a class="nav-link {{ $filter == 'all' ? 'active' : '' }}" href="{{ route('company.index', ['filter' => 'all', 'search' => request('search')]) }}">All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $filter == 'our' ? 'active' : '' }}" href="{{ route('company.index', ['filter' => 'our', 'search' => request('search')]) }}">Our Companies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $filter == 'consultant' ? 'active' : '' }}" href="{{ route('company.index', ['filter' => 'consultant', 'search' => request('search')]) }}">Consultant Companies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $filter == 'partner' ? 'active' : '' }}" href="{{ route('company.index', ['filter' => 'partner', 'search' => request('search')]) }}">Partner Companies</a>
+                </li>
+            </ul>
+        </div>
         @foreach($data as $key => $value)
         <div class="col-xxxl-4 col-xl-4 col-lg-6 col-12">
             <div class="box food-box">
@@ -47,6 +63,12 @@
                             @if($value->company->company_id) {{ $value->company->prefix_company_id }}{{ $value->company->company_id }} - @endif {{ $value->name }}
                         </h4>
                         <p class="mb-5">{{ $value->email }}</p>
+                        @if($value->company->partner)
+                        <p style="border-top: 1px solid #f1eff5;padding-bottom: 0;margin-bottom: 10px;padding-top: 4px;border-bottom: 1px solid #f1eff5;"><strong>Partner : </strong>{{ $value->company->partner->company_name }}</p>
+                        @endif
+                        @if($value->company->consultant)
+                        <p style="border-top: 1px solid #f1eff5;padding-bottom: 0;margin-bottom: 5px;padding-top: 4px;"><strong>Consultant : </strong>{{ $value->company->consultant->name }}</p>
+                        @endif
                         @foreach($value->tags as $tag)
                         <span class="badge badge-info mb-10">{{ $tag->name }}</span>
                         @endforeach
