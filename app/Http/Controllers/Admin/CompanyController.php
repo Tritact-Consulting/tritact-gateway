@@ -52,7 +52,8 @@ class CompanyController extends Controller
             ->orderBy('id', 'desc');
         if ($filter === 'our') {
             $data->whereHas('company', function ($q) {
-                $q->whereNull('consultant_id');
+                $q->whereNull('consultant_id')
+                ->whereNull('referred_by');
             });
         } elseif ($filter === 'consultant') {
             $data->whereHas('company', function ($q) {

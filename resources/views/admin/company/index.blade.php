@@ -54,9 +54,11 @@
             @php
                 $bgColor = '';
                 if (isset($value->company->partner)) {
-                    $bgColor = '#d5e5f4'; // Partner colour
+                    $bgColor = '#c2dcf5'; // Partner colour
                 } elseif (isset($value->company->consultant)) {
                     $bgColor = '#ffeab6'; // Consultant colour
+                } else {
+                    $bgColor = '#bce5c0';
                 }
             @endphp
             <div class="box food-box">
