@@ -51,8 +51,16 @@
         </div>
         @foreach($data as $key => $value)
         <div class="col-xxxl-4 col-xl-4 col-lg-6 col-12">
+            @php
+                $bgColor = '';
+                if (isset($value->company->partner)) {
+                    $bgColor = '#d5e5f4'; // Partner colour
+                } elseif (isset($value->company->consultant)) {
+                    $bgColor = '#ffeab6'; // Consultant colour
+                }
+            @endphp
             <div class="box food-box">
-                <div class="box-body text-center">
+                <div class="box-body text-center" @if($bgColor) style="background-color: {{ $bgColor }};" @endif>
                     <div class="menu-item">
                         @if($value->company != null)
                         <img src="{{ asset($value->company->logo) }}" class="img-fluid w-p75" alt="">
