@@ -161,6 +161,11 @@
                         <!-- /.col -->
                         <div class="col-12 text-center" style="margin-top: 20px;">
                             <button type="submit" class="btn btn-success mt-10" style="height: 50px;width: 140px;border-radius: 10px;background-color: #000000;border: #000000">SIGN IN</button>
+                            <div style="margin-top: 15px;">
+                                <a href="https://tritact.co.uk" target="_blank">
+                                    Visit Tritact Website
+                                </a>
+                            </div>
                         </div>
                         <!-- /.col -->
                     </div>
