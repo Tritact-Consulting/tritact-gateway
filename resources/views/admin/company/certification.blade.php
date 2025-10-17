@@ -196,6 +196,12 @@
     </div>
     @endcan
     @can('view assign certification')
+    @php
+        $modals = []; // store modals to render later
+        $groupedData = $data->groupBy(function($item) {
+            return $item->company_id . '-' . $item->certification_category_id;
+        });
+    @endphp
     <div class="row">
         <div class="col-12">
 			<div class="box">
@@ -273,47 +279,83 @@
                                 <tr>
                                     <th>Company<br>Name</th>
                                     <th>Certification Type</th>
-                                    <th>Certification <br>Body</th>
+                                    <th>Certification<br>Body</th>
                                     <th>Certificate No.</th>
                                     <th>Audit Type</th>
                                     <th>Expiry Date</th>
                                     <th>Assigned To</th>
+                                    <th>Status</th>
+                                    <th>Previous Records</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($data as $key => $value)
-                                <tr class="hover-primary">
-                                    <td>{{ $value->user->name }}</td>
-                                    <td>{{ $value->certificate->name }}</td>
-                                    <td>{{ $value->body != null ? $value->body->name : '' }}</td>
-                                    <td>{{ $value->certification_number != null ? $value->certification_number : '' }}</td>
-                                    <td>{{ $value->certification_name }}</td>
-                                    <td>{{ $value->expire_date }}</td>
-                                    <td>{{ $value->assignedUser?->name ?? 'N/A' }}</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            @can('edit assign certification')
-                                            <a href="{{ route('company.certification.edit', $value->id) }}" class="mr-1 waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                                            @endcan
-                                            @can('delete assign certification')
-                                            <form action="{{ route('company.certification.destroy', $value->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5 show_confirm" data-heading="certification"><i class="fa fa-trash"></i></button>
-                                            </form>
-                                            @endcan
-                                        </div>
-                                        @if($value->status_badge)
-                                            <span class="{{ $value->status_badge['class'] }}">
-                                                {{ $value->status_badge['label'] }}
-                                            </span>
-                                        @endif
-                                    </td>
-                                </tr>
+                                @foreach($groupedData as $groupKey => $records)
+                                    @php
+                                        $sorted = $records->sortByDesc(function($item) {
+                                            return $item->next_audit_due_date ?? $item->expire_date;
+                                        });
+                                        $latest = $sorted->first();
+                                        $olderRecords = $sorted->slice(1);
+                                    @endphp
+
+                                    <tr class="hover-primary">
+                                        <td>{{ $latest->user->name }}</td>
+                                        <td>{{ $latest->certificate->name }}</td>
+                                        <td>{{ $latest->body?->name }}</td>
+                                        <td>{{ $latest->certification_number }}</td>
+                                        <td>{{ $latest->certification_name }}</td>
+                                        <td>{{ $latest->expire_date }}</td>
+                                        <td>{{ $latest->assignedUser?->name ?? 'N/A' }}</td>
+                                        <td>
+                                            @if($latest->status_badge)
+                                                <span class="{{ $latest->status_badge['class'] }}">
+                                                    {{ $latest->status_badge['label'] }}
+                                                </span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($olderRecords->count() > 0)
+                                               <button class="btn btn-sm"
+                                                        style="background-color: #1e88e5; color: #fff; border-radius: 20px; padding: 5px 14px; font-weight: 500;"
+                                                        data-toggle="modal"
+                                                        data-target="#recordsModal{{ str_replace('-', '_', $groupKey) }}">
+                                                    View All
+                                                </button>
+                                            @else
+                                                <span class="text-muted">—</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="d-flex">
+                                                @can('edit assign certification')
+                                                <a href="{{ route('company.certification.edit', $latest->id) }}" class="mr-1 btn btn-circle btn-danger-light btn-xs">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                @endcan
+                                                @can('delete assign certification')
+                                                <form action="{{ route('company.certification.destroy', $latest->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-circle btn-primary-light btn-xs show_confirm" data-heading="certification">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                                @endcan
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    @if($olderRecords->count() > 0)
+                                        @php
+                                        $modalId = 'recordsModal' . str_replace('-', '_', $groupKey);
+                                        $modals[] = view('partials.previous-certification-modal', compact('latest', 'olderRecords', 'modalId'))->render();
+                                        @endphp
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
+                        {!! implode("\n", $modals) !!}
                     </div>
                 </div>
             </div>
