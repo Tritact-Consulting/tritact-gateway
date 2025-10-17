@@ -199,7 +199,9 @@
     @php
         $modals = []; // store modals to render later
         $groupedData = $data->groupBy(function($item) {
-            return $item->company_id . '-' . $item->certification_category_id;
+            $companyId = (int) ($item->company_id ?? $item->user_id ?? 0);
+            $certTypeId = (int) ($item->certification_category_id ?? $item->certificate->id ?? 0);
+            return $companyId . '-' . $certTypeId;
         });
     @endphp
     <div class="row">
